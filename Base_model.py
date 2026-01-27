@@ -351,7 +351,18 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
-    #plot base with all compartments
+    #plot Vm soma comparison
+    plt.figure()
+    plt.plot(t0, vs0, label="soma baseline")
+    plt.plot(t1, vs1, label="soma Cav12 50%")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Membrane potential (mV)")
+    plt.title("Baseline vs reduced Cav1.2")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    #plot base Vm with all compartments
     plt.figure()
     plt.plot(t0, vs0, label="soma")
     plt.plot(t0, vp0, label="prox dend (0.5)")
