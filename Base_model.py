@@ -404,18 +404,7 @@ if __name__ == "__main__":
     else:
         print("baseline cai missing for one or more compartments")
 
-    #plot comparison
-    plt.figure()
-    plt.plot(t0, vs0, label="soma baseline")
-    plt.plot(t1, vs1, label="soma Cav12 50%")
-    plt.xlabel("Time (ms)")
-    plt.ylabel("Membrane potential (mV)")
-    plt.title("Baseline vs reduced Cav1.2 (Cav12)")
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
-
-    #cai comparison
+    #plot cai comparison in soma
     if cai0_soma is not None and cai1_soma is not None:
         plt.figure()
         plt.plot(t0, cai0_soma, label="cai baseline")
