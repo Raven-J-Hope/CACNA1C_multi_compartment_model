@@ -1,0 +1,168 @@
+BK.cpp: ../BK.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "BK.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./BK.o: BK.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Cabuffer.cpp: ../Cabuffer.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cabuffer.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Cabuffer.o: Cabuffer.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+CadepK.cpp: ../CadepK.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "CadepK.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./CadepK.o: CadepK.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Caold.cpp: ../Caold.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Caold.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Caold.o: Caold.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Cav12.cpp: ../Cav12.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cav12.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Cav12.o: Cav12.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Cav13.cpp: ../Cav13.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cav13.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Cav13.o: Cav13.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Cav22.cpp: ../Cav22.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cav22.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Cav22.o: Cav22.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Cav32.cpp: ../Cav32.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cav32.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Cav32.o: Cav32.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+HCN.cpp: ../HCN.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "HCN.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./HCN.o: HCN.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+ichan3.cpp: ../ichan3.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "ichan3.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./ichan3.o: ichan3.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kir21.cpp: ../Kir21.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kir21.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kir21.o: Kir21.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv11.cpp: ../Kv11.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv11.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv11.o: Kv11.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv14.cpp: ../Kv14.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv14.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv14.o: Kv14.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv21.cpp: ../Kv21.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv21.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv21.o: Kv21.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv33.cpp: ../Kv33.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv33.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv33.o: Kv33.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv34.cpp: ../Kv34.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv34.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv34.o: Kv34.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv42b.cpp: ../Kv42b.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv42b.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv42b.o: Kv42b.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv42.cpp: ../Kv42.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv42.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv42.o: Kv42.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+Kv723.cpp: ../Kv723.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Kv723.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./Kv723.o: Kv723.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+na8st.cpp: ../na8st.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "na8st.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./na8st.o: na8st.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
+SK2.cpp: ../SK2.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "SK2.mod"  -o "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64" )
+
+./SK2.o: SK2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/x86_64/$<" -o $@
+
