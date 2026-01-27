@@ -407,8 +407,36 @@ if __name__ == "__main__":
     #plot cai comparison in soma
     if cai0_soma is not None and cai1_soma is not None:
         plt.figure()
-        plt.plot(t0, cai0_soma, label="cai baseline")
-        plt.plot(t1, cai1_soma, label="cai Cav12 50%")
+        plt.plot(t0, cai0_soma, label="baseline")
+        plt.plot(t1, cai1_soma, label="Cav12 50%")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("cai (mM)")
+        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at soma")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("missing soma cai")
+
+    #plot cai comparison in proximal dendrite
+    if cai0_prox is not None and cai1_prox is not None:
+        plt.figure()
+        plt.plot(t0, cai0_prox, label="baseline")
+        plt.plot(t1, cai1_prox, label="Cav12 50%")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("cai (mM)")
+        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at prox dend")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("missing prox cai")
+
+    #plot cai comparison in distal dendrite
+    if cai0_dist is not None and cai1_dist is not None:
+        plt.figure()
+        plt.plot(t0, cai0_dist, label="baseline")
+        plt.plot(t1, cai1_dist, label="Cav12 50%")
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
         plt.title("Baseline vs reduced Cav1.2 intracellular Ca at soma")
