@@ -275,6 +275,9 @@ class DGGranuleLikeCell:
         except Exception as e:
             print("Calcium recording set up failed becasue:", e)
             self.cai_soma_vec = None
+            self.cai_prox_vec = None
+            self.cai_dist_vec = None
+            self.cai_spine_vec = None
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
