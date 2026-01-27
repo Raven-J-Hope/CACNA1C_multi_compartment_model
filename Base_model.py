@@ -386,7 +386,7 @@ if __name__ == "__main__":
     plt.show()
 
     #cai comparison
-    if cai0 is not None and cai1 is not None:
+    if cai0_soma is not None and cai1_soma is not None:
         plt.figure()
         plt.plot(t0, cai0_soma, label="cai baseline")
         plt.plot(t1, cai1_soma, label="cai Cav12 50%")
