@@ -444,7 +444,7 @@ if __name__ == "__main__":
         plt.tight_layout()
         plt.show()
     else:
-        print("cai not recorded (check Ca mechanisms / recording).")
+        print("missing dist cai")
 
     #quantify Ca difference during stimulus window
     win = (t0 >= 100) & (t0 <= 400)
