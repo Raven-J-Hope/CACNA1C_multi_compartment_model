@@ -354,6 +354,8 @@ if __name__ == "__main__":
     print(f"AHP Cav12 50%: {ahp1:.3f} mV (trough {vmin1:.2f} mV at {tmin1:.2f} ms)")
     print(f"ΔAHP (50% - base): {ahp1 - ahp0:+.3f} mV")
 
+#plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
+
     #plot base soma AP
     plt.figure()
     plt.plot(t0, vs0, label="baseline soma")
