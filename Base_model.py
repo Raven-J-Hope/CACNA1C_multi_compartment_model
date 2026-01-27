@@ -260,6 +260,7 @@ class DGGranuleLikeCell:
         #calcium
         try:
             _ = self.soma(0.5)._ref_cai
+
             self.cai_soma_vec = h.Vector()
             self.cai_soma_vec.record(self.soma(0.5)._ref_cai)
         except Exception:
