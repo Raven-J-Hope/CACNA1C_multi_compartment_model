@@ -446,8 +446,23 @@ if __name__ == "__main__":
     else:
         print("missing dist cai")
 
-    #quantify Ca difference during stimulus window
-    win = (t0 >= 100) & (t0 <= 400)
+    #plot cai comparison ate the spine-site
+    if cai0_spine is not None and cai1_spine is not None:
+        plt.figure()
+        plt.plot(t0, cai0_spine, label="baseline")
+        plt.plot(t1, cai1_spine, label="Cav12 50%")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("cai (mM)")
+        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at spine-site")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("missing spine-site cai")
+
+    #quantify Ca difference during stimulus window --in soma
+    if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
+        win = (t0 >= 100) & (t0 <= 400)
 
     peak0 = float(np.max(cai0[win]))
     peak1 = float(np.max(cai1[win]))
