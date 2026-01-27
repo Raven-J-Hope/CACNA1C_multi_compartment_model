@@ -467,8 +467,8 @@ if __name__ == "__main__":
         peak0 = float(np.max(cai0_soma[win]))
         peak1 = float(np.max(cai1_soma[win]))
 
-    auc0 = float(np.trapz(cai0[win], t0[win]))
-    auc1 = float(np.trapz(cai1[win], t0[win]))
+        auc0 = float(np.trapz(cai0_soma[win], t0[win]))
+        auc1 = float(np.trapz(cai1_soma[win], t0[win]))
 
     print(f"Peak cai baseline: {peak0:.6f} mM")
     print(f"Peak cai Cav12 50%: {peak1:.6f} mM  (Δ {peak1 - peak0:+.6f}, {100 * (peak1 / peak0 - 1):+.1f}%)")
