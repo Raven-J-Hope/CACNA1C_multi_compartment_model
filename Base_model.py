@@ -464,8 +464,8 @@ if __name__ == "__main__":
     if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
         win = (t0 >= 100) & (t0 <= 400)
 
-    peak0 = float(np.max(cai0[win]))
-    peak1 = float(np.max(cai1[win]))
+        peak0 = float(np.max(cai0_soma[win]))
+        peak1 = float(np.max(cai1_soma[win]))
 
     auc0 = float(np.trapz(cai0[win], t0[win]))
     auc1 = float(np.trapz(cai1[win], t0[win]))
