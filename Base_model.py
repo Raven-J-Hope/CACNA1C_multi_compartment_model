@@ -318,7 +318,7 @@ if __name__ == "__main__":
     cell.setup_recording()
     t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t0), len(vs0), len(vp0), len(vd0), len(vsp0))
-    print("Peak cai soma/prox/dist/spine:", #prints ca peak in each compartmnet
+    print("Peak cai base soma/prox/dist/spine:", #prints ca peak in each compartmnet
           float(np.max(cai0_soma)),
           float(np.max(cai0_prox)),
           float(np.max(cai0_dist)),
