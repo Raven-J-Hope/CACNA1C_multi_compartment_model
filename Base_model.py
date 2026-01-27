@@ -306,6 +306,14 @@ if __name__ == "__main__":
     print("Has Cav12 on dist dend?", h.ismembrane("Cav12", sec=cell.dend_dist))
     print("Has Caold on prox dend?", h.ismembrane("Caold", sec=cell.dend_prox))
     print("Has Caold on dist dend?", h.ismembrane("Caold", sec=cell.dend_dist))
+
+    #make NEURON shape plot schematic of topology so can see where everything connects - methods figure
+    h.define_shape()
+    ps = h.PlotShape(True)  #show diameters
+    ps.exec_menu("View = plot")  #open shape window
+    h.topology()  #keep printing the tree in the console
+    #opens but freezes, check the neuron doccumentation on 28/01 to fix
+
     cell.add_current_clamp(delay=100, dur=300, amp=0.2)
     cell.setup_recording()
     t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
