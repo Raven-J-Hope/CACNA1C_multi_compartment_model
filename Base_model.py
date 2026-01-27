@@ -358,6 +358,22 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
+    #plot baseline cai across compartments
+    if (cai0_soma is not None and cai0_prox is not None and cai0_dist is not None and cai0_spine is not None):
+        plt.figure()
+        plt.plot(t0, cai0_soma, label="soma")
+        plt.plot(t0, cai0_prox, label="prox dend (0.5)")
+        plt.plot(t0, cai0_dist, label="dist dend (0.9)")
+        plt.plot(t0, cai0_spine, label="spine head[0]")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("cai (mM)")
+        plt.title("Baseline cai across compartments")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("baseline cai missing for one or more compartments")
+
     #plot comparison
     plt.figure()
     plt.plot(t0, vs0, label="soma baseline")
