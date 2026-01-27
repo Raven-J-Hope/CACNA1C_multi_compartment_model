@@ -297,6 +297,10 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
 if __name__ == "__main__":
     #baseline aka WT
     cell = DGGranuleLikeCell()
+    print("Has Cav12 on prox dend?", h.ismembrane("Cav12", sec=cell.dend_prox)) #sanity check if cav in each compartment
+    print("Has Cav12 on dist dend?", h.ismembrane("Cav12", sec=cell.dend_dist))
+    print("Has Caold on prox dend?", h.ismembrane("Caold", sec=cell.dend_prox))
+    print("Has Caold on dist dend?", h.ismembrane("Caold", sec=cell.dend_dist))
     cell.add_current_clamp(delay=100, dur=300, amp=0.2)
     cell.setup_recording()
     t0, vs0, vp0, vd0, vsp0, cai0 = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
