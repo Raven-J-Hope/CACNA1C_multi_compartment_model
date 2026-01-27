@@ -316,7 +316,7 @@ if __name__ == "__main__":
     cell2.scale_cav12(0.5)
     cell2.add_current_clamp(delay=100, dur=300, amp=0.2)
     cell2.setup_recording()
-    t1, vs1, vp1, vd1, vsp1, cai1 = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
+    t1, vs1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
 
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
