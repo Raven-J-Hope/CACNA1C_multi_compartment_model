@@ -341,7 +341,7 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
-    #plot Cav12 50% soma AP
+    #plot Cav1.2 50% soma AP
     plt.figure()
     plt.plot(t1, vs1, label="Cav12 50% soma")
     plt.xlabel("Time (ms)")
