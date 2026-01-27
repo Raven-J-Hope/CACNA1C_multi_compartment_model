@@ -364,10 +364,10 @@ if __name__ == "__main__":
 
     #plot base Vm with all compartments
     plt.figure()
-    plt.plot(t0, vs0, label="soma")
-    plt.plot(t0, vp0, label="prox dend (0.5)")
-    plt.plot(t0, vd0, label="dist dend (0.9)")
-    plt.plot(t0, vsp0, label="spine head[0]")
+    plt.plot(t1, vs0, label="soma")
+    plt.plot(t1, vp0, label="prox dend (0.5)")
+    plt.plot(t1, vd0, label="dist dend (0.9)")
+    plt.plot(t1, vsp0, label="spine head[0]")
     plt.xlabel("Time (ms)")
     plt.ylabel("Vm (mV)")
     plt.title("Baseline Vm across compartments")
