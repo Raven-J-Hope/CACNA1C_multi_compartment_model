@@ -314,7 +314,8 @@ if __name__ == "__main__":
           float(np.max(cai0_soma)),
           float(np.max(cai0_prox)),
           float(np.max(cai0_dist)),
-          float(np.max(cai0_spine)))   ##why is the spine ca so high? how did i even
+          float(np.max(cai0_spine)))   #why is the spine ca so high? how did i even
+                                       #rec from where spine attach looks much more reasonable now - check data for sensibility
 
     #50% Cav1.2 - mimic +/-
     cell2 = DGGranuleLikeCell()
