@@ -388,8 +388,8 @@ if __name__ == "__main__":
     #cai comparison
     if cai0 is not None and cai1 is not None:
         plt.figure()
-        plt.plot(t0, cai0, label="cai baseline")
-        plt.plot(t1, cai1, label="cai Cav12 50%")
+        plt.plot(t0, cai0_soma, label="cai baseline")
+        plt.plot(t1, cai1_soma, label="cai Cav12 50%")
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
         plt.title("Baseline vs reduced Cav1.2 intracellular Ca at soma")
