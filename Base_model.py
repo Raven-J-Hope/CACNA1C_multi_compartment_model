@@ -470,10 +470,12 @@ if __name__ == "__main__":
         auc0 = float(np.trapz(cai0_soma[win], t0[win]))
         auc1 = float(np.trapz(cai1_soma[win], t0[win]))
 
-    print(f"Peak cai baseline: {peak0:.6f} mM")
-    print(f"Peak cai Cav12 50%: {peak1:.6f} mM  (Δ {peak1 - peak0:+.6f}, {100 * (peak1 / peak0 - 1):+.1f}%)")
-    print(f"AUC cai baseline:  {auc0:.6f} mM·ms")
-    print(f"AUC cai Cav12 50%: {auc1:.6f} mM·ms (Δ {auc1 - auc0:+.6f}, {100 * (auc1 / auc0 - 1):+.1f}%)")
+        print(f"Peak cai baseline: {peak0:.6f} mM")
+        print(f"Peak cai Cav12 50%: {peak1:.6f} mM  (Δ {peak1 - peak0:+.6f}, {100 * (peak1 / peak0 - 1):+.1f}%)")
+        print(f"AUC cai baseline:  {auc0:.6f} mM·ms")
+        print(f"AUC cai Cav12 50%: {auc1:.6f} mM·ms (Δ {auc1 - auc0:+.6f}, {100 * (auc1 / auc0 - 1):+.1f}%)")
+    else:
+        print("Skipping Ca quantification because cai is None.")
 
     #mechanism sanity checks
     for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold"]:
