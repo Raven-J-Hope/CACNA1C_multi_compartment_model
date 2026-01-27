@@ -263,7 +263,17 @@ class DGGranuleLikeCell:
 
             self.cai_soma_vec = h.Vector()
             self.cai_soma_vec.record(self.soma(0.5)._ref_cai)
-        except Exception:
+
+            self.cai_prox_vec = h.Vector()
+            self.cai_prox_vec.record(self.dend_prox(0.5)._ref_cai)
+
+            self.cai_dist_vec = h.Vector()
+            self.cai_dist_vec.record(self.dend_dist(0.9)._ref_cai)
+
+            self.cai_spine_vec = h.Vector()
+            self.cai_spine_vec.record(self.spines[0](0.5)._ref_cai)
+        except Exception as e:
+            print("Calcium recording set up failed becasue:", e)
             self.cai_soma_vec = None
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
