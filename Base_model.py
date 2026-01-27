@@ -375,6 +375,19 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
+    #plot CaV1.2 50% Vm with all compartments
+    plt.figure()
+    plt.plot(t1, vs1, label="soma")
+    plt.plot(t1, vp1, label="prox dend (0.5)")
+    plt.plot(t1, vd1, label="dist dend (0.9)")
+    plt.plot(t1, vsp1, label="spine head[0]")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("50% Vm across compartments")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
     #plot baseline cai across compartments
     if (cai0_soma is not None and cai0_prox is not None and cai0_dist is not None and cai0_spine is not None):
         plt.figure()
