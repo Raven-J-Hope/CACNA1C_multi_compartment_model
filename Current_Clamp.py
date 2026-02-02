@@ -539,7 +539,7 @@ if __name__ == "__main__":
         print(f"Has {mech} on dist dend?", h.ismembrane(mech, sec=cell.dend_dist))
 
     #print density mechanism names & parameters
-    print("---- SOMA PSECTION (look at density_mechs) ----")
+    print("SOMA PSECTION (look at density_mechs!)")
     print(cell.soma.psection())
 
 
