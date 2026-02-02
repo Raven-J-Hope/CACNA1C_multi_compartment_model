@@ -355,6 +355,7 @@ if __name__ == "__main__":
     cell2.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100, dur=300)
     cell2.setup_recording()
     t1, vs1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
+    I1 = np.array(cell2.iclamp_vec) if cell2.iclamp_vec is not None else None
     print("lens:", len(t1), len(vs1), len(vp1), len(vd1), len(vsp1))
     print("Peak cai 50% soma/prox/dist/spine:",  #prints ca peak in each compartmnet
           float(np.max(cai1_soma)),
