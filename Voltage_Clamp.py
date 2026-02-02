@@ -243,8 +243,12 @@ class DGGranuleLikeCell:
                           loc=0.5):  #voltage clamp
         sec = self.soma if sec is None else sec
         self.vclamp = h.SEClamp(sec(loc))  #use single electrode clamp
-        self.vclamp.dur1 = dur
-        self.vclamp.amp1 = hold #holds volateg
+        self.vclamp.dur1 = delay
+        self.vclamp.amp1 = hold
+        self.vclamp.dur2 = dur
+        self.vclamp.amp2 = step
+        self.vclamp.dur3 = 0.0
+        self.vclamp.amp3 = hold
         self.vclamp.rs = 0.01  #series resistance in megaohm, small = stronger clamp
 
 
