@@ -201,6 +201,17 @@ class DGGranuleLikeCell:
             try_insert(sec, "BK")
             try_insert(sec, "SK2")
             try_insert(sec, "HCN")
+            try_insert(sec, "Kv42")
+            try_insert(sec, "Kv11")
+            try_insert(sec, "ichan3")
+            try_insert(sec, "Kir21")
+            try_insert(sec, "Kv14")
+            try_insert(sec, "Kv21")
+            try_insert(sec, "Kv33")
+            try_insert(sec, "Kv34")
+            try_insert(sec, "Kv42b")
+            try_insert(sec, "Kv723")
+            try_insert(sec, "na8st")
 
         self._set_channel_densities_default()
 #set baseline conductances
