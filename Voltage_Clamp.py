@@ -307,9 +307,9 @@ class DGGranuleLikeCell:
         try:
             if hasattr(self, "vclamp") and self.vclamp is not None:
                 self.iclamp_vec = h.Vector()
-     #           self.iclamp_vec.record(self.vclamp._ref_i)
-     #   except Exception:
-     #       self.iclamp_vec = None
+                self.iclamp_vec.record(self.vclamp._ref_i)
+        except Exception:
+            self.iclamp_vec = None
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
