@@ -369,6 +369,7 @@ if __name__ == "__main__":
     plt.legend()
     plt.tight_layout()
     plt.show()
+    #remember add save plt before do final
 
     #plot Cav1.2 50% soma AP
     plt.figure()
