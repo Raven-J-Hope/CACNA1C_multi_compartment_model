@@ -282,16 +282,6 @@ class DGGranuleLikeCell:
             self.cai_dist_vec = None
             self.cai_spine_vec = None
 
-        #clamp the current
-        #for 28/01 - run as two cells eg ic and vc so can run both in same script - remember to update names respectively
-        self.iclamp_vec = None
-        try:
-            if hasattr(self, "vclamp") and self.vclamp is not None:
-                self.iclamp_vec = h.Vector()
-                self.iclamp_vec.record(self.vclamp._ref_i)
-        except Exception:
-            self.iclamp_vec = None
-
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
     h.tstop = tstop
