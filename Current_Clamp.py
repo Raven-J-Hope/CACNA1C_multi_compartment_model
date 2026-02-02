@@ -543,3 +543,85 @@ if __name__ == "__main__":
     print(cell.soma.psection())
 
 
+    #F-I curves
+    def count_spikes(t, v, threshold=0.0, t_start=100.0, t_end=400.0, refractory_ms=2.0):
+        """
+        What do?count spikes as upward crossings of 'threshold' within [t_start, t_end],
+        with a refractory!! to avoid double-counting.
+        """
+        t = np.asarray(t)
+        v = np.asarray(v)
+
+        w = (t >= t_start) & (t <= t_end)
+        tt = t[w]
+        vv = v[w]
+
+        if len(tt) < 2:
+            return 0
+
+        #upward crossings
+        crosses = (vv[:-1] < threshold) & (vv[1:] >= threshold)
+        idx = np.where(crosses)[0]
+
+        #apply refractory peroid
+        spikes = 0
+        last_t = -1e9
+        for i in idx:
+            tcross = tt[i + 1]
+            if (tcross - last_t) >= refractory_ms:
+                spikes += 1
+                last_t = tcross
+        return spikes
+
+
+    def run_fi_curve(cav12_factor=1.0, currents=np.arange(0.0, 0.51, 0.05),
+                     delay=100.0, dur=300.0, tstop=500.0, v_init=-70.0, dt=0.025,
+                     threshold=0.0):
+        """
+        Returns (currents, rates_hz, spike_counts).
+        """
+        rates = []
+        counts = []
+        for amp in currents:
+            cell = DGGranuleLikeCell()
+            if cav12_factor != 1.0:
+                cell.scale_cav12(cav12_factor)
+
+            cell.add_current_clamp(delay=delay, dur=dur, amp=float(amp))
+            cell.setup_recording()
+
+            t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine = run_sim(
+                cell, tstop=tstop, v_init=v_init, dt=dt
+            )
+
+            n_spikes = count_spikes(t, vs, threshold=threshold,
+                                    t_start=delay, t_end=delay + dur, refractory_ms=2.0)
+            rate_hz = n_spikes / (dur / 1000.0)
+
+            counts.append(n_spikes)
+            rates.append(rate_hz)
+
+        return np.array(currents), np.array(rates), np.array(counts)
+
+
+    #acc run F–I curve run
+    currents = np.arange(0.0, 0.51, 0.05)  #in nA
+    I_base, fr_base, nsp_base = run_fi_curve(cav12_factor=1.0, currents=currents, threshold=0.0)
+    I_het, fr_het, nsp_het = run_fi_curve(cav12_factor=0.5, currents=currents, threshold=0.0)
+
+    #rheobase estimates i.e., first current that spikes at least onetimews
+    rheo_base = I_base[np.argmax(nsp_base > 0)] if np.any(nsp_base > 0) else None
+    rheo_het = I_het[np.argmax(nsp_het > 0)] if np.any(nsp_het > 0) else None
+    print("Rheobase baseline (nA):", rheo_base)
+    print("Rheobase Cav12 50% (nA):", rheo_het)
+
+    plt.figure()
+    plt.plot(I_base, fr_base, marker="o", label="baseline")
+    plt.plot(I_het, fr_het, marker="o", label="Cav12 50%")
+    plt.xlabel("Injected current (nA)")
+    plt.ylabel("Firing rate (Hz)")
+    plt.title("F–I curve")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
