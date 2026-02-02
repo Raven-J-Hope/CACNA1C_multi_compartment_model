@@ -382,6 +382,63 @@ if __name__ == "__main__":
 
 #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
+    #plot voltage clamp current comparison
+    if I0 is not None and I1 is not None:
+        plt.figure()
+        plt.plot(t0, I0, label="baseline clamp current")
+        plt.plot(t1, I1, label="Cav12 50% clamp current")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Clamp current nA")
+        plt.title("Voltage clamp current (baseline vs Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("Clamp current not recorded (check vclamp + iclamp_vec)")
+
+    #step I–V
+    steps = np.arange(-90, 11, 10)  # mV: -90, -80, ... , +10
+    hold = -70.0
+    delay = 100.0
+    dur = 200.0
+    tstop = 350.0
+
+    Ipeak_base = []
+    Iss_base = []
+
+    for vstep in steps:
+        cell = DGGranuleLikeCell()
+        cell.add_voltage_clamp(hold=hold, step=float(vstep), delay=delay, dur=dur)
+        cell.setup_recording()
+
+        t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine = run_sim(cell, tstop=tstop, v_init=hold, dt=0.025)
+        I = np.array(cell.iclamp_vec) if cell.iclamp_vec is not None else None
+
+        #measure the peak and steady-state clamp current during the step
+        w_peak = (t >= delay) & (t <= delay + 10)  #first 10 ms of step
+        w_ss = (t >= delay + dur - 10) & (t <= delay + dur)  #last 10 ms of step
+
+        Ipeak_base.append(float(np.min(I[w_peak])))  #remembre inward is negative
+        Iss_base.append(float(np.mean(I[w_ss])))
+
+    #plot I–V curves
+    plt.figure()
+    plt.plot(steps, Ipeak_base, marker="o")
+    plt.xlabel("Command voltage (mV)")
+    plt.ylabel("Peak clamp current (nA)")
+    plt.title("Voltage clamp I–V (for peak current)")
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure()
+    plt.plot(steps, Iss_base, marker="o")
+    plt.xlabel("Command voltage (mV)")
+    plt.ylabel("Steady-state clamp current (nA)")
+    plt.title("Voltage clamp I–V (for steady-state current)")
+    plt.tight_layout()
+    plt.show()
+
+#####plots below are from current clamp script, leaving here for now in case need/easy edit later
     #plot base soma AP
     plt.figure()
     plt.plot(t0, vs0, label="baseline soma")
