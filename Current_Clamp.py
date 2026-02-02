@@ -269,7 +269,7 @@ class DGGranuleLikeCell:
         self.vdend_vec.record(self.dend_dist(0.9)._ref_v)
 
         self.vspine_vec = h.Vector()
-        self.vspine_vec.record(self.spines[0](0.5)._ref_v)  # first spine head
+        self.vspine_vec.record(self.spines[0](0.5)._ref_v)  #first spine head
 
         #calcium
         try:
