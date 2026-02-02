@@ -352,7 +352,7 @@ if __name__ == "__main__":
     #50% Cav1.2 - mimic +/-
     cell2 = DGGranuleLikeCell()
     cell2.scale_cav12(0.5)
-    cell2.add_current_clamp(delay=100, dur=300, amp=0.2)
+    cell2.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100, dur=300)
     cell2.setup_recording()
     t1, vs1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t1), len(vs1), len(vp1), len(vd1), len(vsp1))
