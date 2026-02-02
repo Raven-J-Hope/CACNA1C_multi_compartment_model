@@ -242,13 +242,6 @@ class DGGranuleLikeCell:
         self.iclamp.dur = dur   #dur = duration
         self.iclamp.amp = amp  #unit = nA
 
-    def add_voltage_clamp(self, hold=-70.0, dur=300.0, sec=None, loc=0.5): #voltage clamp
-        sec = self.soma if sec is None else sec
-        self.vclamp = h.SEClamp(sec(loc))  #use single electrode clamp
-        self.vclamp.dur1 = dur
-        self.vclamp.amp1 = hold #holds volateg
-        self.vclamp.rs = 0.01  #series resistance in megaohm, small = stronger clamp
-
     def setup_recording(self):
         #time
         self.t_vec = h.Vector()
