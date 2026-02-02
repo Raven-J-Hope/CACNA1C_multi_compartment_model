@@ -99,7 +99,7 @@ class DGGranuleLikeCell:
             head = h.Section(name=f"{self.name}.spine_head[{i}]")
 
             #attach spine neck to distal dendrite, going along branch
-            x = 0.1 + 0.8 * (i / max(1, n_spines - 1))  # ~0.1 to ~0.9
+            x = 0.1 + 0.8 * (i / max(1, n_spines - 1))  #~0.1 to ~0.9
             self.spine_xs.append(x)
             neck.connect(self.dend_dist(x))
 
