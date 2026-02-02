@@ -523,8 +523,9 @@ if __name__ == "__main__":
     else:
         print("Skipping Ca quantification because cai is None.")
 
-    #mechanism sanity checks
-    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold"]:
+    #mechanism sanity checks - soma sanity
+    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
+                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
         print(f"Has {mech} on soma?", h.ismembrane(mech, sec=cell.soma))
 
     #print density mechanism names & parameters
