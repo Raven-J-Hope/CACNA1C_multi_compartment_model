@@ -392,6 +392,46 @@ if __name__ == "__main__":
     print(f"AHP Cav12 50%: {ahp1:.3f} mV (trough {vmin1:.2f} mV at {tmin1:.2f} ms)")
     print(f"ΔAHP (50% - base): {ahp1 - ahp0:+.3f} mV")
 
+    #quant spike &AHP diff per compartment
+    def spike_features(t, v, spike_window=(90, 140)):
+        t = np.asarray(t);
+        v = np.asarray(v)
+        w = (t >= spike_window[0]) & (t <= spike_window[1])
+        tt = t[w];
+        vv = v[w]
+
+        i_peak = int(np.argmax(vv))
+        v_peak = float(vv[i_peak]);
+        t_peak = float(tt[i_peak])
+
+        vv_after = vv[i_peak:];
+        tt_after = tt[i_peak:]
+        i_min = int(np.argmin(vv_after))
+        v_trough = float(vv_after[i_min]);
+        t_trough = float(tt_after[i_min])
+
+        #width at half-max
+        v_half = (v_peak + v_trough) / 2.0
+        above = vv >= v_half
+        idx = np.where(above)[0]
+        if len(idx) >= 2:
+            width = float(tt[idx[-1]] - tt[idx[0]])
+        else:
+            width = float("nan")
+
+        return v_peak, t_peak, v_trough, t_trough, width
+
+
+    for name, vA0, vA1 in [
+        ("soma", vs0, vs1),
+        ("prox", vp0, vp1),
+        ("dist", vd0, vd1),
+        ("spine", vsp0, vsp1),
+    ]:
+        pk0, tpk0, tr0, ttr0, w0 = spike_features(t0, vA0)
+        pk1, tpk1, tr1, ttr1, w1 = spike_features(t1, vA1)
+        print(f"{name}: Δpeak={pk1 - pk0:+.3f} mV, Δtrough={tr1 - tr0:+.3f} mV, Δwidth={w1 - w0:+.3f} ms")
+
 #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
     #plot base soma AP
