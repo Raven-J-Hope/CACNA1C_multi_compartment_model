@@ -382,6 +382,12 @@ if __name__ == "__main__":
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
 
+    print("Percent Δ peak cai (50% vs WT):",
+          100 * (cai1_soma.max() / cai0_soma.max() - 1),
+          100 * (cai1_prox.max() / cai0_prox.max() - 1),
+          100 * (cai1_dist.max() / cai0_dist.max() - 1),
+          100 * (cai1_spine.max() / cai0_spine.max() - 1))
+
     print(f"AHP baseline: {ahp0:.3f} mV (trough {vmin0:.2f} mV at {tmin0:.2f} ms)")
     print(f"AHP Cav12 50%: {ahp1:.3f} mV (trough {vmin1:.2f} mV at {tmin1:.2f} ms)")
     print(f"ΔAHP (50% - base): {ahp1 - ahp0:+.3f} mV")
