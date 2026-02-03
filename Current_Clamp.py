@@ -432,7 +432,7 @@ if __name__ == "__main__":
         pk1, tpk1, tr1, ttr1, w1 = spike_features(t1, vA1)
         print(f"{name}: Δpeak={pk1 - pk0:+.3f} mV, Δtrough={tr1 - tr0:+.3f} mV, Δwidth={w1 - w0:+.3f} ms")
 
-#plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
+    #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
     #plot base soma AP
     plt.figure()
