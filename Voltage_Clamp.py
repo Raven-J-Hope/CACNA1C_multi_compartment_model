@@ -130,6 +130,15 @@ class DGGranuleLikeCell:
             try_insert(head, "Caold")
             try_insert(neck, "Cabuffer")
             try_insert(head, "Cabuffer")
+            try_insert(neck, "Cav12")
+            try_insert(head, "Cav12")
+
+            if has_mech(head, "Cav12"):
+                for seg in head:
+                    seg.Cav12.gbar = 5e-5 * 3.0   #(spine head > soma)
+            if has_mech(neck, "Cav12"):
+                for seg in neck:
+                    seg.Cav12.gbar = 5e-5 * 1.0
 
             self.spine_necks.append(neck)
             self.spines.append(head)
