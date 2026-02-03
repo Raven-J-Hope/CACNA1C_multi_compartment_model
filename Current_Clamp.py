@@ -314,10 +314,28 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
 if __name__ == "__main__":
     #baseline aka WT
     cell = DGGranuleLikeCell()
-    print("Has Cav12 on prox dend?", h.ismembrane("Cav12", sec=cell.dend_prox)) #sanity check if cav in each compartment
-    print("Has Cav12 on dist dend?", h.ismembrane("Cav12", sec=cell.dend_dist))
-    print("Has Caold on prox dend?", h.ismembrane("Caold", sec=cell.dend_prox))
-    print("Has Caold on dist dend?", h.ismembrane("Caold", sec=cell.dend_dist))
+    #mechanism sanity checks - soma sanity
+    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
+                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
+        print(f"Has {mech} on soma?", h.ismembrane(mech, sec=cell.soma))
+
+    #mechanism sanity checks - prox dend sanity
+    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
+                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
+        print(f"Has {mech} on prox dend?", h.ismembrane(mech, sec=cell.dend_prox))
+
+    #mechanism sanity checks - dist dend sanity
+    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
+                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
+        print(f"Has {mech} on dist dend?", h.ismembrane(mech, sec=cell.dend_dist))
+
+    #mechanism sanity checks - spine head sanity
+    for mech in ["Cav12", "Cabuffer", "Caold"]:
+        print(f"Has {mech} on spine head[0]?", h.ismembrane(mech, sec=cell.spines[0]))
+
+    #print density mechanism names & parameters
+    print("SOMA PSECTION (look at density_mechs!)")
+    print(cell.soma.psection())
 
     #make NEURON shape plot schematic of topology so can see where everything connects - methods figure
     h.define_shape()
