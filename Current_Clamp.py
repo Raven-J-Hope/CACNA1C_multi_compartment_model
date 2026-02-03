@@ -492,6 +492,34 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
+    #plot difference traces in each compartment in wt vs 50%
+    plt.figure()
+    plt.plot(t0, vs0 - vs1, label="ΔVm soma")
+    plt.plot(t0, vp0 - vp1, label="ΔVm prox")
+    plt.plot(t0, vd0 - vd1, label="ΔVm dist") #seems to indicate Vm diff only ~spike &mostly dist dend, then spine
+    plt.plot(t0, vsp0 - vsp1, label="ΔVm spine head[0]")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("ΔVm (mV)")
+    plt.title("Difference traces in baseline - Cav12 50%")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    #so plot zoomed difference traces - check subthreshold window more depth
+    w = (t0 >= 100) & (t0 <= 400)
+    plt.figure()
+    plt.plot(t0[w], (vs0 - vs1)[w], label="ΔVm soma")
+    plt.plot(t0[w], (vp0 - vp1)[w], label="ΔVm prox")
+    plt.plot(t0[w], (vd0 - vd1)[w], label="ΔVm dist")     #tis indeedy around spike diff
+    plt.plot(t0[w], (vsp0 - vsp1)[w], label="ΔVm spine head[0]")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("ΔVm (mV)")
+    plt.title("Difference traces (100–400 ms)i in baseline - Cav12 50%")
+    plt.ylim(-0.5, 0.5)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
     #plot baseline cai across compartments
     if (cai0_soma is not None and cai0_prox is not None and cai0_dist is not None and cai0_spine is not None):
         plt.figure()
