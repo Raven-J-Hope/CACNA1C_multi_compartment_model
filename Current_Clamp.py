@@ -7,7 +7,7 @@ from neuron import h
 h.load_file("stdrun.hoc")
 
 #set dir & paths to compiled mod files
-MOD_DIR = "/home/raven/PycharmProjects/Masters/Mod_Files_Beining_2017"
+MOD_DIR = "/home/raven/PycharmProjects/Masters/Mod_Files"
 DLL_PATH = os.path.join(MOD_DIR, "x86_64", "libnrnmech.so")
 
 if os.path.exists(DLL_PATH):
