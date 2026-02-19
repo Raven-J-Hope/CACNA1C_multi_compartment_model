@@ -1064,6 +1064,7 @@ if __name__ == "__main__":
     print("Rheobase baseline (nA):", rheo_base)
     print("Rheobase Cav12 50% (nA):", rheo_het)
 
+    #plots F-I curve
     plt.figure()
     plt.plot(I_base, fr_base, marker="o", label="baseline")
     plt.plot(I_het, fr_het, marker="o", label="Cav12 50%")
