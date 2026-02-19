@@ -358,6 +358,14 @@ class DGGranuleLikeCell:
                 seg.hh.gl = 0.0003
                 seg.hh.el = -54.3
 
+        if has_mech(self.ais, "hh"):
+            for seg in self.ais:
+                seg.hh.gnabar = 0.30   #ais Na high vs soma/axon
+                seg.hh.gkbar = 0.05    #moderate K
+                seg.hh.gl = 0.0003
+                seg.hh.el = -54.3
+
+
         if has_mech(self.axon, "hh"):
             for seg in self.axon:
                 seg.hh.gnabar = 0.18
