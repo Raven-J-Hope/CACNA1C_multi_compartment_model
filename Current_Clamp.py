@@ -8,6 +8,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from neuron import h
+import json  #to save metadata/parameters for diss
 
 h.load_file("stdrun.hoc")
 
