@@ -534,7 +534,11 @@ class DGGranuleLikeCell:
             self.cai_dist_vec.record(self.dend_dist(0.9)._ref_cai)
 
             self.cai_spine_vec = h.Vector()
-            self.cai_spine_vec.record(self.dend_dist(self.spine_xs[0])._ref_cai) #now records spine ca from attachment site on dendrite
+            self.cai_spine_vec.record(self.spines[0](0.5)._ref_cai) #rec spines
+
+            self.cai_neck_vec = h.Vector()
+            self.cai_neck_vec.record(self.spine_necks[0](0.5)._ref_cai) #rec spine neck
+
         except Exception as e:
             print("Calcium recording set up failed becasue:", e)
             self.cai_soma_vec = None
