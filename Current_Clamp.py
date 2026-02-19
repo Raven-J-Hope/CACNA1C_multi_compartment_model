@@ -149,6 +149,38 @@ class DGGranuleLikeCell:
             try_insert(head, "Cabuffer")
             try_insert(neck, "Cav12");
             try_insert(head, "Cav12")
+            try_insert(neck, "BK");
+            try_insert(head, "BK")
+            try_insert(neck, "SK2");
+            try_insert(head, "SK2")
+            try_insert(neck, "HCN");
+            try_insert(head, "HCN")
+            try_insert(neck, "Kv42");
+            try_insert(head, "Kv42")
+            try_insert(neck, "Kv42b");
+            try_insert(head, "Kv42b")
+            try_insert(neck, "Kv11");
+            try_insert(head, "Kv11")
+            try_insert(neck, "Kir21");
+            try_insert(head, "Kir21")
+            try_insert(neck, "Kv14");
+            try_insert(head, "Kv14")
+            try_insert(neck, "Kv21");
+            try_insert(head, "Kv21")
+            try_insert(neck, "Kv33");
+            try_insert(head, "Kv33")
+            try_insert(neck, "Kv34");
+            try_insert(head, "Kv34")
+            try_insert(neck, "Kv723");
+            try_insert(head, "Kv723")
+            try_insert(neck, "ichan3");
+            try_insert(head, "ichan3")
+            try_insert(neck, "na8st");
+            try_insert(head, "na8st")
+            try_insert(neck, "Cav22");
+            try_insert(head, "Cav22")
+            try_insert(neck, "Cav32");
+            try_insert(head, "Cav32")
 
             if has_mech(head, "Cav12"):
                 for seg in head:
