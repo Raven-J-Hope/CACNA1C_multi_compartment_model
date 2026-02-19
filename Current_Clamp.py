@@ -958,6 +958,7 @@ if __name__ == "__main__":
         plt.title("Baseline vs reduced Cav1.2 intracellular Ca at spine-site") #is this still spine site?
         plt.legend()
         plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#plot cai comparison at spine-or-site.png"), dpi=300)
         plt.show()
     else:
         print("missing spine-site cai")
