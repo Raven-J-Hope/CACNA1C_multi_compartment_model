@@ -1039,7 +1039,7 @@ if __name__ == "__main__":
             cell.add_current_clamp(delay=delay, dur=dur, amp=float(amp))
             cell.setup_recording()
 
-            t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine = run_sim(
+            t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bkik_soma = run_sim(
                 cell, tstop=tstop, v_init=v_init, dt=dt
             )
 
