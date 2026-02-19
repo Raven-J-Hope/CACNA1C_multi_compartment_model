@@ -796,6 +796,7 @@ if __name__ == "__main__":
     plt.title("Cav1.2 50% soma action potential")
     plt.legend()
     plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "#plot Cav1.2 50% soma AP.png"), dpi=300)
     plt.show()
 
     #plot Vm soma comparison
