@@ -836,6 +836,7 @@ if __name__ == "__main__":
     plt.title("50% Vm across compartments")
     plt.legend()
     plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "#plot CaV1.2 50% Vm with all compartments.png"), dpi=300)
     plt.show()
 
     #plot difference traces in each compartment in wt vs 50%
