@@ -595,6 +595,7 @@ def save_run_report(path, meta: dict):
 
 if __name__ == "__main__":
     #baseline aka WT
+    h.celsius = 37.0 #37 in vivo-like, 34 slice-like
     cell = DGGranuleLikeCell()
     #mechanism sanity checks - soma sanity
     for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
