@@ -182,6 +182,7 @@ class DGGranuleLikeCell:
             try_insert(neck, "Cav32");
             try_insert(head, "Cav32")
 
+            #spine gbar
             if has_mech(head, "Cav12"):
                 for seg in head:
                     seg.Cav12.gbar = 5e-5 * 3.0   #(spine head > soma)
