@@ -597,6 +597,16 @@ if __name__ == "__main__":
     #baseline aka WT
     h.celsius = 37.0 #37 in vivo-like, 34 slice-like
     cell = DGGranuleLikeCell()
+
+#sanit check ais connected
+    print("Has AIS attribute?", hasattr(cell, "ais"))
+    if hasattr(cell, "ais"):
+        print("AIS name:", cell.ais.name())
+        print("Has hh on AIS?", h.ismembrane("hh", sec=cell.ais))
+        print("AIS PSECTION:", cell.ais.psection())
+    print("TOPOLOGY:")
+    h.topology()
+
     #mechanism sanity checks - soma sanity
     for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
                  "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
