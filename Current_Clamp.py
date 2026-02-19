@@ -190,6 +190,125 @@ class DGGranuleLikeCell:
                 for seg in neck:
                     seg.Cav12.gbar = 5e-5 * 1.0
 
+            if has_mech(head, "BK"):
+                for seg in head:
+                    seg.BK.gakbar = 1e-4  #still need tune later
+                    seg.BK.gabkbar = 1e-4
+            if has_mech(neck, "BK"):
+                for seg in neck:
+                    seg.BK.gakbar = 1e-4
+                    seg.BK.gabkbar = 1e-4
+
+            if has_mech(head, "SK2"):
+                for seg in head:
+                    seg.SK2.gkbar = 1e-4
+            if has_mech(neck, "SK2"):
+                for seg in neck:
+                    seg.SK2.gkbar = 1e-4
+
+            if has_mech(head, "HCN"):
+                for seg in head:
+                    seg.HCN.gbar = 1e-4
+            if has_mech(neck, "HCN"):
+                for seg in neck:
+                    seg.HCN.gbar = 1e-4
+
+            if has_mech(head, "Kv42"):
+                for seg in head:
+                    seg.Kv42.gkbar = 1.5e-4
+            if has_mech(neck, "Kv42"):
+                for seg in neck:
+                    seg.Kv42.gkbar = 1.5e-4
+
+            if has_mech(head, "Kv42b"):
+                for seg in head:
+                    seg.Kv42b.gkbar = 1.5e-4
+            if has_mech(neck, "Kv42b"):
+                for seg in neck:
+                    seg.Kv42b.gkbar = 1.5e-4
+
+            if has_mech(head, "Kv11"):
+                for seg in head:
+                    seg.Kv11.gkbar = 1e-5
+            if has_mech(neck, "Kv11"):
+                for seg in neck:
+                    seg.Kv11.gkbar = 1e-5
+
+            if has_mech(head, "Kir21"):
+                for seg in head:
+                    seg.Kir21.gkbar = 1.5e-4
+            if has_mech(neck, "Kir21"):
+                for seg in neck:
+                    seg.Kir21.gkbar = 1.5e-4
+
+            if has_mech(head, "Kv14"):
+                for seg in head:
+                    seg.Kv14.gkbar = 1e-5
+            if has_mech(neck, "Kv14"):
+                for seg in neck:
+                    seg.Kv14.gkbar = 1e-5
+
+            if has_mech(head, "Kv21"):
+                for seg in head:
+                    seg.Kv21.gkbar = 1e-5
+            if has_mech(neck, "Kv21"):
+                for seg in neck:
+                    seg.Kv21.gkbar = 1e-5
+
+            if has_mech(head, "Kv33"):
+                for seg in head:
+                    seg.Kv33.gkbar = 8e-4
+            if has_mech(neck, "Kv33"):
+                for seg in neck:
+                    seg.Kv33.gkbar = 8e-4
+
+            if has_mech(head, "Kv34"):
+                for seg in head:
+                    seg.Kv34.gkbar = 1.3e-3
+            if has_mech(neck, "Kv34"):
+                for seg in neck:
+                    seg.Kv34.gkbar = 1.3e-3
+
+            if has_mech(head, "Kv723"):
+                for seg in head:
+                    seg.Kv723.gkbar = 2e-3
+            if has_mech(neck, "Kv723"):
+                for seg in neck:
+                    seg.Kv723.gkbar = 2e-3
+
+            if has_mech(head, "ichan3"):
+                for seg in head:
+                    seg.ichan3.gnabar = 5e-3
+                    seg.ichan3.gkfbar = 5e-4
+                    seg.ichan3.gksbar = 5e-4
+                    seg.ichan3.gkabar = 5e-4
+            if has_mech(neck, "ichan3"):
+                for seg in neck:
+                    seg.ichan3.gnabar = 5e-3
+                    seg.ichan3.gkfbar = 5e-4
+                    seg.ichan3.gksbar = 5e-4
+                    seg.ichan3.gkabar = 5e-4
+
+            if has_mech(head, "na8st"):
+                for seg in head:
+                    seg.na8st.gbar = 5e-3
+            if has_mech(neck, "na8st"):
+                for seg in neck:
+                    seg.na8st.gbar = 5e-3
+
+            if has_mech(head, "Cav22"):
+                for seg in head:
+                    seg.Cav22.gbar = 1e-5
+            if has_mech(neck, "Cav22"):
+                for seg in neck:
+                    seg.Cav22.gbar = 1e-5
+
+            if has_mech(head, "Cav32"):
+                for seg in head:
+                    seg.Cav32.gbar = 1e-5
+            if has_mech(neck, "Cav32"):
+                for seg in neck:
+                    seg.Cav32.gbar = 1e-5
 
             self.spine_necks.append(neck)
             self.spines.append(head)
