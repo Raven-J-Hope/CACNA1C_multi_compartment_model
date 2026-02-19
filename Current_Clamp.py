@@ -630,6 +630,32 @@ if __name__ == "__main__":
     print("SOMA PSECTION (look at density_mechs!)")
     print(cell.soma.psection())
 
+    run_meta = {
+        "python_version": __import__("sys").version,
+        "neuron_version": h.nrnversion(),
+        "dt_ms": float(h.dt),
+        "tstop_ms": 500.0,
+        "v_init_mV": -70.0,
+        "celsius_C": float(h.celsius),
+        "morphology": {
+            "soma": {"L": float(cell.soma.L), "diam": float(cell.soma.diam), "nseg": int(cell.soma.nseg)},
+            "dend_prox": {"L": float(cell.dend_prox.L), "diam": float(cell.dend_prox.diam), "nseg": int(cell.dend_prox.nseg)},
+            "dend_dist": {"L": float(cell.dend_dist.L), "diam": float(cell.dend_dist.diam), "nseg": int(cell.dend_dist.nseg)},
+            "axon": {"L": float(cell.axon.L), "diam": float(cell.axon.diam), "nseg": int(cell.axon.nseg)},
+        },
+        "Ra_ohmcm": float(cell.soma.Ra),
+        "cm_uFcm2": float(cell.soma.cm),
+        "soma_psection": cell.soma.psection(),  #includes density_mechs & parameter values
+    }
+    save_run_report(os.path.join(OUT_DIR, "run_report_baseline.json"), run_meta)
+
+    run_meta_50 = dict(run_meta)  #50% meta
+    run_meta_50["model"] = "Cav12_50"
+    save_run_report(os.path.join(OUT_DIR, "run_report_cav12_50.json"), run_meta_50)
+
+    def savefig(name: str):
+        plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
+
     #make NEURON shape plot schematic of topology so can see where everything connects - methods figure
     h.define_shape()
     ps = h.PlotShape(True)  #show diameters
