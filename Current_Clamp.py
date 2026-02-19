@@ -711,6 +711,29 @@ if __name__ == "__main__":
     print(f"AHP Cav12 50%: {ahp1:.3f} mV (trough {vmin1:.2f} mV at {tmin1:.2f} ms)")
     print(f"ΔAHP (50% - base): {ahp1 - ahp0:+.3f} mV")
 
+#prints differences
+    delay = 100.0
+    dur = 300.0
+
+    for name, vA0, vA1 in [
+        ("soma", vs0, vs1),
+        ("prox", vp0, vp1),
+        ("dist", vd0, vd1),
+        ("spine", vsp0, vsp1),
+    ]:
+        f0 = spike_features(t0, vA0, delay=delay, dur=dur, threshold=0.0)
+        f1 = spike_features(t1, vA1, delay=delay, dur=dur, threshold=0.0)
+
+        print(
+            f"{name}: "
+            f"Δrest={f1['v_rest']-f0['v_rest']:+.3f} mV, "
+            f"Δpeak={f1['v_peak']-f0['v_peak']:+.3f} mV, "
+            f"ΔAHP={f1['ahp_depth']-f0['ahp_depth']:+.3f} mV, "
+            f"Δwidth={f1['width_half']-f0['width_half']:+.3f} ms, "
+            f"Δrate={f1['rate_hz']-f0['rate_hz']:+.3f} Hz"
+        )
+
+
     #quant spike &AHP diff per compartment
     def spike_features(t, v, spike_window=(90, 140)):
         t = np.asarray(t);
