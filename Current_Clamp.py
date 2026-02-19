@@ -665,7 +665,7 @@ if __name__ == "__main__":
 
     cell.add_current_clamp(delay=100, dur=300, amp=0.2)
     cell.setup_recording()
-    t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
+    t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, ica0_soma, ik0_soma, bkik0_soma = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t0), len(vs0), len(vp0), len(vd0), len(vsp0))
     print("Peak cai base soma/prox/dist/spine:", #prints ca peak in each compartmnet
           float(np.max(cai0_soma)),
