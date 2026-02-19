@@ -111,7 +111,7 @@ class DGGranuleLikeCell:
         self.cai_soma_vec = None
 
     def all_secs(self):
-        return [self.soma, self.dend_prox, self.dend_dist, self.axon] + self.spine_necks + self.spines
+        return [self.soma, self.dend_prox, self.dend_dist, self.ais, self.axon] + self.spine_necks + self.spines
 
     def add_spines_to_distal_dend(self, n_spines=10):
         for i in range(n_spines):
