@@ -686,6 +686,17 @@ if __name__ == "__main__":
           float(np.max(cai1_dist)),
           float(np.max(cai1_spine)))
 
+    def peak_abs(x):
+        return None if x is None else float(np.max(np.abs(x)))
+
+    print("\n--- CURRENT DIAGNOSTICS (soma, peak |current|) ---")
+    print("WT:  ica_soma =", peak_abs(ica0_soma), "mA/cm2")
+    print("WT:  ik_soma  =", peak_abs(ik0_soma), "mA/cm2")
+    print("WT:  BK_ik    =", peak_abs(bkik0_soma), "mA/cm2")
+
+    print("50%: ica_soma =", peak_abs(ica1_soma), "mA/cm2")
+    print("50%: ik_soma  =", peak_abs(ik1_soma), "mA/cm2")
+    print("50%: BK_ik    =", peak_abs(bkik1_soma), "mA/cm2")
 
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
