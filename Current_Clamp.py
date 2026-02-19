@@ -886,7 +886,7 @@ if __name__ == "__main__":
     else:
         print("baseline cai missing for one or more compartments")
 
-    # plot 50% cai across compartments
+    #plot 50% cai across compartments
     if (cai1_soma is not None and cai1_prox is not None and cai1_dist is not None and cai1_spine is not None):
         plt.figure()
         plt.plot(t1, cai1_soma, label="soma")
