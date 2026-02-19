@@ -881,6 +881,7 @@ if __name__ == "__main__":
         plt.title("Baseline cai across compartments")
         plt.legend()
         plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#plot baseline cai across compartments.png"), dpi=300)
         plt.show()
     else:
         print("baseline cai missing for one or more compartments")
