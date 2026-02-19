@@ -80,9 +80,8 @@ def ahp_depth(t, v, spike_window=(90, 140)):
     v_min = float(vv_after[i_min])
     t_min = float(tt_after[i_min])
 
-    #baseline/rest estimate, the mean before step (e.g., 50–90 ms)
-    w_rest = (t >= 50) & (t <= 90)
-    v_rest = float(np.mean(v[w_rest]))
+    #baseline/rest estimate, now robust to different delays
+    v_rest, _, _ = rest_stats(t, v, delay=spike_window[0], pre_ms=40.0, gap_ms=5.0)
 
     ahp = v_min - v_rest
     return v_peak, t_peak, v_min, t_min, ahp
