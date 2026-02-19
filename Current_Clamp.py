@@ -580,6 +580,18 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     bk_ik_soma = np.array(cell.bk_ik_soma_vec) if getattr(cell, "bk_ik_soma_vec", None) is not None else None
     return t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine,  ica_soma, ik_soma, bk_ik_soma
 
+def save_run_report(path, meta: dict):
+    def _json_safe(x):
+        if isinstance(x, set):
+            return sorted(list(x))
+        if isinstance(x, (list, tuple)):
+            return [_json_safe(v) for v in x]
+        if isinstance(x, dict):
+            return {str(k): _json_safe(v) for k, v in x.items()}
+        return x
+
+    with open(path, "w") as f:
+        json.dump(_json_safe(meta), f, indent=2)
 
 if __name__ == "__main__":
     #baseline aka WT
