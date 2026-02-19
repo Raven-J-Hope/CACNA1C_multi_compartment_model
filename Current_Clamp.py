@@ -850,6 +850,7 @@ if __name__ == "__main__":
     plt.title("Difference traces in baseline - Cav12 50%")
     plt.legend()
     plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "#plot difference traces in each compartment in wt vs 50%.png"), dpi=300)
     plt.show()
 
     #so plot zoomed difference traces - check subthreshold window more depth
