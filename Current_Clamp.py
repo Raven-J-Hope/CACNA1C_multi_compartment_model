@@ -12,7 +12,15 @@ import json  #to save metadata/parameters for diss
 
 h.load_file("stdrun.hoc")
 
-#set dir & paths to compiled mod files
+import sys  #check versions being used
+print("Python version:", sys.version) #if python or neuron version used are different from above and code not running
+print("NEURON version:", h.nrnversion()) #switch to aforementioned versions as first troubleshooting step
+
+#make and set dir & paths to compiled mod files
+OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs")
+FIG_DIR = os.path.join(OUT_DIR, "figures")
+os.makedirs(FIG_DIR, exist_ok=True)  #creates outputs/ and outputs/figures if missing
+
 MOD_DIR = "/home/raven/PycharmProjects/Masters/Mod_Files"
 DLL_PATH = os.path.join(MOD_DIR, "x86_64", "libnrnmech.so")
 
