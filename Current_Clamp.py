@@ -822,6 +822,7 @@ if __name__ == "__main__":
     plt.title("Baseline Vm across compartments")
     plt.legend()
     plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "#plot base Vm with all compartments.png"), dpi=300)
     plt.show()
 
     #plot CaV1.2 50% Vm with all compartments
