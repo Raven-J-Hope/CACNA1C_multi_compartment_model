@@ -866,6 +866,7 @@ if __name__ == "__main__":
     plt.ylim(-0.5, 0.5)
     plt.legend()
     plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "#plot zoomed difference traces.png"), dpi=300)
     plt.show()
 
     #plot baseline cai across compartments
