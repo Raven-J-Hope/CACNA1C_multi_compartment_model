@@ -45,6 +45,19 @@ def has_mech(sec, mech: str) -> bool:
     except Exception:
         return False
 
+def rest_stats(t, v, delay, pre_ms=50.0, gap_ms=5.0):
+    """
+    Robust baseline/rest estimate - the mean/std in a window ending (gap_ms) before delay.
+    """
+    t = np.asarray(t)
+    v = np.asarray(v)
+    t1 = delay - gap_ms
+    t0 = max(t.min(), t1 - pre_ms)
+    w = (t >= t0) & (t <= t1)
+    if not np.any(w):
+        return float("nan"), float("nan"), (t0, t1)
+    return float(np.mean(v[w])), float(np.std(v[w])), (t0, t1)
+
 def ahp_depth(t, v, spike_window=(90, 140)):
     """
     Returns (v_peak, t_peak, v_min_after, t_min_after, ahp_depth_mV)
