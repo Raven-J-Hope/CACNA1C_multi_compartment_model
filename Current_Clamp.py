@@ -314,7 +314,6 @@ class DGGranuleLikeCell:
             self.spines.append(head)
 
     def _set_geometry(self):
-        self.soma.L = 20.0
         self.soma.diam = 20.0
         self.soma.nseg = 1
 
