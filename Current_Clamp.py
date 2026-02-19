@@ -546,6 +546,19 @@ class DGGranuleLikeCell:
             self.cai_dist_vec = None
             self.cai_spine_vec = None
 
+        #total ionic current densities (mA/cm2) at soma(0.5)
+        self.ica_soma_vec = h.Vector()
+        self.ica_soma_vec.record(self.soma(0.5)._ref_ica)  # all ca
+
+        self.ik_soma_vec = h.Vector()
+        self.ik_soma_vec.record(self.soma(0.5)._ref_ik)  # all k
+
+        #BK specific current density (mA/cm2)
+        self.bk_ik_soma_vec = None
+        if has_mech(self.soma, "BK"):
+            self.bk_ik_soma_vec = h.Vector()
+            self.bk_ik_soma_vec.record(self.soma(0.5).BK._ref_ik)  # BK
+
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
     h.tstop = tstop
