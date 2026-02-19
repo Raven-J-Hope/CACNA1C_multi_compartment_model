@@ -142,8 +142,8 @@ class DGGranuleLikeCell:
                     seg.pas.g = 1e-4
                     seg.pas.e = -70.0
 
-            #give spines Ca mechs
-            try_insert(neck, "Caold")
+            # give spines mechs
+            try_insert(neck, "Caold");
             try_insert(head, "Caold")
             try_insert(neck, "Cabuffer")
             try_insert(head, "Cabuffer")
