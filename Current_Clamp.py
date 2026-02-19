@@ -1076,3 +1076,65 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "#plots F-I curve.png"), dpi=300)
     plt.show()
 
+#testing phase planes
+
+#phase plane for soma baseline (dV/dt vs V)
+dvdt0 = np.gradient(vs0, t0)
+
+plt.figure()
+plt.plot(vs0, dvdt0, label="baseline soma")
+plt.xlabel("V (mV)")
+plt.ylabel("dV/dt (mV/ms)")
+plt.title("Phase plane (baseline): soma")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "#phase plane for soma baseline (dV-dt vs V).png"), dpi=300)
+plt.show()
+
+
+#phase plane for soma Cav12 50% (dV/dt vs V)
+dvdt1 = np.gradient(vs1, t1)
+
+plt.figure()
+plt.plot(vs1, dvdt1, label="Cav12 50% soma")
+plt.xlabel("V (mV)")
+plt.ylabel("dV/dt (mV/ms)")
+plt.title("Phase plane (Cav12 50%): soma")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "#phase plane for soma Cav12 50% (dV-dt vs V).png"), dpi=300)
+plt.show()
+
+
+#phase plane overlay for soma baseline vs Cav12 50%
+plt.figure()
+plt.plot(vs0, dvdt0, label="baseline soma")
+plt.plot(vs1, dvdt1, label="Cav12 50% soma")
+plt.xlabel("V (mV)")
+plt.ylabel("dV/dt (mV/ms)")
+plt.title("Phase plane overlay: soma (baseline vs Cav12 50%)")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "#phase plane overlay for soma baseline vs Cav12 50%.png"), dpi=300)
+plt.show()
+
+
+#phase plane with rest-point markers (mean V during 50–90 ms)
+rest0 = (t0 >= 50) & (t0 <= 90)
+rest1 = (t1 >= 50) & (t1 <= 90)
+
+vrest0 = float(np.mean(vs0[rest0]))
+vrest1 = float(np.mean(vs1[rest1]))
+
+plt.figure()
+plt.plot(vs0, dvdt0, label="baseline soma")
+plt.plot(vs1, dvdt1, label="Cav12 50% soma")
+plt.scatter([vrest0], [0.0], label="baseline rest", zorder=5)
+plt.scatter([vrest1], [0.0], label="Cav12 50% rest", zorder=5)
+plt.xlabel("V (mV)")
+plt.ylabel("dV/dt (mV/ms)")
+plt.title("Phase plane + rest markers: soma")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "#phase plane with rest-point markers.png"), dpi=300)
+plt.show()
