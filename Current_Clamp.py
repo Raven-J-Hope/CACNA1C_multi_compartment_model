@@ -955,7 +955,7 @@ if __name__ == "__main__":
         plt.plot(t1, cai1_spine, label="Cav12 50%")
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
-        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at spine-site")
+        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at spine-site") #is this still spine site?
         plt.legend()
         plt.tight_layout()
         plt.show()
