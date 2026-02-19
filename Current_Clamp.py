@@ -86,6 +86,78 @@ def ahp_depth(t, v, spike_window=(90, 140)):
     ahp = v_min - v_rest
     return v_peak, t_peak, v_min, t_min, ahp
 
+def spike_features(t, v, delay, dur, threshold=0.0, refractory_ms=2.0):
+    """
+    Returns spike features in the stimulus window.
+    """
+    t = np.asarray(t)
+    v = np.asarray(v)
+
+    #robust baseline/rest estimate just before stimulus
+    v_rest, v_rest_sd, (t0, t1) = rest_stats(t, v, delay=delay, pre_ms=50.0, gap_ms=5.0)
+
+    #restrict to stimulus window
+    w = (t >= delay) & (t <= delay + dur)
+    tt = t[w]
+    vv = v[w]
+    if len(tt) < 2:
+        return {
+            "v_rest": v_rest, "v_rest_sd": v_rest_sd,
+            "n_spikes": 0, "rate_hz": 0.0,
+            "v_peak": float("nan"), "t_peak": float("nan"),
+            "v_trough": float("nan"), "t_trough": float("nan"),
+            "ahp_depth": float("nan"),
+            "width_half": float("nan"),
+        }
+
+    #spike count as upward crossings & refractory
+    crosses = (vv[:-1] < threshold) & (vv[1:] >= threshold)
+    idx = np.where(crosses)[0]
+
+    spike_times = []
+    last_t = -1e9
+    for i in idx:
+        tcross = tt[i + 1]
+        if (tcross - last_t) >= refractory_ms:
+            spike_times.append(tcross)
+            last_t = tcross
+
+    n_spikes = len(spike_times)
+    rate_hz = n_spikes / (dur / 1000.0)
+
+    #peak & trough after peak
+    i_peak = int(np.argmax(vv))
+    v_peak = float(vv[i_peak])
+    t_peak = float(tt[i_peak])
+
+    vv_after = vv[i_peak:]
+    tt_after = tt[i_peak:]
+    i_min = int(np.argmin(vv_after))
+    v_trough = float(vv_after[i_min])
+    t_trough = float(tt_after[i_min])
+
+    #AHP depth relative to baseline
+    ahp = v_trough - v_rest
+
+    #width at half amplitude
+    v_half = (v_peak + v_trough) / 2.0
+    above = vv >= v_half
+    ids = np.where(above)[0]
+    width_half = float(tt[ids[-1]] - tt[ids[0]]) if len(ids) >= 2 else float("nan")
+
+    return {
+        "v_rest": v_rest,
+        "v_rest_sd": v_rest_sd,
+        "n_spikes": n_spikes,
+        "rate_hz": rate_hz,
+        "v_peak": v_peak,
+        "t_peak": t_peak,
+        "v_trough": v_trough,
+        "t_trough": t_trough,
+        "ahp_depth": ahp,
+        "width_half": width_half,
+    }
+
 #define cell morphology & biophysics
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell"):
