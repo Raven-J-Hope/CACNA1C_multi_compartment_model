@@ -898,6 +898,7 @@ if __name__ == "__main__":
         plt.title("50% cai across compartments")
         plt.legend()
         plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#plot 50% cai across compartments.png"), dpi=300)
         plt.show()
     else:
         print("50% cai missing for one or more compartments")
