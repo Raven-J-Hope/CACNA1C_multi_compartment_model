@@ -81,6 +81,7 @@ class DGGranuleLikeCell:
         self.spines = []    #add dendritic spines
         self.spine_necks = []
         self.spine_xs = [] #store where spines attach
+
         #create compartments - "nseg" i.e., segments
         self.soma = h.Section(name=f"{name}.soma")
         self.dend_prox = h.Section(name=f"{name}.dend_prox")
