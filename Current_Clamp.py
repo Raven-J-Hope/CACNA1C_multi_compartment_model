@@ -963,6 +963,18 @@ if __name__ == "__main__":
     else:
         print("missing spine-site cai")
 
+    #BK recruitment aka soma BK current baseline vs 50%
+    if bkik0_soma is not None and bkik1_soma is not None:
+        plt.figure()
+        plt.plot(t0, bkik0_soma, label="BK ik baseline")
+        plt.plot(t1, bkik1_soma, label="BK ik Cav12 50%")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("BK current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#BK recruitment aka soma BK current baseline vs 50%.png"), dpi=300)
+        plt.show()
+
     #quantify Ca difference during stimulus window --in soma
     if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
         win = (t0 >= 100) & (t0 <= 400)
