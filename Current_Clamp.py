@@ -147,7 +147,7 @@ class DGGranuleLikeCell:
             try_insert(head, "Caold")
             try_insert(neck, "Cabuffer");
             try_insert(head, "Cabuffer")
-            try_insert(neck, "Cav12")
+            try_insert(neck, "Cav12");
             try_insert(head, "Cav12")
 
             if has_mech(head, "Cav12"):
