@@ -919,7 +919,7 @@ if __name__ == "__main__":
         vv = v[w]
 
         i_peak = int(np.argmax(vv))
-        v_peak = float(vv[i_peak]);
+        v_peak = float(vv[i_peak])
         t_peak = float(tt[i_peak])
 
         vv_after = vv[i_peak:];
