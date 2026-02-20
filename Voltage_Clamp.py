@@ -404,7 +404,7 @@ class DGGranuleLikeCell:
                     seg.hh.gl = 5e-5
                     seg.hh.el = -70.0
 
-        #sets mechanisms from Beining 2017
+        #adds mechanisms from Beining 2017
         for sec in [self.soma, self.dend_prox, self.dend_dist]:
             try_insert(sec, "Caold")
             try_insert(sec, "Cabuffer")
