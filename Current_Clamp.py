@@ -263,7 +263,7 @@ class DGGranuleLikeCell:
             try_insert(head, "na8st")
             try_insert(neck, "Cav22")
             try_insert(head, "Cav22")
-            try_insert(neck, "Cav32");
+            try_insert(neck, "Cav32")
             try_insert(head, "Cav32")
 
             #spine gbar
