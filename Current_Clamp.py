@@ -915,7 +915,7 @@ if __name__ == "__main__":
         t = np.asarray(t)
         v = np.asarray(v)
         w = (t >= spike_window[0]) & (t <= spike_window[1])
-        tt = t[w];
+        tt = t[w]
         vv = v[w]
 
         i_peak = int(np.argmax(vv))
