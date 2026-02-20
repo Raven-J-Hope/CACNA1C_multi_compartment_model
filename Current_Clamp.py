@@ -711,7 +711,12 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     ica_soma = np.array(cell.ica_soma_vec) if getattr(cell, "ica_soma_vec", None) is not None else None
     ik_soma = np.array(cell.ik_soma_vec) if getattr(cell, "ik_soma_vec", None) is not None else None
     bk_ik_soma = np.array(cell.bk_ik_soma_vec) if getattr(cell, "bk_ik_soma_vec", None) is not None else None
-    return t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine,  ica_soma, ik_soma, bk_ik_soma
+    sk_ik_soma = np.array(cell.sk_ik_soma_vec) if getattr(cell, "sk_ik_soma_vec", None) is not None else None
+    ina_soma = np.array(cell.ina_soma_vec) if getattr(cell, "ina_soma_vec", None) is not None else None
+    hh_h_soma = np.array(cell.hh_h_soma_vec) if getattr(cell, "hh_h_soma_vec", None) is not None else None
+    hh_h_ais = np.array(cell.hh_h_ais_vec) if getattr(cell, "hh_h_ais_vec", None) is not None else None
+    hh_m_soma = np.array(cell.hh_m_soma_vec) if getattr(cell, "hh_m_soma_vec", None) is not None else None
+    return t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bk_ik_soma, sk_ik_soma, ina_soma, hh_h_soma, hh_h_ais, hh_m_soma
 
 def save_run_report(path, meta: dict):
     def _json_safe(x):
