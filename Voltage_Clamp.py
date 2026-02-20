@@ -87,6 +87,10 @@ class DGGranuleLikeCell:
         self.dend_prox = h.Section(name=f"{name}.dend_prox")
         self.dend_dist = h.Section(name=f"{name}.dend_dist")
         self.axon = h.Section(name=f"{name}.axon")
+        self.ais = h.Section(name=f"{name}.ais")  #adds in inbital axon segment
+        self.ica_soma_vec = None
+        self.ik_soma_vec = None
+        self.bk_ik_soma_vec = None
 
         #connects topology
         #note to sen, how link to morph? e.g., like trees/T2N/beining?
