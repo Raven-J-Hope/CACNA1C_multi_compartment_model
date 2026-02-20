@@ -349,6 +349,10 @@ class DGGranuleLikeCell:
         self.dend_dist.diam = 1.2
         self.dend_dist.nseg = 11
 
+        self.ais.L = 30.0
+        self.ais.diam = 1.0
+        self.ais.nseg = 3
+
         self.axon.L = 300.0    #L = length
         self.axon.diam = 1.0   #diam = diameter
         self.axon.nseg = 11    #nseg = compartment
