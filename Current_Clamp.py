@@ -912,7 +912,7 @@ if __name__ == "__main__":
 
     #quant spike &AHP diff per compartment
     def spike_features(t, v, spike_window=(90, 140)):
-        t = np.asarray(t);
+        t = np.asarray(t)
         v = np.asarray(v)
         w = (t >= spike_window[0]) & (t <= spike_window[1])
         tt = t[w];
