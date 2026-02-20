@@ -8,10 +8,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from neuron import h
-##make cav2.1 mod file -> reproduce function graph /make shape -> need to solve ODE to do this, but do after full I/V-c base
-#hill or coshyberolic function
-#share code - double check how share private repo? cannae remember
-#ask cezar wt measures
+import json  #to save metadata/parameters for diss
+
 h.load_file("stdrun.hoc")
 
 #set dir & paths to compiled mod files
