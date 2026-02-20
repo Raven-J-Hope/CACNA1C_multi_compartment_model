@@ -462,8 +462,8 @@ class DGGranuleLikeCell:
             for seg in self.soma:
                 seg.hh.gnabar = 0.12
                 seg.hh.gkbar = 0.036
-                seg.hh.gl = 0.0003
-                seg.hh.el = -54.3
+                seg.hh.gl = 5e-5
+                seg.hh.el = -70.0
 
         if has_mech(self.ais, "hh"):
             for seg in self.ais:
