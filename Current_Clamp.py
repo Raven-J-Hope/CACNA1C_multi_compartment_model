@@ -394,6 +394,29 @@ class DGGranuleLikeCell:
                 for seg in neck:
                     seg.Cav32.gbar = 1e-5
 
+            if has_mech(head, "Caold"):
+                for seg in head:
+                    seg.Caold.gtcabar = 1e-5  #still need tune?
+                    seg.Caold.gncabar = 1e-5
+                    seg.Caold.glcabar = 1e-5
+
+            if has_mech(neck, "Caold"):
+                for seg in neck:
+                    seg.Caold.gtcabar = 1e-5
+                    seg.Caold.gncabar = 1e-5
+                    seg.Caold.glcabar = 1e-5
+
+            #Cabuffer param - sets buffering strength/kinetics
+            if has_mech(head, "Cabuffer"):
+                for seg in head:
+                    seg.Cabuffer.tau = 9.0  #ms
+                    seg.Cabuffer.brat = 1.0 #buffer ratio factor
+
+            if has_mech(neck, "Cabuffer"):
+                for seg in neck:
+                    seg.Cabuffer.tau = 9.0
+                    seg.Cabuffer.brat = 1.0
+
             self.spine_necks.append(neck)
             self.spines.append(head)
 
