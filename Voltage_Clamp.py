@@ -92,7 +92,8 @@ class DGGranuleLikeCell:
         #note to sen, how link to morph? e.g., like trees/T2N/beining?
         self.dend_prox.connect(self.soma(1))
         self.dend_dist.connect(self.dend_prox(1))
-        self.axon.connect(self.soma(0))
+        self.ais.connect(self.soma(0))
+        self.axon.connect(self.ais(1))
 
         self._set_geometry()
         self._set_biophysics()
