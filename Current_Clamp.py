@@ -219,7 +219,7 @@ class DGGranuleLikeCell:
             try_insert(head, "pas")
             if has_mech(neck, "pas"):
                 for seg in neck:
-                    seg.pas.g = 1e-4
+                    seg.pas.g = 3e-5
                     seg.pas.e = -70.0
             if has_mech(head, "pas"):
                 for seg in head:
