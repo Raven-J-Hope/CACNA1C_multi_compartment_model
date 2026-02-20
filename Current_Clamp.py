@@ -18,7 +18,7 @@ print("NEURON version:", h.nrnversion()) #switch to aforementioned versions as f
 
 #make and set dir & paths to compiled mod files
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs")
-FIG_DIR = os.path.join(OUT_DIR, "figures")
+FIG_DIR = os.path.join(OUT_DIR, "ic_figures")
 os.makedirs(FIG_DIR, exist_ok=True)  #creates outputs/ and outputs/figures if missing
 
 MOD_DIR = "/home/raven/PycharmProjects/Masters/Mod_Files"
