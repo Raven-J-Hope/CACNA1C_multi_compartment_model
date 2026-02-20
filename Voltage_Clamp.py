@@ -367,7 +367,7 @@ class DGGranuleLikeCell:
             try_insert(sec, "pas")
             if has_mech(sec, "pas"):
                 for seg in sec:
-                    seg.pas.g = 1e-4
+                    seg.pas.g = 3e-5
                     seg.pas.e = -70.0
 
         #Hodgkin-Huxley(hh)-style mechanism
