@@ -922,7 +922,7 @@ if __name__ == "__main__":
         v_peak = float(vv[i_peak])
         t_peak = float(tt[i_peak])
 
-        vv_after = vv[i_peak:];
+        vv_after = vv[i_peak:]
         tt_after = tt[i_peak:]
         i_min = int(np.argmin(vv_after))
         v_trough = float(vv_after[i_min]);
