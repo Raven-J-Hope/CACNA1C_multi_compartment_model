@@ -837,6 +837,31 @@ if __name__ == "__main__":
     print("50%: ica_soma =", peak_abs(ica1_soma), "mA/cm2")
     print("50%: ik_soma  =", peak_abs(ik1_soma), "mA/cm2")
     print("50%: BK_ik    =", peak_abs(bkik1_soma), "mA/cm2")
+    print("50%: SK_ik    =", peak_abs(skik1_soma), "mA/cm2")
+    print("50%: ina_soma =", peak_abs(ina1_soma), "mA/cm2")
+
+    #window-average currents during the stimulus, excluding the first 20 ms after onset
+    w = (t0 >= 120) & (t0 <= 390)
+
+    def mean_abs(x):
+        return None if x is None else float(np.mean(np.abs(x[w])))
+
+    print("\n--- PLATEAU (120–390 ms) mean |current| ---")
+    print("WT: mean|ik_soma| =", mean_abs(ik0_soma), "mA/cm2")
+    print("WT: mean|SK_ik|   =", mean_abs(skik0_soma), "mA/cm2")
+    print("WT: mean|BK_ik|   =", mean_abs(bkik0_soma), "mA/cm2")
+    print("WT: mean|ica_soma|=", mean_abs(ica0_soma), "mA/cm2")
+    print("WT: mean|ina_soma| =", float(np.mean(np.abs(ina0_soma[w]))), "mA/cm2")
+    print("WT: mean hh.h soma (120–390) =", float(np.mean(hhh0_soma[w])))
+    print("WT: mean hh.h AIS  (120–390) =", float(np.mean(hhh0_ais[w])))
+
+    print("50%: mean|ik_soma| =", mean_abs(ik1_soma), "mA/cm2")
+    print("50%: mean|SK_ik|   =", mean_abs(skik1_soma), "mA/cm2")
+    print("50%: mean|BK_ik|   =", mean_abs(bkik1_soma), "mA/cm2")
+    print("50%: mean|ica_soma|=", mean_abs(ica1_soma), "mA/cm2")
+    print("50%: mean|ina_soma| =", float(np.mean(np.abs(ina1_soma[w]))), "mA/cm2")
+    print("50%: mean hh.h soma (120–390) =", float(np.mean(hhh1_soma[w])))
+    print("50%: mean hh.h AIS  (120–390) =", float(np.mean(hhh1_ais[w])))
 
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
