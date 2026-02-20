@@ -683,7 +683,14 @@ class DGGranuleLikeCell:
         self.bk_ik_soma_vec = None
         if has_mech(self.soma, "BK"):
             self.bk_ik_soma_vec = h.Vector()
-            self.bk_ik_soma_vec.record(self.soma(0.5).BK._ref_ik)  # BK
+            self.bk_ik_soma_vec.record(self.soma(0.5).BK._ref_ik)  #BK
+
+        #SK specific current density (mA/cm2)
+        self.sk_ik_soma_vec = None
+        if has_mech(self.soma, "SK2"):
+            self.sk_ik_soma_vec = h.Vector()
+            self.sk_ik_soma_vec.record(self.soma(0.5).SK2._ref_ik)
+
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
