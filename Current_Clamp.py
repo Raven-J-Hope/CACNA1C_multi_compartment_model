@@ -789,7 +789,7 @@ if __name__ == "__main__":
 
     run_meta_50 = dict(run_meta)  #50% meta
     run_meta_50["model"] = "Cav12_50"
-    save_run_report(os.path.join(OUT_DIR, "run_report_cav12_50.json"), run_meta_50)
+    save_run_report(os.path.join(OUT_DIR, "ic_run_report_cav12_50.json"), run_meta_50)
 
     def savefig(name: str):
         plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
