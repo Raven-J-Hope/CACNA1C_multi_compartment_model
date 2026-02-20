@@ -660,7 +660,7 @@ class DGGranuleLikeCell:
 
         #total ionic current densities (mA/cm2) at soma(0.5)
         self.ica_soma_vec = h.Vector()
-        self.ica_soma_vec.record(self.soma(0.5)._ref_ica)  # all ca
+        self.ica_soma_vec.record(self.soma(0.5)._ref_ica)  #all ca
 
         self.ik_soma_vec = h.Vector()
         self.ik_soma_vec.record(self.soma(0.5)._ref_ik)  # all k
