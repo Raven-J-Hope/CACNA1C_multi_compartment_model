@@ -663,7 +663,21 @@ class DGGranuleLikeCell:
         self.ica_soma_vec.record(self.soma(0.5)._ref_ica)  #all ca
 
         self.ik_soma_vec = h.Vector()
-        self.ik_soma_vec.record(self.soma(0.5)._ref_ik)  # all k
+        self.ik_soma_vec.record(self.soma(0.5)._ref_ik)  #all k
+
+        self.ina_soma_vec = h.Vector()
+        self.ina_soma_vec.record(self.soma(0.5)._ref_ina)  # all na
+
+        #hh gating variables (Na availability)
+        self.hh_h_soma_vec = h.Vector()
+        self.hh_h_soma_vec.record(self.soma(0.5).hh._ref_h)
+
+        self.hh_h_ais_vec = h.Vector()
+        self.hh_h_ais_vec.record(self.ais(0.5).hh._ref_h)
+
+        #hactivation gate
+        self.hh_m_soma_vec = h.Vector()
+        self.hh_m_soma_vec.record(self.soma(0.5).hh._ref_m)
 
         #BK specific current density (mA/cm2)
         self.bk_ik_soma_vec = None
