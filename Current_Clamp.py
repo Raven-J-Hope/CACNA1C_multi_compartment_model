@@ -925,7 +925,7 @@ if __name__ == "__main__":
         vv_after = vv[i_peak:]
         tt_after = tt[i_peak:]
         i_min = int(np.argmin(vv_after))
-        v_trough = float(vv_after[i_min]);
+        v_trough = float(vv_after[i_min])
         t_trough = float(tt_after[i_min])
 
         #width at half-max
