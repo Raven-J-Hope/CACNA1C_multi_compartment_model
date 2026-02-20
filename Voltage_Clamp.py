@@ -371,7 +371,7 @@ class DGGranuleLikeCell:
                     seg.pas.e = -70.0
 
         #Hodgkin-Huxley(hh)-style mechanism
-        for sec in [self.soma, self.axon, self.dend_prox, self.dend_dist]:
+        for sec in [self.soma, self.ais, self.axon, self.dend_prox, self.dend_dist]:
             try_insert(sec, "hh")
 
         if has_mech(self.soma, "hh"):
