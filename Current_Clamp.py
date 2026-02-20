@@ -588,7 +588,7 @@ class DGGranuleLikeCell:
 
                 #na8st (Na channel)
                 if has_mech(sec, "na8st"):
-                    seg.na8st.gbar = 5e-3 * scale
+                    seg.na8st.gbar =  5e-6 * scale
 
                 #Caold conductances
                 if has_mech(sec, "Caold"):
