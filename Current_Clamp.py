@@ -541,7 +541,7 @@ class DGGranuleLikeCell:
 
                 #SK2
                 if has_mech(sec, "SK2"):
-                    seg.SK2.gkbar = 1e-4 * scale
+                    seg.SK2.gkbar = 5e-6 * scale
 
                 #HCN
                 if has_mech(sec, "HCN"):
