@@ -457,7 +457,54 @@ class DGGranuleLikeCell:
 
                 #SK2
                 if has_mech(sec, "SK2"):
-                    seg.SK2.gkbar = 1e-4 * scale
+                    seg.SK2.gkbar = 5e-6 * scale
+
+                #HCN
+                if has_mech(sec, "HCN"):
+                    seg.HCN.gbar = 1e-4 * scale
+
+                #Kv42 & Kv42b
+                if has_mech(sec, "Kv42"):
+                    seg.Kv42.gkbar = 1.5e-4 * scale
+                if has_mech(sec, "Kv42b"):
+                    seg.Kv42b.gkbar = 1.5e-4 * scale
+
+                #Kv11
+                if has_mech(sec, "Kv11"):
+                    seg.Kv11.gkbar = 1e-5 * scale
+
+                #Kv14
+                if has_mech(sec, "Kv14"):
+                    seg.Kv14.gkbar = 1e-5 * scale
+
+                #Kv21
+                if has_mech(sec, "Kv21"):
+                    seg.Kv21.gkbar = 1e-5 * scale
+
+                #Kv33 & Kv34
+                if has_mech(sec, "Kv33"):
+                    seg.Kv33.gkbar = 8e-4 * scale
+                if has_mech(sec, "Kv34"):
+                    seg.Kv34.gkbar = 1.3e-3 * scale
+
+                #Kv723 (KCNQ/M-current style)
+                if has_mech(sec, "Kv723"):
+                    seg.Kv723.gkbar = 2e-3 * scale
+
+                #Kir21
+                if has_mech(sec, "Kir21"):
+                    seg.Kir21.gkbar = 1.5e-4 * scale
+
+                #ichan3 (multi-current Na/K mechanism)
+                if has_mech(sec, "ichan3"):
+                    seg.ichan3.gnabar = 5e-3 * scale
+                    seg.ichan3.gkfbar = 5e-4 * scale
+                    seg.ichan3.gksbar = 5e-4 * scale
+                    seg.ichan3.gkabar = 5e-4 * scale
+
+                #na8st (Na channel)
+                if has_mech(sec, "na8st"):
+                    seg.na8st.gbar =  5e-6 * scale
 
                 #Caold conductances
                 if has_mech(sec, "Caold"):
