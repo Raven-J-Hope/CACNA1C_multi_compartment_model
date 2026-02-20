@@ -1174,6 +1174,18 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, "#BK recruitment aka soma BK current baseline vs 50%.png"), dpi=300)
         plt.show()
 
+    #SK recruitment aka soma SK current baseline vs 50%
+    if skik0_soma is not None and skik1_soma is not None:
+        plt.figure()
+        plt.plot(t0, skik0_soma, label="SK ik baseline")
+        plt.plot(t1, skik1_soma, label="SK ik Cav12 50%")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("SK current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#SK recruitment aka soma SK current baseline vs 50%.png"), dpi=300)
+        plt.show()
+
     #quantify Ca difference during stimulus window --in soma
     if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
         win = (t0 >= 100) & (t0 <= 400)
