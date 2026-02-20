@@ -866,6 +866,17 @@ if __name__ == "__main__":
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
 
+    #Rin diagnostics (MΩ) sanity - check Rin = if no spikey, want ~100MΩ
+    delay = float(cell.iclamp.delay)
+    dur = float(cell.iclamp.dur)
+    amp = float(cell.iclamp.amp)  #nA
+
+    vrest = float(np.mean(vs0[(t0 >= 50) & (t0 <= 90)]))
+    vstep = float(np.mean(vs0[(t0 >= delay + 50) & (t0 <= delay + dur - 50)]))  #mid step
+    dv = vstep - vrest
+    rin_mohm = dv / amp  #mV / nA = MΩ
+    print(f"[Rin] vrest={vrest:.2f} mV, vstep={vstep:.2f} mV, ΔV={dv:.2f} mV, Rin≈{rin_mohm:.1f} MΩ")
+
     print("Percent Δ peak cai (50% vs WT):",
           100 * (cai1_soma.max() / cai0_soma.max() - 1),
           100 * (cai1_prox.max() / cai0_prox.max() - 1),
