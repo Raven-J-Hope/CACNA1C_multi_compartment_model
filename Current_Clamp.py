@@ -245,7 +245,7 @@ class DGGranuleLikeCell:
             try_insert(head, "Kv42b")
             try_insert(neck, "Kv11")
             try_insert(head, "Kv11")
-            try_insert(neck, "Kir21");
+            try_insert(neck, "Kir21")
             try_insert(head, "Kir21")
             try_insert(neck, "Kv14");
             try_insert(head, "Kv14")
