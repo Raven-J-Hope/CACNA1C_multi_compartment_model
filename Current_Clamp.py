@@ -485,8 +485,8 @@ class DGGranuleLikeCell:
                 for seg in sec:
                     seg.hh.gnabar = 0.03
                     seg.hh.gkbar = 0.01
-                    seg.hh.gl = 0.0003
-                    seg.hh.el = -54.3
+                    seg.hh.gl = 5e-5
+                    seg.hh.el = -70.0
 
         #adds mechanisms from Beining 2017
         for sec in [self.soma, self.dend_prox, self.dend_dist]:
