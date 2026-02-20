@@ -952,6 +952,29 @@ if __name__ == "__main__":
 
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
+    #plot ina wt
+    plt.figure()
+    plt.plot(t0, ina0_soma, label="ina soma")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("ina (mA/cm2)")
+    plt.title("Soma sodium current")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Soma sodium current.png"), dpi=300)
+    plt.show()
+
+    #plot hh wt
+    plt.figure()
+    plt.plot(t0, hhh0_soma, label="hh.h soma")
+    plt.plot(t0, hhh0_ais, label="hh.h AIS")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("h (Na availability)")
+    plt.title("HH Na inactivation gate (h)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "HH Na inactivation gate (h).png"), dpi=300)
+    plt.show()
+
     #plot base soma AP
     plt.figure()
     plt.plot(t0, vs0, label="baseline soma")
