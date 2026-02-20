@@ -28,7 +28,7 @@ if os.path.exists(DLL_PATH):
     h.nrn_load_dll(DLL_PATH)
     print("Loaded mechanisms:", DLL_PATH)
 else:
-    raise RuntimeError(f"Compiled mechanisms not found at: {DLL_PATH}") 
+    raise RuntimeError(f"Compiled mechanisms not found at: {DLL_PATH}")
 
 #sanity savers
 def try_insert(sec, mech: str) -> bool:
