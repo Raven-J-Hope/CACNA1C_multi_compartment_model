@@ -733,7 +733,7 @@ def save_run_report(path, meta: dict):
 
 if __name__ == "__main__":
     #baseline aka WT
-    h.celsius = 37.0 #37 in vivo-like, 34 slice-like
+   #h.celsius = 37.0 #37 in vivo-like, 34 slice-like  #commenting temp out fore with temp no spikey?
     cell = DGGranuleLikeCell()
 
 #sanit check ais connected
