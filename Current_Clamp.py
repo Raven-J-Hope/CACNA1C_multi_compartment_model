@@ -158,6 +158,66 @@ def spike_features(t, v, delay, dur, threshold=0.0, refractory_ms=2.0):
         "width_half": width_half,
     }
 
+def adaptation_metrics(t, v, delay=100.0, dur=300.0, threshold=0.0, refractory_ms=2.0,
+                       early_ms=100.0, late_ms=100.0):
+    """
+    Returns early/late firing rates + adaptation index from soma Vm.
+    early window= [delay, delay+early_ms]
+    late window=  [delay+dur-late_ms, delay+dur]
+    """
+    t = np.asarray(t)
+    v = np.asarray(v)
+
+    def spike_times_in_window(t0, t1):
+        w = (t >= t0) & (t <= t1)
+        tt = t[w]
+        vv = v[w]
+        if len(tt) < 2:
+            return np.array([])
+
+        crosses = (vv[:-1] < threshold) & (vv[1:] >= threshold)
+        idx = np.where(crosses)[0]
+
+        st = []
+        last_t = -1e9
+        for i in idx:
+            tcross = tt[i + 1]
+            if (tcross - last_t) >= refractory_ms:
+                st.append(tcross)
+                last_t = tcross
+        return np.array(st, dtype=float)
+
+    t_on = delay
+    t_off = delay + dur
+
+    early_t0, early_t1 = t_on, min(t_on + early_ms, t_off)
+    late_t0, late_t1 = max(t_off - late_ms, t_on), t_off
+
+    st_early = spike_times_in_window(early_t0, early_t1)
+    st_late  = spike_times_in_window(late_t0, late_t1)
+
+    fr_early = len(st_early) / ((early_t1 - early_t0) / 1000.0) if (early_t1 > early_t0) else 0.0
+    fr_late  = len(st_late)  / ((late_t1  - late_t0)  / 1000.0) if (late_t1  > late_t0) else 0.0
+
+    #adaptation index where 1 = strong (late<<early), 0 = none (late≈early), negative = facilitation
+    adapt_index = (fr_early - fr_late) / (fr_early + 1e-12)
+
+    #ISI ratio (last ISI / first ISI) within full step
+    st_full = spike_times_in_window(t_on, t_off)
+    if len(st_full) >= 3:
+        isis = np.diff(st_full)
+        isi_ratio = float(isis[-1] / (isis[0] + 1e-12))
+    else:
+        isi_ratio = float("nan")
+
+    return {
+        "fr_early_hz": float(fr_early),
+        "fr_late_hz": float(fr_late),
+        "adapt_index": float(adapt_index),
+        "isi_ratio_last_over_first": isi_ratio,
+        "n_spikes": int(len(st_full)),
+    }
+
 #define cell morphology & biophysics
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell"):
