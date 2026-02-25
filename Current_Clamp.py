@@ -887,6 +887,69 @@ if __name__ == "__main__":
           float(np.max(cai1_dist)),
           float(np.max(cai1_spine)))
 
+
+    #recruitment metrics for soma, peak, mean(abs) plateau, and AUC(abs) during step
+    def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
+        """
+        Returns peak(|x|) during step, mean(|x|) during plateau, AUC(|x|) during step.
+        x can be current density (mA/cm2) or any trace.
+        """
+        if x is None:
+            return {"peak_abs": None, "mean_abs_plateau": None, "auc_abs_step": None}
+
+        t = np.asarray(t)
+        x = np.asarray(x)
+
+        w_step = (t >= step_on) & (t <= step_off)
+        w_plat = (t >= step_on + plateau_guard) & (t <= step_off - plateau_guard)
+
+        peak_abs = float(np.max(np.abs(x[w_step]))) if np.any(w_step) else None
+        mean_abs_plateau = float(np.mean(np.abs(x[w_plat]))) if np.any(w_plat) else None
+        auc_abs_step = float(np.trapz(np.abs(x[w_step]), t[w_step])) if np.any(w_step) else None  # units: (x * ms)
+
+        return {"peak_abs": peak_abs, "mean_abs_plateau": mean_abs_plateau, "auc_abs_step": auc_abs_step}
+
+
+    step_on = 100.0
+    step_off = 400.0
+
+    wt_cav = step_metrics(t0, ica0_soma, step_on, step_off)
+    het_cav = step_metrics(t1, ica1_soma, step_on, step_off)
+
+    wt_bk = step_metrics(t0, bkik0_soma, step_on, step_off)
+    het_bk = step_metrics(t1, bkik1_soma, step_on, step_off)
+
+    wt_sk = step_metrics(t0, skik0_soma, step_on, step_off)
+    het_sk = step_metrics(t1, skik1_soma, step_on, step_off)
+
+
+    def fmt(m):
+        return f"peak| |={m['peak_abs']:.3e}, mean| |plat={m['mean_abs_plateau']:.3e}, AUC| |= {m['auc_abs_step']:.3e}" if \
+        m["peak_abs"] is not None else "None"
+
+
+    print("\n--- RECRUITMENT METRICS (soma, step 100–400 ms) ---")
+    print("WT  Cav (ica):", fmt(wt_cav))
+    print("50% Cav (ica):", fmt(het_cav))
+    print("Δ Cav (50%-WT):",
+          f"peak {het_cav['peak_abs'] - wt_cav['peak_abs']:+.3e}, "
+          f"plat {het_cav['mean_abs_plateau'] - wt_cav['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_cav['auc_abs_step'] - wt_cav['auc_abs_step']:+.3e}")
+
+    print("WT  BK (ik):", fmt(wt_bk))
+    print("50% BK (ik):", fmt(het_bk))
+    print("Δ BK (50%-WT):",
+          f"peak {het_bk['peak_abs'] - wt_bk['peak_abs']:+.3e}, "
+          f"plat {het_bk['mean_abs_plateau'] - wt_bk['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_bk['auc_abs_step'] - wt_bk['auc_abs_step']:+.3e}")
+
+    print("WT  SK (ik):", fmt(wt_sk))
+    print("50% SK (ik):", fmt(het_sk))
+    print("Δ SK (50%-WT):",
+          f"peak {het_sk['peak_abs'] - wt_sk['peak_abs']:+.3e}, "
+          f"plat {het_sk['mean_abs_plateau'] - wt_sk['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_sk['auc_abs_step'] - wt_sk['auc_abs_step']:+.3e}")
+
     def peak_abs(x):
         return None if x is None else float(np.max(np.abs(x)))
 
