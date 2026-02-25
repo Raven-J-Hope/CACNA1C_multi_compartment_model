@@ -1360,7 +1360,163 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, "#SK recruitment aka soma SK current baseline vs 50%.png"), dpi=300)
         plt.show()
 
-    #quantify Ca difference during stimulus window --in soma
+    #ΔBK and ΔSK recruitment traces WT - 50%
+    if (bkik0_soma is not None and bkik1_soma is not None and
+            skik0_soma is not None and skik1_soma is not None):
+
+        w = (t0 >= 80) & (t0 <= 450)  # show baseline + step + recovery
+
+        plt.figure()
+        plt.plot(t0[w], (bkik0_soma - bkik1_soma)[w], label="ΔBK (WT - 50%)")
+        plt.plot(t0[w], (skik0_soma - skik1_soma)[w], label="ΔSK (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Δ current density (mA/cm2)")
+        plt.title("Genotype effect on Ca-dependent K currents (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_vs_SK_WT_minus_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("Missing BK/SK traces for ΔBK/ΔSK plot.")
+
+    #SK genotype effect (WT - 50%) as trace & cumulative integrla
+    if skik0_soma is not None and skik1_soma is not None:
+        #uses stimulus window only
+        step_on = 100.0
+        step_off = 400.0
+        w = (t0 >= step_on) & (t0 <= step_off)
+
+        #ΔSK = WT - 50%
+        dsk = (skik0_soma - skik1_soma)
+
+        #cumulative integral of ΔSK over time (signed, not abs)
+        #units mA/cm2 * ms
+        dsk_auc_t = np.cumsum(dsk[w]) * (t0[1] - t0[0])
+
+        plt.figure()
+        plt.plot(t0[w], dsk[w], label="ΔSK (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("ΔSK current density (mA/cm2)")
+        plt.title("Genotype effect on SK current (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_SK_trace_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        plt.figure()
+        plt.plot(t0[w], dsk_auc_t, label="Cumulative ∫ΔSK dt (signed)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cumulative ΔSK AUC (mA/cm2·ms)")
+        plt.title("Cumulative SK difference across the step (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_SK_cumulative_AUC_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        print(f"[ΔSK signed AUC over 100–400 ms] {float(np.trapz(dsk[w], t0[w])):+.6e} mA/cm2·ms")
+    else:
+        print("SK vectors missing (skik0_soma or skik1_soma is None).")
+
+
+    def spike_times_upcross(t, v, thr=0.0, refractory_ms=2.0, t0=100.0, t1=400.0):
+        t = np.asarray(t);
+        v = np.asarray(v)
+        w = (t >= t0) & (t <= t1)
+        tt = t[w];
+        vv = v[w]
+        crosses = (vv[:-1] < thr) & (vv[1:] >= thr)
+        idx = np.where(crosses)[0]
+
+        out = []
+        last = -1e9
+        for i in idx:
+            ts = float(tt[i + 1])
+            if ts - last >= refractory_ms:
+                out.append(ts)
+                last = ts
+        return np.array(out)
+
+
+    def auc_around_spikes(t, y, spike_ts, pre_ms=5.0, post_ms=20.0):
+        t = np.asarray(t)
+        y = np.asarray(y)
+        aucs = []
+        for ts in spike_ts:
+            w = (t >= ts - pre_ms) & (t <= ts + post_ms)
+            if np.any(w):
+                aucs.append(float(np.trapz(y[w], t[w])))
+        return np.array(aucs)
+
+
+    #spike times using soma volt w/in step
+    step_on = 100.0
+    step_off = 400.0
+    pre_ms = 5.0
+    post_ms = 20.0
+
+    spk0 = spike_times_upcross(t0, vs0, thr=0.0, refractory_ms=2.0, t0=step_on, t1=step_off)
+    spk1 = spike_times_upcross(t1, vs1, thr=0.0, refractory_ms=2.0, t0=step_on, t1=step_off)
+
+    #only spikes w/ full AUC window fit inside the step_on/off
+    spk0 = spk0[(spk0 - pre_ms >= step_on) & (spk0 + post_ms <= step_off)]
+    spk1 = spk1[(spk1 - pre_ms >= step_on) & (spk1 + post_ms <= step_off)]
+
+    #per spike SK charge ie signed AUC around spike
+    auc_sk0 = auc_around_spikes(t0, skik0_soma, spk0, pre_ms=pre_ms, post_ms=post_ms)
+    auc_sk1 = auc_around_spikes(t1, skik1_soma, spk1, pre_ms=pre_ms, post_ms=post_ms)
+
+    print(
+        f"[Per-spike SK AUC] WT mean={np.mean(auc_sk0):.3e}, "
+        f"50% mean={np.mean(auc_sk1):.3e}, "
+        f"Δ(50%-WT)={np.mean(auc_sk1) - np.mean(auc_sk0):+.3e}"
+    )
+
+    #per spike Ca AUC
+
+    #only runs if cai vectors exist
+    if (cai0_soma is not None) and (cai1_soma is not None):
+        # per-spike Ca "load" (signed AUC, but cai is always positive anyway)
+        auc_ca0 = auc_around_spikes(t0, cai0_soma, spk0, pre_ms=5.0, post_ms=20.0)
+        auc_ca1 = auc_around_spikes(t1, cai1_soma, spk1, pre_ms=5.0, post_ms=20.0)
+
+        #align lengths
+        n = min(len(auc_ca0), len(auc_ca1))
+        auc_ca0 = auc_ca0[:n]
+        auc_ca1 = auc_ca1[:n]
+
+        print(
+            f"[Per-spike soma Ca AUC] WT mean={np.mean(auc_ca0):.3e}, "
+            f"50% mean={np.mean(auc_ca1):.3e}, Δ(50%-WT)={np.mean(auc_ca1) - np.mean(auc_ca0):+.3e}"
+        )
+
+    #plot SK AUC/spike
+    plt.figure()
+    plt.plot(auc_sk0, label="WT per-spike SK AUC", marker="o")
+    plt.plot(auc_sk1, label="50% per-spike SK AUC", marker="o")
+    plt.xlabel("Spike #")
+    plt.ylabel("SK AUC per spike (mA/cm2·ms)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "SK AUC per spike (soma).png"), dpi=300)
+    plt.show()
+
+    #plots Ca AUC/spike vs spike #
+    plt.figure()
+    plt.plot(np.arange(n), auc_ca0, marker="o", label="WT per-spike Ca AUC")
+    plt.plot(np.arange(n), auc_ca1, marker="o", label="50% per-spike Ca AUC")
+    plt.xlabel("Spike #")
+    plt.ylabel("Ca AUC per spike (mM·ms)")
+    plt.title("Per-spike soma Ca load (AUC)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Ca AUC per spike (soma).png"), dpi=300)
+    plt.show()
+
+else:
+    print("[Per-spike soma Ca AUC] Skipped: cai_soma missing (None).")
+
+
+    #quantify Ca difference during stimulus window in soma
     if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
         win = (t0 >= 100) & (t0 <= 400)
 
