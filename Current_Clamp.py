@@ -1086,6 +1086,44 @@ if __name__ == "__main__":
         pk1, tpk1, tr1, ttr1, w1 = spike_features(t1, vA1)
         print(f"{name}: Δpeak={pk1 - pk0:+.3f} mV, Δtrough={tr1 - tr0:+.3f} mV, Δwidth={w1 - w0:+.3f} ms")
 
+
+    #AP threshold & max dV/dt at soma
+    def ap_threshold_dvdt(t, v, delay, dur, dvdt_thresh=20.0):
+        """
+        Return (v_thresh, t_thresh, dvdt_max) within the stimulus window.
+        Threshold = first time dV/dt crosses dvdt_thresh in mV/ms.
+        """
+        t = np.asarray(t)
+        v = np.asarray(v)
+
+        w = (t >= delay) & (t <= delay + dur)
+        tt = t[w]
+        vv = v[w]
+        if len(tt) < 3:
+            return float("nan"), float("nan"), float("nan")
+
+        dvdt = np.gradient(vv, tt)  #mV/ms b/c t is ms
+        dvdt_max = float(np.max(dvdt))
+
+        idx = np.where(dvdt >= dvdt_thresh)[0]
+        if len(idx) == 0:
+            return float("nan"), float("nan"), dvdt_max
+
+        i0 = int(idx[0])
+        return float(vv[i0]), float(tt[i0]), dvdt_max
+
+
+    delay = 100.0
+    dur = 300.0
+
+    vth0, tth0, dvdtmax0 = ap_threshold_dvdt(t0, vs0, delay=delay, dur=dur, dvdt_thresh=20.0)
+    vth1, tth1, dvdtmax1 = ap_threshold_dvdt(t1, vs1, delay=delay, dur=dur, dvdt_thresh=20.0)
+
+    print(f"[Threshold soma] WT:  Vth={vth0:.2f} mV at {tth0:.2f} ms, max dV/dt={dvdtmax0:.2f} mV/ms")
+    print(f"[Threshold soma] 50%: Vth={vth1:.2f} mV at {tth1:.2f} ms, max dV/dt={dvdtmax1:.2f} mV/ms")
+    print(f"[ΔThreshold soma] 50%-WT: ΔVth={vth1 - vth0:+.2f} mV, Δ(max dV/dt)={dvdtmax1 - dvdtmax0:+.2f} mV/ms")
+
+
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
     #plot ina wt
