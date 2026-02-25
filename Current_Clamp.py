@@ -992,6 +992,16 @@ if __name__ == "__main__":
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
 
+    am0 = adaptation_metrics(t0, vs0, delay=100.0, dur=300.0, threshold=0.0)
+    am1 = adaptation_metrics(t1, vs1, delay=100.0, dur=300.0, threshold=0.0)
+
+    print("\n--- ADAPTATION (soma) ---")
+    print("WT:  early Hz =", am0["fr_early_hz"], " late Hz =", am0["fr_late_hz"],
+          " adapt_index =", am0["adapt_index"], " isi_ratio =", am0["isi_ratio_last_over_first"])
+    print("50%: early Hz =", am1["fr_early_hz"], " late Hz =", am1["fr_late_hz"],
+          " adapt_index =", am1["adapt_index"], " isi_ratio =", am1["isi_ratio_last_over_first"])
+    print("Δadapt_index (50%-WT):", am1["adapt_index"] - am0["adapt_index"])
+
     #Rin diagnostics (MΩ) sanity - check Rin = if no spikey, want ~100MΩ
     delay = float(cell.iclamp.delay)
     dur = float(cell.iclamp.dur)
