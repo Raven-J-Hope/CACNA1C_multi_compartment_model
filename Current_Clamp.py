@@ -647,7 +647,7 @@ class DGGranuleLikeCell:
                     seg.ichan3.gkabar = 5e-4 * 0.3
 
         #adds mechanisms from Beining 2017
-        for sec in [self.soma, self.dend_prox, self.dend_dist]:
+        for sec in [self.soma, self.ais, self.dend_prox, self.dend_dist]:
             try_insert(sec, "Caold")
             try_insert(sec, "Cabuffer")
             try_insert(sec, "Cav12")
