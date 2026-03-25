@@ -875,9 +875,16 @@ class DGGranuleLikeCell:
         self.ina_soma_vec = h.Vector()
         self.ina_soma_vec.record(self.soma(0.5)._ref_ina)  #all na
 
-        #hh gating variables (Na availability)
-        self.hh_h_soma_vec = h.Vector()
-        self.hh_h_soma_vec.record(self.soma(0.5).hh._ref_h)
+        if has_mech(self.soma, "na8st"):
+            self.na8st_m_soma_vec = h.Vector()
+            #na8st Markov proxies
+            self.na8st_o_soma_vec = None
+            self.na8st_g_soma_vec = None
+            self.na8st_i_soma_vecs = None  #list of vectors
+
+            self.na8st_o_ais_vec = None
+            self.na8st_g_ais_vec = None
+            self.na8st_i_ais_vecs = None  #list of vectors
 
         self.hh_h_ais_vec = h.Vector()
         self.hh_h_ais_vec.record(self.ais(0.5).hh._ref_h)
