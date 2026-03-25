@@ -633,6 +633,7 @@ class DGGranuleLikeCell:
                 seg.ichan3.gksbar = 5e-4
                 seg.ichan3.gkabar = 5e-4
 
+        #dend
         for sec in [self.dend_prox, self.dend_dist]:
             if has_mech(sec, "hh"):
                 for seg in sec:
