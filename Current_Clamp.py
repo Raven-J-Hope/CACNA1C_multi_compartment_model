@@ -661,7 +661,6 @@ class DGGranuleLikeCell:
             try_insert(sec, "HCN")
             try_insert(sec, "Kv42")
             try_insert(sec, "Kv11")
-            try_insert(sec, "ichan3")
             try_insert(sec, "Kir21")
             try_insert(sec, "Kv14")
             try_insert(sec, "Kv21")
