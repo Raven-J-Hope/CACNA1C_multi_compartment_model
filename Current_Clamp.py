@@ -891,9 +891,23 @@ class DGGranuleLikeCell:
                 if not has_mech(sec, "na8st"):
                     return None, None, None
 
-        #hactivation gate
-        self.hh_m_soma_vec = h.Vector()
-        self.hh_m_soma_vec.record(self.soma(0.5).hh._ref_m)
+                o_vec = h.Vector()
+                o_vec.record(sec(loc).na8st._ref_o)
+
+                g_vec = h.Vector()
+                g_vec.record(sec(loc).na8st._ref_g)
+
+                i_vecs = []
+                for k in range(1, 7):
+                    v = h.Vector()
+                    v.record(getattr(sec(loc).na8st, f"_ref_i{k}"))
+                    i_vecs.append(v)
+
+                return o_vec, g_vec, i_vecs
+
+            #record soma + AIS
+            self.na8st_o_soma_vec, self.na8st_g_soma_vec, self.na8st_i_soma_vecs = _record_na8st_states(self.soma, 0.5)
+            self.na8st_o_ais_vec, self.na8st_g_ais_vec, self.na8st_i_ais_vecs = _record_na8st_states(self.ais, 0.5)
 
         #BK specific current density (mA/cm2)
         self.bk_ik_soma_vec = None
