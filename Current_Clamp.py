@@ -582,6 +582,10 @@ class DGGranuleLikeCell:
 
 
         #Hodgkin-Huxley(hh)-style mechanism
+        #mammalian spiking - inbuilt NEURON is squid hh
+        #uses na8st for fast Na, and ichan3 for additional Na/K current
+        #acc na8st is markov
+
         for sec in [self.soma, self.ais, self.axon, self.dend_prox, self.dend_dist]:
             try_insert(sec, "hh")
 
