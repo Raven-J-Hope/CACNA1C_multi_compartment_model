@@ -587,7 +587,8 @@ class DGGranuleLikeCell:
         #acc na8st is markov
 
         for sec in [self.soma, self.ais, self.axon, self.dend_prox, self.dend_dist]:
-            try_insert(sec, "hh")
+            try_insert(sec, "na8st")
+            try_insert(sec, "ichan3")
 
         if has_mech(self.soma, "hh"):
             for seg in self.soma:
