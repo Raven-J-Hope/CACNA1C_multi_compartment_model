@@ -382,8 +382,17 @@ class DGGranuleLikeCell:
                     seg.BK_Cav12.gabkbar = 1e-4
             if has_mech(neck, "BK_Cav12"):
                 for seg in neck:
-                    seg.BK.gakbar = 1e-4
-                    seg.BK.gabkbar = 1e-4
+                    seg.BK_Cav12.gakbar = 1e-4
+                    seg.BK_Cav12.gabkbar = 1e-4
+
+            if has_mech(head, "BK_Cav21"):
+                for seg in head:
+                    seg.BK_Cav21.gakbar = 1e-4
+                    seg.BK_Cav21.gabkbar = 1e-4
+            if has_mech(neck, "BK_Cav21"):
+                for seg in neck:
+                    seg.BK_Cav21.gakbar = 1e-4
+                    seg.BK_Cav21.gabkbar = 1e-4
 
             if has_mech(head, "SK2"):
                 for seg in head:
