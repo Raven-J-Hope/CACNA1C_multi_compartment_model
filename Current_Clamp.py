@@ -789,7 +789,7 @@ class DGGranuleLikeCell:
         self.t_vec = h.Vector()
         self.t_vec.record(h._ref_t)
 
-        #voltages
+        #voltages - soma
         self.vsoma_vec = h.Vector()
         self.vsoma_vec.record(self.soma(0.5)._ref_v)
 
