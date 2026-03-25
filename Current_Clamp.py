@@ -805,6 +805,7 @@ class DGGranuleLikeCell:
         self.vdend_vec = h.Vector()
         self.vdend_vec.record(self.dend_dist(0.9)._ref_v)
 
+        #spine
         self.vspine_vec = h.Vector()
         self.vspine_vec.record(self.spines[0](0.5)._ref_v)  #first spine head
 
