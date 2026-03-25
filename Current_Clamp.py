@@ -835,6 +835,36 @@ class DGGranuleLikeCell:
             self.cai_dist_vec = None
             self.cai_spine_vec = None
 
+        #BK_Cav22 local Ca
+        self.bk_acai22_soma_vec = None
+        if has_mech(self.soma, "BK_Cav22"):
+            try:
+                self.bk_acai22_soma_vec = h.Vector()
+                self.bk_acai22_soma_vec.record(self.soma(0.5).BK_Cav22._ref_acai)
+                print("Recorded BK_Cav22 acai on soma")
+            except Exception as e:
+                print("FAILED recording BK_Cav22 acai:", e)
+
+        #BK_Cav12 local Ca
+        self.bk_acai12_soma_vec = None
+        if has_mech(self.soma, "BK_Cav12"):
+            try:
+                self.bk_acai12_soma_vec = h.Vector()
+                self.bk_acai12_soma_vec.record(self.soma(0.5).BK_Cav12._ref_acai)
+                print("Recorded BK_Cav12 acai on soma")
+            except Exception as e:
+                print("FAILED recording BK_Cav12 acai:", e)
+
+        #BK_Cav21 local Ca 
+        self.bk_acai21_soma_vec = None
+        if has_mech(self.soma, "BK_Cav21"):
+            try:
+                self.bk_acai21_soma_vec = h.Vector()
+                self.bk_acai21_soma_vec.record(self.soma(0.5).BK_Cav21._ref_acai)
+                print("Recorded BK_Cav21 acai on soma")
+            except Exception as e:
+                print("FAILED recording BK_Cav21 acai:", e)
+
         #total ionic current densities (mA/cm2) at soma(0.5)
         self.ica_soma_vec = h.Vector()
         self.ica_soma_vec.record(self.soma(0.5)._ref_ica)  #all ca
