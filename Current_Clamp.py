@@ -910,10 +910,28 @@ class DGGranuleLikeCell:
             self.na8st_o_ais_vec, self.na8st_g_ais_vec, self.na8st_i_ais_vecs = _record_na8st_states(self.ais, 0.5)
 
         #BK specific current density (mA/cm2)
-        self.bk_ik_soma_vec = None
-        if has_mech(self.soma, "BK"):
-            self.bk_ik_soma_vec = h.Vector()
-            self.bk_ik_soma_vec.record(self.soma(0.5).BK._ref_ik)  #BK
+#        self.bk_ik_soma_vec = None
+#        if has_mech(self.soma, "BK"):
+#            self.bk_ik_soma_vec = h.Vector()
+#            self.bk_ik_soma_vec.record(self.soma(0.5).BK._ref_ik)  #BK
+
+        #BK_Cav22 specific current density (mA/cm2)
+        self.bk_Cav22_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav22"):
+            self.bk_Cav22_ik_soma_vec = h.Vector()
+            self.bk_Cav22_ik_soma_vec.record(self.soma(0.5).BK_Cav22._ref_ik)  #BK_Cav22
+
+        #BK_Cav12 specific current density (mA/cm2)
+        self.bk_Cav12_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav12"):
+            self.bk_Cav12_ik_soma_vec = h.Vector()
+            self.bk_Cav12_ik_soma_vec.record(self.soma(0.5).BK_Cav12._ref_ik)  #BK_Cav12
+
+        #BK_Cav21 specific current density (mA/cm2)
+        self.bk_Cav21_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav22"):
+            self.bk_Cav21_ik_soma_vec = h.Vector()
+            self.bk_Cav21_ik_soma_vec.record(self.soma(0.5).BK_Cav21._ref_ik)  #BK_Cav21
 
         #SK specific current density (mA/cm2)
         self.sk_ik_soma_vec = None
