@@ -739,7 +739,7 @@ class DGGranuleLikeCell:
 
                 #Kv21
                 if has_mech(sec, "Kv21"):
-                    seg.Kv21.gkbar = 1e-5 * scale
+                    seg.Kv21.gkbar = 3e-5 * scale
 
                 #Kv33 & Kv34
                 if has_mech(sec, "Kv33"):
