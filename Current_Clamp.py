@@ -347,6 +347,8 @@ class DGGranuleLikeCell:
             try_insert(head, "Cav22")
             try_insert(neck, "Cav32")
             try_insert(head, "Cav32")
+            try_insert(neck, "Cav2_1")
+            try_insert(head, "Cav2_1")
 
             #spine gbar
             if has_mech(head, "Cav12"):
