@@ -777,7 +777,7 @@ class DGGranuleLikeCell:
                 for seg in sec:
                     seg.Cav12.gbar *= factor
 
-    def add_current_clamp(self, delay=100.0, dur=300.0, amp=0.2, sec=None, loc=0.5):
+    def add_current_clamp(self, delay=100.0, dur=300.0, amp=0.3, sec=None, loc=0.5):
         sec = self.soma if sec is None else sec
         self.iclamp = h.IClamp(sec(loc))
         self.iclamp.delay = delay
