@@ -886,8 +886,10 @@ class DGGranuleLikeCell:
             self.na8st_g_ais_vec = None
             self.na8st_i_ais_vecs = None  #list of vectors
 
-        self.hh_h_ais_vec = h.Vector()
-        self.hh_h_ais_vec.record(self.ais(0.5).hh._ref_h)
+            def _record_na8st_states(sec, loc=0.5):
+                """Return (o_vec, g_vec, [i1..i6 vecs]) or (None, None, None) if na8st not present."""
+                if not has_mech(sec, "na8st"):
+                    return None, None, None
 
         #hactivation gate
         self.hh_m_soma_vec = h.Vector()
