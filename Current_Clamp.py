@@ -218,6 +218,22 @@ def adaptation_metrics(t, v, delay=100.0, dur=300.0, threshold=0.0, refractory_m
         "n_spikes": int(len(st_full)),
     }
 
+def list_mech_fields(seg, mech_name: str, max_items=200):
+    """
+    Print all public fields NEURON exposes for a mechanism on a specific segment.
+    """
+    mech = getattr(seg, mech_name, None)
+    if mech is None:
+        print(f"[{mech_name}] not present on seg")
+        return
+    names = [n for n in dir(mech) if not n.startswith("_")]
+    names = sorted(names)
+    print(f"[{mech_name}] fields on {seg.sec.name()}({seg.x}):")
+    for n in names[:max_items]:
+        print(" ", n)
+    if len(names) > max_items:
+        print(f" ... ({len(names)-max_items} more)")
+
 #define cell morphology & biophysics
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell"):
