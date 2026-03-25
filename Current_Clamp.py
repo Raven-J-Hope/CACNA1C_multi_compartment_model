@@ -671,7 +671,8 @@ class DGGranuleLikeCell:
             try_insert(sec, "Cav2_1")
 
         self._set_channel_densities_default()
-#set baseline conductances
+
+    #set baseline conductances
     def _set_channel_densities_default(self):
         for sec in [self.soma, self.dend_prox, self.dend_dist]:
             for seg in sec:
