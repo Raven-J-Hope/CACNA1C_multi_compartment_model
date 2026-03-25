@@ -801,6 +801,7 @@ class DGGranuleLikeCell:
         self.vprox_vec = h.Vector()
         self.vprox_vec.record(self.dend_prox(0.5)._ref_v)
 
+        #dist dend
         self.vdend_vec = h.Vector()
         self.vdend_vec.record(self.dend_dist(0.9)._ref_v)
 
