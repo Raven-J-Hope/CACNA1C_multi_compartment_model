@@ -873,7 +873,7 @@ class DGGranuleLikeCell:
         self.ik_soma_vec.record(self.soma(0.5)._ref_ik)  #all k
 
         self.ina_soma_vec = h.Vector()
-        self.ina_soma_vec.record(self.soma(0.5)._ref_ina)  # all na
+        self.ina_soma_vec.record(self.soma(0.5)._ref_ina)  #all na
 
         #hh gating variables (Na availability)
         self.hh_h_soma_vec = h.Vector()
