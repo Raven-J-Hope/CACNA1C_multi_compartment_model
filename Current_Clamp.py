@@ -621,7 +621,12 @@ class DGGranuleLikeCell:
         if has_mech(self.soma, "na8st"):
             print("[AIS debug] soma na8st.gbar @0.5 =", float(self.soma(0.5).na8st.gbar))
 
-        if has_mech(self.axon, "hh"):
+        #axon
+        if has_mech(self.axon, "na8st"):
+            for seg in self.axon:
+                seg.na8st.gbar = 0.0000001 * 3.0
+
+        if has_mech(self.axon, "ichan3"):
             for seg in self.axon:
                 seg.hh.gnabar = 0.18
                 seg.hh.gkbar = 0.05
