@@ -749,7 +749,7 @@ class DGGranuleLikeCell:
 
                 #Kv723 (KCNQ/M-current style)
                 if has_mech(sec, "Kv723"):
-                    seg.Kv723.gkbar = 2e-3 * scale
+                    seg.Kv723.gkbar = 2e-9 * scale
 
                 #Kir21
                 if has_mech(sec, "Kir21"):
