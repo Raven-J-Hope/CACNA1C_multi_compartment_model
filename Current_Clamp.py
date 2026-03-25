@@ -486,7 +486,7 @@ class DGGranuleLikeCell:
 
             if has_mech(head, "na8st"):
                 for seg in head:
-                    seg.na8st.gbar = 5e-6
+                    seg.na8st.gbar = 0.000001
             if has_mech(neck, "na8st"):
                 for seg in neck:
                     seg.na8st.gbar = 5e-6
