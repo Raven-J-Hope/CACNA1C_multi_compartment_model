@@ -2275,7 +2275,7 @@ if __name__ == "__main__":
         w = (t0 >= 80) & (t0 <= 450)  # show baseline + step + recovery
 
         plt.figure()
-        plt.plot(t0[w], (bkik0_soma - bkik1_soma)[w], label="ΔBK (WT - 50%)")
+        plt.plot(t0[w], (bk_Cav22ik0_soma - bk_Cav22ik1_soma)[w], label="ΔBK_Cav22 (WT - 50%)")
         plt.plot(t0[w], (skik0_soma - skik1_soma)[w], label="ΔSK (WT - 50%)")
         plt.xlabel("Time (ms)")
         plt.ylabel("Δ current density (mA/cm2)")
