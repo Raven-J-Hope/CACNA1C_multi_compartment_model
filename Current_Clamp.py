@@ -1395,8 +1395,14 @@ if __name__ == "__main__":
     wt_cav = step_metrics(t0, ica0_soma, step_on, step_off)
     het_cav = step_metrics(t1, ica1_soma, step_on, step_off)
 
-    wt_bk = step_metrics(t0, bkik0_soma, step_on, step_off)
-    het_bk = step_metrics(t1, bkik1_soma, step_on, step_off)
+    wt_bk_Cav22 = step_metrics(t0, bk_Cav22ik0_soma, step_on, step_off)
+    het_bk_Cav22 = step_metrics(t1, bk_Cav22ik1_soma, step_on, step_off)
+
+    wt_bk_Cav12 = step_metrics(t0, bk_Cav12ik0_soma, step_on, step_off)
+    het_bk_Cav12 = step_metrics(t1, bk_Cav12ik1_soma, step_on, step_off)
+
+    wt_bk_Cav21 = step_metrics(t0, bk_Cav21ik0_soma, step_on, step_off)
+    het_bk_Cav21 = step_metrics(t1, bk_Cav21ik1_soma, step_on, step_off)
 
     wt_sk = step_metrics(t0, skik0_soma, step_on, step_off)
     het_sk = step_metrics(t1, skik1_soma, step_on, step_off)
