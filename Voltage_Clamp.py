@@ -422,7 +422,6 @@ class DGGranuleLikeCell:
                     seg.BK_Cav21.gakbar = total_bk_gakbar * self.bk_split["BK_Cav21"]
                     seg.BK_Cav21.gabkbar = total_bk_gabkbar * self.bk_split["BK_Cav21"]
 
-                #SK2
                 if has_mech(sec, "SK2"):
                     seg.SK2.gkbar = 5e-6 * scale
 
