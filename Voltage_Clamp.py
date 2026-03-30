@@ -180,8 +180,6 @@ class DGGranuleLikeCell:
             x = 0.1 + 0.8 * (i / max(1, n_spines - 1))
             self.spine_xs.append(x)
             neck.connect(self.dend_dist(x))
-
-            #attach spine head to end of spine neck
             head.connect(neck(1))
 
             #spine geometry
