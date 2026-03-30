@@ -675,7 +675,7 @@ if __name__ == "__main__":
     }
     save_run_report(os.path.join(OUT_DIR, "vc_run_report_WT.json"), run_meta)
 
-    run_meta_50 = dict(run_meta)  #50% meta
+    run_meta_50 = dict(run_meta)
     run_meta_50["model"] = "Cav12_50"
     save_run_report(os.path.join(OUT_DIR, "vc_run_report_cav12_50.json"), run_meta_50)
 
