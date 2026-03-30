@@ -3018,8 +3018,8 @@ plt.show()
 
 #phase plane overlay for soma baseline vs Cav12 50%
 plt.figure()
-plt.plot(vs0, dvdt0, label="baseline soma")
-plt.plot(vs1, dvdt1, label="Cav12 50% soma")
+plt.plot(vs0, dvdt0, color=WT_COLOR, label=WT_LABEL)
+plt.plot(vs1, dvdt1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
 plt.xlabel("V (mV)")
 plt.ylabel("dV/dt (mV/ms)")
 plt.title("Phase plane overlay: soma (baseline vs Cav12 50%)")
