@@ -1615,8 +1615,6 @@ if __name__ == "__main__":
     print("50%: mean|BK_Cav21_ik|   =", mean_abs(bk_Cav21ik1_soma), "mA/cm2")
     print("50%: mean|ica_soma|=", mean_abs(ica1_soma), "mA/cm2")
     print("50%: mean|ina_soma| =", float(np.mean(np.abs(ina1_soma[w]))), "mA/cm2")
-    print("50%: mean hh.h soma (120–390) =", float(np.mean(hhh1_soma[w])))
-    print("50%: mean hh.h AIS  (120–390) =", float(np.mean(hhh1_ais[w])))
 
     vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
     vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
