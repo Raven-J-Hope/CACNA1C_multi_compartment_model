@@ -794,8 +794,6 @@ if __name__ == "__main__":
         plt.tight_layout()
         savefig(fname)
         plt.show()
-    else:
-        print("50% cai missing for one or more compartments")
 
     #plot cai comparison in soma
     if cai0_soma is not None and cai1_soma is not None:
