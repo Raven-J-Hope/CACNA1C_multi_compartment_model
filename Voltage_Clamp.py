@@ -673,7 +673,7 @@ if __name__ == "__main__":
         "cm_uFcm2": float(cell.soma.cm),
         "soma_psection": str(cell.soma.psection()),
     }
-    save_run_report(os.path.join(OUT_DIR, "vc_run_report_baseline.json"), run_meta)
+    save_run_report(os.path.join(OUT_DIR, "vc_run_report_WT.json"), run_meta)
 
     run_meta_50 = dict(run_meta)  #50% meta
     run_meta_50["model"] = "Cav12_50"
