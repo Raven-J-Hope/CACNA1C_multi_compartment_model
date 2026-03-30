@@ -2067,7 +2067,7 @@ if __name__ == "__main__":
         plt.plot(t1, cai1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
-        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at soma")
+        plt.title("Intracellular Ca at soma")
         plt.legend()
         plt.tight_layout()
         plt.savefig(os.path.join(FIG_DIR, "#plot cai comparison in soma.png"), dpi=300)
