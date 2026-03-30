@@ -2259,8 +2259,8 @@ if __name__ == "__main__":
     #SK recruitment aka soma SK current baseline vs 50%
     if skik0_soma is not None and skik1_soma is not None:
         plt.figure()
-        plt.plot(t0, skik0_soma, label="SK ik baseline")
-        plt.plot(t1, skik1_soma, label="SK ik Cav12 50%")
+        plt.plot(t0, skik0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, skik1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
         plt.xlabel("Time (ms)")
         plt.ylabel("SK current density (mA/cm2)")
         plt.legend()
