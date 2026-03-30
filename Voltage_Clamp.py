@@ -565,6 +565,7 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
     h.tstop = tstop
     h.finitialize(v_init)
+    h.frecord_init()
     h.continuerun(tstop)
 
     t = np.array(cell.t_vec)
