@@ -412,10 +412,15 @@ class DGGranuleLikeCell:
                 if has_mech(sec, "Cav32"):
                     seg.Cav32.gbar = 1e-5 * scale
 
-                #BK
-                if has_mech(sec, "BK"):
-                    seg.BK.gakbar = 1e-4 * scale
-                    seg.BK.gabkbar = 1e-4 * scale
+                total_bk_gakbar = 1e-4 * scale
+                total_bk_gabkbar = 1e-4 * scale
+                if has_mech(sec, "BK_Cav22") and has_mech(sec, "BK_Cav12") and has_mech(sec, "BK_Cav21"):
+                    seg.BK_Cav22.gakbar = total_bk_gakbar * self.bk_split["BK_Cav22"]
+                    seg.BK_Cav22.gabkbar = total_bk_gabkbar * self.bk_split["BK_Cav22"]
+                    seg.BK_Cav12.gakbar = total_bk_gakbar * self.bk_split["BK_Cav12"]
+                    seg.BK_Cav12.gabkbar = total_bk_gabkbar * self.bk_split["BK_Cav12"]
+                    seg.BK_Cav21.gakbar = total_bk_gakbar * self.bk_split["BK_Cav21"]
+                    seg.BK_Cav21.gabkbar = total_bk_gabkbar * self.bk_split["BK_Cav21"]
 
                 #SK2
                 if has_mech(sec, "SK2"):
