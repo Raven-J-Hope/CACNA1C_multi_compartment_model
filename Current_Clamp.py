@@ -1208,7 +1208,8 @@ if __name__ == "__main__":
     print("Has AIS attribute?", hasattr(cell, "ais"))
     if hasattr(cell, "ais"):
         print("AIS name:", cell.ais.name())
-        print("Has hh on AIS?", h.ismembrane("hh", sec=cell.ais))
+        print("Has na8st on AIS?", h.ismembrane("na8st", sec=cell.ais))
+        print("Has pas on AIS?", h.ismembrane("pas", sec=cell.ais))
         print("AIS PSECTION:", cell.ais.psection())
     print("TOPOLOGY:")
     h.topology()
