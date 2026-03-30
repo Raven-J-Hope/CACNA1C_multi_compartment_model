@@ -1829,7 +1829,7 @@ if __name__ == "__main__":
 
     #plot base soma AP
     plt.figure()
-    plt.plot(t0, vs0, label="baseline soma")
+    plt.plot(t0, vs0, color=WT_COLOR, label=WT_LABEL)
     plt.xlabel("Time (ms)")
     plt.ylabel("Vm (mV)")
     plt.title("Baseline soma action potential")
