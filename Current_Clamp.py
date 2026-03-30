@@ -1795,7 +1795,8 @@ if __name__ == "__main__":
     print(f"[Soma peak 80–150 ms] Vmax={np.max(vs_w):.2f} mV")
 
     plt.figure()
-    plt.plot(t0, ina0_soma, label="ina soma")
+    plt.plot(t_w, vs_w, label="soma (zoom)")
+    plt.plot(t_w, vais_w, label="AIS (zoom)")
     plt.xlabel("Time (ms)")
     plt.ylabel("ina (mA/cm2)")
     plt.title("Soma sodium current")
