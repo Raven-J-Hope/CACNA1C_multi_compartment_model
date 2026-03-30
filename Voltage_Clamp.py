@@ -123,9 +123,6 @@ def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
         "auc_abs_step": float(np.trapz(np.abs(x[w_step]), t[w_step])) if np.any(w_step) else None,
     }
 
-    i_peak = int(np.argmax(vv))
-    v_peak = float(vv[i_peak])
-    t_peak = float(tt[i_peak])
 
     #search for minimum after the peak i.e., AHP trough
     vv_after = vv[i_peak:]
