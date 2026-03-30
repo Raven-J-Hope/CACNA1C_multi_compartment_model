@@ -2437,6 +2437,20 @@ if __name__ == "__main__":
             f"50% mean={np.mean(auc_ca1):.3e}, Δ(50%-WT)={np.mean(auc_ca1) - np.mean(auc_ca0):+.3e}"
         )
 
+        #plot Ca AUC/spike
+        plt.figure()
+        plt.plot(np.arange(n), auc_ca0, marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(n), auc_ca1, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike #")
+        plt.ylabel("Ca AUC per spike (mM·ms)")
+        plt.title("Per-spike soma Ca load (AUC)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "Ca AUC per spike (soma).png"), dpi=300)
+        plt.show()
+    else:
+        print("[Per-spike soma Ca AUC] Skipped: cai_soma missing (None).")
+
     #plot SK AUC/spike
     plt.figure()
     plt.plot(auc_sk0, label="WT per-spike SK AUC", marker="o")
