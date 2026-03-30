@@ -694,8 +694,19 @@ if __name__ == "__main__":
         print(f"{label}: Cav2.1 source current =", peak_abs(cav21), "mA/cm2")
         print(f"{label}: Cav22 source current =", peak_abs(cav22), "mA/cm2")
 
-    Ipeak_base = []
-    Iss_base = []
+    step_on = 100.0
+    step_off = 400.0
+    print("\n--- STEP METRICS (VC, 100–400 ms) ---")
+    for name, wt, het in [
+        ("Clamp current", step_metrics(t0, I0, step_on, step_off), step_metrics(t1, I1, step_on, step_off)),
+        ("Total Ca current", step_metrics(t0, ica0_soma, step_on, step_off), step_metrics(t1, ica1_soma, step_on, step_off)),
+        ("BK_Cav22", step_metrics(t0, bk_Cav22ik0_soma, step_on, step_off), step_metrics(t1, bk_Cav22ik1_soma, step_on, step_off)),
+        ("BK_Cav12", step_metrics(t0, bk_Cav12ik0_soma, step_on, step_off), step_metrics(t1, bk_Cav12ik1_soma, step_on, step_off)),
+        ("BK_Cav21", step_metrics(t0, bk_Cav21ik0_soma, step_on, step_off), step_metrics(t1, bk_Cav21ik1_soma, step_on, step_off)),
+        ("SK", step_metrics(t0, skik0_soma, step_on, step_off), step_metrics(t1, skik1_soma, step_on, step_off)),
+    ]:
+        print(f"WT {name}: {fmt_metrics(wt)}")
+        print(f"{CAV12_50_LABEL} {name}: {fmt_metrics(het)}")
 
     for vstep in steps:
         cell = DGGranuleLikeCell()
