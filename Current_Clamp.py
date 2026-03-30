@@ -1111,9 +1111,9 @@ def print_key_params(cell, label=""):
         print("  BK_Cav12 =", bk12 / total_bk)
         print("  BK_Cav21 =", bk21 / total_bk)
 
-def ap_half_widths_per_spike(t, v, threshold=0.0, refractory_ms=2.0,
-                             t_start=100.0, t_end=400.0,
-                             pre_ms=3.0, post_ms=15.0):
+def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
+                        t_start=100.0, t_end=400.0,
+                        pre_ms=3.0, post_ms=15.0):
     """
     Returns AP half-width (ms) for each spike in [t_start, t_end].
     Spike detection = upward threshold crossing.
