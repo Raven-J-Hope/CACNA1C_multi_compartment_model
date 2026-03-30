@@ -22,6 +22,14 @@ BK_Cav22.cpp: ../BK_Cav22.mod $(NOCMODL)
 	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters/Mod_Files/x86_64/$<\\n"
 	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters/Mod_Files/x86_64/$<" -o $@
 
+BK.cpp: ../BK.mod $(NOCMODL)
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "BK.mod"  -o "/home/raven/PycharmProjects/Masters/Mod_Files/x86_64" )
+
+./BK.o: BK.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) /home/raven/PycharmProjects/Masters/Mod_Files/x86_64/$<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/home/raven/PycharmProjects/Masters/Mod_Files/x86_64/$<" -o $@
+
 Cabuffer.cpp: ../Cabuffer.mod $(NOCMODL)
 	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
 	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Cabuffer.mod"  -o "/home/raven/PycharmProjects/Masters/Mod_Files/x86_64" )

@@ -6,6 +6,7 @@ extern int nrn_nobanner_;
 extern "C" void _BK_Cav12_reg(void);
 extern "C" void _BK_Cav21_reg(void);
 extern "C" void _BK_Cav22_reg(void);
+extern "C" void _BK_reg(void);
 extern "C" void _Cabuffer_reg(void);
 extern "C" void _CadepK_reg(void);
 extern "C" void _Caold_reg(void);
@@ -34,6 +35,7 @@ extern "C" void modl_reg() {
     fprintf(stderr, " \"BK_Cav12.mod\"");
     fprintf(stderr, " \"BK_Cav21.mod\"");
     fprintf(stderr, " \"BK_Cav22.mod\"");
+    fprintf(stderr, " \"BK.mod\"");
     fprintf(stderr, " \"Cabuffer.mod\"");
     fprintf(stderr, " \"CadepK.mod\"");
     fprintf(stderr, " \"Caold.mod\"");
@@ -60,6 +62,7 @@ extern "C" void modl_reg() {
   _BK_Cav12_reg();
   _BK_Cav21_reg();
   _BK_Cav22_reg();
+  _BK_reg();
   _Cabuffer_reg();
   _CadepK_reg();
   _Caold_reg();
