@@ -1164,7 +1164,7 @@ def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
         i_trough = int(np.argmin(v_after))
         v_trough = float(v_after[i_trough])
 
-        v_half = 0.5 * (v_peak + v_trough)
+        v_level = v_trough + frac * (v_peak - v_trough)
 
         #upward crossing before peak
         up_idx = np.where((v_sp[:i_peak] < v_half) & (v_sp[1:i_peak+1] >= v_half))[0]
