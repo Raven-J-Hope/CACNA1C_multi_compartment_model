@@ -2823,7 +2823,7 @@ if __name__ == "__main__":
     plt.title("BK_Cav12 recruitment efficiency per unit Ca (per spike)")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, "Ca AUC per spike (soma).png"), dpi=300)
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav12_per_Ca_per_spike.png"), dpi=300)
     plt.show()
 
 else:
