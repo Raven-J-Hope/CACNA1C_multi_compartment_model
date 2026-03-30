@@ -1607,8 +1607,6 @@ if __name__ == "__main__":
     print("WT: mean|BK_Cav21_ik|   =", mean_abs(bk_Cav21ik0_soma), "mA/cm2")
     print("WT: mean|ica_soma|=", mean_abs(ica0_soma), "mA/cm2")
     print("WT: mean|ina_soma| =", float(np.mean(np.abs(ina0_soma[w]))), "mA/cm2")
-    print("WT: mean hh.h soma (120–390) =", float(np.mean(hhh0_soma[w])))
-    print("WT: mean hh.h AIS  (120–390) =", float(np.mean(hhh0_ais[w])))
 
     print("50%: mean|ik_soma| =", mean_abs(ik1_soma), "mA/cm2")
     print("50%: mean|SK_ik|   =", mean_abs(skik1_soma), "mA/cm2")
