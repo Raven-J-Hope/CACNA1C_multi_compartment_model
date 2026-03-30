@@ -1774,6 +1774,14 @@ if __name__ == "__main__":
           (float(np.nanmean(widths1)) - float(np.nanmean(widths0)))
           if (len(widths0) and len(widths1)) else np.nan)
 
+    print("WT AP one-third widths (ms):", widths_third0)
+    print("50% AP one-third widths (ms):", widths_third1)
+    print("WT mean AP one-third width (ms):", float(np.nanmean(widths_third0)) if len(widths_third0) else np.nan)
+    print("50% mean AP one-third width (ms):", float(np.nanmean(widths_third1)) if len(widths_third1) else np.nan)
+    print("Δ AP one-third width (50%-WT) (ms):",
+          (float(np.nanmean(widths_third1)) - float(np.nanmean(widths_third0)))
+          if (len(widths_third0) and len(widths_third1)) else np.nan)
+
     #plot AP half-width per spike
     n_hw = min(len(widths0), len(widths1))
     if n_hw > 0:
