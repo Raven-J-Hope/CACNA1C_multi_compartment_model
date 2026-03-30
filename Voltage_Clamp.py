@@ -37,7 +37,7 @@ print("NEURON version:", h.nrnversion())
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs")
 FIG_DIR = os.path.join(OUT_DIR, "vc_figures")
-os.makedirs(FIG_DIR, exist_ok=True)  #creates outputs/ and outputs/figures if missing
+os.makedirs(FIG_DIR, exist_ok=True)
 
 MOD_DIR = "/home/raven/PycharmProjects/Masters/Mod_Files"
 DLL_PATH = os.path.join(MOD_DIR, "x86_64", "libnrnmech.so")
