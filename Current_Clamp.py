@@ -554,7 +554,7 @@ class DGGranuleLikeCell:
             #Cabuffer param - sets buffering strength/kinetics
             if has_mech(head, "Cabuffer"):
                 for seg in head:
-                    seg.Cabuffer.tau = 9.0  #ms
+                    seg.Cabuffer.tau = 8.0  #ms
                     seg.Cabuffer.brat = 1.0 #buffer ratio factor
 
             if has_mech(neck, "Cabuffer"):
