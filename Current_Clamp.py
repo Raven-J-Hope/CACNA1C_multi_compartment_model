@@ -1270,6 +1270,8 @@ if __name__ == "__main__":
 #    ps.exec_menu("View = plot")  #open shape window
 #    h.topology()  #keep printing the tree in the console
     #opens but freezes, check the neuron doccumentation on 28/01 to fix
+    #commented out for now - need check cell builder function to make more realistic morpho
+    #then shape again
 
     cell.add_current_clamp(delay=100, dur=300, amp=0.2)
     cell.setup_recording()
