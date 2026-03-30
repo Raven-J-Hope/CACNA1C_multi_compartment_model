@@ -2872,6 +2872,18 @@ if __name__ == "__main__":
         step_off = 400.0
         w = (t0 >= step_on) & (t0 <= step_off)
 
+        dcav21 = (cav21_ica0_soma - cav21_ica1_soma)
+
+        plt.figure()
+        plt.plot(t0[w], dcav21[w], label="ΔCav2.1 (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Δ Cav2.1 current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_Cav21_trace_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        print(f"[ΔCav2.1 signed AUC over 100–400 ms] {float(np.trapz(dcav21[w], t0[w])):+.6e} mA/cm2·ms")
 
     #quantify Ca difference during stimulus window in soma
     if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
