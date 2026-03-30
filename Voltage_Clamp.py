@@ -442,9 +442,9 @@ class DGGranuleLikeCell:
                 if has_mech(sec, "Kir21"):
                     seg.Kir21.gkbar = 1.5e-4 * scale
                 if has_mech(sec, "Caold"):
-                    seg.Caold.gtcabar = 1e-5 * scale
-                    seg.Caold.gncabar = 1e-5 * scale
-                    seg.Caold.glcabar = 1e-5 * scale
+                    seg.Caold.gtcabar = 1e-6 * scale
+                    seg.Caold.gncabar = 1e-6 * scale
+                    seg.Caold.glcabar = 1e-6 * scale
                 if has_mech(sec, "Cabuffer"):
                     seg.Cabuffer.tau = 9.0
                     seg.Cabuffer.brat = 1.0
