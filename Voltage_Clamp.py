@@ -648,13 +648,13 @@ if __name__ == "__main__":
         cell, tstop=500.0, v_init=-70.0, dt=0.025
     )
 
-    #mechanism sanity checks - spine head sanity
-    for mech in ["Cav12", "Cabuffer", "Caold"]:
-        print(f"Has {mech} on spine head[0]?", h.ismembrane(mech, sec=cell.spines[0]))
-
-    #print density mechanism names & parameters
-    print("SOMA PSECTION (look at density_mechs!)")
-    print(cell.soma.psection())
+    cell2 = DGGranuleLikeCell(bk_split=CAV12_50_BK_SPLIT)
+    cell2.scale_cav12(0.5)
+    cell2.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100.0, dur=300.0)
+    cell2.setup_recording()
+    t1, vs1, vais1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, I1 = run_sim(
+        cell2, tstop=500.0, v_init=-70.0, dt=0.025
+    )
 
     run_meta = {
         "python_version": __import__("sys").version,
