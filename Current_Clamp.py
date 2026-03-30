@@ -2453,8 +2453,8 @@ if __name__ == "__main__":
 
     #plot SK AUC/spike
     plt.figure()
-    plt.plot(auc_sk0, label="WT per-spike SK AUC", marker="o")
-    plt.plot(auc_sk1, label="50% per-spike SK AUC", marker="o")
+    plt.plot(auc_sk0, marker="o", color=WT_COLOR, label=WT_LABEL)
+    plt.plot(auc_sk1, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Spike #")
     plt.ylabel("SK AUC per spike (mA/cm2·ms)")
     plt.legend()
