@@ -141,7 +141,10 @@ def savefig(name: str):
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell", bk_split=None):
         self.name = name
-        self.spines = []    #add dendritic spines
+        self.bk_split = WT_BK_SPLIT if bk_split is None else bk_split
+        validate_bk_split(self.bk_split)
+
+        self.spines = []
         self.spine_necks = []
         self.spine_xs = [] #store where spines attach
 
