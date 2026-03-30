@@ -470,7 +470,7 @@ class DGGranuleLikeCell:
         self.vclamp.amp2 = step
         self.vclamp.dur3 = 50.0
         self.vclamp.amp3 = hold
-        self.vclamp.rs = 0.01  #series resistance in megaohm, small = stronger clamp
+        self.vclamp.rs = 0.01
 
     def setup_recording(self):
         #time
