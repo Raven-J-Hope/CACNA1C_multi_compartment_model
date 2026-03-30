@@ -63,11 +63,54 @@ def has_mech(sec, mech: str) -> bool:
     except Exception:
         return False
 
-def ahp_depth(t, v, spike_window=(90, 140)):
-    """
-    Returns (v_peak, t_peak, v_min_after, t_min_after, ahp_depth_mV)
-    AHP depth = v_min_after - v_rest (more negative = deeper)
-    """
+
+def validate_bk_split(split: dict):
+    s = sum(split.values())
+    if abs(s - 1.0) > 1e-9:
+        raise ValueError(f"BK split must sum to 1.0, got {s}")
+
+
+def apply_bk_split_to_section(sec, total_bk_gakbar: float, total_bk_gabkbar: float, split: dict):
+    validate_bk_split(split)
+    for seg in sec:
+        if has_mech(sec, "BK_Cav22"):
+            seg.BK_Cav22.gakbar = total_bk_gakbar * split["BK_Cav22"]
+            seg.BK_Cav22.gabkbar = total_bk_gabkbar * split["BK_Cav22"]
+        if has_mech(sec, "BK_Cav12"):
+            seg.BK_Cav12.gakbar = total_bk_gakbar * split["BK_Cav12"]
+            seg.BK_Cav12.gabkbar = total_bk_gabkbar * split["BK_Cav12"]
+        if has_mech(sec, "BK_Cav21"):
+            seg.BK_Cav21.gakbar = total_bk_gakbar * split["BK_Cav21"]
+            seg.BK_Cav21.gabkbar = total_bk_gabkbar * split["BK_Cav21"]
+
+
+def save_run_report(path, meta: dict):
+    def _json_safe(x):
+        if isinstance(x, set):
+            return sorted(list(x))
+        if isinstance(x, (list, tuple)):
+            return [_json_safe(v) for v in x]
+        if isinstance(x, dict):
+            return {str(k): _json_safe(v) for k, v in x.items()}
+        if isinstance(x, (str, int, float, bool)) or x is None:
+            return x
+        try:
+            return float(x)
+        except Exception:
+            return str(x)
+
+    with open(path, "w") as f:
+        json.dump(_json_safe(meta), f, indent=2)
+
+
+def peak_abs(x):
+    return None if x is None else float(np.max(np.abs(x)))
+
+
+def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
+    if x is None:
+        return {"peak_abs": None, "mean_abs_plateau": None, "auc_abs_step": None}
+
     t = np.asarray(t)
     v = np.asarray(v)
 
