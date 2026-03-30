@@ -57,12 +57,12 @@ PARAMETER {
 
     vhalfm = -29.458 (mV)
     cvm = 8.429(mV)
-    vhalfh = -11.039 (mV)
-    cvh = 16.098 (mV)
+    vhalfh = -45 (mV)
+    cvh = 10 (mV)
     vshift = 0 (mV)
 
-    tauh_base = 120 (ms)
-    tauh_amp = 80 (ms)
+    tauh_base = 50 (ms)
+    tauh_amp = 30 (ms)
 
     pcabar = 2.2e-4 (cm/s)
 }

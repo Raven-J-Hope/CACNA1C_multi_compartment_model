@@ -30,7 +30,7 @@ ASSIGNED {
 
 PARAMETER {
 	gbar = 0	(S/cm2)
-	hTau = 100 (ms)
+	hTau = 25 (ms)
 	vshift = 10 		(mV)  : recorrection of Jaffe  1994 compared to Fox 1987, as voltage-dependent activation curve should not depend on ion concentrations or type
 }
 
@@ -60,7 +60,7 @@ PROCEDURE rates() { LOCAL alpha,beta
 	beta = exponential(0.046,-0.048239,v, vshift)
 	mTau = 1/(alpha+beta)
 	mInf = alpha*mTau
-	hInf = 1/(1+exp((v+40)/12.5)) 
+	hInf = 1/(1+exp((v+40)/8))
 }
 
 

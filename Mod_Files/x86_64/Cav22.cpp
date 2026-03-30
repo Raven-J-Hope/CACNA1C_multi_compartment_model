@@ -153,7 +153,7 @@ static NPyDirectMechFunc npy_direct_func_proc[] = {
  #define gind 0
  #define _gth 0
 #define hTau hTau_Cav22
- double hTau = 100;
+ double hTau = 25;
 #define vshift vshift_Cav22
  double vshift = 10;
  /* some parameters have upper and lower limits */
@@ -315,7 +315,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  
     hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 Cav22 /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav22.mod\n");
+ 	ivoc_help("help ?1 Cav22 /home/raven/PycharmProjects/Masters/Mod_Files/Cav22.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -359,7 +359,7 @@ static int  rates ( _internalthreadargsproto_ ) {
    _lbeta = exponential ( _threadargscomma_ 0.046 , - 0.048239 , v , vshift ) ;
    mTau = 1.0 / ( _lalpha + _lbeta ) ;
    mInf = _lalpha * mTau ;
-   hInf = 1.0 / ( 1.0 + exp ( ( v + 40.0 ) / 12.5 ) ) ;
+   hInf = 1.0 / ( 1.0 + exp ( ( v + 40.0 ) / 8.0 ) ) ;
     return 0; }
  
 static void _hoc_rates(void) {
@@ -671,7 +671,7 @@ _first = 0;
 
 #if NMODL_TEXT
 static void register_nmodl_text_and_filename(int mech_type) {
-    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav22.mod";
+    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters/Mod_Files/Cav22.mod";
     const char* nmodl_file_text = 
   ": Ca channels (N-type) from Aradi and Holmes 1999, transferred from GENESIS to NEURON\n"
   ": increased inactivation time constant and corrected calcium handling by Beining et al (2016), \"A novel comprehensive and consistent electrophysiologcal model of dentate granule cells\"\n"
@@ -705,7 +705,7 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "\n"
   "PARAMETER {\n"
   "	gbar = 0	(S/cm2)\n"
-  "	hTau = 100 (ms)\n"
+  "	hTau = 25 (ms)\n"
   "	vshift = 10 		(mV)  : recorrection of Jaffe  1994 compared to Fox 1987, as voltage-dependent activation curve should not depend on ion concentrations or type\n"
   "}\n"
   "\n"
@@ -735,7 +735,7 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	beta = exponential(0.046,-0.048239,v, vshift)\n"
   "	mTau = 1/(alpha+beta)\n"
   "	mInf = alpha*mTau\n"
-  "	hInf = 1/(1+exp((v+40)/12.5)) \n"
+  "	hInf = 1/(1+exp((v+40)/8))\n"
   "}\n"
   "\n"
   "\n"

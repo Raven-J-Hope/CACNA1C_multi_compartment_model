@@ -183,13 +183,13 @@ static NPyDirectMechFunc npy_direct_func_proc[] = {
  #define gind 0
  #define _gth 0
 #define B B_BK_Cav22
- double B = 0.26;
+ double B = 0.15;
 #define base base_BK_Cav22
  double base = 4;
 #define ca0 ca0_BK_Cav22
  double ca0 = 7e-05;
 #define tau tau_BK_Cav22
- double tau = 9;
+ double tau = 3;
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
  {0, 0, 0}
@@ -912,8 +912,8 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	base = 4  	(mV)\n"
   "\n"
   "	ca0 = 0.00007 (mM)   : baseline local Ca\n"
-  "	tau = 9 (ms)         : decay time constant of local Ca nanodomain\n"
-  "	B = 0.26 (mM-cm2/mA-ms)\n"
+  "	tau = 3 (ms)         : decay time constant of local Ca nanodomain\n"
+  "	B = 0.15 (mM-cm2/mA-ms)\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"

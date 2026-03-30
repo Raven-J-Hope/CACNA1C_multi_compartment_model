@@ -790,18 +790,18 @@ class DGGranuleLikeCell:
 
                 #Caold conductances
                 if has_mech(sec, "Caold"):
-                    seg.Caold.gtcabar = 1e-5 * scale
-                    seg.Caold.gncabar = 1e-5 * scale
-                    seg.Caold.glcabar = 1e-5 * scale
+                    seg.Caold.gtcabar = 1e-6 * scale
+                    seg.Caold.gncabar = 1e-6 * scale
+                    seg.Caold.glcabar = 1e-6 * scale
 
                 #Cabuffer params - sets buffering strength/kinetics
                 if has_mech(sec, "Cabuffer"):
-                    seg.Cabuffer.tau = 9.0  #ms
+                    seg.Cabuffer.tau = 8.0  #ms
                     seg.Cabuffer.brat = 1.0  #buffer ratio factor
 
                 #Cav2.1 permeability density, cm/s
                 if has_mech(sec, "Cav2_1"):
-                    seg.Cav2_1.pcabar = 2.2e-6 * scale  #-6 = like w/ no cav21, -5 big diff & -4 break
+                    seg.Cav2_1.pcabar = 1e-5 * scale  #-6 = like w/ no cav21, -5 big diff & -4 break
                     seg.Cav2_1.vshift = 0.0
 
     def scale_cav12(self, factor: float):

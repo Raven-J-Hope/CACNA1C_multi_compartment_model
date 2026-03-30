@@ -177,7 +177,7 @@
       },
       "Cabuffer": {
         "tau": [
-          9.0
+          8.0
         ],
         "brat": [
           1.0
@@ -185,13 +185,13 @@
       },
       "Caold": {
         "gtcabar": [
-          1e-05
+          1e-06
         ],
         "gncabar": [
-          1e-05
+          1e-06
         ],
         "glcabar": [
-          1e-05
+          1e-06
         ],
         "e_ca": [
           0.0
@@ -252,22 +252,22 @@
           8.429
         ],
         "vhalfh": [
-          -11.039
+          -45.0
         ],
         "cvh": [
-          16.098
+          10.0
         ],
         "vshift": [
           0.0
         ],
         "tauh_base": [
-          120.0
+          50.0
         ],
         "tauh_amp": [
-          80.0
+          30.0
         ],
         "pcabar": [
-          2.2e-06
+          1e-05
         ],
         "ica": [
           0.0
@@ -964,7 +964,7 @@
     "regions": [],
     "species": [],
     "name": "dgcell.soma",
-    "hoc_internal_name": "__nrnsec_0x598276b9ee60",
+    "hoc_internal_name": "__nrnsec_0x5a99a3ef75e0",
     "cell": null
   }
 }

@@ -273,11 +273,11 @@ static void _ode_matsol(_nrn_model_sorted_token const&, NrnThread*, Memb_list*, 
  static _nrn_mechanism_std_vector<double> _parm_default{
      -29.458, /* vhalfm */
      8.429, /* cvm */
-     -11.039, /* vhalfh */
-     16.098, /* cvh */
+     -45, /* vhalfh */
+     10, /* cvh */
      0, /* vshift */
-     120, /* tauh_base */
-     80, /* tauh_amp */
+     50, /* tauh_base */
+     30, /* tauh_amp */
      0.00022, /* pcabar */
  }; 
  
@@ -295,11 +295,11 @@ static void nrn_alloc(Prop* _prop) {
  	/*initialize range parameters*/
  	vhalfm = _parm_default[0]; /* -29.458 */
  	cvm = _parm_default[1]; /* 8.429 */
- 	vhalfh = _parm_default[2]; /* -11.039 */
- 	cvh = _parm_default[3]; /* 16.098 */
+ 	vhalfh = _parm_default[2]; /* -45 */
+ 	cvh = _parm_default[3]; /* 10 */
  	vshift = _parm_default[4]; /* 0 */
- 	tauh_base = _parm_default[5]; /* 120 */
- 	tauh_amp = _parm_default[6]; /* 80 */
+ 	tauh_base = _parm_default[5]; /* 50 */
+ 	tauh_amp = _parm_default[6]; /* 30 */
  	pcabar = _parm_default[7]; /* 0.00022 */
  	 assert(_nrn_mechanism_get_num_vars(_prop) == 27);
  	_nrn_mechanism_access_dparam(_prop) = _ppvar;
@@ -864,12 +864,12 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "\n"
   "    vhalfm = -29.458 (mV)\n"
   "    cvm = 8.429(mV)\n"
-  "    vhalfh = -11.039 (mV)\n"
-  "    cvh = 16.098 (mV)\n"
+  "    vhalfh = -45 (mV)\n"
+  "    cvh = 10 (mV)\n"
   "    vshift = 0 (mV)\n"
   "\n"
-  "    tauh_base = 120 (ms)\n"
-  "    tauh_amp = 80 (ms)\n"
+  "    tauh_base = 50 (ms)\n"
+  "    tauh_amp = 30 (ms)\n"
   "\n"
   "    pcabar = 2.2e-4 (cm/s)\n"
   "}\n"
