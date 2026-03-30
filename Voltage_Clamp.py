@@ -134,8 +134,8 @@ def fmt_metrics(m):
     w_rest = (t >= 50) & (t <= 90)
     v_rest = float(np.mean(v[w_rest]))
 
-    ahp = v_min - v_rest
-    return v_peak, t_peak, v_min, t_min, ahp
+def savefig(name: str):
+    plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
 
 #define cell morphology & biophysics
 class DGGranuleLikeCell:
