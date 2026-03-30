@@ -305,7 +305,7 @@ class DGGranuleLikeCell:
 
     def _set_geometry(self):
         self.soma.diam = 20.0
-        self.soma.L = self.soma.diam  #make the soma spherical i.e., make L = diam
+        self.soma.L = self.soma.diam
         self.soma.nseg = 1
 
         self.dend_prox.L = 150.0
