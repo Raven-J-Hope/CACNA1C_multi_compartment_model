@@ -2964,7 +2964,7 @@ if __name__ == "__main__":
 
 
     #acc run F–I curve run
-    currents = np.arange(0.0, 0.51, 0.05)  #in nA
+    currents = np.arange(0.0, 0.8, 0.05)  #in nA
     I_base, fr_base, nsp_base = run_fi_curve(cav12_factor=1.0, currents=currents, threshold=0.0)
     I_het, fr_het, nsp_het = run_fi_curve(cav12_factor=0.5, currents=currents, threshold=0.0)
 
