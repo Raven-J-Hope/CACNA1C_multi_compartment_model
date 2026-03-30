@@ -2976,8 +2976,8 @@ if __name__ == "__main__":
 
     #plots F-I curve
     plt.figure()
-    plt.plot(I_base, fr_base, marker="o", label="baseline")
-    plt.plot(I_het, fr_het, marker="o", label="Cav12 50%")
+    plt.plot(I_base, fr_base, marker="o", color=WT_COLOR, label=WT_LABEL)
+    plt.plot(I_het, fr_het, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Injected current (nA)")
     plt.ylabel("Firing rate (Hz)")
     plt.title("F–I curve")
