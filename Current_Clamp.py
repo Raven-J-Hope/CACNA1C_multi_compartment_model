@@ -1020,6 +1020,8 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     cai_prox = np.array(cell.cai_prox_vec) if cell.cai_prox_vec is not None else None
     cai_dist = np.array(cell.cai_dist_vec) if cell.cai_dist_vec is not None else None
     cai_spine = np.array(cell.cai_spine_vec) if cell.cai_spine_vec is not None else None
+    cai_ais = np.array(cell.cai_ais_vec) if getattr(cell, "cai_ais_vec", None) is not None else None
+
     ica_soma = np.array(cell.ica_soma_vec) if getattr(cell, "ica_soma_vec", None) is not None else None
     ik_soma = np.array(cell.ik_soma_vec) if getattr(cell, "ik_soma_vec", None) is not None else None
     bk_ik_soma = np.array(cell.bk_ik_soma_vec) if getattr(cell, "bk_ik_soma_vec", None) is not None else None
