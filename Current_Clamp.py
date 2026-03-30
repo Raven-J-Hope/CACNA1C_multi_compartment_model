@@ -541,9 +541,9 @@ class DGGranuleLikeCell:
 
             if has_mech(head, "Caold"):
                 for seg in head:
-                    seg.Caold.gtcabar = 1e-5  #still need tune?
-                    seg.Caold.gncabar = 1e-5
-                    seg.Caold.glcabar = 1e-5
+                    seg.Caold.gtcabar = 1e-6  #tuuuuuuuuuuned
+                    seg.Caold.gncabar = 1e-6
+                    seg.Caold.glcabar = 1e-6
 
             if has_mech(neck, "Caold"):
                 for seg in neck:
