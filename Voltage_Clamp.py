@@ -365,8 +365,7 @@ class DGGranuleLikeCell:
                 seg.ichan3.gksbar = 5e-4
                 seg.ichan3.gkabar = 5e-4
 
-
-        if has_mech(self.axon, "hh"):
+        if has_mech(self.axon, "na8st"):
             for seg in self.axon:
                 seg.hh.gnabar = 0.18
                 seg.hh.gkbar = 0.05
