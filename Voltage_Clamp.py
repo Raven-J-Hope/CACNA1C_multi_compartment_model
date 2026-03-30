@@ -444,19 +444,6 @@ class DGGranuleLikeCell:
                     seg.Kv723.gkbar = 2e-9 * scale
                 if has_mech(sec, "Kir21"):
                     seg.Kir21.gkbar = 1.5e-4 * scale
-
-                #ichan3 (multi-current Na/K mechanism)
-                if has_mech(sec, "ichan3"):
-                    seg.ichan3.gnabar = 5e-3 * scale
-                    seg.ichan3.gkfbar = 5e-4 * scale
-                    seg.ichan3.gksbar = 5e-4 * scale
-                    seg.ichan3.gkabar = 5e-4 * scale
-
-                #na8st (Na channel)
-                if has_mech(sec, "na8st"):
-                    seg.na8st.gbar =  5e-6 * scale
-
-                #Caold conductances
                 if has_mech(sec, "Caold"):
                     seg.Caold.gtcabar = 1e-5 * scale
                     seg.Caold.gncabar = 1e-5 * scale
