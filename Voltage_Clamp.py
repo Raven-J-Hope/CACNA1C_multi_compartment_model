@@ -124,12 +124,11 @@ def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
     }
 
 
-    #search for minimum after the peak i.e., AHP trough
-    vv_after = vv[i_peak:]
-    tt_after = tt[i_peak:]
-    i_min = int(np.argmin(vv_after))
-    v_min = float(vv_after[i_min])
-    t_min = float(tt_after[i_min])
+def fmt_metrics(m):
+    return (
+        f"peak| |={m['peak_abs']:.3e}, mean| |plat={m['mean_abs_plateau']:.3e}, AUC| |={m['auc_abs_step']:.3e}"
+        if m["peak_abs"] is not None else "None"
+    )
 
     #baseline/rest estimate, the mean before step (e.g., 50–90 ms)
     w_rest = (t >= 50) & (t <= 90)
