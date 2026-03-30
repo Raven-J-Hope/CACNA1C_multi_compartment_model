@@ -456,7 +456,7 @@ class DGGranuleLikeCell:
                     seg.Cav2_1.vshift = 0.0
 
     def scale_cav12(self, factor: float):
-        for sec in [self.soma, self.dend_prox, self.dend_dist] +self.spine_necks +self.spines:
+        for sec in [self.soma, self.dend_prox, self.dend_dist] + self.spine_necks + self.spines:
             if has_mech(sec, "Cav12"):
                 for seg in sec:
                     seg.Cav12.gbar *= factor
