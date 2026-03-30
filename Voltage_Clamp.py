@@ -838,3 +838,42 @@ plt.legend()
 plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "vc_Cav21_source_current_WT_vs_Cav12_50.png"), dpi=300)
 plt.show()
+
+#4-panel voltage clamp Ca current fig
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+#top lefttotal Ca current
+ax = axes[0, 0]
+ax.plot(t0, ica0_soma, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+#top right Cav1.2 source current
+ax = axes[0, 1]
+ax.plot(t0, cav12_ica0_soma, color=WT_COLOR)
+ax.plot(t1, cav12_ica1_soma, color=CAV12_50_COLOR)
+
+#bottom left Cav2.1 source current
+ax = axes[1, 0]
+ax.plot(t0, cav21_ica0_soma, color=WT_COLOR)
+ax.plot(t1, cav21_ica1_soma, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+#bottom right Cav22 source current
+ax = axes[1, 1]
+ax.plot(t0, cav22_ica0_soma, color=WT_COLOR)
+ax.plot(t1, cav22_ica1_soma, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_4panel_total_Cav12_Cav21_Cav22_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
