@@ -892,7 +892,7 @@ class DGGranuleLikeCell:
             except Exception as e:
                 print("FAILED recording BK_Cav12 acai:", e)
 
-        #BK_Cav21 local Ca 
+        #BK_Cav21 local Ca
         self.bk_acai21_soma_vec = None
         if has_mech(self.soma, "BK_Cav21"):
             try:
