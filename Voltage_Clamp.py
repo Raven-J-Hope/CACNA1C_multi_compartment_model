@@ -708,61 +708,6 @@ if __name__ == "__main__":
         print(f"WT {name}: {fmt_metrics(wt)}")
         print(f"{CAV12_50_LABEL} {name}: {fmt_metrics(het)}")
 
-    for vstep in steps:
-        cell = DGGranuleLikeCell()
-        cell.add_voltage_clamp(hold=hold, step=float(vstep), delay=delay, dur=dur)
-        cell.setup_recording()
-
-        t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine = run_sim(cell, tstop=tstop, v_init=hold, dt=0.025)
-        I = np.array(cell.iclamp_vec) if cell.iclamp_vec is not None else None
-
-        #measure the peak and steady-state clamp current during the step
-        w_peak = (t >= delay) & (t <= delay + 10)  #first 10 ms of step
-        w_ss = (t >= delay + dur - 10) & (t <= delay + dur)  #last 10 ms of step
-
-        Ipeak_base.append(float(np.min(I[w_peak])))  #remembre inward is negative
-        Iss_base.append(float(np.mean(I[w_ss])))
-
-    #plot I–V curves
-    plt.figure()
-    plt.plot(steps, Ipeak_base, marker="o")
-    plt.xlabel("Command voltage (mV)")
-    plt.ylabel("Peak clamp current (nA)")
-    plt.title("Voltage clamp I–V (for peak current)")
-    plt.tight_layout()
-    plt.show()
-
-    plt.figure()
-    plt.plot(steps, Iss_base, marker="o")
-    plt.xlabel("Command voltage (mV)")
-    plt.ylabel("Steady-state clamp current (nA)")
-    plt.title("Voltage clamp I–V (for steady-state current)")
-    plt.tight_layout()
-    plt.show()
-
-#####plots below are from current clamp script, leaving here for now in case need/easy edit later
-    #plot base soma AP
-    plt.figure()
-    plt.plot(t0, vs0, label="baseline soma")
-    plt.xlabel("Time (ms)")
-    plt.ylabel("Vm (mV)")
-    plt.title("Baseline soma action potential")
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
-    #remember add save plt before do final
-
-    #plot Cav1.2 50% soma AP
-    plt.figure()
-    plt.plot(t1, vs1, label="Cav1.2 50% soma")
-    plt.xlabel("Time (ms)")
-    plt.ylabel("Vm (mV)")
-    plt.title("Cav1.2 50% soma action potential")
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
-
-    #plot Vm soma comparison
     plt.figure()
     plt.plot(t0, vs0, label="soma baseline")
     plt.plot(t1, vs1, label="soma Cav12 50%")
