@@ -1008,6 +1008,7 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.continuerun(tstop)
 
     t = np.array(cell.t_vec)
+
     vs = np.array(cell.vsoma_vec)
     vd = np.array(cell.vdend_vec)
     vp = np.array(cell.vprox_vec)
