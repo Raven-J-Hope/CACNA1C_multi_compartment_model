@@ -287,7 +287,7 @@ class DGGranuleLikeCell:
                     seg.Cabuffer.brat = 1.0
             if has_mech(neck, "Cabuffer"):
                 for seg in neck:
-                    seg.Cabuffer.tau = 9.0
+                    seg.Cabuffer.tau = 8.0
                     seg.Cabuffer.brat = 1.0
 
             if has_mech(head, "Cav2_1"):
