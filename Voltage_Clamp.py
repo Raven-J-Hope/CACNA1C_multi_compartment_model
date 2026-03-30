@@ -772,8 +772,18 @@ if __name__ == "__main__":
             savefig(fname)
             plt.show()
 
-    # plot 50% cai across compartments
-    if (cai1_soma is not None and cai1_prox is not None and cai1_dist is not None and cai1_spine is not None):
+    steps = np.arange(-90, 11, 10)
+    iv_wt = run_iv_curve(WT_BK_SPLIT, cav12_factor=1.0, steps=steps)
+    iv_50 = run_iv_curve(CAV12_50_BK_SPLIT, cav12_factor=0.5, steps=steps)
+
+    for ykey, ylabel, title, fname in [
+        ("peak_current", "Peak clamp current (nA)", "Voltage-clamp I–V: peak current", "vc_iv_peak_current.png"),
+        ("steady_current", "Steady-state clamp current (nA)", "Voltage-clamp I–V: steady-state current", "vc_iv_steady_current.png"),
+        ("peak_ica", "Peak total Ca current (mA/cm2)", "Voltage-clamp I–V: peak Ca current", "vc_iv_peak_ca_current.png"),
+        ("peak_bk12", "Peak BK_Cav12 current (mA/cm2)", "Voltage-clamp I–V: peak BK_Cav12", "vc_iv_peak_BK_Cav12.png"),
+        ("peak_bk21", "Peak BK_Cav21 current (mA/cm2)", "Voltage-clamp I–V: peak BK_Cav21", "vc_iv_peak_BK_Cav21.png"),
+        ("peak_bk22", "Peak BK_Cav22 current (mA/cm2)", "Voltage-clamp I–V: peak BK_Cav22", "vc_iv_peak_BK_Cav22.png"),
+    ]:
         plt.figure()
         plt.plot(t1, cai1_soma, label="soma")
         plt.plot(t1, cai1_prox, label="prox dend (0.5)")
