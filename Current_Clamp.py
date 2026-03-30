@@ -1300,6 +1300,55 @@ if __name__ == "__main__":
           float(np.max(cai0_dist)),
           float(np.max(cai0_spine)))
 
+    #na8st opening / conductance sanity (during)
+    w = (t0 >= 100) & (t0 <= 400)
+
+    print("[na8st] peak o_soma =", float(np.max(na8st0_o_soma[w])) if na8st0_o_soma is not None else None)
+    print("[na8st] peak g_soma =", float(np.max(na8st0_g_soma[w])) if na8st0_g_soma is not None else None)
+
+    print("[na] peak |ina_soma| =", float(np.max(np.abs(ina0_soma[w]))), "mA/cm2")
+    print("[na] ena_soma =", float(cell.soma(0.5).ena), "mV")
+    print("[na] Vmax soma step =", float(np.max(vs0[w])), "mV")
+
+    #soma current-balance sanity (during)
+    w = (t0 >= 100) & (t0 <= 400)
+
+    #passive leak current density (mA/cm2) from pas
+    ipas0 = None
+    if has_mech(cell.soma, "pas"):
+        #soNEURON defines i as membrane current density (mA/cm2)
+        ipas0 = np.array([cell.soma(0.5).pas.g * (v - cell.soma(0.5).pas.e) for v in vs0])
+
+    print("[pas] soma pas.g =", float(cell.soma(0.5).pas.g) if has_mech(cell.soma, "pas") else None)
+    print("[pas] soma pas.e =", float(cell.soma(0.5).pas.e) if has_mech(cell.soma, "pas") else None)
+    print("[pas] mean|ipas| step =", float(np.mean(np.abs(ipas0[w]))) if ipas0 is not None else None, "mA/cm2")
+
+    print("[total] mean|ina| step =", float(np.mean(np.abs(ina0_soma[w]))), "mA/cm2")
+    print("[total] mean|ik|  step =", float(np.mean(np.abs(ik0_soma[w]))), "mA/cm2")
+    print("[total] mean|ica| step =", float(np.mean(np.abs(ica0_soma[w]))), "mA/cm2")
+
+
+    def report_ik_sources(sec, loc=0.5):
+        """
+        Prints which inserted density mechanisms on this section expose an 'ik' variable,
+        plus conductance parameters if present.
+        """
+        ps = sec.psection()
+        dens = ps.get("density_mechs", {})
+        print(f"\n[ik source scan] section={sec.name()}({loc})")
+        for mech_name, params in dens.items():
+            #many mechanisms expose ik if they WRITE ik
+            has_ik = isinstance(params, dict) and ("ik" in params)
+            if not has_ik:
+                continue
+
+            #show a "gbar-ish" parameter if present
+            g_fields = [k for k in params.keys() if ("g" in k and k != "ik")]
+            g_preview = {k: params[k][0] for k in g_fields[:6]}  # small preview
+
+            ik0 = params["ik"][0] if isinstance(params["ik"], list) and len(params["ik"]) else params["ik"]
+            print(f"  - {mech_name}: ik={ik0}  g_fields={g_preview}")
+
     #50% Cav1.2 - mimic +/-
     cell2 = DGGranuleLikeCell()
     cell2.scale_cav12(0.5)
