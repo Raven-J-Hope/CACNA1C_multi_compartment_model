@@ -1784,7 +1784,16 @@ if __name__ == "__main__":
 
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
-    #plot ina wt
+    #AIS spike sanity peak & zoom plot
+    w = (t >= 80) & (t <= 150)  # around step onset / first event
+    ais_peak_i = np.argmax(vais[w])
+    t_w = t[w]
+    vais_w = vais[w]
+    vs_w = vs[w]
+
+    print(f"[AIS peak 80–150 ms] Vmax={vais_w[ais_peak_i]:.2f} mV at t={t_w[ais_peak_i]:.2f} ms")
+    print(f"[Soma peak 80–150 ms] Vmax={np.max(vs_w):.2f} mV")
+
     plt.figure()
     plt.plot(t0, ina0_soma, label="ina soma")
     plt.xlabel("Time (ms)")
