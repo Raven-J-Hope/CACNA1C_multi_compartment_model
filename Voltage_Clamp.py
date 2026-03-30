@@ -396,7 +396,7 @@ class DGGranuleLikeCell:
         self._set_channel_densities_default()
 
     def _set_channel_densities_default(self):
-       for sec in [self.soma, self.dend_prox, self.dend_dist]:
+        for sec in [self.soma, self.ais, self.dend_prox, self.dend_dist]:
             for seg in sec:
                 if sec is self.soma:
                     scale = 1.0
