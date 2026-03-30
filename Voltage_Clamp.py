@@ -505,7 +505,7 @@ class DGGranuleLikeCell:
             self.cai_spine_vec = h.Vector()
             self.cai_spine_vec.record(self.spines[0](0.5)._ref_cai)
         except Exception as e:
-            print("Calcium recording set up failed becasue:", e)
+            print("Calcium recording set up failed because:", e)
             self.cai_soma_vec = None
             self.cai_prox_vec = None
             self.cai_dist_vec = None
