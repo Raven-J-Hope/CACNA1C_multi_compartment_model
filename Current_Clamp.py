@@ -1463,7 +1463,9 @@ if __name__ == "__main__":
 
     print("50%: ica_soma =", peak_abs(ica1_soma), "mA/cm2")
     print("50%: ik_soma  =", peak_abs(ik1_soma), "mA/cm2")
-    print("50%: BK_ik    =", peak_abs(bkik1_soma), "mA/cm2")
+    print("50%: BK_Cav22_ik =", peak_abs(bk_Cav22ik1_soma), "mA/cm2")
+    print("50%: BK_Cav12_ik =", peak_abs(bk_Cav12ik1_soma), "mA/cm2")
+    print("50%: BK_Cav21_ik =", peak_abs(bk_Cav21ik1_soma), "mA/cm2")
     print("50%: SK_ik    =", peak_abs(skik1_soma), "mA/cm2")
     print("50%: ina_soma =", peak_abs(ina1_soma), "mA/cm2")
 
