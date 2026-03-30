@@ -2417,7 +2417,7 @@ if __name__ == "__main__":
         f"Δ(50%-WT)={np.mean(auc_sk1) - np.mean(auc_sk0):+.3e}"
     )
 
-    #per spike Ca AUC
+    #per spike Ca AUC & SK-per-Ca efficiency
 
     #only runs if cai vectors exist
     if (cai0_soma is not None) and (cai1_soma is not None):
