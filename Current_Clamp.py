@@ -1469,6 +1469,99 @@ if __name__ == "__main__":
     print("50%: SK_ik    =", peak_abs(skik1_soma), "mA/cm2")
     print("50%: ina_soma =", peak_abs(ina1_soma), "mA/cm2")
 
+    print("WT bk_acai12 vec exists?", cell.bk_acai12_soma_vec is not None)
+    print("WT bk_acai21 vec exists?", cell.bk_acai21_soma_vec is not None)
+    print("WT bk_acai22 vec exists?", cell.bk_acai22_soma_vec is not None)
+
+    print("50% bk_acai12 vec exists?", cell2.bk_acai12_soma_vec is not None)
+    print("50% bk_acai21 vec exists?", cell2.bk_acai21_soma_vec is not None)
+    print("50% bk_acai22 vec exists?", cell2.bk_acai22_soma_vec is not None)
+
+    print("WT BK_Cav12 acai max:", float(np.max(bk_acai12_0)) if bk_acai12_0 is not None else None)
+    print("WT BK_Cav21 acai max:", float(np.max(bk_acai21_0)) if bk_acai21_0 is not None else None)
+    print("WT BK_Cav22 acai max:", float(np.max(bk_acai22_0)) if bk_acai22_0 is not None else None)
+
+    print("50% BK_Cav12 acai max:", float(np.max(bk_acai12_1)) if bk_acai12_1 is not None else None)
+    print("50% BK_Cav21 acai max:", float(np.max(bk_acai21_1)) if bk_acai21_1 is not None else None)
+    print("50% BK_Cav22 acai max:", float(np.max(bk_acai22_1)) if bk_acai22_1 is not None else None)
+
+    print("WT Cav2.1 ica max:", float(np.max(np.abs(cav21_ica0_soma))) if cav21_ica0_soma is not None else None)
+    print("50% Cav2.1 ica max:", float(np.max(np.abs(cav21_ica1_soma))) if cav21_ica1_soma is not None else None)
+
+    print("WT Cav22 ica max:", float(np.max(np.abs(cav22_ica0_soma))) if cav22_ica0_soma is not None else None)
+    print("50% Cav22 ica max:", float(np.max(np.abs(cav22_ica1_soma))) if cav22_ica1_soma is not None else None)
+
+    print("WT Cav12 ica max:", float(np.max(np.abs(cav12_ica0_soma))) if cav12_ica0_soma is not None else None)
+    print("50% Cav12 ica max:", float(np.max(np.abs(cav12_ica1_soma))) if cav12_ica1_soma is not None else None)
+
+    plt.figure()
+    if bk_acai12_0 is not None:
+        plt.plot(t0, bk_acai12_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai12_1 is not None:
+        plt.plot(t1, bk_acai12_1, "--", label="50% Cav12")
+
+    if bk_acai21_0 is not None:
+        plt.plot(t0, bk_acai21_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai21_1 is not None:
+        plt.plot(t1, bk_acai21_1, "--", label="50% Cav21")
+
+    if bk_acai22_0 is not None:
+        plt.plot(t0, bk_acai22_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai22_1 is not None:
+        plt.plot(t1, bk_acai22_1, "--", label="50% Cav22")
+
+    plt.title("BK local calcium signals (acai)")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("acai (mM)")
+    plt.legend()
+    plt.show()
+
+
+#cav22
+    plt.figure()
+    if bk_acai22_0 is not None:
+        plt.plot(t0, bk_acai22_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai22_1 is not None:
+        plt.plot(t1, bk_acai22_1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+
+    plt.title("BK_Cav22 local calcium signals (acai)")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("acai (mM)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav22 local calcium signals (acai)"), dpi=300)
+    plt.show()
+
+#cav12
+    plt.figure()
+    if bk_acai12_0 is not None:
+        plt.plot(t0, bk_acai12_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai12_1 is not None:
+        plt.plot(t1, bk_acai12_1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+
+    plt.title("BK_Cav12 local calcium signals (acai)")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("acai (mM)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav12 local calcium signals (acai)"), dpi=300)
+    plt.show()
+
+#cav21
+    plt.figure()
+    if bk_acai21_0 is not None:
+        plt.plot(t0, bk_acai21_0, color=WT_COLOR, label=WT_LABEL)
+    if bk_acai21_1 is not None:
+        plt.plot(t1, bk_acai21_1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+
+    plt.title("BK_Cav21 local calcium signals (acai)")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("acai (mM)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav21 local calcium signals (acai)"), dpi=300)
+    plt.show()
+
     #window-average currents during the stimulus, excluding the first 20 ms after onset
     w = (t0 >= 120) & (t0 <= 390)
 
