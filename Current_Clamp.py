@@ -2205,6 +2205,57 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, "#BK_Cav21 recruitment aka soma BK_Cav21 current baseline vs 50%.png"), dpi=300)
         plt.show()
 
+    #6-panel BK fig forcurrents on top, local acai on bottom
+    fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharex=True, sharey=False)
+
+    #top row is BK currents
+
+    #BK_Cav12 current
+    ax = axes[0, 0]
+    ax.plot(t0, bk_Cav12ik0_soma, color=WT_COLOR)
+    ax.plot(t1, bk_Cav12ik1_soma, color=CAV12_50_COLOR)
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #BK_Cav21 current
+    ax = axes[0, 1]
+    ax.plot(t0, bk_Cav21ik0_soma, color=WT_COLOR)
+    ax.plot(t1, bk_Cav21ik1_soma, color=CAV12_50_COLOR)
+
+    #BK_Cav22 current
+    ax = axes[0, 2]
+    ax.plot(t0, bk_Cav22ik0_soma, color=WT_COLOR)
+    ax.plot(t1, bk_Cav22ik1_soma, color=CAV12_50_COLOR)
+
+    #bottom row is BK local calcium (acai) ...should do ilca, ipca etc tho?
+
+    #BK_Cav12 acai
+    ax = axes[1, 0]
+    ax.plot(t0, bk_acai12_0, color=WT_COLOR)
+    ax.plot(t1, bk_acai12_1, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("acai (mM)")
+
+    #BK_Cav21 acai
+    ax = axes[1, 1]
+    ax.plot(t0, bk_acai21_0, color=WT_COLOR)
+    ax.plot(t1, bk_acai21_1, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    #BK_Cav22 acai
+    ax = axes[1, 2]
+    ax.plot(t0, bk_acai22_0, color=WT_COLOR)
+    ax.plot(t1, bk_acai22_1, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+
+    fig.tight_layout(rect=[0, 0.05, 1, 1])
+    plt.savefig(
+        os.path.join(FIG_DIR, "BK_6panel_currents_and_acai_WT_vs_Cav12_50.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
     #SK recruitment aka soma SK current baseline vs 50%
     if skik0_soma is not None and skik1_soma is not None:
         plt.figure()
