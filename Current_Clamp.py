@@ -2154,8 +2154,35 @@ if __name__ == "__main__":
     else:
         print("missing spine-site cai")
 
-    #BK recruitment aka soma BK current baseline vs 50%
-    if bkik0_soma is not None and bkik1_soma is not None:
+    #plot cai comparison ate the ais
+    if cai0_spine is not None and cai1_spine is not None:
+        plt.figure()
+        plt.plot(t0, cai0_ais, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, cai1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("cai (mM)")
+        plt.title("Intracellular Ca at AIS") #is this still spine site?
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#plot cai comparison at AIS.png"), dpi=300)
+        plt.show()
+    else:
+        print("missing ais cai")
+
+    #BK recruitment aka soma BK current baseline vs 50% - made cav22 specific
+    if bk_Cav22ik0_soma is not None and bk_Cav22ik1_soma is not None:
+        plt.figure()
+        plt.plot(t0, bk_Cav22ik0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, bk_Cav22ik1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("BK_Cav22 current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#BK_Cav22 recruitment aka soma BK_Cav22 current baseline vs 50%.png"), dpi=300)
+        plt.show()
+
+    #BK recruitment aka soma BK current baseline vs 50% - made cav12 specific
+    if bk_Cav12ik0_soma is not None and bk_Cav12ik1_soma is not None:
         plt.figure()
         plt.plot(t0, bkik0_soma, label="BK ik baseline")
         plt.plot(t1, bkik1_soma, label="BK ik Cav12 50%")
