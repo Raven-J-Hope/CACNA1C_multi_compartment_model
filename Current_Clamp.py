@@ -1750,6 +1750,37 @@ if __name__ == "__main__":
     print(f"[Threshold soma] 50%: Vth={vth1:.2f} mV at {tth1:.2f} ms, max dV/dt={dvdtmax1:.2f} mV/ms")
     print(f"[ΔThreshold soma] 50%-WT: ΔVth={vth1 - vth0:+.2f} mV, Δ(max dV/dt)={dvdtmax1 - dvdtmax0:+.2f} mV/ms")
 
+    #AP broadening (soma) per-spike half-widths
+    spk_t0, widths0, peaks0, troughs0 = ap_half_widths_per_spike(
+        t0, vs0, threshold=0.0, t_start=100.0, t_end=400.0
+    )
+    spk_t1, widths1, peaks1, troughs1 = ap_half_widths_per_spike(
+        t1, vs1, threshold=0.0, t_start=100.0, t_end=400.0
+    )
+
+    print("WT AP half-widths (ms):", widths0)
+    print("50% AP half-widths (ms):", widths1)
+    print("WT mean AP half-width (ms):", float(np.nanmean(widths0)) if len(widths0) else np.nan)
+    print("50% mean AP half-width (ms):", float(np.nanmean(widths1)) if len(widths1) else np.nan)
+    print("Δ AP half-width (50%-WT) (ms):",
+          (float(np.nanmean(widths1)) - float(np.nanmean(widths0)))
+          if (len(widths0) and len(widths1)) else np.nan)
+
+    #plot AP half-width per spike
+    n_hw = min(len(widths0), len(widths1))
+    if n_hw > 0:
+        plt.figure()
+        plt.plot(np.arange(1, n_hw + 1), widths0[:n_hw], marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(1, n_hw + 1), widths1[:n_hw], marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike number")
+        plt.ylabel("AP half-width (ms)")
+        plt.title("Action potential broadening across spike train")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "AP_half_width_per_spike_WT_vs_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("AP half-width plot skipped no spikes detected in one or both conditions.")
 
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
