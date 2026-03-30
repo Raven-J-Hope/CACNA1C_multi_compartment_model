@@ -1015,6 +1015,7 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     vd = np.array(cell.vdend_vec)
     vp = np.array(cell.vprox_vec)
     vsp = np.array(cell.vspine_vec)
+
     cai_soma = np.array(cell.cai_soma_vec) if cell.cai_soma_vec is not None else None
     cai_prox = np.array(cell.cai_prox_vec) if cell.cai_prox_vec is not None else None
     cai_dist = np.array(cell.cai_dist_vec) if cell.cai_dist_vec is not None else None
