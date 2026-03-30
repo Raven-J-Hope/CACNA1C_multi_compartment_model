@@ -1455,7 +1455,9 @@ if __name__ == "__main__":
     print("\n--- CURRENT DIAGNOSTICS (soma, peak |current|) ---")
     print("WT:  ica_soma =", peak_abs(ica0_soma), "mA/cm2")
     print("WT:  ik_soma  =", peak_abs(ik0_soma), "mA/cm2")
-    print("WT:  BK_ik    =", peak_abs(bkik0_soma), "mA/cm2")
+    print("WT:  BK_Cav22_ik =", peak_abs(bk_Cav22ik0_soma), "mA/cm2")
+    print("WT:  BK_Cav12_ik =", peak_abs(bk_Cav12ik0_soma), "mA/cm2")
+    print("WT:  BK_Cav21_ik =", peak_abs(bk_Cav21ik0_soma), "mA/cm2")
     print("WT:  SK_ik    =", peak_abs(skik0_soma), "mA/cm2")
     print("WT:  ina_soma =", peak_abs(ina0_soma), "mA/cm2")
 
