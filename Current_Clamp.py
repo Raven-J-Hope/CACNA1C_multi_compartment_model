@@ -1352,6 +1352,7 @@ if __name__ == "__main__":
     #50% Cav1.2 - mimic +/-
     cell2 = DGGranuleLikeCell(bk_split=CAV12_50_BK_SPLIT)
     cell2.scale_cav12(0.5)
+    print_key_params(cell2, label="Cav12_50")
     print("[Cav12 gbar check] soma WT:", cell.soma(0.5).Cav12.gbar)
     print("[Cav12 gbar check] soma 50%:", cell2.soma(0.5).Cav12.gbar)
     print("[Cav12 gbar ratio 50%/WT]:", cell2.soma(0.5).Cav12.gbar / cell.soma(0.5).Cav12.gbar) #check 50% scale corrcet
