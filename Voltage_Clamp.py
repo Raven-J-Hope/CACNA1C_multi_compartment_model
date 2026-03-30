@@ -241,7 +241,7 @@ class DGGranuleLikeCell:
 
             if has_mech(head, "ichan3"):
                 for seg in head:
-                    seg.ichan3.gnabar = 5e-3
+                    seg.ichan3.gnabar = 5e-2
                     seg.ichan3.gkfbar = 5e-4
                     seg.ichan3.gksbar = 5e-4
                     seg.ichan3.gkabar = 5e-4
