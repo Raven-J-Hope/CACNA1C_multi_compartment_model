@@ -448,8 +448,6 @@ class DGGranuleLikeCell:
                     seg.Caold.gtcabar = 1e-5 * scale
                     seg.Caold.gncabar = 1e-5 * scale
                     seg.Caold.glcabar = 1e-5 * scale
-
-                #Cabuffer params - sets buffering strength/kinetics
                 if has_mech(sec, "Cabuffer"):
                     seg.Cabuffer.tau = 9.0  #ms
                     seg.Cabuffer.brat = 1.0  #buffer ratio factor
