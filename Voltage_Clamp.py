@@ -117,8 +117,11 @@ def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
     w_step = (t >= step_on) & (t <= step_off)
     w_plat = (t >= step_on + plateau_guard) & (t <= step_off - plateau_guard)
 
-    w = (t >= spike_window[0]) & (t <= spike_window[1])
-    tt = t[w]; vv = v[w]
+    return {
+        "peak_abs": float(np.max(np.abs(x[w_step]))) if np.any(w_step) else None,
+        "mean_abs_plateau": float(np.mean(np.abs(x[w_plat]))) if np.any(w_plat) else None,
+        "auc_abs_step": float(np.trapz(np.abs(x[w_step]), t[w_step])) if np.any(w_step) else None,
+    }
 
     i_peak = int(np.argmax(vv))
     v_peak = float(vv[i_peak])
