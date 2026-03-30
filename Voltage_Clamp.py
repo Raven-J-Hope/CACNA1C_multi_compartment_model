@@ -275,7 +275,7 @@ class DGGranuleLikeCell:
 
             if has_mech(head, "Caold"):
                 for seg in head:
-                    seg.Caold.gtcabar = 1e-5  #still need tune?
+                    seg.Caold.gtcabar = 1e-5
                     seg.Caold.gncabar = 1e-5
                     seg.Caold.glcabar = 1e-5
 
