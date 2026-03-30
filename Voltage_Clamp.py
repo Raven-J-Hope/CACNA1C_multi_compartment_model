@@ -320,9 +320,9 @@ class DGGranuleLikeCell:
         self.ais.diam = 1.0
         self.ais.nseg = 3
 
-        self.axon.L = 300.0    #L = length
-        self.axon.diam = 1.0   #diam = diameter
-        self.axon.nseg = 11    #nseg = compartment
+        self.axon.L = 300.0
+        self.axon.diam = 1.0
+        self.axon.nseg = 11
 
         for sec in self.all_secs():
             sec.Ra = 100.0       #Ra = axial resistivity
