@@ -568,16 +568,74 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.frecord_init()
     h.continuerun(tstop)
 
-    t = np.array(cell.t_vec)
-    vs = np.array(cell.vsoma_vec)
-    vd = np.array(cell.vdend_vec)
-    vp = np.array(cell.vprox_vec)
-    vsp = np.array(cell.vspine_vec)
-    cai_soma = np.array(cell.cai_soma_vec) if cell.cai_soma_vec is not None else None
-    cai_prox = np.array(cell.cai_prox_vec) if cell.cai_prox_vec is not None else None
-    cai_dist = np.array(cell.cai_dist_vec) if cell.cai_dist_vec is not None else None
-    cai_spine = np.array(cell.cai_spine_vec) if cell.cai_spine_vec is not None else None
-    return t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine
+    def arr(v):
+        return np.array(v) if v is not None else None
+
+    return (
+        np.array(cell.t_vec),
+        np.array(cell.vsoma_vec),
+        arr(getattr(cell, "vais_vec", None)),
+        np.array(cell.vprox_vec),
+        np.array(cell.vdend_vec),
+        np.array(cell.vspine_vec),
+        arr(getattr(cell, "cai_soma_vec", None)),
+        arr(getattr(cell, "cai_prox_vec", None)),
+        arr(getattr(cell, "cai_dist_vec", None)),
+        arr(getattr(cell, "cai_spine_vec", None)),
+        arr(getattr(cell, "ica_soma_vec", None)),
+        arr(getattr(cell, "ik_soma_vec", None)),
+        arr(getattr(cell, "bk_Cav22_ik_soma_vec", None)),
+        arr(getattr(cell, "bk_Cav12_ik_soma_vec", None)),
+        arr(getattr(cell, "bk_Cav21_ik_soma_vec", None)),
+        arr(getattr(cell, "sk_ik_soma_vec", None)),
+        arr(getattr(cell, "ina_soma_vec", None)),
+        arr(getattr(cell, "cav21_ica_soma_vec", None)),
+        arr(getattr(cell, "cav22_ica_soma_vec", None)),
+        arr(getattr(cell, "cav12_ica_soma_vec", None)),
+        arr(getattr(cell, "clamp_i_vec", None)),
+    )
+
+
+def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200.0, tstop=380.0):
+    peak_current = []
+    steady_current = []
+    peak_ica = []
+    peak_bk12 = []
+    peak_bk21 = []
+    peak_bk22 = []
+
+    for vstep in steps:
+        cell = DGGranuleLikeCell(bk_split=bk_split)
+        if cav12_factor != 1.0:
+            cell.scale_cav12(cav12_factor)
+        cell.add_voltage_clamp(hold=hold, step=float(vstep), delay=delay, dur=dur)
+        cell.setup_recording()
+        t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bk22, bk12, bk21, sk, ina, cav21, cav22, cav12, iclamp = run_sim(
+            cell, tstop=tstop, v_init=hold, dt=0.025
+        )
+
+        if iclamp is None:
+            raise RuntimeError("Voltage clamp current not recorded.")
+
+        w_peak = (t >= delay) & (t <= delay + 10)
+        w_ss = (t >= delay + dur - 10) & (t <= delay + dur)
+
+        peak_current.append(float(np.min(iclamp[w_peak])))
+        steady_current.append(float(np.mean(iclamp[w_ss])))
+        peak_ica.append(float(np.min(ica_soma[w_peak])) if ica_soma is not None else np.nan)
+        peak_bk12.append(float(np.max(np.abs(bk12[w_peak]))) if bk12 is not None else np.nan)
+        peak_bk21.append(float(np.max(np.abs(bk21[w_peak]))) if bk21 is not None else np.nan)
+        peak_bk22.append(float(np.max(np.abs(bk22[w_peak]))) if bk22 is not None else np.nan)
+
+    return {
+        "steps": np.array(steps),
+        "peak_current": np.array(peak_current),
+        "steady_current": np.array(steady_current),
+        "peak_ica": np.array(peak_ica),
+        "peak_bk12": np.array(peak_bk12),
+        "peak_bk21": np.array(peak_bk21),
+        "peak_bk22": np.array(peak_bk22),
+    }
 
 
 if __name__ == "__main__":
