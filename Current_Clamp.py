@@ -2427,7 +2427,7 @@ if __name__ == "__main__":
         auc_ca0 = auc_around_spikes(t0, cai0_soma, spk0, pre_ms=pre_ms, post_ms=post_ms)
         auc_ca1 = auc_around_spikes(t1, cai1_soma, spk1, pre_ms=pre_ms, post_ms=post_ms)
 
-        #align lengths
+        #align lengths across genotypes for plotting
         n = min(len(auc_ca0), len(auc_ca1))
         auc_ca0 = auc_ca0[:n]
         auc_ca1 = auc_ca1[:n]
