@@ -48,7 +48,7 @@ if os.path.exists(DLL_PATH):
 else:
     raise RuntimeError(f"Compiled mechanisms not found at: {DLL_PATH}")
 
-#sanity savers
+
 def try_insert(sec, mech: str) -> bool:
     try:
         sec.insert(mech)
