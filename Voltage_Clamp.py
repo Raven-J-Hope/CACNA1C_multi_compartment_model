@@ -831,36 +831,13 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "vc_Cav22_source_current_WT_vs_Cav12_50.png"), dpi=300)
 plt.show()
 
-    #plot cai comparison ate the spine-site
-    if cai0_spine is not None and cai1_spine is not None:
-        plt.figure()
-        plt.plot(t0, cai0_spine, label="baseline")
-        plt.plot(t1, cai1_spine, label="Cav12 50%")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("cai (mM)")
-        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at spine-site")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-    else:
-        print("missing spine-site cai")
-
-    #quantify Ca difference during stimulus window --in soma
-    if cai0_soma is not None and cai1_soma is not None: #made soma-specifci
-        win = (t0 >= 100) & (t0 <= 400)
-
-        peak0 = float(np.max(cai0_soma[win]))
-        peak1 = float(np.max(cai1_soma[win]))
-
-        auc0 = float(np.trapz(cai0_soma[win], t0[win]))
-        auc1 = float(np.trapz(cai1_soma[win], t0[win]))
-
-        print(f"Peak cai baseline: {peak0:.6f} mM")
-        print(f"Peak cai Cav12 50%: {peak1:.6f} mM  (Δ {peak1 - peak0:+.6f}, {100 * (peak1 / peak0 - 1):+.1f}%)")
-        print(f"AUC cai baseline:  {auc0:.6f} mM·ms")
-        print(f"AUC cai Cav12 50%: {auc1:.6f} mM·ms (Δ {auc1 - auc0:+.6f}, {100 * (auc1 / auc0 - 1):+.1f}%)")
-    else:
-        print("Skipping Ca quantification because cai is None.")
-
-
-
+plt.figure()
+plt.plot(t0, cav21_ica0_soma, color=WT_COLOR, label=WT_LABEL)
+plt.plot(t1, cav21_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+plt.xlabel("Time (ms)")
+plt.ylabel("Current density (mA/cm2)")
+plt.title("Cav2.1 source current")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "vc_Cav21_source_current_WT_vs_Cav12_50.png"), dpi=300)
+plt.show()
