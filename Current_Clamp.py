@@ -2949,7 +2949,7 @@ if __name__ == "__main__":
             cell.add_current_clamp(delay=delay, dur=dur, amp=float(amp))
             cell.setup_recording()
 
-            t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bkik_soma, skik_soma, ina_soma, hhh_soma, hhh_ais, hhm_soma = run_sim(
+            t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, cai_ais, ica_soma, ik_soma, bk_Cav22ik_soma, bk_Cav12ik_soma, bk_Cav21ik_soma, skik_soma, ina_soma, na8st_o_soma, na8st_g_soma, na8st_i_total_soma, na8st_o_ais, na8st_g_ais, na8st_i_total_ais, sk_acai_soma, cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, bk_acai12, bk_acai21, bk_acai22 = run_sim(
                 cell, tstop=tstop, v_init=v_init, dt=dt
             )
 
