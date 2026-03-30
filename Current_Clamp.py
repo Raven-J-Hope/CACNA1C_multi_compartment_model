@@ -1115,8 +1115,13 @@ def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
                         t_start=100.0, t_end=400.0,
                         pre_ms=3.0, post_ms=15.0):
     """
-    Returns AP half-width (ms) for each spike in [t_start, t_end].
-    Spike detection = upward threshold crossing.
+    Returns AP width (ms) at a chosen fractional level for each spike in [t_start, t_end].
+
+    frac = 0.5 -> half-width
+    frac = 1/3 -> one-third width
+
+    Width level is measured at:
+        v_level = v_trough + frac * (v_peak - v_trough)
     """
     t = np.asarray(t)
     v = np.asarray(v)
