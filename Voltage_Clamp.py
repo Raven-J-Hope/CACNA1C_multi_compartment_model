@@ -657,7 +657,7 @@ if __name__ == "__main__":
     )
 
     run_meta = {
-        "python_version": __import__("sys").version,
+        "python_version": sys.version,
         "neuron_version": h.nrnversion(),
         "dt_ms": float(h.dt),
         "tstop_ms": 500.0,
