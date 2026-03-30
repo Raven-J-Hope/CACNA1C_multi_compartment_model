@@ -146,7 +146,7 @@ class DGGranuleLikeCell:
 
         self.spines = []
         self.spine_necks = []
-        self.spine_xs = [] #store where spines attach
+        self.spine_xs = []
 
         #create compartments - "nseg" i.e., segments
         self.soma = h.Section(name=f"{name}.soma")
