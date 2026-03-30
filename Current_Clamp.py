@@ -64,6 +64,32 @@ def has_mech(sec, mech: str) -> bool:
     except Exception:
         return False
 
+#check BK split acc worky
+def validate_bk_split(split: dict):
+    s = sum(split.values())
+    if abs(s - 1.0) > 1e-9:
+        raise ValueError(f"BK split must sum to 1.0, got {s}")
+
+
+def apply_bk_split_to_section(sec, total_bk_gakbar: float, total_bk_gabkbar: float, split: dict):
+    """
+    Split total BK across BK_Cav22, BK_Cav12, and BK_Cav21.
+    """
+    validate_bk_split(split)
+
+    for seg in sec:
+        if has_mech(sec, "BK_Cav22"):
+            seg.BK_Cav22.gakbar = total_bk_gakbar * split["BK_Cav22"]
+            seg.BK_Cav22.gabkbar = total_bk_gabkbar * split["BK_Cav22"]
+
+        if has_mech(sec, "BK_Cav12"):
+            seg.BK_Cav12.gakbar = total_bk_gakbar * split["BK_Cav12"]
+            seg.BK_Cav12.gabkbar = total_bk_gabkbar * split["BK_Cav12"]
+
+        if has_mech(sec, "BK_Cav21"):
+            seg.BK_Cav21.gakbar = total_bk_gakbar * split["BK_Cav21"]
+            seg.BK_Cav21.gabkbar = total_bk_gabkbar * split["BK_Cav21"]
+
 def rest_stats(t, v, delay, pre_ms=50.0, gap_ms=5.0):
     """
     Robust baseline/rest estimate - the mean/std in a window ending (gap_ms) before delay.
