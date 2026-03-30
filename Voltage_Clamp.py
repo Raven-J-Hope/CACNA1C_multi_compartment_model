@@ -193,7 +193,7 @@ class DGGranuleLikeCell:
                     seg.pas.e = -70.0
             if has_mech(head, "pas"):
                 for seg in head:
-                    seg.pas.g = 1e-4
+                    seg.pas.g = 0.00039
                     seg.pas.e = -70.0
 
             #give spines Ca mechs
