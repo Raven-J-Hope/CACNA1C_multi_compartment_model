@@ -292,7 +292,7 @@ class DGGranuleLikeCell:
 
             if has_mech(head, "Cav2_1"):
                 for seg in head:
-                    seg.Cav2_1.pcabar = 2.2e-6
+                    seg.Cav2_1.pcabar = 1e-5
             if has_mech(neck, "Cav2_1"):
                 for seg in neck:
                     seg.Cav2_1.pcabar = 2.2e-6
