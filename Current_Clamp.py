@@ -1610,7 +1610,9 @@ if __name__ == "__main__":
 
     print("50%: mean|ik_soma| =", mean_abs(ik1_soma), "mA/cm2")
     print("50%: mean|SK_ik|   =", mean_abs(skik1_soma), "mA/cm2")
-    print("50%: mean|BK_ik|   =", mean_abs(bkik1_soma), "mA/cm2")
+    print("50%: mean|BK_Cav22_ik|   =", mean_abs(bk_Cav22ik1_soma), "mA/cm2")
+    print("50%: mean|BK_Cav12_ik|   =", mean_abs(bk_Cav12ik1_soma), "mA/cm2")
+    print("50%: mean|BK_Cav21_ik|   =", mean_abs(bk_Cav21ik1_soma), "mA/cm2")
     print("50%: mean|ica_soma|=", mean_abs(ica1_soma), "mA/cm2")
     print("50%: mean|ina_soma| =", float(np.mean(np.abs(ina1_soma[w]))), "mA/cm2")
     print("50%: mean hh.h soma (120–390) =", float(np.mean(hhh1_soma[w])))
