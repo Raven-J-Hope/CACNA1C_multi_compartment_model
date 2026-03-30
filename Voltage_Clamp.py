@@ -748,21 +748,29 @@ if __name__ == "__main__":
             savefig(fname)
             plt.show()
 
-    #plot baseline cai across compartments
-    if (cai0_soma is not None and cai0_prox is not None and cai0_dist is not None and cai0_spine is not None):
-        plt.figure()
-        plt.plot(t0, cai0_soma, label="soma")
-        plt.plot(t0, cai0_prox, label="prox dend (0.5)")
-        plt.plot(t0, cai0_dist, label="dist dend (0.9)")
-        plt.plot(t0, cai0_spine, label="spine head[0]")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("cai (mM)")
-        plt.title("Baseline cai across compartments")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-    else:
-        print("baseline cai missing for one or more compartments")
+    plot_specs = [
+        (ica0_soma, ica1_soma, "Total calcium current", "Current density (mA/cm2)", "vc_total_ca_current_WT_vs_Cav12_50.png"),
+        (ik0_soma, ik1_soma, "Total potassium current", "Current density (mA/cm2)", "vc_total_k_current_WT_vs_Cav12_50.png"),
+        (bk_Cav22ik0_soma, bk_Cav22ik1_soma, "BK_Cav22 current", "Current density (mA/cm2)", "vc_BK_Cav22_current_WT_vs_Cav12_50.png"),
+        (bk_Cav12ik0_soma, bk_Cav12ik1_soma, "BK_Cav12 current", "Current density (mA/cm2)", "vc_BK_Cav12_current_WT_vs_Cav12_50.png"),
+        (bk_Cav21ik0_soma, bk_Cav21ik1_soma, "BK_Cav21 current", "Current density (mA/cm2)", "vc_BK_Cav21_current_WT_vs_Cav12_50.png"),
+        (skik0_soma, skik1_soma, "SK current", "Current density (mA/cm2)", "vc_SK_current_WT_vs_Cav12_50.png"),
+        (cav21_ica0_soma, cav21_ica1_soma, "Cav2.1 source current", "Current density (mA/cm2)", "vc_Cav21_source_current_WT_vs_Cav12_50.png"),
+        (cav22_ica0_soma, cav22_ica1_soma, "Cav22 source current", "Current density (mA/cm2)", "vc_Cav22_source_current_WT_vs_Cav12_50.png"),
+    ]
+
+    for y0, y1, title, ylabel, fname in plot_specs:
+        if y0 is not None and y1 is not None:
+            plt.figure()
+            plt.plot(t0, y0, color=WT_COLOR, label=WT_LABEL)
+            plt.plot(t1, y1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+            plt.xlabel("Time (ms)")
+            plt.ylabel(ylabel)
+            plt.title(title)
+            plt.legend()
+            plt.tight_layout()
+            savefig(fname)
+            plt.show()
 
     # plot 50% cai across compartments
     if (cai1_soma is not None and cai1_prox is not None and cai1_dist is not None and cai1_spine is not None):
