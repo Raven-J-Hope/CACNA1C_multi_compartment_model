@@ -2001,7 +2001,7 @@ if __name__ == "__main__":
     plt.plot(t0, vs0 - vs1, label="ΔVm soma")
     plt.plot(t0, vp0 - vp1, label="ΔVm prox")
     plt.plot(t0, vd0 - vd1, label="ΔVm dist") #seems to indicate Vm diff only ~spike &mostly dist dend, then spine
-    plt.plot(t0, vsp0 - vsp1, label="ΔVm spine head[0]")
+    plt.plot(t0, vsp0 - vsp1, label="ΔVm spine head[0]") # need to make sure acc sspine head measurfe
     plt.xlabel("Time (ms)")
     plt.ylabel("ΔVm (mV)")
     plt.title("Difference traces in baseline - Cav12 50%")

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-#software and package versions used:
-#Python version: 3.12.2
-#NEURON version: NEURON -- VERSION 9.0.1
+# software and package versions used:
+# Python version: 3.12.2
+# NEURON version: NEURON -- VERSION 9.0.1
 
 import os
 import sys
@@ -130,9 +130,6 @@ def fmt_metrics(m):
         if m["peak_abs"] is not None else "None"
     )
 
-    #baseline/rest estimate, the mean before step (e.g., 50–90 ms)
-    w_rest = (t >= 50) & (t <= 90)
-    v_rest = float(np.mean(v[w_rest]))
 
 def savefig(name: str):
     plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
