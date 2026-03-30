@@ -325,8 +325,8 @@ class DGGranuleLikeCell:
         self.axon.nseg = 11
 
         for sec in self.all_secs():
-            sec.Ra = 100.0       #Ra = axial resistivity
-            sec.cm = 1.0         #cm = capacitance
+            sec.Ra = 100.0
+            sec.cm = 1.0
 
     def _set_biophysics(self):
         #set passive membrane
