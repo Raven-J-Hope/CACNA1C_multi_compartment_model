@@ -2268,8 +2268,8 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, "#SK recruitment aka soma SK current baseline vs 50%.png"), dpi=300)
         plt.show()
 
-    #ΔBK and ΔSK recruitment traces WT - 50%
-    if (bkik0_soma is not None and bkik1_soma is not None and
+    #ΔBK_Cav22 and ΔSK recruitment traces WT - 50% cav22
+    if (bk_Cav22ik0_soma is not None and bk_Cav22ik1_soma is not None and
             skik0_soma is not None and skik1_soma is not None):
 
         w = (t0 >= 80) & (t0 <= 450)  # show baseline + step + recovery
