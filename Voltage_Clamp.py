@@ -345,7 +345,7 @@ class DGGranuleLikeCell:
             try_insert(sec, "na8st")
             try_insert(sec, "ichan3")
 
-        if has_mech(self.soma, "hh"):
+        if has_mech(self.soma, "na8st"):
             for seg in self.soma:
                 seg.hh.gnabar = 0.12
                 seg.hh.gkbar = 0.036
