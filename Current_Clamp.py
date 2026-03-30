@@ -966,7 +966,7 @@ class DGGranuleLikeCell:
 
         #BK_Cav21 specific current density (mA/cm2)
         self.bk_Cav21_ik_soma_vec = None
-        if has_mech(self.soma, "BK_Cav22"):
+        if has_mech(self.soma, "BK_Cav21"):
             self.bk_Cav21_ik_soma_vec = h.Vector()
             self.bk_Cav21_ik_soma_vec.record(self.soma(0.5).BK_Cav21._ref_ik)  #BK_Cav21
 
