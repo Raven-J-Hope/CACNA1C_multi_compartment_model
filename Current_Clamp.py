@@ -283,6 +283,8 @@ def list_mech_fields(seg, mech_name: str, max_items=200):
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell", bk_split=None):
         self.name = name
+        self.bk_split = WT_BK_SPLIT if bk_split is None else bk_split
+        validate_bk_split(self.bk_split)
         self.spines = []    #add dendritic spines
         self.spine_necks = []
         self.spine_xs = [] #store where spines attach
