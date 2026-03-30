@@ -1755,8 +1755,8 @@ if __name__ == "__main__":
     spk_t0, widths0, peaks0, troughs0 = ap_widths_per_spike(
         t0, vs0, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0
     )
-    spk_t1, widths1, peaks1, troughs1 = ap_half_widths_per_spike(
-        t1, vs1, threshold=0.0, t_start=100.0, t_end=400.0
+    spk_t1, widths1, peaks1, troughs1 = ap_widths_per_spike(
+        t1, vs1, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0
     )
 
     print("WT AP half-widths (ms):", widths0)
