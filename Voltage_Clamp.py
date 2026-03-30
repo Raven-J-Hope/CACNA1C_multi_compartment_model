@@ -671,7 +671,7 @@ if __name__ == "__main__":
         },
         "Ra_ohmcm": float(cell.soma.Ra),
         "cm_uFcm2": float(cell.soma.cm),
-        "soma_psection": cell.soma.psection(),  #includes density_mechs & parameter values
+        "soma_psection": str(cell.soma.psection()),
     }
     save_run_report(os.path.join(OUT_DIR, "vc_run_report_baseline.json"), run_meta)
 
