@@ -1421,12 +1421,26 @@ if __name__ == "__main__":
           f"plat {het_cav['mean_abs_plateau'] - wt_cav['mean_abs_plateau']:+.3e}, "
           f"AUC {het_cav['auc_abs_step'] - wt_cav['auc_abs_step']:+.3e}")
 
-    print("WT  BK (ik):", fmt(wt_bk))
-    print("50% BK (ik):", fmt(het_bk))
-    print("Δ BK (50%-WT):",
-          f"peak {het_bk['peak_abs'] - wt_bk['peak_abs']:+.3e}, "
-          f"plat {het_bk['mean_abs_plateau'] - wt_bk['mean_abs_plateau']:+.3e}, "
-          f"AUC {het_bk['auc_abs_step'] - wt_bk['auc_abs_step']:+.3e}")
+    print("WT  BK_Cav22 (ik):", fmt(wt_bk_Cav22))
+    print("50% BK_Cav22 (ik):", fmt(het_bk_Cav22))
+    print("Δ BK_Cav22 (50%-WT):",
+          f"peak {het_bk_Cav22['peak_abs'] - wt_bk_Cav22['peak_abs']:+.3e}, "
+          f"plat {het_bk_Cav22['mean_abs_plateau'] - wt_bk_Cav22['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_bk_Cav22['auc_abs_step'] - wt_bk_Cav22['auc_abs_step']:+.3e}")
+
+    print("WT  BK_Cav12 (ik):", fmt(wt_bk_Cav12))
+    print("50% BK_Cav12 (ik):", fmt(het_bk_Cav12))
+    print("Δ BK_Cav12 (50%-WT):",
+          f"peak {het_bk_Cav12['peak_abs'] - wt_bk_Cav12['peak_abs']:+.3e}, "
+          f"plat {het_bk_Cav12['mean_abs_plateau'] - wt_bk_Cav12['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_bk_Cav12['auc_abs_step'] - wt_bk_Cav12['auc_abs_step']:+.3e}")
+
+    print("WT  BK_Cav21 (ik):", fmt(wt_bk_Cav21))
+    print("50% BK_Cav21 (ik):", fmt(het_bk_Cav21))
+    print("Δ BK_Cav21 (50%-WT):",
+          f"peak {het_bk_Cav21['peak_abs'] - wt_bk_Cav21['peak_abs']:+.3e}, "
+          f"plat {het_bk_Cav21['mean_abs_plateau'] - wt_bk_Cav21['mean_abs_plateau']:+.3e}, "
+          f"AUC {het_bk_Cav21['auc_abs_step'] - wt_bk_Cav21['auc_abs_step']:+.3e}")
 
     print("WT  SK (ik):", fmt(wt_sk))
     print("50% SK (ik):", fmt(het_sk))
