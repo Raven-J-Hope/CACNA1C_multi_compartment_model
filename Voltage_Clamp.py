@@ -730,18 +730,23 @@ if __name__ == "__main__":
     savefig("vc_soma_vm_WT_vs_Cav12_50.png")
     plt.show()
 
-    #plot CaV1.2 50% Vm with all compartments
-    plt.figure()
-    plt.plot(t1, vs1, label="soma")
-    plt.plot(t1, vp1, label="prox dend (0.5)")
-    plt.plot(t1, vd1, label="dist dend (0.9)")
-    plt.plot(t1, vsp1, label="spine head[0]")
-    plt.xlabel("Time (ms)")
-    plt.ylabel("Vm (mV)")
-    plt.title("50% Vm across compartments")
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+    for title, y0, y1, fname in [
+        ("Soma intracellular Ca", cai0_soma, cai1_soma, "vc_cai_soma_WT_vs_Cav12_50.png"),
+        ("Proximal dendrite intracellular Ca", cai0_prox, cai1_prox, "vc_cai_prox_WT_vs_Cav12_50.png"),
+        ("Distal dendrite intracellular Ca", cai0_dist, cai1_dist, "vc_cai_dist_WT_vs_Cav12_50.png"),
+        ("Spine intracellular Ca", cai0_spine, cai1_spine, "vc_cai_spine_WT_vs_Cav12_50.png"),
+    ]:
+        if y0 is not None and y1 is not None:
+            plt.figure()
+            plt.plot(t0, y0, color=WT_COLOR, label=WT_LABEL)
+            plt.plot(t1, y1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+            plt.xlabel("Time (ms)")
+            plt.ylabel("cai (mM)")
+            plt.title(title)
+            plt.legend()
+            plt.tight_layout()
+            savefig(fname)
+            plt.show()
 
     #plot baseline cai across compartments
     if (cai0_soma is not None and cai0_prox is not None and cai0_dist is not None and cai0_spine is not None):
