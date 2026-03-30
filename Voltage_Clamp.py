@@ -449,7 +449,7 @@ class DGGranuleLikeCell:
                     seg.Cabuffer.tau = 8.0
                     seg.Cabuffer.brat = 1.0
                 if has_mech(sec, "Cav2_1"):
-                    seg.Cav2_1.pcabar = 2.2e-6 * scale
+                    seg.Cav2_1.pcabar = 1e-5 * scale
                     seg.Cav2_1.vshift = 0.0
 
     def scale_cav12(self, factor: float):
