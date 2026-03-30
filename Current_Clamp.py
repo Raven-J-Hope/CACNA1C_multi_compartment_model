@@ -2933,7 +2933,7 @@ if __name__ == "__main__":
         return spikes
 
 
-    def run_fi_curve(cav12_factor=1.0, currents=np.arange(0.0, 0.51, 0.05),
+    def run_fi_curve(cav12_factor=1.0, currents=np.arange(0.0, 0.8, 0.05),
                      delay=100.0, dur=300.0, tstop=500.0, v_init=-70.0, dt=0.025,
                      threshold=0.0):
         """
