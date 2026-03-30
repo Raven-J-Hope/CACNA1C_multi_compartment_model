@@ -870,6 +870,7 @@ class DGGranuleLikeCell:
             self.cai_prox_vec = None
             self.cai_dist_vec = None
             self.cai_spine_vec = None
+            self.cai_ais_vec = None
 
         #BK_Cav22 local Ca
         self.bk_acai22_soma_vec = None
