@@ -2282,7 +2282,45 @@ if __name__ == "__main__":
         plt.title("Genotype effect on Ca-dependent K currents (WT - Cav12 50%)")
         plt.legend()
         plt.tight_layout()
-        plt.savefig(os.path.join(FIG_DIR, "delta_BK_vs_SK_WT_minus_50.png"), dpi=300)
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav22_vs_SK_WT_minus_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("Missing BK/SK traces for ΔBK/ΔSK plot.")
+
+    #ΔBK_Cav12 and ΔSK recruitment traces WT - 50% cav12
+    if (bk_Cav12ik0_soma is not None and bk_Cav12ik1_soma is not None and
+            skik0_soma is not None and skik1_soma is not None):
+
+        w = (t0 >= 80) & (t0 <= 450)  # show baseline + step + recovery
+
+        plt.figure()
+        plt.plot(t0[w], (bk_Cav12ik0_soma - bk_Cav12ik1_soma)[w], label="ΔBK_Cav12 (WT - 50%)")
+        plt.plot(t0[w], (skik0_soma - skik1_soma)[w], label="ΔSK (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Δ current density (mA/cm2)")
+        plt.title("Genotype effect on Ca-dependent K currents (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav12_vs_SK_WT_minus_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("Missing BK/SK traces for ΔBK/ΔSK plot.")
+
+    #ΔBK_Cav21 and ΔSK recruitment traces WT - 50% cav21
+    if (bk_Cav21ik0_soma is not None and bk_Cav21ik1_soma is not None and
+            skik0_soma is not None and skik1_soma is not None):
+
+        w = (t0 >= 80) & (t0 <= 450)  # show baseline + step + recovery
+
+        plt.figure()
+        plt.plot(t0[w], (bk_Cav21ik0_soma - bk_Cav21ik1_soma)[w], label="ΔBK_Cav21 (WT - 50%)")
+        plt.plot(t0[w], (skik0_soma - skik1_soma)[w], label="ΔSK (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Δ current density (mA/cm2)")
+        plt.title("Genotype effect on Ca-dependent K currents (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav21_vs_SK_WT_minus_50.png"), dpi=300)
         plt.show()
     else:
         print("Missing BK/SK traces for ΔBK/ΔSK plot.")
