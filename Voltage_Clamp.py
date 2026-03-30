@@ -719,7 +719,6 @@ if __name__ == "__main__":
     savefig("vc_clamp_current_WT_vs_Cav12_50.png")
     plt.show()
 
-    #plot base Vm with all compartments
     plt.figure()
     plt.plot(t0, vs0, label="soma")
     plt.plot(t0, vp0, label="prox dend (0.5)")
