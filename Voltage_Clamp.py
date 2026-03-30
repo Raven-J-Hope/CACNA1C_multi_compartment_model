@@ -795,19 +795,19 @@ if __name__ == "__main__":
         savefig(fname)
         plt.show()
 
-    #plot cai comparison in soma
-    if cai0_soma is not None and cai1_soma is not None:
-        plt.figure()
-        plt.plot(t0, cai0_soma, label="baseline")
-        plt.plot(t1, cai1_soma, label="Cav12 50%")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("cai (mM)")
-        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at soma")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-    else:
-        print("missing soma cai")
+    dvdt0 = np.gradient(vs0, t0)
+    dvdt1 = np.gradient(vs1, t1)
+
+    plt.figure()
+    plt.plot(vs0, dvdt0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(vs1, dvdt1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("V (mV)")
+    plt.ylabel("dV/dt (mV/ms)")
+    plt.title("Phase plane: soma")
+    plt.legend()
+    plt.tight_layout()
+    savefig("vc_phase_plane_soma_WT_vs_Cav12_50.png")
+    plt.show()
 
     #plot cai comparison in proximal dendrite
     if cai0_prox is not None and cai1_prox is not None:
