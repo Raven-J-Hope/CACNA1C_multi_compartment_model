@@ -1862,6 +1862,112 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "#plot Vm soma comparison.png"), dpi=300)
     plt.show()
 
+    #4-panel Vm figure for AIS, prox dend, dist dend, spine
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left AIS
+    ax = axes[0, 0]
+    ax.plot(t0, vais0, color=WT_COLOR)
+    ax.plot(t1, vais1, color=CAV12_50_COLOR)
+    ax.set_ylabel("Vm (mV)")
+    ax.legend()
+
+    #top right prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, vp0, color=WT_COLOR)
+    ax.plot(t1, vp1, color=CAV12_50_COLOR)
+
+    #bottom left dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, vd0, color=WT_COLOR)
+    ax.plot(t1, vd1, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("Vm (mV)")
+
+    #bottom right spine
+    ax = axes[1, 1]
+    ax.plot(t0, vsp0, color=WT_COLOR)
+    ax.plot(t1, vsp1, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    fig.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #baseline vs 50% AIS Vm
+    plt.figure()
+    plt.plot(t0, vais0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vais1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("Baseline vs reduced Cav1.2 (AIS)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_AIS_baseline_vs_Cav12_50.png"), dpi=300)
+    plt.show()
+
+    # baseline vs 50% axon Vm
+#    plt.figure()
+#    plt.plot(t0, vax0, label="axon baseline")
+#    plt.plot(t1, vax1, label="axon Cav12 50%")
+#    plt.xlabel("Time (ms)")
+#    plt.ylabel("Vm (mV)")
+#    plt.title("Baseline vs reduced Cav1.2 (axon)")
+#    plt.legend()
+#    plt.tight_layout()
+#    plt.savefig(os.path.join(FIG_DIR, "Vm_axon_baseline_vs_Cav12_50.png"), dpi=300)
+#    plt.show()
+
+    #baseline vs 50% prox dend Vm
+    plt.figure()
+    plt.plot(t0, vp0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vp1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("Baseline vs reduced Cav1.2 (prox dend)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_prox_baseline_vs_Cav12_50.png"), dpi=300)
+    plt.show()
+
+    #baseline vs 50% dist dend Vm
+    plt.figure()
+    plt.plot(t0, vd0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vd1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("Baseline vs reduced Cav1.2 (dist dend)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_dist_baseline_vs_Cav12_50.png"), dpi=300)
+    plt.show()
+
+    #baseline vs 50% spine Vm
+    plt.figure()
+    plt.plot(t0, vsp0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vsp1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("Baseline vs reduced Cav1.2 (spine)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_spine_baseline_vs_Cav12_50.png"), dpi=300)
+    plt.show()
+
+    #plot ais vs soma vs dend baseline
+    plt.figure()
+    plt.plot(t0, vs0, label="soma(0.5)")
+    plt.plot(t0, vais0, label="ais(0.5)")
+    plt.plot(t0, vp0, label="dend_prox(0.5)")
+    plt.plot(t0, vd0, label="dend_dist(0.9)")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.title("Vm across compartments incl. AIS")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "Vm_soma_AIS_dend.png"), dpi=300)
+    plt.show()
+
     #plot base Vm with all compartments
     plt.figure()
     plt.plot(t0, vs0, label="soma")
