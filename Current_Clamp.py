@@ -1565,6 +1565,37 @@ if __name__ == "__main__":
     #window-average currents during the stimulus, excluding the first 20 ms after onset
     w = (t0 >= 120) & (t0 <= 390)
 
+    print("[SK acai check] WT peak acai (mM):", None if sk_acai0_soma is None else float(np.max(sk_acai0_soma)))
+    print("[SK acai check] 50% peak acai (mM):", None if sk_acai1_soma is None else float(np.max(sk_acai1_soma)))
+
+    print("WT max Vsoma:", float(np.max(vs0)))
+    print("50% max Vsoma:", float(np.max(vs1)))
+    print("WT max SK acai:", float(np.max(sk_acai0_soma)) if sk_acai0_soma is not None else None)
+    print("50% max SK acai:", float(np.max(sk_acai1_soma)) if sk_acai1_soma is not None else None)
+
+    print("WT Vmax:", float(np.max(vs0)))
+    print("50% Vmax:", float(np.max(vs1)))
+
+    print("WT has SK2 on soma?", h.ismembrane("SK2", sec=cell.soma))
+    print("50% has SK2 on soma?", h.ismembrane("SK2", sec=cell2.soma))
+
+    print("WT has SK2 on soma?", h.ismembrane("SK2", sec=cell.soma))
+    print("50% has SK2 on soma?", h.ismembrane("SK2", sec=cell2.soma))
+
+    #overlay sk_acai during the step
+    if sk_acai0_soma is not None and sk_acai1_soma is not None:
+        w = (t0 >= 100) & (t0 <= 400)
+        plt.figure()
+        plt.plot(t0[w], sk_acai0_soma[w], color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1[w], sk_acai1_soma[w], color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("SK acai (mM)")
+        plt.title("SK driver calcium (acai) during step")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "SK_acai_trace_WT_vs_50.png"), dpi=300)
+        plt.show()
+
     def mean_abs(x):
         return None if x is None else float(np.mean(np.abs(x[w])))
 
