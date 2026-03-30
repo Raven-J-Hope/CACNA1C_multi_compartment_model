@@ -964,7 +964,7 @@
     "regions": [],
     "species": [],
     "name": "dgcell.soma",
-    "hoc_internal_name": "__nrnsec_0x5a99a3ef75e0",
+    "hoc_internal_name": "__nrnsec_0x5d060821e4c0",
     "cell": null
   },
   "model": "Cav12_50"
