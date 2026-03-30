@@ -228,68 +228,16 @@ class DGGranuleLikeCell:
                 for seg in neck:
                     seg.HCN.gbar = 1e-4
 
-            if has_mech(head, "Kv42"):
-                for seg in head:
-                    seg.Kv42.gkbar = 1.5e-4
-            if has_mech(neck, "Kv42"):
-                for seg in neck:
-                    seg.Kv42.gkbar = 1.5e-4
-
-            if has_mech(head, "Kv42b"):
-                for seg in head:
-                    seg.Kv42b.gkbar = 1.5e-4
-            if has_mech(neck, "Kv42b"):
-                for seg in neck:
-                    seg.Kv42b.gkbar = 1.5e-4
-
-            if has_mech(head, "Kv11"):
-                for seg in head:
-                    seg.Kv11.gkbar = 1e-5
-            if has_mech(neck, "Kv11"):
-                for seg in neck:
-                    seg.Kv11.gkbar = 1e-5
-
-            if has_mech(head, "Kir21"):
-                for seg in head:
-                    seg.Kir21.gkbar = 1.5e-4
-            if has_mech(neck, "Kir21"):
-                for seg in neck:
-                    seg.Kir21.gkbar = 1.5e-4
-
-            if has_mech(head, "Kv14"):
-                for seg in head:
-                    seg.Kv14.gkbar = 1e-5
-            if has_mech(neck, "Kv14"):
-                for seg in neck:
-                    seg.Kv14.gkbar = 1e-5
-
-            if has_mech(head, "Kv21"):
-                for seg in head:
-                    seg.Kv21.gkbar = 1e-5
-            if has_mech(neck, "Kv21"):
-                for seg in neck:
-                    seg.Kv21.gkbar = 1e-5
-
-            if has_mech(head, "Kv33"):
-                for seg in head:
-                    seg.Kv33.gkbar = 8e-4
-            if has_mech(neck, "Kv33"):
-                for seg in neck:
-                    seg.Kv33.gkbar = 8e-4
-
-            if has_mech(head, "Kv34"):
-                for seg in head:
-                    seg.Kv34.gkbar = 1.3e-3
-            if has_mech(neck, "Kv34"):
-                for seg in neck:
-                    seg.Kv34.gkbar = 1.3e-3
-
-            if has_mech(head, "Kv723"):
-                for seg in head:
-                    seg.Kv723.gkbar = 2e-3
-            if has_mech(neck, "Kv723"):
-                for seg in neck:
-                    seg.Kv723.gkbar = 2e-3
+            for mech_name, gval in [
+                ("Kv42", 1.5e-4), ("Kv42b", 1.5e-4), ("Kv11", 1e-5), ("Kir21", 1.5e-4),
+                ("Kv14", 1e-5), ("Kv21", 3e-5), ("Kv33", 2e-2), ("Kv34", 2e-3), ("Kv723", 2e-9)
+            ]:
+                if has_mech(head, mech_name):
+                    for seg in head:
+                        getattr(seg, mech_name).gkbar = gval
+                if has_mech(neck, mech_name):
+                    for seg in neck:
+                        getattr(seg, mech_name).gkbar = gval
 
             if has_mech(head, "ichan3"):
                 for seg in head:
