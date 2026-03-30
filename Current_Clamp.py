@@ -3006,7 +3006,7 @@ plt.show()
 dvdt1 = np.gradient(vs1, t1)
 
 plt.figure()
-plt.plot(vs1, dvdt1, label="Cav12 50% soma")
+plt.plot(vs1, dvdt1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
 plt.xlabel("V (mV)")
 plt.ylabel("dV/dt (mV/ms)")
 plt.title("Phase plane (Cav12 50%): soma")
