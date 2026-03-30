@@ -1182,8 +1182,27 @@ def ap_half_widths_per_spike(t, v, threshold=0.0, refractory_ms=2.0,
 
 if __name__ == "__main__":
     #baseline aka WT
-   #h.celsius = 37.0 #37 in vivo-like, 34 slice-like  #commenting temp out fore with temp no spikey?
-    cell = DGGranuleLikeCell()
+    h.celsius = 34.0 #37 in vivo-like, 34 slice-like
+    cell = DGGranuleLikeCell(bk_split=WT_BK_SPLIT)
+    print_key_params(cell, label="WT")
+
+    if has_mech(cell.soma, "na8st"):
+        list_mech_fields(cell.soma(0.5), "na8st")
+    else:
+        print("na8st not found on soma")
+
+    print("[ion check] soma has na ion?", h.ion_style("na_ion", sec=cell.soma))
+    print("[ion check] soma _ref_ina exists?", hasattr(cell.soma(0.5), "_ref_ina"))
+    print("[ion check] soma ina baseline (before running) =", float(cell.soma(0.5).ina))
+
+    print("[AIS pas debug] has pas on AIS?", h.ismembrane("pas", sec=cell.ais))
+    if h.ismembrane("pas", sec=cell.ais):
+        print("[AIS pas debug] AIS pas.g @0.5 =", float(cell.ais(0.5).pas.g))
+        print("[AIS pas debug] AIS pas.e @0.5 =", float(cell.ais(0.5).pas.e))
+
+    print("[Soma pas debug] has pas on soma?", h.ismembrane("pas", sec=cell.soma))
+    if h.ismembrane("pas", sec=cell.soma):
+        print("[Soma pas debug] soma pas.g @0.5 =", float(cell.soma(0.5).pas.g))
 
 #sanit check ais connected
     print("Has AIS attribute?", hasattr(cell, "ais"))
