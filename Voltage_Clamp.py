@@ -409,8 +409,6 @@ class DGGranuleLikeCell:
                     seg.Cav12.gbar = 5e-5 * scale
                 if has_mech(sec, "Cav22"):
                     seg.Cav22.gbar = 1e-5 * scale
-
-                #Cav32
                 if has_mech(sec, "Cav32"):
                     seg.Cav32.gbar = 1e-5 * scale
 
