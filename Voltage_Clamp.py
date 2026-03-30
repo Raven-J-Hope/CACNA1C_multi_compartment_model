@@ -329,7 +329,6 @@ class DGGranuleLikeCell:
             sec.cm = 1.0
 
     def _set_biophysics(self):
-        #set passive membrane
         for sec in self.all_secs():
             try_insert(sec, "pas")
             if has_mech(sec, "pas"):
