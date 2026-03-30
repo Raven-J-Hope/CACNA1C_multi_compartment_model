@@ -112,7 +112,10 @@ def step_metrics(t, x, step_on=100.0, step_off=400.0, plateau_guard=20.0):
         return {"peak_abs": None, "mean_abs_plateau": None, "auc_abs_step": None}
 
     t = np.asarray(t)
-    v = np.asarray(v)
+    x = np.asarray(x)
+
+    w_step = (t >= step_on) & (t <= step_off)
+    w_plat = (t >= step_on + plateau_guard) & (t <= step_off - plateau_guard)
 
     w = (t >= spike_window[0]) & (t <= spike_window[1])
     tt = t[w]; vv = v[w]
