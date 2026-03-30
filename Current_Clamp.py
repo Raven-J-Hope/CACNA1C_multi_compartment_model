@@ -281,7 +281,7 @@ def list_mech_fields(seg, mech_name: str, max_items=200):
 
 #define cell morphology & biophysics
 class DGGranuleLikeCell:
-    def __init__(self, name="dgcell"):
+    def __init__(self, name="dgcell", bk_split=None):
         self.name = name
         self.spines = []    #add dendritic spines
         self.spine_necks = []
