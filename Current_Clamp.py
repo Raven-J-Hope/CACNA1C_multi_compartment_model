@@ -1030,10 +1030,38 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     bk_Cav21_ik_soma = np.array(cell.bk_Cav21_ik_soma_vec) if getattr(cell, "bk_Cav21_ik_soma_vec", None) is not None else None
     sk_ik_soma = np.array(cell.sk_ik_soma_vec) if getattr(cell, "sk_ik_soma_vec", None) is not None else None
     ina_soma = np.array(cell.ina_soma_vec) if getattr(cell, "ina_soma_vec", None) is not None else None
-    hh_h_soma = np.array(cell.hh_h_soma_vec) if getattr(cell, "hh_h_soma_vec", None) is not None else None
-    hh_h_ais = np.array(cell.hh_h_ais_vec) if getattr(cell, "hh_h_ais_vec", None) is not None else None
-    hh_m_soma = np.array(cell.hh_m_soma_vec) if getattr(cell, "hh_m_soma_vec", None) is not None else None
-    return t, vs, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bk_ik_soma, sk_ik_soma, ina_soma, hh_h_soma, hh_h_ais, hh_m_soma
+
+    na8st_o_soma = np.array(cell.na8st_o_soma_vec) if getattr(cell, "na8st_o_soma_vec", None) is not None else None     #na8st Markov recordings
+    na8st_g_soma = np.array(cell.na8st_g_soma_vec) if getattr(cell, "na8st_g_soma_vec", None) is not None else None
+    na8st_o_ais = np.array(cell.na8st_o_ais_vec) if getattr(cell, "na8st_o_ais_vec", None) is not None else None
+    na8st_g_ais = np.array(cell.na8st_g_ais_vec) if getattr(cell, "na8st_g_ais_vec", None) is not None else None
+
+    na8st_i_soma = None
+    if getattr(cell, "na8st_i_soma_vecs", None) is not None:
+        na8st_i_soma = [np.array(v) for v in cell.na8st_i_soma_vecs]
+
+    na8st_i_ais = None
+    if getattr(cell, "na8st_i_ais_vecs", None) is not None:
+        na8st_i_ais = [np.array(v) for v in cell.na8st_i_ais_vecs]
+
+    na8st_i_total_soma = None
+    if na8st_i_soma is not None:
+        na8st_i_total_soma = np.sum(np.vstack(na8st_i_soma), axis=0)
+
+    na8st_i_total_ais = None
+    if na8st_i_ais is not None:
+        na8st_i_total_ais = np.sum(np.vstack(na8st_i_ais), axis=0)
+
+    sk_acai_soma = np.array(cell.sk_acai_soma_vec) if getattr(cell, "sk_acai_soma_vec", None) is not None else None
+    cav21_ica_soma = np.array(cell.cav21_ica_soma_vec) if getattr(cell, "cav21_ica_soma_vec", None) is not None else None
+    cav22_ica_soma = np.array(cell.cav22_ica_soma_vec) if getattr(cell, "cav22_ica_soma_vec", None) is not None else None
+    cav12_ica_soma = np.array(cell.cav12_ica_soma_vec) if getattr(cell, "cav12_ica_soma_vec",
+                                                                  None) is not None else None
+    bk_acai12 = np.array(cell.bk_acai12_soma_vec) if cell.bk_acai12_soma_vec is not None else None
+    bk_acai21 = np.array(cell.bk_acai21_soma_vec) if cell.bk_acai21_soma_vec is not None else None
+    bk_acai22 = np.array(cell.bk_acai22_soma_vec) if cell.bk_acai22_soma_vec is not None else None
+
+    return t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, cai_ais, ica_soma, ik_soma, bk_Cav22_ik_soma, bk_Cav12_ik_soma, bk_Cav21_ik_soma, sk_ik_soma, ina_soma, na8st_o_soma, na8st_g_soma, na8st_i_total_soma, na8st_o_ais, na8st_g_ais, na8st_i_total_ais, sk_acai_soma, cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, bk_acai12, bk_acai21, bk_acai22
 
 def save_run_report(path, meta: dict):
     def _json_safe(x):
