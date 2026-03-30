@@ -182,7 +182,6 @@ class DGGranuleLikeCell:
             neck.connect(self.dend_dist(x))
             head.connect(neck(1))
 
-            #spine geometry
             neck.L, neck.diam, neck.nseg = 1.0, 0.2, 1
             head.L, head.diam, head.nseg = 0.5, 0.5, 1
 
