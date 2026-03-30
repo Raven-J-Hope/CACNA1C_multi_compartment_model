@@ -720,10 +720,8 @@ if __name__ == "__main__":
     plt.show()
 
     plt.figure()
-    plt.plot(t0, vs0, label="soma")
-    plt.plot(t0, vp0, label="prox dend (0.5)")
-    plt.plot(t0, vd0, label="dist dend (0.9)")
-    plt.plot(t0, vsp0, label="spine head[0]")
+    plt.plot(t0, vs0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vs1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Time (ms)")
     plt.ylabel("Vm (mV)")
     plt.title("Baseline Vm across compartments")
