@@ -727,6 +727,7 @@ if __name__ == "__main__":
     plt.title("Soma Vm during voltage clamp")
     plt.legend()
     plt.tight_layout()
+    savefig("vc_soma_vm_WT_vs_Cav12_50.png")
     plt.show()
 
     #plot CaV1.2 50% Vm with all compartments
