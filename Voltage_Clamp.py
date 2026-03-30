@@ -540,13 +540,26 @@ class DGGranuleLikeCell:
             self.sk_ik_soma_vec = h.Vector()
             self.sk_ik_soma_vec.record(self.soma(0.5).SK2._ref_ik)
 
-        self.iclamp_vec = None
-        try:
-            if hasattr(self, "vclamp") and self.vclamp is not None:
-                self.iclamp_vec = h.Vector()
-                self.iclamp_vec.record(self.vclamp._ref_i)
-        except Exception:
-            self.iclamp_vec = None
+        self.cav21_ica_soma_vec = None
+        if has_mech(self.soma, "Cav2_1"):
+            self.cav21_ica_soma_vec = h.Vector()
+            self.cav21_ica_soma_vec.record(self.soma(0.5).Cav2_1._ref_ipca)
+
+        self.cav22_ica_soma_vec = None
+        if has_mech(self.soma, "Cav22"):
+            self.cav22_ica_soma_vec = h.Vector()
+            self.cav22_ica_soma_vec.record(self.soma(0.5)._ref_inca)
+
+        self.clamp_i_vec = None
+        if self.vclamp is not None:
+            self.clamp_i_vec = h.Vector()
+            self.clamp_i_vec.record(self.vclamp._ref_i)
+
+        self.cav12_ica_soma_vec = None
+        if has_mech(self.soma, "Cav12"):
+            self.cav12_ica_soma_vec = h.Vector()
+            self.cav12_ica_soma_vec.record(self.soma(0.5)._ref_ilca)
+
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
