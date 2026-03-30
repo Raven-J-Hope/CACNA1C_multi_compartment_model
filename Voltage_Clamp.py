@@ -803,7 +803,7 @@ if __name__ == "__main__":
     plt.plot(vs1, dvdt1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("V (mV)")
     plt.ylabel("dV/dt (mV/ms)")
-    plt.title("Phase plane: soma")
+    plt.title("Phase plane soma")
     plt.legend()
     plt.tight_layout()
     savefig("vc_phase_plane_soma_WT_vs_Cav12_50.png")
