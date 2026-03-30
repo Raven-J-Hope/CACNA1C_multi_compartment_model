@@ -461,8 +461,7 @@ class DGGranuleLikeCell:
                 for seg in sec:
                     seg.Cav12.gbar *= factor
 
-    def add_voltage_clamp(self, hold=-70.0, step=-50.0, delay=100.0, dur=300.0, sec=None,
-                          loc=0.5):  #voltage clamp
+    def add_voltage_clamp(self, hold=-70.0, step=-50.0, delay=100.0, dur=300.0, sec=None, loc=0.5):
         sec = self.soma if sec is None else sec
         self.vclamp = h.SEClamp(sec(loc))  #use single electrode clamp, is in nA
         self.vclamp.dur1 = delay
