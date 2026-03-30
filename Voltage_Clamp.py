@@ -13,9 +13,18 @@ from neuron import h
 
 h.load_file("stdrun.hoc")
 
-import sys  #check versions being used
-print("Python version:", sys.version) #if python or neuron version used are different from above and code not running
-print("NEURON version:", h.nrnversion()) #switch to aforementioned versions as first troubleshooting step
+# BK coupling splits
+WT_BK_SPLIT = {
+    "BK_Cav22": 1.0 / 3.0,
+    "BK_Cav12": 1.0 / 3.0,
+    "BK_Cav21": 1.0 / 3.0,
+}
+
+CAV12_50_BK_SPLIT = {
+    "BK_Cav22": 5.0 / 12.0,
+    "BK_Cav12": 1.0 / 6.0,
+    "BK_Cav21": 5.0 / 12.0,
+}
 
 #make and set dir & paths to compiled mod files
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs")
