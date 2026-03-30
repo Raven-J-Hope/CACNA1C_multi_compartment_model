@@ -1159,7 +1159,6 @@ def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
         i_peak = int(np.argmax(v_sp))
         v_peak = float(v_sp[i_peak])
 
-        # trough after peak
         v_after = v_sp[i_peak:]
         t_after = t_sp[i_peak:]
         i_trough = int(np.argmin(v_after))
