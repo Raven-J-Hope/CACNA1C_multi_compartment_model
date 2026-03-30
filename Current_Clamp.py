@@ -2826,8 +2826,51 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "BK_Cav12_per_Ca_per_spike.png"), dpi=300)
     plt.show()
 
-else:
-    print("[Per-spike soma Ca AUC] Skipped: cai_soma missing (None).")
+    #BK-per-Ca plot - cav21
+    plt.figure()
+    plt.plot(np.arange(len(ratio_bk_Cav210)), ratio_bk_Cav210, marker="o", label="WT BK_Cav21/Ca")
+    plt.plot(np.arange(len(ratio_bk_Cav211)), ratio_bk_Cav211, marker="o", label="50% BK_Cav12/Ca")
+    plt.xlabel("Spike #")
+    plt.ylabel("BK_Cav21-per-Ca ratio (a.u.)")
+    plt.title("BK_Cav21 recruitment efficiency per unit Ca (per spike)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav21_per_Ca_per_spike.png"), dpi=300)
+    plt.show()
+
+    #SK vs BK - cav22 -> change later to all BK/separate by type
+    plt.figure() ##not running yet need to def ratio terms/check where names
+    plt.plot(np.arange(n2), ratio0, marker="o", label="WT SK/Ca")
+    plt.plot(np.arange(n2), ratio1, marker="o", label="50% SK/Ca")
+    plt.plot(np.arange(n2), ratio_bk_Cav220, marker="o", label="WT BK_Cav22/Ca")
+    plt.plot(np.arange(n2), ratio_bk_Cav221, marker="o", label="50% BK_Cav22/Ca")
+    plt.xlabel("Spike #")
+    plt.ylabel("K-per-Ca ratio (a.u.)")
+    plt.title("Ca→K coupling efficiency per spike")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "SK_vs_BK_Cav22_per_Ca_per_spike.png"), dpi=300)
+    plt.show()
+
+    #Cav2.1 recruitment (soma) baseline vs 50%
+    if cav21_ica0_soma is not None and cav21_ica1_soma is not None:
+        plt.figure()
+        plt.plot(t0, cav21_ica0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, cav21_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cav2.1 current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "Cav21_recruitment_soma_baseline_vs_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("Cav2.1 ica missing (cav21_ica0_soma or cav21_ica1_soma is None).")
+
+    #ΔCav2.1 trace (WT - 50%) during step
+    if cav21_ica0_soma is not None and cav21_ica1_soma is not None:
+        step_on = 100.0
+        step_off = 400.0
+        w = (t0 >= step_on) & (t0 <= step_off)
 
 
     #quantify Ca difference during stimulus window in soma
