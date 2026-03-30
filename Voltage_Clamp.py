@@ -185,7 +185,6 @@ class DGGranuleLikeCell:
             neck.L, neck.diam, neck.nseg = 1.0, 0.2, 1
             head.L, head.diam, head.nseg = 0.5, 0.5, 1
 
-            #passive membrane
             try_insert(neck, "pas")
             try_insert(head, "pas")
             if has_mech(neck, "pas"):
