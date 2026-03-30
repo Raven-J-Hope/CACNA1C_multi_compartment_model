@@ -473,7 +473,6 @@ class DGGranuleLikeCell:
         self.vclamp.rs = 0.01
 
     def setup_recording(self):
-        #time
         self.t_vec = h.Vector()
         self.t_vec.record(h._ref_t)
 
