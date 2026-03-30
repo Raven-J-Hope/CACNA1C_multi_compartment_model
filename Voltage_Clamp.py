@@ -641,10 +641,12 @@ def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200
 if __name__ == "__main__":
     h.celsius = 34.0
 
-    #mechanism sanity checks - dist dend sanity
-    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
-                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
-        print(f"Has {mech} on dist dend?", h.ismembrane(mech, sec=cell.dend_dist))
+    cell = DGGranuleLikeCell(bk_split=WT_BK_SPLIT)
+    cell.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100.0, dur=300.0)
+    cell.setup_recording()
+    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, I0 = run_sim(
+        cell, tstop=500.0, v_init=-70.0, dt=0.025
+    )
 
     #mechanism sanity checks - spine head sanity
     for mech in ["Cav12", "Cabuffer", "Caold"]:
