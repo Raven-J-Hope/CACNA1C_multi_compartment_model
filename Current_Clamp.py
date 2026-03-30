@@ -1852,8 +1852,8 @@ if __name__ == "__main__":
 
     #plot Vm soma comparison
     plt.figure()
-    plt.plot(t0, vs0, label="soma baseline")
-    plt.plot(t1, vs1, label="soma Cav12 50%")
+    plt.plot(t0, vs0, color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1, vs1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Time (ms)")
     plt.ylabel("Membrane potential (mV)")
     plt.title("Baseline vs reduced Cav1.2")
