@@ -716,6 +716,7 @@ if __name__ == "__main__":
     plt.title("Voltage-clamp current")
     plt.legend()
     plt.tight_layout()
+    savefig("vc_clamp_current_WT_vs_Cav12_50.png")
     plt.show()
 
     #plot base Vm with all compartments
