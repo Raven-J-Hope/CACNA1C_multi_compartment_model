@@ -2816,8 +2816,8 @@ if __name__ == "__main__":
 
     #BK-per-Ca plot - cav12
     plt.figure()
-    plt.plot(np.arange(n), auc_ca0, marker="o", label="WT per-spike Ca AUC")
-    plt.plot(np.arange(n), auc_ca1, marker="o", label="50% per-spike Ca AUC")
+    plt.plot(np.arange(len(ratio_bk_Cav120)), ratio_bk_Cav120, marker="o", label="WT BK_Cav12/Ca")
+    plt.plot(np.arange(len(ratio_bk_Cav121)), ratio_bk_Cav121, marker="o", label="50% BK_Cav12/Ca")
     plt.xlabel("Spike #")
     plt.ylabel("Ca AUC per spike (mM·ms)")
     plt.title("Per-spike soma Ca load (AUC)")
