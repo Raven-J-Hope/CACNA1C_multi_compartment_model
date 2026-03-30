@@ -2462,7 +2462,359 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "SK AUC per spike (soma).png"), dpi=300)
     plt.show()
 
-    #plots Ca AUC/spike vs spike #
+    #SK recruitment efficiency per Ca load
+    if (auc_ca0 is not None) and (auc_ca1 is not None):
+        n2 = min(len(auc_sk0), len(auc_sk1), len(auc_ca0), len(auc_ca1))
+        auc_sk0a = auc_sk0[:n2]
+        auc_sk1a = auc_sk1[:n2]
+        auc_ca0a = auc_ca0[:n2]
+        auc_ca1a = auc_ca1[:n2]
+
+        eps = 1e-12
+        ratio0 = auc_sk0a / (auc_ca0a + eps)
+        ratio1 = auc_sk1a / (auc_ca1a + eps)
+
+        print(
+            f"[SK per Ca] WT mean={np.mean(ratio0):.3e}, 50% mean={np.mean(ratio1):.3e}, "
+            f"Δ(50%-WT)={np.mean(ratio1) - np.mean(ratio0):+.3e}"
+        )
+
+        plt.figure()
+        plt.plot(np.arange(n2), ratio0, marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(n2), ratio1, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike #")
+        plt.ylabel("SK-per-Ca ratio (a.u.)")
+        plt.title("SK recruitment efficiency per unit Ca (per spike)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "SK per Ca per spike (soma).png"), dpi=300)
+        plt.show()
+    else:
+        print("[SK per Ca] Skipped: per-spike Ca AUC missing.")
+
+    #per spike BK AUC (soma)
+
+    #per spike BK_Cav22 charge ie signed AUC around each spike
+    auc_bk_Cav220 = auc_around_spikes(t0, bk_Cav22ik0_soma, spk0, pre_ms=pre_ms, post_ms=post_ms)
+    auc_bk_Cav221 = auc_around_spikes(t1, bk_Cav22ik1_soma, spk1, pre_ms=pre_ms, post_ms=post_ms)
+
+    #per spike BK_Cav12 charge ie signed AUC around each spike
+    auc_bk_Cav120 = auc_around_spikes(t0, bk_Cav12ik0_soma, spk0, pre_ms=pre_ms, post_ms=post_ms)
+    auc_bk_Cav121 = auc_around_spikes(t1, bk_Cav12ik1_soma, spk1, pre_ms=pre_ms, post_ms=post_ms)
+
+    #per spike BK_Cav21 charge ie signed AUC around each spike
+    auc_bk_Cav210 = auc_around_spikes(t0, bk_Cav21ik0_soma, spk0, pre_ms=pre_ms, post_ms=post_ms)
+    auc_bk_Cav211 = auc_around_spikes(t1, bk_Cav21ik1_soma, spk1, pre_ms=pre_ms, post_ms=post_ms)
+
+    #align lengths so spike # match cav22
+    n_bk_Cav22 = min(len(auc_bk_Cav220), len(auc_bk_Cav221))
+    auc_bk_Cav220 = auc_bk_Cav220[:n_bk_Cav22]
+    auc_bk_Cav221 = auc_bk_Cav221[:n_bk_Cav22]
+
+    #align lengths so spike # match cav12
+    n_bk_Cav12 = min(len(auc_bk_Cav120), len(auc_bk_Cav121))
+    auc_bk_Cav120 = auc_bk_Cav120[:n_bk_Cav12]
+    auc_bk_Cav121 = auc_bk_Cav121[:n_bk_Cav12]
+
+    #align lengths so spike # match cav21
+    n_bk_Cav21 = min(len(auc_bk_Cav210), len(auc_bk_Cav211))
+    auc_bk_Cav210 = auc_bk_Cav210[:n_bk_Cav21]
+    auc_bk_Cav211 = auc_bk_Cav211[:n_bk_Cav21]
+
+    print(
+        f"[Per-spike BK_Cav22 AUC] WT mean={np.mean(auc_bk_Cav220):.3e}, "
+        f"50% mean={np.mean(auc_bk_Cav221):.3e}, "
+        f"Δ(50%-WT)={np.mean(auc_bk_Cav221) - np.mean(auc_bk_Cav220):+.3e}"
+    )
+
+    print(
+        f"[Per-spike BK_Cav12 AUC] WT mean={np.mean(auc_bk_Cav120):.3e}, "
+        f"50% mean={np.mean(auc_bk_Cav121):.3e}, "
+        f"Δ(50%-WT)={np.mean(auc_bk_Cav121) - np.mean(auc_bk_Cav120):+.3e}"
+    )
+
+    print(
+        f"[Per-spike BK_Cav21 AUC] WT mean={np.mean(auc_bk_Cav210):.3e}, "
+        f"50% mean={np.mean(auc_bk_Cav211):.3e}, "
+        f"Δ(50%-WT)={np.mean(auc_bk_Cav211) - np.mean(auc_bk_Cav210):+.3e}"
+    )
+
+
+    #BK recruitment efficiency per unit Ca / spike - Cav22
+    n2 = min(len(auc_bk_Cav220), len(auc_bk_Cav221), len(auc_ca0), len(auc_ca1))
+    if n2 < 1:
+        print("[BK_Cav22 per Ca] Skipped: not enough spikes with full AUC windows.")
+    else:
+        auc_bk_Cav220a = auc_bk_Cav220[:n2]
+        auc_bk_Cav221a = auc_bk_Cav221[:n2]
+        auc_ca0a = auc_ca0[:n2]
+        auc_ca1a = auc_ca1[:n2]
+
+        eps = 1e-12  # avoid divide-by-zero
+        ratio0 = auc_bk_Cav220a / (auc_ca0a + eps)
+        ratio1 = auc_bk_Cav221a / (auc_ca1a + eps)
+
+        print(
+            f"[BK_Cav22 per Ca] WT mean={np.mean(ratio0):.3e}, 50% mean={np.mean(ratio1):.3e}, "
+            f"Δ(50%-WT)={np.mean(ratio1) - np.mean(ratio0):+.3e}"
+        )
+
+        #BK recruitment efficiency per unit Ca / spike - cav12
+        n2 = min(len(auc_bk_Cav120), len(auc_bk_Cav121), len(auc_ca0), len(auc_ca1))
+        if n2 < 1:
+            print("[BK_Cav12 per Ca] Skipped: not enough spikes with full AUC windows.")
+        else:
+            auc_bk_Cav120a = auc_bk_Cav120[:n2]
+            auc_bk_Cav121a = auc_bk_Cav121[:n2]
+            auc_ca0a = auc_ca0[:n2]
+            auc_ca1a = auc_ca1[:n2]
+
+            eps = 1e-12  # avoid divide-by-zero
+            ratio2 = auc_bk_Cav120a / (auc_ca0a + eps)
+            ratio3 = auc_bk_Cav121a / (auc_ca1a + eps)
+
+            print(
+                f"[BK_Cav12 per Ca] WT mean={np.mean(ratio2):.3e}, 50% mean={np.mean(ratio3):.3e}, "
+                f"Δ(50%-WT)={np.mean(ratio3) - np.mean(ratio2):+.3e}"
+            )
+
+        #BK recruitment efficiency per unit Ca / spike - Cav21
+        n2 = min(len(auc_bk_Cav210), len(auc_bk_Cav211), len(auc_ca0), len(auc_ca1))
+        if n2 < 1:
+            print("[BK_Cav21 per Ca] Skipped: not enough spikes with full AUC windows.")
+        else:
+            auc_bk_Cav210a = auc_bk_Cav210[:n2]
+            auc_bk_Cav211a = auc_bk_Cav211[:n2]
+            auc_ca0a = auc_ca0[:n2]
+            auc_ca1a = auc_ca1[:n2]
+
+            eps = 1e-12  # avoid divide-by-zero
+            ratio4 = auc_bk_Cav210a / (auc_ca0a + eps)
+            ratio5 = auc_bk_Cav211a / (auc_ca1a + eps)
+
+            print(
+                f"[BK_Cav21 per Ca] WT mean={np.mean(ratio4):.3e}, 50% mean={np.mean(ratio5):.3e}, "
+                f"Δ(50%-WT)={np.mean(ratio5) - np.mean(ratio4):+.3e}"
+            )
+
+        #BK recruitment efficiency per Ca load (per spike) - cav22
+        eps = 1e-12
+        ratio_bk_Cav220 = auc_bk_Cav220a / (auc_ca0a + eps)
+        ratio_bk_Cav221 = auc_bk_Cav221a / (auc_ca1a + eps)
+
+        plt.figure()
+        plt.plot(np.arange(n2), ratio0, marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(n2), ratio1, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike #")
+        plt.ylabel("BK_Cav22-per-Ca ratio (a.u.)")
+        plt.title("BK_Cav22 recruitment efficiency ck/ca auc per unit Ca (per spike)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "BK_Cav22 per Ca per spike (soma).png"), dpi=300)
+        plt.show()
+
+        #BK recruitment efficiency per Ca load (per spike) - cav12
+        eps = 1e-12
+        ratio_bk_Cav120 = auc_bk_Cav120a / (auc_ca0a + eps)
+        ratio_bk_Cav121 = auc_bk_Cav121a / (auc_ca1a + eps)
+
+        plt.figure()
+        plt.plot(np.arange(n2), ratio2, marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(n2), ratio3, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike #")
+        plt.ylabel("BK_Cav12-per-Ca ratio (a.u.)")
+        plt.title("BK_Cav12 recruitment efficiency bk/ca auc per unit Ca (per spike)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "BK_Cav12 per Ca per spike (soma).png"), dpi=300)
+        plt.show()
+
+        #BK recruitment efficiency per Ca load (per spike) - cav21
+        eps = 1e-12
+        ratio_bk_Cav210 = auc_bk_Cav210a / (auc_ca0a + eps)
+        ratio_bk_Cav211 = auc_bk_Cav211a / (auc_ca1a + eps)
+
+        plt.figure()
+        plt.plot(np.arange(n2), ratio0, marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(n2), ratio1, marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike #")
+        plt.ylabel("BK_Cav21-per-Ca ratio (a.u.)")
+        plt.title("BK_Cav21 recruitment efficiency bk/ca auc per unit Ca (per spike)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "BK_Cav21 per Ca per spike (soma).png"), dpi=300)
+        plt.show()
+
+    #plot BK AUC per spike - cav22
+    plt.figure()
+    plt.plot(auc_bk_Cav220, label="WT per-spike BK_Cav22 AUC", marker="o")
+    plt.plot(auc_bk_Cav221, label="50% per-spike BK_Cav22 AUC", marker="o")
+    plt.xlabel("Spike #")
+    plt.ylabel("BK_Cav22 AUC per spike (mA/cm2·ms)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav22 AUC per spike (soma).png"), dpi=300)
+    plt.show()
+
+    #plot BK AUC per spike - cav12
+    plt.figure()
+    plt.plot(auc_bk_Cav120, label="WT per-spike BK_Cav12 AUC", marker="o")
+    plt.plot(auc_bk_Cav121, label="50% per-spike BK_Cav12 AUC", marker="o")
+    plt.xlabel("Spike #")
+    plt.ylabel("BK_Cav12 AUC per spike (mA/cm2·ms)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav12 AUC per spike (soma).png"), dpi=300)
+    plt.show()
+
+    #plot BK AUC per spike - cav21
+    plt.figure()
+    plt.plot(auc_bk_Cav210, label="WT per-spike BK_Cav21 AUC", marker="o")
+    plt.plot(auc_bk_Cav211, label="50% per-spike BK_Cav21 AUC", marker="o")
+    plt.xlabel("Spike #")
+    plt.ylabel("BK_Cav21 AUC per spike (mA/cm2·ms)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav21 AUC per spike (soma).png"), dpi=300)
+    plt.show()
+
+    #ΔBK trace (WT - 50%) & cumulative AUC across the step - cav22
+    if bk_Cav22ik0_soma is not None and bk_Cav22ik1_soma is not None:
+        step_on = 100.0
+        step_off = 400.0
+        w = (t0 >= step_on) & (t0 <= step_off)
+
+        #ΔBK = WT - 50%
+        dbk_Cav22 = (bk_Cav22ik0_soma - bk_Cav22ik1_soma)
+
+        #cumulative ∫ΔBK dt (signed), units = mA/cm2 * ms
+        dt_ms = float(t0[1] - t0[0])
+        dbk_Cav22_auc_t = np.cumsum(dbk_Cav22[w]) * dt_ms
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav22[w], label="ΔBK_Cav22 (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("ΔBK_Cav22 current density (mA/cm2)")
+        plt.title("Genotype effect on BK_Cav22 current (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav22_trace_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav22_auc_t, label="Cumulative ∫ΔBK_Cav22 dt (signed)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cumulative ΔBK_Cav22 AUC (mA/cm2·ms)")
+        plt.title("Cumulative BK_Cav22 difference across the step (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav22_cumulative_AUC_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        print(f"[ΔBK_Cav22 signed AUC over 100–400 ms] {float(np.trapz(dbk_Cav22[w], t0[w])):+.6e} mA/cm2·ms")
+    else:
+        print("BK_Cav22 vectors missing (bk_Cav22ik0_soma or bk_Cav22ik1_soma is None).")
+
+    #ΔBK trace (WT - 50%) & cumulative AUC across the step - cav12
+    if bk_Cav12ik0_soma is not None and bk_Cav12ik1_soma is not None:
+        step_on = 100.0
+        step_off = 400.0
+        w = (t0 >= step_on) & (t0 <= step_off)
+
+        #ΔBK = WT - 50%
+        dbk_Cav12 = (bk_Cav12ik0_soma - bk_Cav12ik1_soma)
+
+        #cumulative ∫ΔBK dt (signed), units = mA/cm2 * ms
+        dt_ms = float(t0[1] - t0[0])
+        dbk_Cav12_auc_t = np.cumsum(dbk_Cav12[w]) * dt_ms
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav22[w], label="ΔBK_Cav12 (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("ΔBK_Cav12 current density (mA/cm2)")
+        plt.title("Genotype effect on BK_Cav12 current (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav12_trace_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav22_auc_t, label="Cumulative ∫ΔBK_Cav12 dt (signed)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cumulative ΔBK_Cav12 AUC (mA/cm2·ms)")
+        plt.title("Cumulative BK_Cav12 difference across the step (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav12_cumulative_AUC_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        print(f"[ΔBK_Cav12 signed AUC over 100–400 ms] {float(np.trapz(dbk_Cav12[w], t0[w])):+.6e} mA/cm2·ms")
+    else:
+        print("BK_Cav12 vectors missing (bk_Cav12ik0_soma or bk_Cav12ik1_soma is None).")
+
+    #ΔBK trace (WT - 50%) & cumulative AUC across the step - cav21
+    if bk_Cav21ik0_soma is not None and bk_Cav21ik1_soma is not None:
+        step_on = 100.0
+        step_off = 400.0
+        w = (t0 >= step_on) & (t0 <= step_off)
+
+        #ΔBK = WT - 50%
+        dbk_Cav21 = (bk_Cav21ik0_soma - bk_Cav21ik1_soma)
+
+        #cumulative ∫ΔBK dt (signed), units = mA/cm2 * ms
+        dt_ms = float(t0[1] - t0[0])
+        dbk_Cav21_auc_t = np.cumsum(dbk_Cav21[w]) * dt_ms
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav21[w], label="ΔBK_Cav21 (WT - 50%)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("ΔBK_Cav21 current density (mA/cm2)")
+        plt.title("Genotype effect on BK_Cav21 current (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav21_trace_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        plt.figure()
+        plt.plot(t0[w], dbk_Cav21_auc_t, label="Cumulative ∫ΔBK_Cav21 dt (signed)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cumulative ΔBK_Cav21 AUC (mA/cm2·ms)")
+        plt.title("Cumulative BK_Cav21 difference across the step (WT - Cav12 50%)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "delta_BK_Cav21_cumulative_AUC_WT_minus_50.png"), dpi=300)
+        plt.show()
+
+        print(f"[ΔBK_Cav21 signed AUC over 100–400 ms] {float(np.trapz(dbk_Cav21[w], t0[w])):+.6e} mA/cm2·ms")
+    else:
+        print("BK_Cav21 vectors missing (bk_Cav21ik0_soma or bk_Cav21ik1_soma is None).")
+
+
+    #SK-per-Ca plot
+    plt.figure()
+    plt.plot(np.arange(len(ratio0)), ratio0, marker="o", label="WT SK/Ca")
+    plt.plot(np.arange(len(ratio1)), ratio1, marker="o", label="50% SK/Ca")
+    plt.xlabel("Spike #")
+    plt.ylabel("SK-per-Ca ratio (a.u.)")
+    plt.title("SK recruitment efficiency per unit Ca (per spike)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "SK_per_Ca_per_spike.png"), dpi=300)
+    plt.show()
+
+    #BK-per-Ca plot - cav22
+    plt.figure()
+    plt.plot(np.arange(len(ratio_bk_Cav220)), ratio_bk_Cav220, marker="o", label="WT BK_Cav22/Ca")
+    plt.plot(np.arange(len(ratio_bk_Cav221)), ratio_bk_Cav221, marker="o", label="50% BK_Cav12/Ca")
+    plt.xlabel("Spike #")
+    plt.ylabel("BK_Cav22-per-Ca ratio (a.u.)")
+    plt.title("BK_Cav22 recruitment efficiency per unit Ca (per spike)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav22_per_Ca_per_spike.png"), dpi=300)
+    plt.show()
+
+    #BK-per-Ca plot - cav12
     plt.figure()
     plt.plot(np.arange(n), auc_ca0, marker="o", label="WT per-spike Ca AUC")
     plt.plot(np.arange(n), auc_ca1, marker="o", label="50% per-spike Ca AUC")
