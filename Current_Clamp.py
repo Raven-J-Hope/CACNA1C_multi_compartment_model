@@ -12,6 +12,25 @@ import json  #to save metadata/parameters for diss
 
 h.load_file("stdrun.hoc")
 
+#BK coupling splits
+WT_BK_SPLIT = {              #equal distrib
+    "BK_Cav22": 1.0 / 3.0,
+    "BK_Cav12": 1.0 / 3.0,
+    "BK_Cav21": 1.0 / 3.0,
+}
+
+CAV12_50_BK_SPLIT = {          #halves BK_Cav12 and redistribs other half equally to cav22 and 21
+    "BK_Cav22": 5.0 / 12.0,
+    "BK_Cav12": 1.0 / 6.0,
+    "BK_Cav21": 5.0 / 12.0,
+}
+
+#labels and colour scheme
+WT_LABEL = "WT"
+CAV12_50_LABEL = "Cav1.2 50%"
+WT_COLOR = "black"
+CAV12_50_COLOR = "#ffa6b2" #"#e16173"
+
 import sys  #check versions being used
 print("Python version:", sys.version) #if python or neuron version used are different from above and code not running
 print("NEURON version:", h.nrnversion()) #switch to aforementioned versions as first troubleshooting step
