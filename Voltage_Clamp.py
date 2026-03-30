@@ -163,8 +163,7 @@ class DGGranuleLikeCell:
         self._set_biophysics()
         self.add_spines_to_distal_dend(n_spines=10)
 
-        #stim & recordings
-        self.iclamp = None
+        self.vclamp = None
         self.t_vec = h.Vector()
         self.vsoma_vec = h.Vector()
         self.vdend_vec = h.Vector()
