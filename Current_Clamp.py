@@ -2190,7 +2190,19 @@ if __name__ == "__main__":
         plt.ylabel("BK_Cav12 current density (mA/cm2)")
         plt.legend()
         plt.tight_layout()
-        plt.savefig(os.path.join(FIG_DIR, "#BK recruitment aka soma BK current baseline vs 50%.png"), dpi=300)
+        plt.savefig(os.path.join(FIG_DIR, "#BK_Cav12 recruitment aka soma BK_Cav12 current baseline vs 50%.png"), dpi=300)
+        plt.show()
+
+    #BK recruitment aka soma BK current baseline vs 50% - made cav21 specific
+    if bk_Cav21ik0_soma is not None and bk_Cav21ik1_soma is not None:
+        plt.figure()
+        plt.plot(t0, bk_Cav21ik0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, bk_Cav21ik1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("BK_Cav21 current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "#BK_Cav21 recruitment aka soma BK_Cav21 current baseline vs 50%.png"), dpi=300)
         plt.show()
 
     #SK recruitment aka soma SK current baseline vs 50%
