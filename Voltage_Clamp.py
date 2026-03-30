@@ -820,19 +820,16 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "vc_Cav12_source_current_WT_vs_Cav12_50.png"), dpi=300)
 plt.show()
 
-    #plot cai comparison in distal dendrite
-    if cai0_dist is not None and cai1_dist is not None:
-        plt.figure()
-        plt.plot(t0, cai0_dist, label="baseline")
-        plt.plot(t1, cai1_dist, label="Cav12 50%")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("cai (mM)")
-        plt.title("Baseline vs reduced Cav1.2 intracellular Ca at dist dend")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-    else:
-        print("missing dist cai")
+plt.figure()
+plt.plot(t0, cav22_ica0_soma, color=WT_COLOR, label=WT_LABEL)
+plt.plot(t1, cav22_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+plt.xlabel("Time (ms)")
+plt.ylabel("Current density (mA/cm2)")
+plt.title("Cav22 source current")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "vc_Cav22_source_current_WT_vs_Cav12_50.png"), dpi=300)
+plt.show()
 
     #plot cai comparison ate the spine-site
     if cai0_spine is not None and cai1_spine is not None:
