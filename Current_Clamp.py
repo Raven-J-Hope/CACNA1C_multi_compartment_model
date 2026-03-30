@@ -2127,8 +2127,8 @@ if __name__ == "__main__":
     #plot cai comparison in distal dendrite
     if cai0_dist is not None and cai1_dist is not None:
         plt.figure()
-        plt.plot(t0, cai0_dist, label="baseline")
-        plt.plot(t1, cai1_dist, label="Cav12 50%")
+        plt.plot(t0, cai0_dist, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, cai1_dist, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
         plt.title("Baseline vs reduced Cav1.2 intracellular Ca at dist dend")
