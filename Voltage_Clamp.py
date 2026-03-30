@@ -137,7 +137,7 @@ def fmt_metrics(m):
 def savefig(name: str):
     plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
 
-#define cell morphology & biophysics
+
 class DGGranuleLikeCell:
     def __init__(self, name="dgcell"):
         self.name = name
