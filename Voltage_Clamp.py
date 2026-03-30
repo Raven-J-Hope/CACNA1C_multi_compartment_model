@@ -639,27 +639,7 @@ def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200
 
 
 if __name__ == "__main__":
-    #baseline aka WT
-    cell = DGGranuleLikeCell()
-
-#sanit check ais connected
-    print("Has AIS attribute?", hasattr(cell, "ais"))
-    if hasattr(cell, "ais"):
-        print("AIS name:", cell.ais.name())
-        print("Has hh on AIS?", h.ismembrane("hh", sec=cell.ais))
-        print("AIS PSECTION:", cell.ais.psection())
-    print("TOPOLOGY:")
-    h.topology()
-
-    #mechanism sanity checks - soma sanity
-    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
-                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
-        print(f"Has {mech} on soma?", h.ismembrane(mech, sec=cell.soma))
-
-    #mechanism sanity checks - prox dend sanity
-    for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
-                 "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "na8st"]:
-        print(f"Has {mech} on prox dend?", h.ismembrane(mech, sec=cell.dend_prox))
+    h.celsius = 34.0
 
     #mechanism sanity checks - dist dend sanity
     for mech in ["BK", "Cav12", "Cav22", "Cav32", "SK2", "HCN", "Cabuffer", "Caold", "Kv42", "Kv11", "ichan3", "Kir21",
