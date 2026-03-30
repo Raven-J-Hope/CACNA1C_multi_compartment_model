@@ -1800,6 +1800,38 @@ if __name__ == "__main__":
 
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
+    #2-panel fig for SK current and SK driver calcium acai
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharex=False)
+
+    #SK current density
+    ax = axes[0]
+    ax.plot(t0, skik0_soma, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, skik1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("SK current density (mA/cm2)")
+
+    #SK driver calcium during step
+    ax = axes[1]
+    w0 = (t0 >= 100) & (t0 <= 400)
+    w1 = (t1 >= 100) & (t1 <= 400)
+    ax.plot(t0[w0], sk_acai0_soma[w0], color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1[w1], sk_acai1_soma[w1], color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("SK acai (mM)")
+
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.08, 1, 1])
+    plt.savefig(
+        os.path.join(FIG_DIR, "SK_current_and_SK_acai_2panel_WT_vs_Cav12_50.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+
     #AIS spike sanity peak & zoom plot
     w = (t >= 80) & (t <= 150)  # around step onset / first event
     ais_peak_i = np.argmax(vais[w])
