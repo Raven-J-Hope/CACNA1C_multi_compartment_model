@@ -26,7 +26,15 @@ CAV12_50_BK_SPLIT = {
     "BK_Cav21": 5.0 / 12.0,
 }
 
-#make and set dir & paths to compiled mod files
+# labels and colour scheme
+WT_LABEL = "WT"
+CAV12_50_LABEL = "Cav1.2 50%"
+WT_COLOR = "black"
+CAV12_50_COLOR = "#ffa6b2" #"#e16173"
+
+print("Python version:", sys.version)
+print("NEURON version:", h.nrnversion())
+
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs")
 FIG_DIR = os.path.join(OUT_DIR, "vc_figures")
 os.makedirs(FIG_DIR, exist_ok=True)  #creates outputs/ and outputs/figures if missing
