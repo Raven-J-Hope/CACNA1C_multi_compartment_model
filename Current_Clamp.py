@@ -1126,7 +1126,6 @@ def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
     t = np.asarray(t)
     v = np.asarray(v)
 
-    # detect spikes
     w = (t >= t_start) & (t <= t_end)
     tt = t[w]
     vv = v[w]
