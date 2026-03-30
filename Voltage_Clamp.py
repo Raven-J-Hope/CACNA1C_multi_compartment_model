@@ -679,80 +679,20 @@ if __name__ == "__main__":
     run_meta_50["model"] = "Cav12_50"
     save_run_report(os.path.join(OUT_DIR, "vc_run_report_cav12_50.json"), run_meta_50)
 
-    def savefig(name: str):
-        plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
-
-    #make NEURON shape plot schematic of topology so can see where everything connects - methods figure
-  #  h.define_shape()
-   # ps = h.PlotShape(True)  #show diameters
-   # ps.exec_menu("View = plot")  #open shape window
-   # h.topology()  #keep printing the tree in the console
-    #opens but freezes, check the neuron doccumentation on 28/01 to fix
-    #commented out for now - need check cell builder function to make more realistic morpho
-    #then shape again
-
-    cell.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100, dur=300)
-    cell.setup_recording()
-    t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
-    I0 = np.array(cell.iclamp_vec) if cell.iclamp_vec is not None else None  #adds current arrays so can plot, in nA
-    print("lens:", len(t0), len(vs0), len(vp0), len(vd0), len(vsp0))
-    print("Peak cai base soma/prox/dist/spine:", #prints ca peak in each compartmnet
-          float(np.max(cai0_soma)),
-          float(np.max(cai0_prox)),
-          float(np.max(cai0_dist)),
-          float(np.max(cai0_spine)))   #why is the spine ca so high? how did i even
-                                       #rec from where spine attach looks much more reasonable now - check data for sensibility
-
-    #50% Cav1.2 - mimic +/-
-    cell2 = DGGranuleLikeCell()
-    cell2.scale_cav12(0.5)
-    cell2.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100, dur=300)
-    cell2.setup_recording()
-    t1, vs1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
-    I1 = np.array(cell2.iclamp_vec) if cell2.iclamp_vec is not None else None #in nA
-    print("lens:", len(t1), len(vs1), len(vp1), len(vd1), len(vsp1))
-    print("Peak cai 50% soma/prox/dist/spine:",  #prints ca peak in each compartmnet
-          float(np.max(cai1_soma)),
-          float(np.max(cai1_prox)),
-          float(np.max(cai1_dist)),
-          float(np.max(cai1_spine)))
-
-
-    vpeak0, tpeak0, vmin0, tmin0, ahp0 = ahp_depth(t0, vs0)
-    vpeak1, tpeak1, vmin1, tmin1, ahp1 = ahp_depth(t1, vs1)
-
-    print("Percent Δ peak cai (50% vs WT):",
-          100 * (cai1_soma.max() / cai0_soma.max() - 1),
-          100 * (cai1_prox.max() / cai0_prox.max() - 1),
-          100 * (cai1_dist.max() / cai0_dist.max() - 1),
-          100 * (cai1_spine.max() / cai0_spine.max() - 1))
-
-    print(f"AHP baseline: {ahp0:.3f} mV (trough {vmin0:.2f} mV at {tmin0:.2f} ms)")
-    print(f"AHP Cav12 50%: {ahp1:.3f} mV (trough {vmin1:.2f} mV at {tmin1:.2f} ms)")
-    print(f"ΔAHP (50% - base): {ahp1 - ahp0:+.3f} mV")
-
-#plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
-
-    #plot voltage clamp current comparison
-    if I0 is not None and I1 is not None:
-        plt.figure()
-        plt.plot(t0, I0, label="baseline clamp current")
-        plt.plot(t1, I1, label="Cav12 50% clamp current")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("Clamp current nA")
-        plt.title("Voltage clamp current (baseline vs Cav12 50%)")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-    else:
-        print("Clamp current not recorded (check vclamp + iclamp_vec)")
-
-    #step I–V
-    steps = np.arange(-90, 11, 10)  # mV: -90, -80, ... , +10
-    hold = -70.0
-    delay = 100.0
-    dur = 200.0
-    tstop = 350.0
+    print("\n--- CURRENT DIAGNOSTICS (soma, peak |current|) --")
+    for label, ica, ik, bk22, bk12, bk21, sk, ina, cav21, cav22 in [
+        (WT_LABEL, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, cav21_ica0_soma, cav22_ica0_soma),
+        (CAV12_50_LABEL, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, cav21_ica1_soma, cav22_ica1_soma),
+    ]:
+        print(f"{label}: ica_soma =", peak_abs(ica), "mA/cm2")
+        print(f"{label}: ik_soma  =", peak_abs(ik), "mA/cm2")
+        print(f"{label}: BK_Cav22_ik =", peak_abs(bk22), "mA/cm2")
+        print(f"{label}: BK_Cav12_ik =", peak_abs(bk12), "mA/cm2")
+        print(f"{label}: BK_Cav21_ik =", peak_abs(bk21), "mA/cm2")
+        print(f"{label}: SK_ik =", peak_abs(sk), "mA/cm2")
+        print(f"{label}: ina_soma =", peak_abs(ina), "mA/cm2")
+        print(f"{label}: Cav2.1 source current =", peak_abs(cav21), "mA/cm2")
+        print(f"{label}: Cav22 source current =", peak_abs(cav22), "mA/cm2")
 
     Ipeak_base = []
     Iss_base = []
