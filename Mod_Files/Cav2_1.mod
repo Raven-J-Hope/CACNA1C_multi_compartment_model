@@ -26,7 +26,7 @@ NEURON {
     SUFFIX Cav2_1
     USEION ca READ cai, cao WRITE ica
     USEION pca WRITE ipca VALENCE 0
-    RANGE pcabar, ica, ipca, gk, vhalfm, cvm, vshift, taum, minf
+    RANGE pcabar, ica, ipca, gk, vhalfm, cvm, vhalfh, cvh, vshift, taum, tauh, minf, hinf, tauh_base, tauh_amp
 }
 
 UNITS {
@@ -61,6 +61,9 @@ PARAMETER {
     cvh = 16.098 (mV)
     vshift = 0 (mV)
 
+    tauh_base = 120 (ms)
+    tauh_amp = 80 (ms)
+
     pcabar = 2.2e-4 (cm/s)
 }
 
@@ -69,32 +72,36 @@ ASSIGNED {
     ica (mA/cm2)
     ipca (mA/cm2)
     minf
+    hinf
     taum (ms)
+    tauh (ms)
     gk (coulombs/cm3)
     T (kelvin)
     E (volt)
     zeta
 }
 
-STATE { m }
+STATE { m h }
 
 INITIAL {
     qt = q10^((celsius-23 (degC))/10 (degC))
     T = kelvinfkt( celsius )
     rates(v)
     m = minf
+    h = hinf
 }
 
 BREAKPOINT {
     SOLVE states METHOD cnexp
 
-    ica = (1e3) * pcabar * m * m * m * gk
+    ica = (1e3) * pcabar * m * m * m * h * gk
     ipca = ica
 }
 
 DERIVATIVE states {
     rates(v)
     m' = (minf-m)/taum
+    h' = (hinf-h)/tauh
 }
 
 FUNCTION ghk( v (mV), ci (mM), co (mM), z )  (coulombs/cm3) { 
@@ -111,9 +118,11 @@ FUNCTION ghk( v (mV), ci (mM), co (mM), z )  (coulombs/cm3) {
 PROCEDURE rates( v (mV) ) {
 
     minf = 1 / ( 1 + exp(-(v-vhalfm-vshift)/cvm) )
-
     taum = taumfkt(v-vshift)/qt
-    
+
+    hinf = 1 / ( 1 + exp((v-vhalfh-vshift)/cvh) )
+    tauh = (tauh_base + tauh_amp / (1 + exp((v + 20)/8))) / qt
+
     gk = ghk(v-vshift, cai, cao, 2)
 }
 
