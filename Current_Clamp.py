@@ -1824,7 +1824,7 @@ if __name__ == "__main__":
     plt.title("Soma sodium current")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, "HH Na inactivation gate (h).png"), dpi=300)
+    plt.savefig(os.path.join(FIG_DIR, "Soma sodium current.png"), dpi=300)
     plt.show()
 
     #plot base soma AP
