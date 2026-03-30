@@ -1803,7 +1803,7 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
 
-    #plot hh wt
+    #plot ais &soma
     plt.figure()
     plt.plot(t0, hhh0_soma, label="hh.h soma")
     plt.plot(t0, hhh0_ais, label="hh.h AIS")
