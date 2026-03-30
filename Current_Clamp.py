@@ -2187,7 +2187,7 @@ if __name__ == "__main__":
         plt.plot(t0, bk_Cav12ik0_soma, color=WT_COLOR, label=WT_LABEL)
         plt.plot(t1, bk_Cav12ik1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
         plt.xlabel("Time (ms)")
-        plt.ylabel("BK current density (mA/cm2)")
+        plt.ylabel("BK_Cav12 current density (mA/cm2)")
         plt.legend()
         plt.tight_layout()
         plt.savefig(os.path.join(FIG_DIR, "#BK recruitment aka soma BK current baseline vs 50%.png"), dpi=300)
