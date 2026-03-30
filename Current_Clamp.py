@@ -2112,8 +2112,8 @@ if __name__ == "__main__":
     #plot cai comparison in proximal dendrite
     if cai0_prox is not None and cai1_prox is not None:
         plt.figure()
-        plt.plot(t0, cai0_prox, label="baseline")
-        plt.plot(t1, cai1_prox, label="Cav12 50%")
+        plt.plot(t0, cai0_prox, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, cai1_prox, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
         plt.xlabel("Time (ms)")
         plt.ylabel("cai (mM)")
         plt.title("Baseline vs reduced Cav1.2 intracellular Ca at prox dend")
