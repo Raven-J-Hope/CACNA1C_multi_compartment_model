@@ -1273,9 +1273,26 @@ if __name__ == "__main__":
     #commented out for now - need check cell builder function to make more realistic morpho
     #then shape again
 
-    cell.add_current_clamp(delay=100, dur=300, amp=0.2)
+    for Ra in [50, 100, 150, 200, 300]:
+        cell = DGGranuleLikeCell()
+        for sec in cell.all_secs():
+            sec.Ra = Ra
+        cell.add_current_clamp(delay=100, dur=300, amp=0.3)
+        cell.setup_recording()
+        print_key_params(cell, label=f"Ra={Ra}")
+        t, vs, vais, vp, vd, vsp, *_ = run_sim(cell)
+
+        #peak separation during step
+        w = (t >= 100) & (t <= 400)
+        d_soma_dist = float(np.max(np.abs(vs[w] - vd[w])))
+        d_ais_soma = float(np.max(np.abs(vais[w] - vs[w])))
+
+        print(f"Ra={Ra:>3} Ω·cm | max|soma-dist|={d_soma_dist:.3f} mV | max|ais-soma|={d_ais_soma:.3f} mV")
+
+
+    cell.add_current_clamp(delay=100, dur=300, amp=0.3)
     cell.setup_recording()
-    t0, vs0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, ica0_soma, ik0_soma, bkik0_soma, skik0_soma, ina0_soma, hhh0_soma, hhh0_ais, hhm0_soma = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
+    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, cai0_ais, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, na8st0_o_soma, na8st0_g_soma, na8st0_i_total_soma, na8st0_o_ais, na8st0_g_ais, na8st0_i_total_ais, sk_acai0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, bk_acai12_0, bk_acai21_0, bk_acai22_0 = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t0), len(vs0), len(vp0), len(vd0), len(vsp0))
     print("Peak cai base soma/prox/dist/spine:", #prints ca peak in each compartmnet
           float(np.max(cai0_soma)),
