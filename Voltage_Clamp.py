@@ -449,8 +449,11 @@ class DGGranuleLikeCell:
                     seg.Caold.gncabar = 1e-5 * scale
                     seg.Caold.glcabar = 1e-5 * scale
                 if has_mech(sec, "Cabuffer"):
-                    seg.Cabuffer.tau = 9.0  #ms
-                    seg.Cabuffer.brat = 1.0  #buffer ratio factor
+                    seg.Cabuffer.tau = 9.0
+                    seg.Cabuffer.brat = 1.0
+                if has_mech(sec, "Cav2_1"):
+                    seg.Cav2_1.pcabar = 2.2e-6 * scale
+                    seg.Cav2_1.vshift = 0.0
 
     def scale_cav12(self, factor: float):
         for sec in [self.soma, self.dend_prox, self.dend_dist] +self.spine_necks +self.spines:
