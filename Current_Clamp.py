@@ -2075,6 +2075,40 @@ if __name__ == "__main__":
     else:
         print("missing soma cai")
 
+    #4-panel cai fig for AIS, prox dend, dist dend, spine
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left AIS
+    ax = axes[0, 0]
+    ax.plot(t0, cai0_ais, color=WT_COLOR)
+    ax.plot(t1, cai1_ais, color=CAV12_50_COLOR)
+    ax.set_ylabel("cai (mM)")
+
+    #top right: prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, cai0_prox, color=WT_COLOR)
+    ax.plot(t1, cai1_prox, color=CAV12_50_COLOR)
+
+    #bottom left dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, cai0_dist, color=WT_COLOR)
+    ax.plot(t1, cai1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("cai (mM)")
+
+    #bottom right spine
+    ax = axes[1, 1]
+    ax.plot(t0, cai0_spine, color=WT_COLOR)
+    ax.plot(t1, cai1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+
+    fig.tight_layout(rect=[0, 0.05, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "cai_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"), dpi=300,
+                bbox_inches="tight")
+    plt.show()
+
+
     #plot cai comparison in proximal dendrite
     if cai0_prox is not None and cai1_prox is not None:
         plt.figure()
