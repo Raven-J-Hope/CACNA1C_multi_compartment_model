@@ -511,6 +511,34 @@ class DGGranuleLikeCell:
             self.cai_dist_vec = None
             self.cai_spine_vec = None
 
+        self.ica_soma_vec = h.Vector()
+        self.ica_soma_vec.record(self.soma(0.5)._ref_ica)
+
+        self.ik_soma_vec = h.Vector()
+        self.ik_soma_vec.record(self.soma(0.5)._ref_ik)
+
+        self.ina_soma_vec = h.Vector()
+        self.ina_soma_vec.record(self.soma(0.5)._ref_ina)
+
+        self.bk_Cav22_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav22"):
+            self.bk_Cav22_ik_soma_vec = h.Vector()
+            self.bk_Cav22_ik_soma_vec.record(self.soma(0.5).BK_Cav22._ref_ik)
+
+        self.bk_Cav12_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav12"):
+            self.bk_Cav12_ik_soma_vec = h.Vector()
+            self.bk_Cav12_ik_soma_vec.record(self.soma(0.5).BK_Cav12._ref_ik)
+
+        self.bk_Cav21_ik_soma_vec = None
+        if has_mech(self.soma, "BK_Cav21"):
+            self.bk_Cav21_ik_soma_vec = h.Vector()
+            self.bk_Cav21_ik_soma_vec.record(self.soma(0.5).BK_Cav21._ref_ik)
+
+        self.sk_ik_soma_vec = None
+        if has_mech(self.soma, "SK2"):
+            self.sk_ik_soma_vec = h.Vector()
+            self.sk_ik_soma_vec.record(self.soma(0.5).SK2._ref_ik)
 
         self.iclamp_vec = None
         try:
