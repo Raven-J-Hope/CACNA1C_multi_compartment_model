@@ -1010,6 +1010,8 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     t = np.array(cell.t_vec)
 
     vs = np.array(cell.vsoma_vec)
+    vais = np.array(cell.vais_vec) if getattr(cell, "vais_vec", None) is not None else None
+
     vd = np.array(cell.vdend_vec)
     vp = np.array(cell.vprox_vec)
     vsp = np.array(cell.vspine_vec)
