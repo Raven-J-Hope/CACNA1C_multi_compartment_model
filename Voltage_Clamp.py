@@ -785,13 +785,11 @@ if __name__ == "__main__":
         ("peak_bk22", "Peak BK_Cav22 current (mA/cm2)", "Voltage-clamp I–V: peak BK_Cav22", "vc_iv_peak_BK_Cav22.png"),
     ]:
         plt.figure()
-        plt.plot(t1, cai1_soma, label="soma")
-        plt.plot(t1, cai1_prox, label="prox dend (0.5)")
-        plt.plot(t1, cai1_dist, label="dist dend (0.9)")
-        plt.plot(t1, cai1_spine, label="spine head[0]")
-        plt.xlabel("Time (ms)")
-        plt.ylabel("cai (mM)")
-        plt.title("50% cai across compartments")
+        plt.plot(iv_wt["steps"], iv_wt[ykey], marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(iv_50["steps"], iv_50[ykey], marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Command voltage (mV)")
+        plt.ylabel(ylabel)
+        plt.title(title)
         plt.legend()
         plt.tight_layout()
         plt.show()
