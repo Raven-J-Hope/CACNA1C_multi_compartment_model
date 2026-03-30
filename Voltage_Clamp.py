@@ -367,10 +367,13 @@ class DGGranuleLikeCell:
 
         if has_mech(self.axon, "na8st"):
             for seg in self.axon:
-                seg.hh.gnabar = 0.18
-                seg.hh.gkbar = 0.05
-                seg.hh.gl = 5e-5
-                seg.hh.el = -70.0
+                seg.na8st.gbar = 0.0000001 * 3.0
+        if has_mech(self.axon, "ichan3"):
+            for seg in self.axon:
+                seg.ichan3.gnabar = 5e-2
+                seg.ichan3.gkfbar = 5e-4
+                seg.ichan3.gksbar = 5e-4
+                seg.ichan3.gkabar = 5e-4
 
         for sec in [self.dend_prox, self.dend_dist]:
             if has_mech(sec, "hh"):
