@@ -2992,7 +2992,7 @@ if __name__ == "__main__":
 dvdt0 = np.gradient(vs0, t0)
 
 plt.figure()
-plt.plot(vs0, dvdt0, label="baseline soma")
+plt.plot(vs0, dvdt0, color=WT_COLOR, label=WT_LABEL)
 plt.xlabel("V (mV)")
 plt.ylabel("dV/dt (mV/ms)")
 plt.title("Phase plane (baseline): soma")
