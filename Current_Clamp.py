@@ -2419,7 +2419,10 @@ if __name__ == "__main__":
 
     #per spike Ca AUC & SK-per-Ca efficiency
 
-    #only runs if cai vectors exist
+    auc_ca0 = None
+    auc_ca1 = None
+    n = 0
+
     if (cai0_soma is not None) and (cai1_soma is not None):
         # per-spike Ca "load" (signed AUC, but cai is always positive anyway)
         auc_ca0 = auc_around_spikes(t0, cai0_soma, spk0, pre_ms=5.0, post_ms=20.0)
