@@ -1841,7 +1841,7 @@ if __name__ == "__main__":
 
     #plot Cav1.2 50% soma AP
     plt.figure()
-    plt.plot(t1, vs1, label="Cav1.2 50% soma")
+    plt.plot(t1, vs1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Time (ms)")
     plt.ylabel("Vm (mV)")
     plt.title("Cav1.2 50% soma action potential")
