@@ -479,6 +479,9 @@ class DGGranuleLikeCell:
         self.vsoma_vec = h.Vector()
         self.vsoma_vec.record(self.soma(0.5)._ref_v)
 
+        self.vais_vec = h.Vector()
+        self.vais_vec.record(self.ais(0.5)._ref_v)
+
         self.vprox_vec = h.Vector()
         self.vprox_vec.record(self.dend_prox(0.5)._ref_v)
 
