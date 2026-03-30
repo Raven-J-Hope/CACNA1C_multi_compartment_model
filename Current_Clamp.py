@@ -1166,10 +1166,8 @@ def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
 
         v_level = v_trough + frac * (v_peak - v_trough)
 
-        #upward crossing before peak
-        up_idx = np.where((v_sp[:i_peak] < v_half) & (v_sp[1:i_peak+1] >= v_half))[0]
-        #downward crossing after peak
-        down_idx = np.where((v_sp[i_peak:-1] >= v_half) & (v_sp[i_peak+1:] < v_half))[0]
+        up_idx = np.where((v_sp[:i_peak] < v_level) & (v_sp[1:i_peak+1] >= v_level))[0]
+        down_idx = np.where((v_sp[i_peak:-1] >= v_level) & (v_sp[i_peak+1:] < v_level))[0]
 
         if len(up_idx) == 0 or len(down_idx) == 0:
             widths.append(np.nan)
