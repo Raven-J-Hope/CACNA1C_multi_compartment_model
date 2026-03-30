@@ -468,7 +468,7 @@ class DGGranuleLikeCell:
         self.vclamp.amp1 = hold
         self.vclamp.dur2 = dur
         self.vclamp.amp2 = step
-        self.vclamp.dur3 = 0.0
+        self.vclamp.dur3 = 50.0
         self.vclamp.amp3 = hold
         self.vclamp.rs = 0.01  #series resistance in megaohm, small = stronger clamp
 
