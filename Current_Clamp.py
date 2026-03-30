@@ -1265,10 +1265,10 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, name), dpi=300, bbox_inches="tight")
 
     #make NEURON shape plot schematic of topology so can see where everything connects - methods figure
-    h.define_shape()
-    ps = h.PlotShape(True)  #show diameters
-    ps.exec_menu("View = plot")  #open shape window
-    h.topology()  #keep printing the tree in the console
+#    h.define_shape()
+#    ps = h.PlotShape(True)  #show diameters
+#    ps.exec_menu("View = plot")  #open shape window
+#    h.topology()  #keep printing the tree in the console
     #opens but freezes, check the neuron doccumentation on 28/01 to fix
 
     cell.add_current_clamp(delay=100, dur=300, amp=0.2)
