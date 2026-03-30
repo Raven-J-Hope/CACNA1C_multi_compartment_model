@@ -1805,8 +1805,20 @@ if __name__ == "__main__":
 
     #plot ais &soma
     plt.figure()
-    plt.plot(t0, hhh0_soma, label="hh.h soma")
-    plt.plot(t0, hhh0_ais, label="hh.h AIS")
+    plt.plot(t0, vs0, label="soma")
+    plt.plot(t0, vais0, label="AIS")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Vm (mV)")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    print("[AIS dv/dt max]", float(np.max(np.gradient(vais0, t0))), "mV/ms")
+    print("[Soma dv/dt max]", float(np.max(np.gradient(vs0, t0))), "mV/ms")
+
+    #plot ina wt
+    plt.figure()
+    plt.plot(t0, ina0_soma, label="ina soma")
     plt.xlabel("Time (ms)")
     plt.ylabel("h (Na availability)")
     plt.title("HH Na inactivation gate (h)")
