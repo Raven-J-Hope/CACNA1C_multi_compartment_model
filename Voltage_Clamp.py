@@ -139,7 +139,7 @@ def savefig(name: str):
 
 
 class DGGranuleLikeCell:
-    def __init__(self, name="dgcell"):
+    def __init__(self, name="dgcell", bk_split=None):
         self.name = name
         self.spines = []    #add dendritic spines
         self.spine_necks = []
