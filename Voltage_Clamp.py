@@ -724,7 +724,7 @@ if __name__ == "__main__":
     plt.plot(t1, vs1, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
     plt.xlabel("Time (ms)")
     plt.ylabel("Vm (mV)")
-    plt.title("Baseline Vm across compartments")
+    plt.title("Soma Vm during voltage clamp")
     plt.legend()
     plt.tight_layout()
     plt.show()
