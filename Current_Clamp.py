@@ -1801,7 +1801,6 @@ if __name__ == "__main__":
     plt.ylabel("Vm (mV)")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, "Soma sodium current.png"), dpi=300)
     plt.show()
 
     #plot hh wt
