@@ -1751,9 +1751,9 @@ if __name__ == "__main__":
     print(f"[Threshold soma] 50%: Vth={vth1:.2f} mV at {tth1:.2f} ms, max dV/dt={dvdtmax1:.2f} mV/ms")
     print(f"[ΔThreshold soma] 50%-WT: ΔVth={vth1 - vth0:+.2f} mV, Δ(max dV/dt)={dvdtmax1 - dvdtmax0:+.2f} mV/ms")
 
-    #AP broadening (soma) per-spike half-widths
-    spk_t0, widths0, peaks0, troughs0 = ap_half_widths_per_spike(
-        t0, vs0, threshold=0.0, t_start=100.0, t_end=400.0
+    #AP broadening (soma) per-spike
+    spk_t0, widths0, peaks0, troughs0 = ap_widths_per_spike(
+        t0, vs0, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0
     )
     spk_t1, widths1, peaks1, troughs1 = ap_half_widths_per_spike(
         t1, vs1, threshold=0.0, t_start=100.0, t_end=400.0
