@@ -1759,6 +1759,13 @@ if __name__ == "__main__":
         t1, vs1, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0
     )
 
+    spk_t0_third, widths_third0, peaks_third0, troughs_third0 = ap_widths_per_spike( #so can rec third widthys
+        t0, vs0, frac=1.0 / 3.0, threshold=0.0, t_start=100.0, t_end=400.0
+    )
+    spk_t1_third, widths_third1, peaks_third1, troughs_third1 = ap_widths_per_spike(
+        t1, vs1, frac=1.0 / 3.0, threshold=0.0, t_start=100.0, t_end=400.0
+    )
+
     print("WT AP half-widths (ms):", widths0)
     print("50% AP half-widths (ms):", widths1)
     print("WT mean AP half-width (ms):", float(np.nanmean(widths0)) if len(widths0) else np.nan)
