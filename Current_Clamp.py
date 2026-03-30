@@ -976,6 +976,29 @@ class DGGranuleLikeCell:
             self.sk_ik_soma_vec = h.Vector()
             self.sk_ik_soma_vec.record(self.soma(0.5).SK2._ref_ik)
 
+        #SK acai, used by SK2 kinetics (mM) from mod as ca driver
+        self.sk_acai_soma_vec = None
+        if has_mech(self.soma, "SK2"):
+            self.sk_acai_soma_vec = h.Vector()
+            self.sk_acai_soma_vec.record(self.soma(0.5).SK2._ref_acai)
+
+        #Cav2.1-specific current density (mA/cm2) at soma(0.5)
+        self.cav21_ica_soma_vec = None
+        if has_mech(self.soma, "Cav2_1"):
+             self.cav21_ica_soma_vec = h.Vector()
+             self.cav21_ica_soma_vec.record(self.soma(0.5).Cav2_1._ref_ipca)
+
+        #Cav22-specific current density (mA/cm2) at soma(0.5)
+        self.cav22_ica_soma_vec = None
+        if has_mech(self.soma, "Cav22"):
+            self.cav22_ica_soma_vec = h.Vector()
+            self.cav22_ica_soma_vec.record(self.soma(0.5)._ref_inca)
+
+        #Cav22-specific current density (mA/cm2) at soma(0.5)
+        self.cav12_ica_soma_vec = None
+        if has_mech(self.soma, "Cav12"):
+            self.cav12_ica_soma_vec = h.Vector()
+            self.cav12_ica_soma_vec.record(self.soma(0.5)._ref_ilca)
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
