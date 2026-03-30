@@ -1076,6 +1076,110 @@ def save_run_report(path, meta: dict):
     with open(path, "w") as f:
         json.dump(_json_safe(meta), f, indent=2)
 
+def print_key_params(cell, label=""):
+    print(f"\n--- PARAM SNAPSHOT {label} ---")
+    print("h.celsius =", float(h.celsius))
+    print("soma Ra =", float(cell.soma.Ra), "ais Ra =", float(cell.ais.Ra), "dend_dist Ra =", float(cell.dend_dist.Ra))
+    if has_mech(cell.soma, "pas"):
+        print("soma pas.g =", float(cell.soma(0.5).pas.g), "pas.e =", float(cell.soma(0.5).pas.e))
+    if has_mech(cell.soma, "na8st"):
+        print("soma na8st.gbar =", float(cell.soma(0.5).na8st.gbar))
+    else:
+        print("WARNING: na8st not present on soma")
+    if has_mech(cell.soma, "SK2"):
+        print("soma SK2.gkbar =", float(cell.soma(0.5).SK2.gkbar))
+    if has_mech(cell.soma, "BK_Cav22"):
+        print("soma BK_Cav22.gakbar =", float(cell.soma(0.5).BK_Cav22.gakbar),
+              "gabkbar =", float(cell.soma(0.5).BK_Cav22.gabkbar))
+    if has_mech(cell.soma, "BK_Cav12"):
+        print("soma BK_Cav12.gakbar =", float(cell.soma(0.5).BK_Cav12.gakbar),
+              "gabkbar =", float(cell.soma(0.5).BK_Cav12.gabkbar))
+    if has_mech(cell.soma, "BK_Cav21"):
+        print("soma BK_Cav21.gakbar =", float(cell.soma(0.5).BK_Cav21.gakbar),
+              "gabkbar =", float(cell.soma(0.5).BK_Cav21.gabkbar))
+    if has_mech(cell.soma, "Cav12"):
+        print("soma Cav12.gbar =", float(cell.soma(0.5).Cav12.gbar))
+    if has_mech(cell.soma, "BK_Cav22") and has_mech(cell.soma, "BK_Cav12") and has_mech(cell.soma, "BK_Cav21"):
+        bk22 = float(cell.soma(0.5).BK_Cav22.gakbar) #checks split
+        bk12 = float(cell.soma(0.5).BK_Cav12.gakbar)
+        bk21 = float(cell.soma(0.5).BK_Cav21.gakbar)
+        total_bk = bk22 + bk12 + bk21
+
+        print("soma total BK gakbar =", total_bk)
+        print("soma BK fractions:")
+        print("  BK_Cav22 =", bk22 / total_bk)
+        print("  BK_Cav12 =", bk12 / total_bk)
+        print("  BK_Cav21 =", bk21 / total_bk)
+
+def ap_half_widths_per_spike(t, v, threshold=0.0, refractory_ms=2.0,
+                             t_start=100.0, t_end=400.0,
+                             pre_ms=3.0, post_ms=15.0):
+    """
+    Returns AP half-width (ms) for each spike in [t_start, t_end].
+    Spike detection = upward threshold crossing.
+    """
+    t = np.asarray(t)
+    v = np.asarray(v)
+
+    # detect spikes
+    w = (t >= t_start) & (t <= t_end)
+    tt = t[w]
+    vv = v[w]
+
+    crosses = (vv[:-1] < threshold) & (vv[1:] >= threshold)
+    idx = np.where(crosses)[0]
+
+    spike_times = []
+    last_t = -1e9
+    for i in idx:
+        ts = float(tt[i + 1])
+        if ts - last_t >= refractory_ms:
+            spike_times.append(ts)
+            last_t = ts
+
+    widths = []
+    peaks = []
+    troughs = []
+
+    for ts in spike_times:
+        w_sp = (t >= ts - pre_ms) & (t <= ts + post_ms)
+        t_sp = t[w_sp]
+        v_sp = v[w_sp]
+
+        if len(t_sp) < 5:
+            widths.append(np.nan)
+            peaks.append(np.nan)
+            troughs.append(np.nan)
+            continue
+
+        i_peak = int(np.argmax(v_sp))
+        v_peak = float(v_sp[i_peak])
+
+        # trough after peak
+        v_after = v_sp[i_peak:]
+        t_after = t_sp[i_peak:]
+        i_trough = int(np.argmin(v_after))
+        v_trough = float(v_after[i_trough])
+
+        v_half = 0.5 * (v_peak + v_trough)
+
+        #upward crossing before peak
+        up_idx = np.where((v_sp[:i_peak] < v_half) & (v_sp[1:i_peak+1] >= v_half))[0]
+        #downward crossing after peak
+        down_idx = np.where((v_sp[i_peak:-1] >= v_half) & (v_sp[i_peak+1:] < v_half))[0]
+
+        if len(up_idx) == 0 or len(down_idx) == 0:
+            widths.append(np.nan)
+        else:
+            t_up = float(t_sp[up_idx[-1] + 1])
+            t_down = float(t_sp[i_peak + down_idx[0] + 1])
+            widths.append(t_down - t_up)
+
+        peaks.append(v_peak)
+        troughs.append(v_trough)
+
+    return np.array(spike_times), np.array(widths), np.array(peaks), np.array(troughs)
+
 if __name__ == "__main__":
     #baseline aka WT
    #h.celsius = 37.0 #37 in vivo-like, 34 slice-like  #commenting temp out fore with temp no spikey?
