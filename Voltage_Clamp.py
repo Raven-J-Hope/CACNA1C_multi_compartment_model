@@ -491,7 +491,6 @@ class DGGranuleLikeCell:
         self.vspine_vec = h.Vector()
         self.vspine_vec.record(self.spines[0](0.5)._ref_v)
 
-        #calcium
         try:
             _ = self.soma(0.5)._ref_cai
 
