@@ -1002,6 +1002,17 @@ plt.savefig(os.path.join(FIG_DIR, "vc_Cav12_source_current_WT_vs_Cav12_50.png"),
 plt.show()
 
 plt.figure()
+plt.plot(t0, cav13_ica0_soma, color=WT_COLOR, label=WT_LABEL)
+plt.plot(t1, cav13_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+plt.xlabel("Time (ms)")
+plt.ylabel("Current density (mA/cm2)")
+plt.title("Cav1.3 source current")
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(FIG_DIR, "vc_Cav13_source_current_WT_vs_Cav12_50.png"), dpi=300)
+plt.show()
+
+plt.figure()
 plt.plot(t0, cav22_ica0_soma, color=WT_COLOR, label=WT_LABEL)
 plt.plot(t1, cav22_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
 plt.xlabel("Time (ms)")
