@@ -985,6 +985,264 @@ class DGGranuleLikeCell:
             self.bk_Cav21_ik_soma_vec = h.Vector()
             self.bk_Cav21_ik_soma_vec.record(self.soma(0.5).BK_Cav21._ref_ik)  #BK_Cav21
 
+
+        #BK_Cav22 currents by compartment
+
+        self.bk_Cav22_ik_ais_vec = None
+        self.bk_Cav22_ik_prox_vec = None
+        self.bk_Cav22_ik_dist_vec = None
+        self.bk_Cav22_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav22"):
+            self.bk_Cav22_ik_ais_vec = h.Vector()
+            self.bk_Cav22_ik_ais_vec.record(self.ais(0.5).BK_Cav22._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav22"):
+            self.bk_Cav22_ik_prox_vec = h.Vector()
+            self.bk_Cav22_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav22._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav22"):
+            self.bk_Cav22_ik_dist_vec = h.Vector()
+            self.bk_Cav22_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav22._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav22"):
+            self.bk_Cav22_ik_spine_vec = h.Vector()
+            self.bk_Cav22_ik_spine_vec.record(self.spines[0](0.5).BK_Cav22._ref_ik)
+
+
+        #BK_Cav12 currents by compartment
+
+        self.bk_Cav12_ik_ais_vec = None
+        self.bk_Cav12_ik_prox_vec = None
+        self.bk_Cav12_ik_dist_vec = None
+        self.bk_Cav12_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav12"):
+            self.bk_Cav12_ik_ais_vec = h.Vector()
+            self.bk_Cav12_ik_ais_vec.record(self.ais(0.5).BK_Cav12._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav12"):
+            self.bk_Cav12_ik_prox_vec = h.Vector()
+            self.bk_Cav12_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav12._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav12"):
+            self.bk_Cav12_ik_dist_vec = h.Vector()
+            self.bk_Cav12_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav12._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav12"):
+            self.bk_Cav12_ik_spine_vec = h.Vector()
+            self.bk_Cav12_ik_spine_vec.record(self.spines[0](0.5).BK_Cav12._ref_ik)
+
+
+        #BK_Cav21 currents by compartment
+
+        self.bk_Cav21_ik_ais_vec = None
+        self.bk_Cav21_ik_prox_vec = None
+        self.bk_Cav21_ik_dist_vec = None
+        self.bk_Cav21_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav21"):
+            self.bk_Cav21_ik_ais_vec = h.Vector()
+            self.bk_Cav21_ik_ais_vec.record(self.ais(0.5).BK_Cav21._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav21"):
+            self.bk_Cav21_ik_prox_vec = h.Vector()
+            self.bk_Cav21_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav21._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav21"):
+            self.bk_Cav21_ik_dist_vec = h.Vector()
+            self.bk_Cav21_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav21._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav21"):
+            self.bk_Cav21_ik_spine_vec = h.Vector()
+            self.bk_Cav21_ik_spine_vec.record(self.spines[0](0.5).BK_Cav21._ref_ik)
+
+
+        #BK local acai by compartment: Cav22
+
+        self.bk_acai22_ais_vec = None
+        self.bk_acai22_prox_vec = None
+        self.bk_acai22_dist_vec = None
+        self.bk_acai22_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav22"):
+            self.bk_acai22_ais_vec = h.Vector()
+            self.bk_acai22_ais_vec.record(self.ais(0.5).BK_Cav22._ref_acai)
+
+        if has_mech(self.dend_prox, "BK_Cav22"):
+            self.bk_acai22_prox_vec = h.Vector()
+            self.bk_acai22_prox_vec.record(self.dend_prox(0.5).BK_Cav22._ref_acai)
+
+        if has_mech(self.dend_dist, "BK_Cav22"):
+            self.bk_acai22_dist_vec = h.Vector()
+            self.bk_acai22_dist_vec.record(self.dend_dist(0.9).BK_Cav22._ref_acai)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav22"):
+            self.bk_acai22_spine_vec = h.Vector()
+            self.bk_acai22_spine_vec.record(self.spines[0](0.5).BK_Cav22._ref_acai)
+
+
+        #BK local acai by compartment: Cav12
+
+        self.bk_acai12_ais_vec = None
+        self.bk_acai12_prox_vec = None
+        self.bk_acai12_dist_vec = None
+        self.bk_acai12_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav12"):
+            self.bk_acai12_ais_vec = h.Vector()
+            self.bk_acai12_ais_vec.record(self.ais(0.5).BK_Cav12._ref_acai)
+
+        if has_mech(self.dend_prox, "BK_Cav12"):
+            self.bk_acai12_prox_vec = h.Vector()
+            self.bk_acai12_prox_vec.record(self.dend_prox(0.5).BK_Cav12._ref_acai)
+
+        if has_mech(self.dend_dist, "BK_Cav12"):
+            self.bk_acai12_dist_vec = h.Vector()
+            self.bk_acai12_dist_vec.record(self.dend_dist(0.9).BK_Cav12._ref_acai)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav12"):
+            self.bk_acai12_spine_vec = h.Vector()
+            self.bk_acai12_spine_vec.record(self.spines[0](0.5).BK_Cav12._ref_acai)
+
+
+        #BK_Cav22 currents by compartment
+
+        self.bk_Cav22_ik_ais_vec = None
+        self.bk_Cav22_ik_prox_vec = None
+        self.bk_Cav22_ik_dist_vec = None
+        self.bk_Cav22_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav22"):
+            self.bk_Cav22_ik_ais_vec = h.Vector()
+            self.bk_Cav22_ik_ais_vec.record(self.ais(0.5).BK_Cav22._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav22"):
+            self.bk_Cav22_ik_prox_vec = h.Vector()
+            self.bk_Cav22_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav22._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav22"):
+            self.bk_Cav22_ik_dist_vec = h.Vector()
+            self.bk_Cav22_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav22._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav22"):
+            self.bk_Cav22_ik_spine_vec = h.Vector()
+            self.bk_Cav22_ik_spine_vec.record(self.spines[0](0.5).BK_Cav22._ref_ik)
+
+
+        #BK_Cav12 currents by compartment
+
+        self.bk_Cav12_ik_ais_vec = None
+        self.bk_Cav12_ik_prox_vec = None
+        self.bk_Cav12_ik_dist_vec = None
+        self.bk_Cav12_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav12"):
+            self.bk_Cav12_ik_ais_vec = h.Vector()
+            self.bk_Cav12_ik_ais_vec.record(self.ais(0.5).BK_Cav12._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav12"):
+            self.bk_Cav12_ik_prox_vec = h.Vector()
+            self.bk_Cav12_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav12._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav12"):
+            self.bk_Cav12_ik_dist_vec = h.Vector()
+            self.bk_Cav12_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav12._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav12"):
+            self.bk_Cav12_ik_spine_vec = h.Vector()
+            self.bk_Cav12_ik_spine_vec.record(self.spines[0](0.5).BK_Cav12._ref_ik)
+
+
+        #BK_Cav21 currents by compartment
+
+        self.bk_Cav21_ik_ais_vec = None
+        self.bk_Cav21_ik_prox_vec = None
+        self.bk_Cav21_ik_dist_vec = None
+        self.bk_Cav21_ik_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav21"):
+            self.bk_Cav21_ik_ais_vec = h.Vector()
+            self.bk_Cav21_ik_ais_vec.record(self.ais(0.5).BK_Cav21._ref_ik)
+
+        if has_mech(self.dend_prox, "BK_Cav21"):
+            self.bk_Cav21_ik_prox_vec = h.Vector()
+            self.bk_Cav21_ik_prox_vec.record(self.dend_prox(0.5).BK_Cav21._ref_ik)
+
+        if has_mech(self.dend_dist, "BK_Cav21"):
+            self.bk_Cav21_ik_dist_vec = h.Vector()
+            self.bk_Cav21_ik_dist_vec.record(self.dend_dist(0.9).BK_Cav21._ref_ik)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav21"):
+            self.bk_Cav21_ik_spine_vec = h.Vector()
+            self.bk_Cav21_ik_spine_vec.record(self.spines[0](0.5).BK_Cav21._ref_ik)
+
+        #BK local acai by compartment for Cav22
+        self.bk_acai22_ais_vec = None
+        self.bk_acai22_prox_vec = None
+        self.bk_acai22_dist_vec = None
+        self.bk_acai22_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav22"):
+            self.bk_acai22_ais_vec = h.Vector()
+            self.bk_acai22_ais_vec.record(self.ais(0.5).BK_Cav22._ref_acai)
+
+        if has_mech(self.dend_prox, "BK_Cav22"):
+            self.bk_acai22_prox_vec = h.Vector()
+            self.bk_acai22_prox_vec.record(self.dend_prox(0.5).BK_Cav22._ref_acai)
+
+        if has_mech(self.dend_dist, "BK_Cav22"):
+            self.bk_acai22_dist_vec = h.Vector()
+            self.bk_acai22_dist_vec.record(self.dend_dist(0.9).BK_Cav22._ref_acai)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav22"):
+            self.bk_acai22_spine_vec = h.Vector()
+            self.bk_acai22_spine_vec.record(self.spines[0](0.5).BK_Cav22._ref_acai)
+
+        #BK local acai by compartment for Cav12
+        self.bk_acai12_ais_vec = None
+        self.bk_acai12_prox_vec = None
+        self.bk_acai12_dist_vec = None
+        self.bk_acai12_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav12"):
+            self.bk_acai12_ais_vec = h.Vector()
+            self.bk_acai12_ais_vec.record(self.ais(0.5).BK_Cav12._ref_acai)
+
+        if has_mech(self.dend_prox, "BK_Cav12"):
+            self.bk_acai12_prox_vec = h.Vector()
+            self.bk_acai12_prox_vec.record(self.dend_prox(0.5).BK_Cav12._ref_acai)
+
+        if has_mech(self.dend_dist, "BK_Cav12"):
+            self.bk_acai12_dist_vec = h.Vector()
+            self.bk_acai12_dist_vec.record(self.dend_dist(0.9).BK_Cav12._ref_acai)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav12"):
+            self.bk_acai12_spine_vec = h.Vector()
+            self.bk_acai12_spine_vec.record(self.spines[0](0.5).BK_Cav12._ref_acai)
+
+        #BK local acai by compartment for Cav21
+        self.bk_acai21_ais_vec = None
+        self.bk_acai21_prox_vec = None
+        self.bk_acai21_dist_vec = None
+        self.bk_acai21_spine_vec = None
+
+        if has_mech(self.ais, "BK_Cav21"):
+            self.bk_acai21_ais_vec = h.Vector()
+            self.bk_acai21_ais_vec.record(self.ais(0.5).BK_Cav21._ref_acai)
+
+        if has_mech(self.dend_prox, "BK_Cav21"):
+            self.bk_acai21_prox_vec = h.Vector()
+            self.bk_acai21_prox_vec.record(self.dend_prox(0.5).BK_Cav21._ref_acai)
+
+        if has_mech(self.dend_dist, "BK_Cav21"):
+            self.bk_acai21_dist_vec = h.Vector()
+            self.bk_acai21_dist_vec.record(self.dend_dist(0.9).BK_Cav21._ref_acai)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "BK_Cav21"):
+            self.bk_acai21_spine_vec = h.Vector()
+            self.bk_acai21_spine_vec.record(self.spines[0](0.5).BK_Cav21._ref_acai)
+
         #SK specific current density (mA/cm2)
         self.sk_ik_soma_vec = None
         if has_mech(self.soma, "SK2"):
