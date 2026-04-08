@@ -1067,6 +1067,208 @@ ax.plot(t0, cav22_ica0_soma, color=WT_COLOR)
 ax.plot(t1, cav22_ica1_soma, color=CAV12_50_COLOR)
 ax.set_xlabel("Time (ms)")
 
+#bottom right Cav32 estimate from residual
+ax = axes[1, 2]
+if all(x is not None for x in [ica0_soma, cav12_ica0_soma, cav13_ica0_soma, cav21_ica0_soma, cav22_ica0_soma]):
+    cav32_est0 = ica0_soma - cav12_ica0_soma - cav13_ica0_soma - cav21_ica0_soma - cav22_ica0_soma
+    ax.plot(t0, cav32_est0, color=WT_COLOR)
+if all(x is not None for x in [ica1_soma, cav12_ica1_soma, cav13_ica1_soma, cav21_ica1_soma, cav22_ica1_soma]):
+    cav32_est1 = ica1_soma - cav12_ica1_soma - cav13_ica1_soma - cav21_ica1_soma - cav22_ica1_soma
+    ax.plot(t1, cav32_est1, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_6panel_total_Cav12_Cav13_Cav21_Cav22_Cav32est_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
+
+
+
+#4-panel total Ca current by compartment
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+# AIS
+ax = axes[0, 0]
+ax.plot(t0, ica0_ais, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+# prox dend
+ax = axes[0, 1]
+ax.plot(t0, ica0_prox, color=WT_COLOR)
+ax.plot(t1, ica1_prox, color=CAV12_50_COLOR)
+
+# dist dend
+ax = axes[1, 0]
+ax.plot(t0, ica0_dist, color=WT_COLOR)
+ax.plot(t1, ica1_dist, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+# spine
+ax = axes[1, 1]
+ax.plot(t0, ica0_spine, color=WT_COLOR)
+ax.plot(t1, ica1_spine, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_totalCa_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
+
+#4-panel Cav1.2 source current by compartment
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+# AIS
+ax = axes[0, 0]
+ax.plot(t0, cav12_ica0_ais, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, cav12_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+# prox dend
+ax = axes[0, 1]
+ax.plot(t0, cav12_ica0_prox, color=WT_COLOR)
+ax.plot(t1, cav12_ica1_prox, color=CAV12_50_COLOR)
+
+# dist dend
+ax = axes[1, 0]
+ax.plot(t0, cav12_ica0_dist, color=WT_COLOR)
+ax.plot(t1, cav12_ica1_dist, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+# spine
+ax = axes[1, 1]
+ax.plot(t0, cav12_ica0_spine, color=WT_COLOR)
+ax.plot(t1, cav12_ica1_spine, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_Cav12_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
+
+#4-panel Cav1.3 source current by compartment
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+# AIS
+ax = axes[0, 0]
+ax.plot(t0, cav13_ica0_ais, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, cav13_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+# prox dend
+ax = axes[0, 1]
+ax.plot(t0, cav13_ica0_prox, color=WT_COLOR)
+ax.plot(t1, cav13_ica1_prox, color=CAV12_50_COLOR)
+
+# dist dend
+ax = axes[1, 0]
+ax.plot(t0, cav13_ica0_dist, color=WT_COLOR)
+ax.plot(t1, cav13_ica1_dist, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+# spine
+ax = axes[1, 1]
+ax.plot(t0, cav13_ica0_spine, color=WT_COLOR)
+ax.plot(t1, cav13_ica1_spine, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_Cav13_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
+
+#4-panel Cav2.1 source current by compartment
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+# AIS
+ax = axes[0, 0]
+ax.plot(t0, cav21_ica0_ais, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, cav21_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+# prox dend
+ax = axes[0, 1]
+ax.plot(t0, cav21_ica0_prox, color=WT_COLOR)
+ax.plot(t1, cav21_ica1_prox, color=CAV12_50_COLOR)
+
+# dist dend
+ax = axes[1, 0]
+ax.plot(t0, cav21_ica0_dist, color=WT_COLOR)
+ax.plot(t1, cav21_ica1_dist, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+# spine
+ax = axes[1, 1]
+ax.plot(t0, cav21_ica0_spine, color=WT_COLOR)
+ax.plot(t1, cav21_ica1_spine, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
+handles, labels = axes[0, 0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+fig.tight_layout(rect=[0, 0.05, 1, 1])
+plt.savefig(
+    os.path.join(FIG_DIR, "vc_Cav21_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"),
+    dpi=300,
+    bbox_inches="tight"
+)
+plt.show()
+
+#4-panel Cav2.2 source current by compartment
+fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+# AIS
+ax = axes[0, 0]
+ax.plot(t0, cav22_ica0_ais, color=WT_COLOR, label=WT_LABEL)
+ax.plot(t1, cav22_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+ax.set_ylabel("Current density (mA/cm2)")
+
+# prox dend
+ax = axes[0, 1]
+ax.plot(t0, cav22_ica0_prox, color=WT_COLOR)
+ax.plot(t1, cav22_ica1_prox, color=CAV12_50_COLOR)
+
+# dist dend
+ax = axes[1, 0]
+ax.plot(t0, cav22_ica0_dist, color=WT_COLOR)
+ax.plot(t1, cav22_ica1_dist, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+ax.set_ylabel("Current density (mA/cm2)")
+
+# spine
+ax = axes[1, 1]
+ax.plot(t0, cav22_ica0_spine, color=WT_COLOR)
+ax.plot(t1, cav22_ica1_spine, color=CAV12_50_COLOR)
+ax.set_xlabel("Time (ms)")
+
 handles, labels = axes[0, 0].get_legend_handles_labels()
 fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
 
