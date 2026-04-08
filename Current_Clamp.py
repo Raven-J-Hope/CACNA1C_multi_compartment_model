@@ -1267,7 +1267,7 @@ class DGGranuleLikeCell:
             self.cav22_ica_soma_vec = h.Vector()
             self.cav22_ica_soma_vec.record(self.soma(0.5)._ref_inca)
 
-        #Cav22-specific current density (mA/cm2) at soma(0.5)
+        #Cav12-specific current density (mA/cm2) at soma(0.5)
         self.cav12_ica_soma_vec = None
         if has_mech(self.soma, "Cav12"):
             self.cav12_ica_soma_vec = h.Vector()
