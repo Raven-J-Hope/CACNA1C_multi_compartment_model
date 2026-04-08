@@ -1036,7 +1036,7 @@ plt.show()
 
 # 6-panel voltage clamp Ca current fig
 
-fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharex=True, sharey=False)
 
 #top lefttotal Ca current
 ax = axes[0, 0]
