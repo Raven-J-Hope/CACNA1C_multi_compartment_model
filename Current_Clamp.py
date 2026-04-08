@@ -426,8 +426,8 @@ class DGGranuleLikeCell:
 
             apply_bk_split_to_section(
                 head,
-                total_bk_gakbar=1e-4,
-                total_bk_gabkbar=1e-4,
+                total_bk_gakbar=3e-2,
+                total_bk_gabkbar=3e-2,
                 split=self.bk_split
             )
 
