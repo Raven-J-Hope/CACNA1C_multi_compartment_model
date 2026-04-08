@@ -1049,6 +1049,11 @@ ax = axes[0, 1]
 ax.plot(t0, cav12_ica0_soma, color=WT_COLOR)
 ax.plot(t1, cav12_ica1_soma, color=CAV12_50_COLOR)
 
+#top right Cav1.3 source current
+ax = axes[0, 2]
+ax.plot(t0, cav13_ica0_soma, color=WT_COLOR)
+ax.plot(t1, cav13_ica1_soma, color=CAV12_50_COLOR)
+
 #bottom left Cav2.1 source current
 ax = axes[1, 0]
 ax.plot(t0, cav21_ica0_soma, color=WT_COLOR)
