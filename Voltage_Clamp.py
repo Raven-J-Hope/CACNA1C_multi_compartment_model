@@ -1104,7 +1104,7 @@ ax = axes[0, 1]
 ax.plot(t0, ica0_prox, color=WT_COLOR)
 ax.plot(t1, ica1_prox, color=CAV12_50_COLOR)
 
-# dist dend
+#dist dend
 ax = axes[1, 0]
 ax.plot(t0, ica0_dist, color=WT_COLOR)
 ax.plot(t1, ica1_dist, color=CAV12_50_COLOR)
