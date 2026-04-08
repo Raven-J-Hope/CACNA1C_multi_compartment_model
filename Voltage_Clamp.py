@@ -1274,7 +1274,7 @@ fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
 
 fig.tight_layout(rect=[0, 0.05, 1, 1])
 plt.savefig(
-    os.path.join(FIG_DIR, "vc_4panel_total_Cav12_Cav21_Cav22_WT_vs_Cav12_50.png"),
+    os.path.join(FIG_DIR, "vc_Cav22_4panel_AIS_prox_dist_spine_WT_vs_Cav12_50.png"),
     dpi=300,
     bbox_inches="tight"
 )
