@@ -882,6 +882,7 @@ if __name__ == "__main__":
         ("BK_Cav12", step_metrics(t0, bk_Cav12ik0_soma, step_on, step_off), step_metrics(t1, bk_Cav12ik1_soma, step_on, step_off)),
         ("BK_Cav21", step_metrics(t0, bk_Cav21ik0_soma, step_on, step_off), step_metrics(t1, bk_Cav21ik1_soma, step_on, step_off)),
         ("SK", step_metrics(t0, skik0_soma, step_on, step_off), step_metrics(t1, skik1_soma, step_on, step_off)),
+        ("Cav1.3", step_metrics(t0, cav13_ica0_soma, step_on, step_off), step_metrics(t1, cav13_ica1_soma, step_on, step_off)),
     ]:
         print(f"WT {name}: {fmt_metrics(wt)}")
         print(f"{CAV12_50_LABEL} {name}: {fmt_metrics(het)}")
