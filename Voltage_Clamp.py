@@ -765,7 +765,14 @@ def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200
             cell.scale_cav12(cav12_factor)
         cell.add_voltage_clamp(hold=hold, step=float(vstep), delay=delay, dur=dur)
         cell.setup_recording()
-        t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, ica_soma, ik_soma, bk22, bk12, bk21, sk, ina, cav21, cav22, cav12, iclamp = run_sim(
+        t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, \
+            ica_soma, ik_soma, bk_Cav22ik_soma, bk_Cav12ik_soma, bk_Cav21ik_soma, skik_soma, ina_soma, \
+            cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, cav13_ica_soma, I, \
+            ica_ais, ica_prox, ica_dist, ica_spine, \
+            cav12_ica_ais, cav12_ica_prox, cav12_ica_dist, cav12_ica_spine, \
+            cav13_ica_ais, cav13_ica_prox, cav13_ica_dist, cav13_ica_spine, \
+            cav21_ica_ais, cav21_ica_prox, cav21_ica_dist, cav21_ica_spine, \
+            cav22_ica_ais, cav22_ica_prox, cav22_ica_dist, cav22_ica_spine = run_sim(
             cell, tstop=tstop, v_init=hold, dt=0.025
         )
 
