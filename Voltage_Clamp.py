@@ -856,9 +856,9 @@ if __name__ == "__main__":
     save_run_report(os.path.join(OUT_DIR, "vc_run_report_cav12_50.json"), run_meta_50)
 
     print("\n--- CURRENT DIAGNOSTICS (soma, peak |current|) --")
-    for label, ica, ik, bk22, bk12, bk21, sk, ina, cav21, cav22 in [
-        (WT_LABEL, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, cav21_ica0_soma, cav22_ica0_soma),
-        (CAV12_50_LABEL, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, cav21_ica1_soma, cav22_ica1_soma),
+    for label, ica, ik, bk22, bk12, bk21, sk, ina, cav21, cav22, cav12, cav13 in [
+        (WT_LABEL, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, cav13_ica0_soma),
+        (CAV12_50_LABEL, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, cav13_ica1_soma),
     ]:
         print(f"{label}: ica_soma =", peak_abs(ica), "mA/cm2")
         print(f"{label}: ik_soma  =", peak_abs(ik), "mA/cm2")
