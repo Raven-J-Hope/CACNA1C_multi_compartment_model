@@ -392,7 +392,7 @@ class DGGranuleLikeCell:
 
         for sec in [self.soma, self.ais, self.dend_prox, self.dend_dist]:
             for mech in [
-                "Caold", "Cabuffer", "Cav12", "Cav22", "Cav32", "BK_Cav22", "BK_Cav12", "BK_Cav21",
+                "Caold", "Cabuffer", "Cav12", "Cav13", "Cav22", "Cav32", "BK_Cav22", "BK_Cav12", "BK_Cav21",
                 "SK2", "HCN", "Kv42", "Kv11", "Kir21", "Kv14", "Kv21", "Kv33", "Kv34", "Kv42b", "Kv723", "Cav2_1"
             ]:
                 try_insert(sec, mech)
