@@ -776,7 +776,7 @@ def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200
             cell, tstop=tstop, v_init=hold, dt=0.025
         )
 
-        if iclamp is None:
+        if I is None:
             raise RuntimeError("Voltage clamp current not recorded.")
 
         w_peak = (t >= delay) & (t <= delay + 10)
