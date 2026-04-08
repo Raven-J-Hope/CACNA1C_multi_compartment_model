@@ -1175,7 +1175,7 @@ ax.plot(t0, cav13_ica0_ais, color=WT_COLOR, label=WT_LABEL)
 ax.plot(t1, cav13_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
 ax.set_ylabel("Current density (mA/cm2)")
 
-# prox dend
+#prox dend
 ax = axes[0, 1]
 ax.plot(t0, cav13_ica0_prox, color=WT_COLOR)
 ax.plot(t1, cav13_ica1_prox, color=CAV12_50_COLOR)
