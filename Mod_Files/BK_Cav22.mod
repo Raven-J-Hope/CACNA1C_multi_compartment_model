@@ -34,7 +34,7 @@ PARAMETER {
 	base = 4  	(mV)
 
 	ca0 = 0.00007 (mM)   : baseline local Ca
-	tau = 3 (ms)         : decay time constant of local Ca nanodomain
+	tau = 5 (ms)         : decay time constant of local Ca nanodomain
 	B = 0.15 (mM-cm2/mA-ms)
 }
 

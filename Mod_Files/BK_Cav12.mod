@@ -34,7 +34,7 @@ PARAMETER {
 	base = 4  	(mV)
 
 	ca0 = 0.00007 (mM)
-	tau = 3 (ms)
+	tau = 5 (ms)
 	B = 0.15 (mM-cm2/mA-ms)
 }
 

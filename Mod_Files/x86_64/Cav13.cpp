@@ -68,16 +68,16 @@ void _nrn_mechanism_register_data_fields(Args&&... args) {
 #define dt _nt->_dt
 #define gbar _ml->template fpfield<0>(_iml)
 #define gbar_columnindex 0
-#define g _ml->template fpfield<1>(_iml)
-#define g_columnindex 1
-#define m _ml->template fpfield<2>(_iml)
-#define m_columnindex 2
-#define h _ml->template fpfield<3>(_iml)
-#define h_columnindex 3
-#define h2 _ml->template fpfield<4>(_iml)
-#define h2_columnindex 4
-#define ilca _ml->template fpfield<5>(_iml)
-#define ilca_columnindex 5
+#define ilca13 _ml->template fpfield<1>(_iml)
+#define ilca13_columnindex 1
+#define g _ml->template fpfield<2>(_iml)
+#define g_columnindex 2
+#define m _ml->template fpfield<3>(_iml)
+#define m_columnindex 3
+#define h _ml->template fpfield<4>(_iml)
+#define h_columnindex 4
+#define h2 _ml->template fpfield<5>(_iml)
+#define h2_columnindex 5
 #define ica _ml->template fpfield<6>(_iml)
 #define ica_columnindex 6
 #define eca _ml->template fpfield<7>(_iml)
@@ -111,9 +111,9 @@ void _nrn_mechanism_register_data_fields(Args&&... args) {
 #define _ion_ica *(_ml->dptr_field<3>(_iml))
 #define _p_ion_ica static_cast<neuron::container::data_handle<double>>(_ppvar[3])
 #define _ion_dicadv *(_ml->dptr_field<4>(_iml))
-#define _ion_ilca *(_ml->dptr_field<5>(_iml))
-#define _p_ion_ilca static_cast<neuron::container::data_handle<double>>(_ppvar[5])
-#define _ion_dilcadv *(_ml->dptr_field<6>(_iml))
+#define _ion_ilca13 *(_ml->dptr_field<5>(_iml))
+#define _p_ion_ilca13 static_cast<neuron::container::data_handle<double>>(_ppvar[5])
+#define _ion_dilca13dv *(_ml->dptr_field<6>(_iml))
 #define diam	(*(_ml->dptr_field<7>(_iml)))
  /* Thread safe. No static _ml, _iml or _ppvar. */
  static int hoc_nrnpointerindex =  -1;
@@ -172,6 +172,7 @@ static NPyDirectMechFunc npy_direct_func_proc[] = {
  {"vshift_Cav13", "mV"},
  {"kf_Cav13", "mM"},
  {"gbar_Cav13", "S/cm2"},
+ {"ilca13_Cav13", "mA/cm2"},
  {"g_Cav13", "S/cm2"},
  {0, 0}
 };
@@ -222,6 +223,7 @@ static void _ode_matsol(_nrn_model_sorted_token const&, NrnThread*, Memb_list*, 
 "Cav13",
  "gbar_Cav13",
  0,
+ "ilca13_Cav13",
  "g_Cav13",
  0,
  "m_Cav13",
@@ -231,7 +233,7 @@ static void _ode_matsol(_nrn_model_sorted_token const&, NrnThread*, Memb_list*, 
  0};
  static Symbol* _morphology_sym;
  static Symbol* _ca_sym;
- static Symbol* _lca_sym;
+ static Symbol* _lca13_sym;
  
  /* Used by NrnProperty */
  static _nrn_mechanism_std_vector<double> _parm_default{
@@ -263,9 +265,9 @@ static void nrn_alloc(Prop* _prop) {
  	_ppvar[2] = _nrn_mechanism_get_param_handle(prop_ion, 2); /* cao */
  	_ppvar[3] = _nrn_mechanism_get_param_handle(prop_ion, 3); /* ica */
  	_ppvar[4] = _nrn_mechanism_get_param_handle(prop_ion, 4); /* _ion_dicadv */
- prop_ion = need_memb(_lca_sym);
- 	_ppvar[5] = _nrn_mechanism_get_param_handle(prop_ion, 3); /* ilca */
- 	_ppvar[6] = _nrn_mechanism_get_param_handle(prop_ion, 4); /* _ion_dilcadv */
+ prop_ion = need_memb(_lca13_sym);
+ 	_ppvar[5] = _nrn_mechanism_get_param_handle(prop_ion, 3); /* ilca13 */
+ 	_ppvar[6] = _nrn_mechanism_get_param_handle(prop_ion, 4); /* _ion_dilca13dv */
  
 }
  static void _initlists();
@@ -284,10 +286,10 @@ extern void _cvode_abstol( Symbol**, double*, int);
 	int _vectorized = 1;
   _initlists();
  	ion_reg("ca", -10000.);
- 	ion_reg("lca", 0.0);
+ 	ion_reg("lca13", 0.0);
  	_morphology_sym = hoc_lookup("morphology");
  	_ca_sym = hoc_lookup("ca_ion");
- 	_lca_sym = hoc_lookup("lca_ion");
+ 	_lca13_sym = hoc_lookup("lca13_ion");
  	register_mech(_mechanism, nrn_alloc,nrn_cur, nrn_jacob, nrn_state, nrn_init, hoc_nrnpointerindex, 1);
  _mechtype = nrn_get_mechtype(_mechanism[1]);
  hoc_register_parm_default(_mechtype, &_parm_default);
@@ -298,11 +300,11 @@ extern void _cvode_abstol( Symbol**, double*, int);
 #endif
    _nrn_mechanism_register_data_fields(_mechtype,
                                        _nrn_mechanism_field<double>{"gbar"} /* 0 */,
-                                       _nrn_mechanism_field<double>{"g"} /* 1 */,
-                                       _nrn_mechanism_field<double>{"m"} /* 2 */,
-                                       _nrn_mechanism_field<double>{"h"} /* 3 */,
-                                       _nrn_mechanism_field<double>{"h2"} /* 4 */,
-                                       _nrn_mechanism_field<double>{"ilca"} /* 5 */,
+                                       _nrn_mechanism_field<double>{"ilca13"} /* 1 */,
+                                       _nrn_mechanism_field<double>{"g"} /* 2 */,
+                                       _nrn_mechanism_field<double>{"m"} /* 3 */,
+                                       _nrn_mechanism_field<double>{"h"} /* 4 */,
+                                       _nrn_mechanism_field<double>{"h2"} /* 5 */,
                                        _nrn_mechanism_field<double>{"ica"} /* 6 */,
                                        _nrn_mechanism_field<double>{"eca"} /* 7 */,
                                        _nrn_mechanism_field<double>{"cai"} /* 8 */,
@@ -320,8 +322,8 @@ extern void _cvode_abstol( Symbol**, double*, int);
                                        _nrn_mechanism_field<double*>{"_ion_cao", "ca_ion"} /* 2 */,
                                        _nrn_mechanism_field<double*>{"_ion_ica", "ca_ion"} /* 3 */,
                                        _nrn_mechanism_field<double*>{"_ion_dicadv", "ca_ion"} /* 4 */,
-                                       _nrn_mechanism_field<double*>{"_ion_ilca", "lca_ion"} /* 5 */,
-                                       _nrn_mechanism_field<double*>{"_ion_dilcadv", "lca_ion"} /* 6 */,
+                                       _nrn_mechanism_field<double*>{"_ion_ilca13", "lca13_ion"} /* 5 */,
+                                       _nrn_mechanism_field<double*>{"_ion_dilca13dv", "lca13_ion"} /* 6 */,
                                        _nrn_mechanism_field<double*>{"diam", "diam"} /* 7 */,
                                        _nrn_mechanism_field<int>{"_cvode_ieq", "cvodeieq"} /* 8 */);
   hoc_register_prop_size(_mechtype, 18, 9);
@@ -330,15 +332,15 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_register_dparam_semantics(_mechtype, 2, "ca_ion");
   hoc_register_dparam_semantics(_mechtype, 3, "ca_ion");
   hoc_register_dparam_semantics(_mechtype, 4, "ca_ion");
-  hoc_register_dparam_semantics(_mechtype, 5, "lca_ion");
-  hoc_register_dparam_semantics(_mechtype, 6, "lca_ion");
+  hoc_register_dparam_semantics(_mechtype, 5, "lca13_ion");
+  hoc_register_dparam_semantics(_mechtype, 6, "lca13_ion");
   hoc_register_dparam_semantics(_mechtype, 8, "cvodeieq");
   hoc_register_dparam_semantics(_mechtype, 7, "diam");
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  
     hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 Cav13 /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav13.mod\n");
+ 	ivoc_help("help ?1 Cav13 /home/raven/PycharmProjects/Masters/Mod_Files/Cav13.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -522,10 +524,10 @@ double _current=0.; v=_v;
    rates ( _threadargs_ ) ;
    g = gbar * m * h * h2 ;
    ica = ( g ) * ( v - eca ) ;
-   ilca = ica ;
+   ilca13 = ica ;
    }
  _current += ica;
- _current += ilca;
+ _current += ilca13;
 
 } return _current;
 }
@@ -549,17 +551,17 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
   cai = _ion_cai;
   eca = _ion_eca;
  auto const _g_local = _nrn_current(_threadargscomma_ _v + .001);
- 	{ double _dilca;
+ 	{ double _dilca13;
  double _dica;
   _dica = ica;
-  _dilca = ilca;
+  _dilca13 = ilca13;
  _rhs = _nrn_current(_threadargscomma_ _v);
   _ion_dicadv += (_dica - ica)/.001 ;
-  _ion_dilcadv += (_dilca - ilca)/.001 ;
+  _ion_dilca13dv += (_dilca13 - ilca13)/.001 ;
  	}
  _g = (_g_local - _rhs)/.001;
   _ion_ica += ica ;
-  _ion_ilca += ilca ;
+  _ion_ilca13 += ilca13 ;
 	 _vec_rhs[_ni[_iml]] -= _rhs;
  
 }
@@ -622,7 +624,7 @@ _first = 0;
 
 #if NMODL_TEXT
 static void register_nmodl_text_and_filename(int mech_type) {
-    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav13.mod";
+    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters/Mod_Files/Cav13.mod";
     const char* nmodl_file_text = 
   ": model from Evans et al 2013, transferred from GENESIS to NEURON by Beining et al (2016), \"A novel comprehensive and consistent electrophysiologcal model of dentate granule cells\"\n"
   ": also added Calcium dependent inactivation\n"
@@ -630,8 +632,8 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "NEURON {\n"
   "	SUFFIX Cav13\n"
   "	USEION ca READ cai, eca WRITE ica   :,cai,cao...., cai, cao\n"
-  "	USEION lca WRITE ilca VALENCE 0\n"
-  "	RANGE gbar, g\n"
+  "	USEION lca13 WRITE ilca13 VALENCE 0\n"
+  "	RANGE gbar, g, ilca13\n"
   "	GLOBAL kf, h2Tau, VDI\n"
   "}\n"
   "\n"
@@ -645,7 +647,7 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "}\n"
   "\n"
   "ASSIGNED {\n"
-  "	ilca		(mA/cm2) : instantaneous calcium current of l-type calcium channel\n"
+  "	ilca13		(mA/cm2) : instantaneous calcium current of l-type calcium channel\n"
   "	v			(mV)\n"
   "	ica		(mA/cm2)\n"
   "	g		(S/cm2)\n"
@@ -663,11 +665,11 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	h2Tau = 0.5 (ms)\n"
   "	gbar = 0	(S/cm2)\n"
   "		vshift = 0 		(mV)\n"
-  "		\n"
-  "		:parameters for calcium-dep inactivation (CDI) \n"
+  "\n"
+  "		:parameters for calcium-dep inactivation (CDI)\n"
   "			:f= (0.001/(0.001+[Ca]))Poirazi CA1  2003\n"
   "			:f= (0.0005/(0.0005+[Ca])) Rhodes and Llinas 2001 Cort Pyr\n"
-  "	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper	\n"
+  "	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper\n"
   "	VDI = 1\n"
   "}\n"
   "\n"
@@ -684,9 +686,9 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	rates()\n"
   "	SOLVE state METHOD cnexp\n"
   "	g = gbar*m*h*h2 : h2 calcium dependent inactivation is taken from santhakumar 05.. tjos assumes instantaneous calcium inactivation\n"
-  "	ica = (g)*(v - eca) : \n"
-  "	ilca = ica\n"
-  "	\n"
+  "	ica = (g)*(v - eca) :\n"
+  "	ilca13 = ica\n"
+  "\n"
   "}\n"
   "\n"
   "DERIVATIVE state {	: exact when v held constant integrates over dt step\n"
@@ -698,9 +700,9 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "PROCEDURE rates(){\n"
   "		LOCAL mA,mB\n"
   "		mA = (39800*( v + 67.24))/( exp ( (v + 67.24)/15.005) - 1.0)\n"
-  "		mB = 3500* exp(v/31.4) \n"
+  "		mB = 3500* exp(v/31.4)\n"
   "		mTau = (1/(mA + mB))\n"
-  "		\n"
+  "\n"
   "		mInf = 1.0/((exp ( (v - (-40.0))/(-5))) + 1.0)\n"
   "\n"
   "		hInf = VDI/( (exp ( (v - (-37))/(5))) + 1.0) + (1-VDI)\n"

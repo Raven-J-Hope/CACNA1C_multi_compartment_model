@@ -28,7 +28,7 @@ CAV12_50_BK_SPLIT = {          #halves BK_Cav12 and redistribs other half equall
 #labels and colour scheme
 WT_LABEL = "WT"
 CAV12_50_LABEL = "Cav1.2 50%"
-WT_COLOR = "black"
+WT_COLOR = "black" #make grey
 CAV12_50_COLOR = "#ffa6b2" #"#e16173"
 
 import sys  #check versions being used
@@ -402,7 +402,7 @@ class DGGranuleLikeCell:
             #spine gbar
             if has_mech(head, "Cav12"):
                 for seg in head:
-                    seg.Cav12.gbar = 1e-5 #* 3.0  
+                    seg.Cav12.gbar = 1e-5 #* 3.0
             if has_mech(neck, "Cav12"):
                 for seg in neck:
                     seg.Cav12.gbar = 1e-5 #* 1.0
@@ -2803,7 +2803,7 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "Vm_AIS_baseline_vs_Cav12_50.png"), dpi=300)
     plt.show()
 
-    # baseline vs 50% axon Vm
+    #baseline vs 50% axon Vm
 #    plt.figure()
 #    plt.plot(t0, vax0, label="axon baseline")
 #    plt.plot(t1, vax1, label="axon Cav12 50%")

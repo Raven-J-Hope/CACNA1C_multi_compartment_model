@@ -4,8 +4,8 @@
 NEURON {
 	SUFFIX Cav13
 	USEION ca READ cai, eca WRITE ica   :,cai,cao...., cai, cao
-	USEION lca WRITE ilca VALENCE 0
-	RANGE gbar, g
+	USEION lca13 WRITE ilca13 VALENCE 0
+	RANGE gbar, g, ilca13
 	GLOBAL kf, h2Tau, VDI
 }
 
@@ -19,7 +19,7 @@ UNITS {
 }
 
 ASSIGNED {
-	ilca		(mA/cm2) : instantaneous calcium current of l-type calcium channel
+	ilca13		(mA/cm2) : instantaneous calcium current of l-type calcium channel
 	v			(mV)
 	ica		(mA/cm2)
 	g		(S/cm2)
@@ -37,11 +37,11 @@ PARAMETER {
 	h2Tau = 0.5 (ms)
 	gbar = 0	(S/cm2)
 		vshift = 0 		(mV)
-		
-		:parameters for calcium-dep inactivation (CDI) 
+
+		:parameters for calcium-dep inactivation (CDI)
 			:f= (0.001/(0.001+[Ca]))Poirazi CA1  2003
 			:f= (0.0005/(0.0005+[Ca])) Rhodes and Llinas 2001 Cort Pyr
-	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper	
+	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper
 	VDI = 1
 }
 
@@ -58,9 +58,9 @@ BREAKPOINT {
 	rates()
 	SOLVE state METHOD cnexp
 	g = gbar*m*h*h2 : h2 calcium dependent inactivation is taken from santhakumar 05.. tjos assumes instantaneous calcium inactivation
-	ica = (g)*(v - eca) : 
-	ilca = ica
-	
+	ica = (g)*(v - eca) :
+	ilca13 = ica
+
 }
 
 DERIVATIVE state {	: exact when v held constant integrates over dt step
@@ -72,9 +72,9 @@ DERIVATIVE state {	: exact when v held constant integrates over dt step
 PROCEDURE rates(){
 		LOCAL mA,mB
 		mA = (39800*( v + 67.24))/( exp ( (v + 67.24)/15.005) - 1.0)
-		mB = 3500* exp(v/31.4) 
+		mB = 3500* exp(v/31.4)
 		mTau = (1/(mA + mB))
-		
+
 		mInf = 1.0/((exp ( (v - (-40.0))/(-5))) + 1.0)
 
 		hInf = VDI/( (exp ( (v - (-37))/(5))) + 1.0) + (1-VDI)
