@@ -1131,7 +1131,7 @@ plt.show()
 #4-panel Cav1.2 source current by compartment
 fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
 
-# AIS
+#AIS
 ax = axes[0, 0]
 ax.plot(t0, cav12_ica0_ais, color=WT_COLOR, label=WT_LABEL)
 ax.plot(t1, cav12_ica1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
