@@ -1263,7 +1263,7 @@ ax.plot(t1, cav22_ica1_dist, color=CAV12_50_COLOR)
 ax.set_xlabel("Time (ms)")
 ax.set_ylabel("Current density (mA/cm2)")
 
-# spine
+#spine
 ax = axes[1, 1]
 ax.plot(t0, cav22_ica0_spine, color=WT_COLOR)
 ax.plot(t1, cav22_ica1_spine, color=CAV12_50_COLOR)
