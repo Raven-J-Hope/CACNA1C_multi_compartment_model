@@ -716,6 +716,7 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
         arr(getattr(cell, "cav21_ica_soma_vec", None)),
         arr(getattr(cell, "cav22_ica_soma_vec", None)),
         arr(getattr(cell, "cav12_ica_soma_vec", None)),
+        arr(getattr(cell, "cav13_ica_soma_vec", None)),
         arr(getattr(cell, "clamp_i_vec", None)),
     )
 
