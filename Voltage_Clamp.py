@@ -1038,7 +1038,7 @@ plt.show()
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharex=True, sharey=False)
 
-#top lefttotal Ca current
+#top left total Ca current
 ax = axes[0, 0]
 ax.plot(t0, ica0_soma, color=WT_COLOR, label=WT_LABEL)
 ax.plot(t1, ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
