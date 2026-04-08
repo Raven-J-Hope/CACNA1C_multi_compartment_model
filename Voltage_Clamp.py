@@ -194,7 +194,7 @@ class DGGranuleLikeCell:
                     seg.pas.e = -70.0
 
             for mech in [
-                "Caold", "Cabuffer", "Cav12", "BK_Cav22", "BK_Cav12", "BK_Cav21",
+                "Caold", "Cabuffer", "Cav12", "Cav13", "BK_Cav22", "BK_Cav12", "BK_Cav21",
                 "SK2", "HCN", "Kv42", "Kv42b", "Kv11", "Kir21", "Kv14", "Kv21",
                 "Kv33", "Kv34", "Kv723", "ichan3", "na8st", "Cav22", "Cav32", "Cav2_1"
             ]:
