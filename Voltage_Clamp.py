@@ -700,6 +700,7 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
         np.array(cell.vprox_vec),
         np.array(cell.vdend_vec),
         np.array(cell.vspine_vec),
+
         arr(getattr(cell, "cai_soma_vec", None)),
         arr(getattr(cell, "cai_prox_vec", None)),
         arr(getattr(cell, "cai_dist_vec", None)),
