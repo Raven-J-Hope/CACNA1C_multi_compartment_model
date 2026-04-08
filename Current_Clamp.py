@@ -1329,6 +1329,13 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     bk_Cav22_ik_soma = np.array(cell.bk_Cav22_ik_soma_vec) if getattr(cell, "bk_Cav22_ik_soma_vec", None) is not None else None
     bk_Cav12_ik_soma = np.array(cell.bk_Cav12_ik_soma_vec) if getattr(cell, "bk_Cav12_ik_soma_vec", None) is not None else None
     bk_Cav21_ik_soma = np.array(cell.bk_Cav21_ik_soma_vec) if getattr(cell, "bk_Cav21_ik_soma_vec", None) is not None else None
+    bk_total_soma = None
+    if (
+        bk_Cav22_ik_soma is not None
+        and bk_Cav12_ik_soma is not None
+        and bk_Cav21_ik_soma is not None
+    ):
+        bk_total_soma = bk_Cav22_ik_soma + bk_Cav12_ik_soma + bk_Cav21_ik_soma
     sk_ik_soma = np.array(cell.sk_ik_soma_vec) if getattr(cell, "sk_ik_soma_vec", None) is not None else None
     ina_soma = np.array(cell.ina_soma_vec) if getattr(cell, "ina_soma_vec", None) is not None else None
 
