@@ -806,7 +806,14 @@ if __name__ == "__main__":
     cell = DGGranuleLikeCell(bk_split=WT_BK_SPLIT)
     cell.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100.0, dur=300.0)
     cell.setup_recording()
-    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, I0 = run_sim(
+    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, \
+        ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, \
+        cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, cav13_ica0_soma, I0, \
+        ica0_ais, ica0_prox, ica0_dist, ica0_spine, \
+        cav12_ica0_ais, cav12_ica0_prox, cav12_ica0_dist, cav12_ica0_spine, \
+        cav13_ica0_ais, cav13_ica0_prox, cav13_ica0_dist, cav13_ica0_spine, \
+        cav21_ica0_ais, cav21_ica0_prox, cav21_ica0_dist, cav21_ica0_spine, \
+        cav22_ica0_ais, cav22_ica0_prox, cav22_ica0_dist, cav22_ica0_spine = run_sim(
         cell, tstop=500.0, v_init=-70.0, dt=0.025
     )
 
