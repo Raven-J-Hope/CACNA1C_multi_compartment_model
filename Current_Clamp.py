@@ -2213,6 +2213,442 @@ if __name__ == "__main__":
 
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
+    #ploy ap & ca for one ap
+    w_ap0 = (t0 >= 95) & (t0 <= 120)
+
+    plt.figure()
+    plt.plot(t0[w_ap0], cai0_soma[w_ap0], color=WT_COLOR, label="WT soma cai")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("cai (mM)")
+    plt.title("Soma calcium during one AP")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+    #50%
+    w_ap1 = (t1 >= 95) & (t1 <= 130)
+
+    plt.figure()
+    plt.plot(t1[w_ap1], cai1_soma[w_ap1], color=CAV12_50_COLOR, label="Cav1.2 50% soma cai")
+    plt.xlabel("Time (ms)")
+    plt.ylabel("cai (mM)")
+    plt.title("Soma calcium during one AP")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    #overlay
+    plt.figure()
+    plt.plot(t0[w_ap0], cai0_soma[w_ap0], color=WT_COLOR, label=WT_LABEL)
+    plt.plot(t1[w_ap1], cai1_soma[w_ap1], color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("cai (mM)")
+    plt.title("Soma calcium during one AP")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    #BK_Cav12 vs AP waveform alignment
+    # same real-time window for all plots
+    w0 = (t0 >= 95) & (t0 <= 410)
+    w1 = (t1 >= 95) & (t1 <= 410)
+
+    #same Vm axis across all AP/BK plots
+    vm_min = min(np.min(vs0[w0]), np.min(vs1[w1]))
+    vm_max = max(np.max(vs0[w0]), np.max(vs1[w1]))
+
+    #same BK axis per channel across WT and 50%
+    bk12_min = min(np.min(bk_Cav12ik0_soma[w0]), np.min(bk_Cav12ik1_soma[w1]))
+    bk12_max = max(np.max(bk_Cav12ik0_soma[w0]), np.max(bk_Cav12ik1_soma[w1]))
+
+    bk21_min = min(np.min(bk_Cav21ik0_soma[w0]), np.min(bk_Cav21ik1_soma[w1]))
+    bk21_max = max(np.max(bk_Cav21ik0_soma[w0]), np.max(bk_Cav21ik1_soma[w1]))
+
+    bk22_min = min(np.min(bk_Cav22ik0_soma[w0]), np.min(bk_Cav22ik1_soma[w1]))
+    bk22_max = max(np.max(bk_Cav22ik0_soma[w0]), np.max(bk_Cav22ik1_soma[w1]))
+
+
+    #BK_Cav12
+
+    #WT
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t0[w0], vs0[w0], color=WT_COLOR, linestyle="-", label=f"{WT_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=WT_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t0[w0], bk_Cav12ik0_soma[w0], color="blue", linestyle="--", label=f"{WT_LABEL} BK_Cav12")
+    ax2.set_ylabel("BK_Cav12 current density (mA/cm2)")
+    ax2.set_ylim(bk12_min, bk12_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "WT_AP_and_BK_Cav12_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+    #50% Cav1.2
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t1[w1], vs1[w1], color=CAV12_50_COLOR, linestyle="-", label=f"{CAV12_50_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=CAV12_50_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t1[w1], bk_Cav12ik1_soma[w1], color="blue", linestyle="--", label=f"{CAV12_50_LABEL} BK_Cav12")
+    ax2.set_ylabel("BK_Cav12 current density (mA/cm2)")
+    ax2.set_ylim(bk12_min, bk12_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "Cav12_50_AP_and_BK_Cav12_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+
+    #BK_Cav21
+
+    # WT
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t0[w0], vs0[w0], color=WT_COLOR, linestyle="-", label=f"{WT_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=WT_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t0[w0], bk_Cav21ik0_soma[w0], color="blue", linestyle="--", label=f"{WT_LABEL} BK_Cav21")
+    ax2.set_ylabel("BK_Cav21 current density (mA/cm2)")
+    ax2.set_ylim(bk21_min, bk21_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "WT_AP_and_BK_Cav21_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+    #50% Cav1.2
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t1[w1], vs1[w1], color=CAV12_50_COLOR, linestyle="-", label=f"{CAV12_50_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=CAV12_50_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t1[w1], bk_Cav21ik1_soma[w1], color="blue", linestyle="--", label=f"{CAV12_50_LABEL} BK_Cav21")
+    ax2.set_ylabel("BK_Cav21 current density (mA/cm2)")
+    ax2.set_ylim(bk21_min, bk21_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "Cav12_50_AP_and_BK_Cav21_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+
+    #BK_Cav22
+
+    #WT
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t0[w0], vs0[w0], color=WT_COLOR, linestyle="-", label=f"{WT_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=WT_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t0[w0], bk_Cav22ik0_soma[w0], color="blue", linestyle="--", label=f"{WT_LABEL} BK_Cav22")
+    ax2.set_ylabel("BK_Cav22 current density (mA/cm2)")
+    ax2.set_ylim(bk22_min, bk22_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "WT_AP_and_BK_Cav22_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+    #50% Cav1.2
+    fig, ax1 = plt.subplots(figsize=(10, 5))
+
+    ax1.plot(t1[w1], vs1[w1], color=CAV12_50_COLOR, linestyle="-", label=f"{CAV12_50_LABEL} AP")
+    ax1.set_xlabel("Time (ms)")
+    ax1.set_ylabel("Membrane potential (mV)", color=CAV12_50_COLOR)
+    ax1.set_xlim(95, 410)
+    ax1.set_ylim(vm_min, vm_max)
+    ax1.tick_params(axis="y")
+
+    ax2 = ax1.twinx()
+    ax2.plot(t1[w1], bk_Cav22ik1_soma[w1], color="blue", linestyle="--", label=f"{CAV12_50_LABEL} BK_Cav22")
+    ax2.set_ylabel("BK_Cav22 current density (mA/cm2)")
+    ax2.set_ylim(bk22_min, bk22_max)
+    ax2.tick_params(axis="y")
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    plt.savefig(
+        os.path.join(FIG_DIR, "Cav12_50_AP_and_BK_Cav22_dual_axis_realtime.png"),
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+
+    #4-panel BK current fig for bk_cav12
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_Cav12ik0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_Cav12ik1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_Cav12ik0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_Cav12ik1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_Cav12ik0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_Cav12ik1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_Cav12ik0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_Cav12ik1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav12_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #4-panel BK current fig for bk_cav21
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_Cav21ik0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_Cav21ik1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_Cav21ik0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_Cav21ik1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_Cav21ik0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_Cav21ik1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_Cav21ik0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_Cav21ik1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav21_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #4-panel BK current fig for bk_cav22
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_Cav22ik0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_Cav22ik1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_Cav22ik0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_Cav22ik1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_Cav22ik0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_Cav22ik1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("Current density (mA/cm2)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_Cav22ik0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_Cav22ik1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav22_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #4-panel BK acai fig for BK_cav12
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_acai12_0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_acai12_1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("acai (mM)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_acai12_0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_acai12_1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_acai12_0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_acai12_1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("acai (mM)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_acai12_0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_acai12_1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav12_acai_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #4-panel BK acai fig for BK_cav21
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_acai21_0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_acai21_1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("acai (mM)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_acai21_0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_acai21_1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_acai21_0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_acai21_1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("acai (mM)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_acai21_0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_acai21_1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav21_acai_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
+    #4-panel BK acai fig for BK_cav22
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True, sharey=False)
+
+    #top left = AIS
+    ax = axes[0, 0]
+    ax.plot(t0, bk_acai22_0_ais, color=WT_COLOR, label=WT_LABEL)
+    ax.plot(t1, bk_acai22_1_ais, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+    ax.set_ylabel("acai (mM)")
+
+    #top right = prox dend
+    ax = axes[0, 1]
+    ax.plot(t0, bk_acai22_0_prox, color=WT_COLOR)
+    ax.plot(t1, bk_acai22_1_prox, color=CAV12_50_COLOR)
+
+    #bottom left = dist dend
+    ax = axes[1, 0]
+    ax.plot(t0, bk_acai22_0_dist, color=WT_COLOR)
+    ax.plot(t1, bk_acai22_1_dist, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+    ax.set_ylabel("acai (mM)")
+
+    #bottom right = spine
+    ax = axes[1, 1]
+    ax.plot(t0, bk_acai22_0_spine, color=WT_COLOR)
+    ax.plot(t1, bk_acai22_1_spine, color=CAV12_50_COLOR)
+    ax.set_xlabel("Time (ms)")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, frameon=True)
+
+    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    plt.savefig(os.path.join(FIG_DIR, "BK_Cav22_acai_4panel_AIS_prox_dist_spine.png"), dpi=300, bbox_inches="tight")
+    plt.show()
+
     #2-panel fig for SK current and SK driver calcium acai
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharex=False)
