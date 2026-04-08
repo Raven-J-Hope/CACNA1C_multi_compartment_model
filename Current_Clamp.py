@@ -695,6 +695,7 @@ class DGGranuleLikeCell:
             try_insert(sec, "Caold")
             try_insert(sec, "Cabuffer")
             try_insert(sec, "Cav12")
+            try_insert(sec, "Cav13")
             try_insert(sec, "Cav22")
             try_insert(sec, "Cav32")
         #    try_insert(sec, "BK")
