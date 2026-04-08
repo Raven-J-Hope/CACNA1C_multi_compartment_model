@@ -3761,6 +3761,19 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(FIG_DIR, "SK_vs_BK_Cav22_per_Ca_per_spike.png"), dpi=300)
     plt.show()
 
+   #cav13
+    if cav13_ica0_soma is not None and cav13_ica1_soma is not None:
+        plt.figure()
+        plt.plot(t0, cav13_ica0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, cav13_ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Cav1.3 current density (mA/cm2)")
+        plt.title("Cav1.3 source current")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "Cav13_recruitment_soma_baseline_vs_50.png"), dpi=300)
+        plt.show()
+
     #Cav2.1 recruitment (soma) baseline vs 50%
     if cav21_ica0_soma is not None and cav21_ica1_soma is not None:
         plt.figure()
