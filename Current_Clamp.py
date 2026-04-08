@@ -3871,9 +3871,26 @@ if __name__ == "__main__":
             cell.add_current_clamp(delay=delay, dur=dur, amp=float(amp))
             cell.setup_recording()
 
-            t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, cai_ais, ica_soma, ik_soma, bk_Cav22ik_soma, bk_Cav12ik_soma, bk_Cav21ik_soma, skik_soma, ina_soma, na8st_o_soma, na8st_g_soma, na8st_i_total_soma, na8st_o_ais, na8st_g_ais, na8st_i_total_ais, sk_acai_soma, cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, bk_acai12, bk_acai21, bk_acai22 = run_sim(
-                cell, tstop=tstop, v_init=v_init, dt=dt
-            )
+            t, vs, vais, vp, vd, vsp,
+            cai_soma, cai_prox, cai_dist, cai_spine, cai_ais,
+            ica_soma, ik_soma,
+            bk_Cav22_ik_soma, bk_Cav12_ik_soma, bk_Cav21_ik_soma,
+            bk_total_soma, sk_ik_soma, ina_soma,
+            na8st_o_soma, na8st_g_soma, na8st_i_total_soma,
+            na8st_o_ais, na8st_g_ais, na8st_i_total_ais,
+            sk_acai_soma,
+            cav13_ica_soma,
+            cav13_ica_ais, cav13_ica_prox, cav13_ica_dist, cav13_ica_spine,
+            cav21_ica_soma, cav22_ica_soma, cav12_ica_soma,
+            bk_acai12, bk_acai21, bk_acai22,
+
+            bk_Cav22_ik_ais, bk_Cav22_ik_prox, bk_Cav22_ik_dist, bk_Cav22_ik_spine,
+            bk_Cav12_ik_ais, bk_Cav12_ik_prox, bk_Cav12_ik_dist, bk_Cav12_ik_spine,
+            bk_Cav21_ik_ais, bk_Cav21_ik_prox, bk_Cav21_ik_dist, bk_Cav21_ik_spine,
+
+            bk_acai22_ais, bk_acai22_prox, bk_acai22_dist, bk_acai22_spine,
+            bk_acai12_ais, bk_acai12_prox, bk_acai12_dist, bk_acai12_spine,
+            bk_acai21_ais, bk_acai21_prox, bk_acai21_dist, bk_acai21_spine = run_sim(cell, tstop=tstop, v_init=v_init, dt=dt)
 
             n_spikes = count_spikes(t, vs, threshold=threshold,
                                     t_start=delay, t_end=delay + dur, refractory_ms=2.0)
