@@ -566,6 +566,122 @@ class DGGranuleLikeCell:
             self.cav12_ica_soma_vec = h.Vector()
             self.cav12_ica_soma_vec.record(self.soma(0.5)._ref_ilca)
 
+        self.cav13_ica_soma_vec = None
+        if has_mech(self.soma, "Cav13"):
+            self.cav13_ica_soma_vec = h.Vector()
+            self.cav13_ica_soma_vec.record(self.soma(0.5)._ref_ilca13)
+
+
+        #Total calcium current by compartment
+
+        self.ica_ais_vec = h.Vector()
+        self.ica_ais_vec.record(self.ais(0.5)._ref_ica)
+
+        self.ica_prox_vec = h.Vector()
+        self.ica_prox_vec.record(self.dend_prox(0.5)._ref_ica)
+
+        self.ica_dist_vec = h.Vector()
+        self.ica_dist_vec.record(self.dend_dist(0.9)._ref_ica)
+
+        self.ica_spine_vec = h.Vector()
+        self.ica_spine_vec.record(self.spines[0](0.5)._ref_ica)
+
+
+        #Cav1.2 source current by compartment
+
+        self.cav12_ica_ais_vec = None
+        self.cav12_ica_prox_vec = None
+        self.cav12_ica_dist_vec = None
+        self.cav12_ica_spine_vec = None
+
+        if has_mech(self.ais, "Cav12"):
+            self.cav12_ica_ais_vec = h.Vector()
+            self.cav12_ica_ais_vec.record(self.ais(0.5)._ref_ilca)
+
+        if has_mech(self.dend_prox, "Cav12"):
+            self.cav12_ica_prox_vec = h.Vector()
+            self.cav12_ica_prox_vec.record(self.dend_prox(0.5)._ref_ilca)
+
+        if has_mech(self.dend_dist, "Cav12"):
+            self.cav12_ica_dist_vec = h.Vector()
+            self.cav12_ica_dist_vec.record(self.dend_dist(0.9)._ref_ilca)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "Cav12"):
+            self.cav12_ica_spine_vec = h.Vector()
+            self.cav12_ica_spine_vec.record(self.spines[0](0.5)._ref_ilca)
+
+
+        #Cav1.3 source current by compartment
+
+        self.cav13_ica_ais_vec = None
+        self.cav13_ica_prox_vec = None
+        self.cav13_ica_dist_vec = None
+        self.cav13_ica_spine_vec = None
+
+        if has_mech(self.ais, "Cav13"):
+            self.cav13_ica_ais_vec = h.Vector()
+            self.cav13_ica_ais_vec.record(self.ais(0.5)._ref_ilca13)
+
+        if has_mech(self.dend_prox, "Cav13"):
+            self.cav13_ica_prox_vec = h.Vector()
+            self.cav13_ica_prox_vec.record(self.dend_prox(0.5)._ref_ilca13)
+
+        if has_mech(self.dend_dist, "Cav13"):
+            self.cav13_ica_dist_vec = h.Vector()
+            self.cav13_ica_dist_vec.record(self.dend_dist(0.9)._ref_ilca13)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "Cav13"):
+            self.cav13_ica_spine_vec = h.Vector()
+            self.cav13_ica_spine_vec.record(self.spines[0](0.5)._ref_ilca13)
+
+
+        #Cav2.1 source current by compartment
+
+        self.cav21_ica_ais_vec = None
+        self.cav21_ica_prox_vec = None
+        self.cav21_ica_dist_vec = None
+        self.cav21_ica_spine_vec = None
+
+        if has_mech(self.ais, "Cav2_1"):
+            self.cav21_ica_ais_vec = h.Vector()
+            self.cav21_ica_ais_vec.record(self.ais(0.5).Cav2_1._ref_ipca)
+
+        if has_mech(self.dend_prox, "Cav2_1"):
+            self.cav21_ica_prox_vec = h.Vector()
+            self.cav21_ica_prox_vec.record(self.dend_prox(0.5).Cav2_1._ref_ipca)
+
+        if has_mech(self.dend_dist, "Cav2_1"):
+            self.cav21_ica_dist_vec = h.Vector()
+            self.cav21_ica_dist_vec.record(self.dend_dist(0.9).Cav2_1._ref_ipca)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "Cav2_1"):
+            self.cav21_ica_spine_vec = h.Vector()
+            self.cav21_ica_spine_vec.record(self.spines[0](0.5).Cav2_1._ref_ipca)
+
+
+        #Cav2.2 source current by compartment
+
+        self.cav22_ica_ais_vec = None
+        self.cav22_ica_prox_vec = None
+        self.cav22_ica_dist_vec = None
+        self.cav22_ica_spine_vec = None
+
+        if has_mech(self.ais, "Cav22"):
+            self.cav22_ica_ais_vec = h.Vector()
+            self.cav22_ica_ais_vec.record(self.ais(0.5)._ref_inca)
+
+        if has_mech(self.dend_prox, "Cav22"):
+            self.cav22_ica_prox_vec = h.Vector()
+            self.cav22_ica_prox_vec.record(self.dend_prox(0.5)._ref_inca)
+
+        if has_mech(self.dend_dist, "Cav22"):
+            self.cav22_ica_dist_vec = h.Vector()
+            self.cav22_ica_dist_vec.record(self.dend_dist(0.9)._ref_inca)
+
+        if len(self.spines) > 0 and has_mech(self.spines[0], "Cav22"):
+            self.cav22_ica_spine_vec = h.Vector()
+            self.cav22_ica_spine_vec.record(self.spines[0](0.5)._ref_inca)
+
 
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
