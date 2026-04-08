@@ -1663,7 +1663,18 @@ if __name__ == "__main__":
 
     cell.add_current_clamp(delay=100, dur=300, amp=0.3)
     cell.setup_recording()
-    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, cai0_ais, ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, skik0_soma, ina0_soma, na8st0_o_soma, na8st0_g_soma, na8st0_i_total_soma, na8st0_o_ais, na8st0_g_ais, na8st0_i_total_ais, sk_acai0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, bk_acai12_0, bk_acai21_0, bk_acai22_0 = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
+    t0, vs0, vais0, vp0, vd0, vsp0, cai0_soma, cai0_prox, cai0_dist, cai0_spine, cai0_ais, \
+    ica0_soma, ik0_soma, bk_Cav22ik0_soma, bk_Cav12ik0_soma, bk_Cav21ik0_soma, bk_total0_soma, skik0_soma, ina0_soma, \
+    na8st0_o_soma, na8st0_g_soma, na8st0_i_total_soma, na8st0_o_ais, na8st0_g_ais, na8st0_i_total_ais, \
+    sk_acai0_soma, cav21_ica0_soma, cav22_ica0_soma, cav12_ica0_soma, cav13_ica0_soma, \
+    cav13_ica0_ais, cav13_ica0_prox, cav13_ica0_dist, cav13_ica0_spine, \
+    bk_acai12_0, bk_acai21_0, bk_acai22_0, \
+    bk_Cav22ik0_ais, bk_Cav22ik0_prox, bk_Cav22ik0_dist, bk_Cav22ik0_spine, \
+    bk_Cav12ik0_ais, bk_Cav12ik0_prox, bk_Cav12ik0_dist, bk_Cav12ik0_spine, \
+    bk_Cav21ik0_ais, bk_Cav21ik0_prox, bk_Cav21ik0_dist, bk_Cav21ik0_spine, \
+    bk_acai22_0_ais, bk_acai22_0_prox, bk_acai22_0_dist, bk_acai22_0_spine, \
+    bk_acai12_0_ais, bk_acai12_0_prox, bk_acai12_0_dist, bk_acai12_0_spine, \
+    bk_acai21_0_ais, bk_acai21_0_prox, bk_acai21_0_dist, bk_acai21_0_spine = run_sim(cell, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t0), len(vs0), len(vp0), len(vd0), len(vsp0))
     print("Peak cai base soma/prox/dist/spine:", #prints ca peak in each compartmnet
           float(np.max(cai0_soma)),
