@@ -1363,8 +1363,14 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     sk_acai_soma = np.array(cell.sk_acai_soma_vec) if getattr(cell, "sk_acai_soma_vec", None) is not None else None
     cav21_ica_soma = np.array(cell.cav21_ica_soma_vec) if getattr(cell, "cav21_ica_soma_vec", None) is not None else None
     cav22_ica_soma = np.array(cell.cav22_ica_soma_vec) if getattr(cell, "cav22_ica_soma_vec", None) is not None else None
-    cav12_ica_soma = np.array(cell.cav12_ica_soma_vec) if getattr(cell, "cav12_ica_soma_vec",
-                                                                  None) is not None else None
+    cav12_ica_soma = np.array(cell.cav12_ica_soma_vec) if getattr(cell, "cav12_ica_soma_vec", None) is not None else None
+
+    cav13_ica_soma = np.array(cell.cav13_ica_soma_vec) if getattr(cell, "cav13_ica_soma_vec", None) is not None else None
+    cav13_ica_ais = np.array(cell.cav13_ica_ais_vec) if getattr(cell, "cav13_ica_ais_vec", None) is not None else None
+    cav13_ica_prox = np.array(cell.cav13_ica_prox_vec) if getattr(cell, "cav13_ica_prox_vec", None) is not None else None
+    cav13_ica_dist = np.array(cell.cav13_ica_dist_vec) if getattr(cell, "cav13_ica_dist_vec", None) is not None else None
+    cav13_ica_spine = np.array(cell.cav13_ica_spine_vec) if getattr(cell, "cav13_ica_spine_vec", None) is not None else None
+
     bk_acai12 = np.array(cell.bk_acai12_soma_vec) if cell.bk_acai12_soma_vec is not None else None
     bk_acai21 = np.array(cell.bk_acai21_soma_vec) if cell.bk_acai21_soma_vec is not None else None
     bk_acai22 = np.array(cell.bk_acai22_soma_vec) if cell.bk_acai22_soma_vec is not None else None
