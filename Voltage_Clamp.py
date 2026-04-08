@@ -821,7 +821,14 @@ if __name__ == "__main__":
     cell2.scale_cav12(0.5)
     cell2.add_voltage_clamp(hold=-70.0, step=-50.0, delay=100.0, dur=300.0)
     cell2.setup_recording()
-    t1, vs1, vais1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, I1 = run_sim(
+    t1, vs1, vais1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine, \
+        ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, \
+        cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, cav13_ica1_soma, I1, \
+        ica1_ais, ica1_prox, ica1_dist, ica1_spine, \
+        cav12_ica1_ais, cav12_ica1_prox, cav12_ica1_dist, cav12_ica1_spine, \
+        cav13_ica1_ais, cav13_ica1_prox, cav13_ica1_dist, cav13_ica1_spine, \
+        cav21_ica1_ais, cav21_ica1_prox, cav21_ica1_dist, cav21_ica1_spine, \
+        cav22_ica1_ais, cav22_ica1_prox, cav22_ica1_dist, cav22_ica1_spine = run_sim(
         cell2, tstop=500.0, v_init=-70.0, dt=0.025
     )
 
