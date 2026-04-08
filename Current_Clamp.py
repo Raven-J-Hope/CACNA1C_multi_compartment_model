@@ -2195,6 +2195,22 @@ if __name__ == "__main__":
     else:
         print("AP half-width plot skipped no spikes detected in one or both conditions.")
 
+    #plot AP tird-width per spike - wooooooo now show boradening more wt vs 50
+    n_hw = min(len(widths0), len(widths1))
+    if n_hw > 0:
+        plt.figure()
+        plt.plot(np.arange(1, n_hw + 1), widths_third0[:n_hw], marker="o", color=WT_COLOR, label=WT_LABEL)
+        plt.plot(np.arange(1, n_hw + 1), widths_third1[:n_hw], marker="o", color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Spike number")
+        plt.ylabel("AP third-width (ms)")
+        plt.title("third width Action potential broadening across spike train")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "AP_third_width_per_spike_WT_vs_50.png"), dpi=300)
+        plt.show()
+    else:
+        print("AP third-width plot skipped no spikes detected in one or both conditions.")
+
     #plots - REMEMBER TO REMOVE TITLES AND WHATNOT BEFORE PUT IN DISS!
 
     #2-panel fig for SK current and SK driver calcium acai
