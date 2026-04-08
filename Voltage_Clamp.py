@@ -1044,7 +1044,7 @@ ax.plot(t0, ica0_soma, color=WT_COLOR, label=WT_LABEL)
 ax.plot(t1, ica1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
 ax.set_ylabel("Current density (mA/cm2)")
 
-#top right Cav1.2 source current
+#top middle Cav1.2 source current
 ax = axes[0, 1]
 ax.plot(t0, cav12_ica0_soma, color=WT_COLOR)
 ax.plot(t1, cav12_ica1_soma, color=CAV12_50_COLOR)
