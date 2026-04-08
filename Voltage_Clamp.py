@@ -934,6 +934,8 @@ if __name__ == "__main__":
         (bk_Cav12ik0_soma, bk_Cav12ik1_soma, "BK_Cav12 current", "Current density (mA/cm2)", "vc_BK_Cav12_current_WT_vs_Cav12_50.png"),
         (bk_Cav21ik0_soma, bk_Cav21ik1_soma, "BK_Cav21 current", "Current density (mA/cm2)", "vc_BK_Cav21_current_WT_vs_Cav12_50.png"),
         (skik0_soma, skik1_soma, "SK current", "Current density (mA/cm2)", "vc_SK_current_WT_vs_Cav12_50.png"),
+        (cav12_ica0_soma, cav12_ica1_soma, "Cav1.2 source current", "Current density (mA/cm2)", "vc_Cav12_source_current_WT_vs_Cav12_50.png"),
+        (cav13_ica0_soma, cav13_ica1_soma, "Cav1.3 source current", "Current density (mA/cm2)", "vc_Cav13_source_current_WT_vs_Cav12_50.png"),
         (cav21_ica0_soma, cav21_ica1_soma, "Cav2.1 source current", "Current density (mA/cm2)", "vc_Cav21_source_current_WT_vs_Cav12_50.png"),
         (cav22_ica0_soma, cav22_ica1_soma, "Cav22 source current", "Current density (mA/cm2)", "vc_Cav22_source_current_WT_vs_Cav12_50.png"),
     ]
