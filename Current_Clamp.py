@@ -3102,6 +3102,18 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(FIG_DIR, "#BK_Cav21 recruitment aka soma BK_Cav21 current baseline vs 50%.png"), dpi=300)
         plt.show()
 
+    #total BK recruitment aka soma total BK current baseline vs 50%
+    if bk_total0_soma is not None and bk_total1_soma is not None:
+        plt.figure()
+        plt.plot(t0, bk_total0_soma, color=WT_COLOR, label=WT_LABEL)
+        plt.plot(t1, bk_total1_soma, color=CAV12_50_COLOR, label=CAV12_50_LABEL)
+        plt.xlabel("Time (ms)")
+        plt.ylabel("Total BK current density (mA/cm2)")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(FIG_DIR, "BK_total_recruitment_soma_baseline_vs_50.png"), dpi=300)
+        plt.show()
+
     #6-panel BK fig forcurrents on top, local acai on bottom
     fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharex=True, sharey=False)
 
