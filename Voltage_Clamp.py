@@ -782,8 +782,8 @@ def run_iv_curve(bk_split, cav12_factor, steps, hold=-70.0, delay=100.0, dur=200
         w_peak = (t >= delay) & (t <= delay + 10)
         w_ss = (t >= delay + dur - 10) & (t <= delay + dur)
 
-        peak_current.append(float(np.min(iclamp[w_peak])))
-        steady_current.append(float(np.mean(iclamp[w_ss])))
+        peak_current.append(float(np.min(I[w_peak])))
+        steady_current.append(float(np.mean(I[w_ss])))
         peak_ica.append(float(np.min(ica_soma[w_peak])) if ica_soma is not None else np.nan)
         peak_bk12.append(float(np.max(np.abs(bk12[w_peak]))) if bk12 is not None else np.nan)
         peak_bk21.append(float(np.max(np.abs(bk21[w_peak]))) if bk21 is not None else np.nan)
