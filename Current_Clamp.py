@@ -1273,6 +1273,34 @@ class DGGranuleLikeCell:
             self.cav12_ica_soma_vec = h.Vector()
             self.cav12_ica_soma_vec.record(self.soma(0.5)._ref_ilca)
 
+        #Cav1.3-specific current density (mA/cm2) at soma(0.5)
+        self.cav13_ica_soma_vec = None
+        if has_mech(self.soma, "Cav13"):
+            self.cav13_ica_soma_vec = h.Vector()
+            self.cav13_ica_soma_vec.record(self.soma(0.5)._ref_ilca13)
+
+        #Cav1.3-specific current density (mA/cm2) by compartment
+        self.cav13_ica_ais_vec = None
+        if has_mech(self.ais, "Cav13"):
+            self.cav13_ica_ais_vec = h.Vector()
+            self.cav13_ica_ais_vec.record(self.ais(0.5)._ref_ilca13)
+
+        self.cav13_ica_prox_vec = None
+        if has_mech(self.dend_prox, "Cav13"):
+            self.cav13_ica_prox_vec = h.Vector()
+            self.cav13_ica_prox_vec.record(self.dend_prox(0.5)._ref_ilca13)
+
+        self.cav13_ica_dist_vec = None
+        if has_mech(self.dend_dist, "Cav13"):
+            self.cav13_ica_dist_vec = h.Vector()
+            self.cav13_ica_dist_vec.record(self.dend_dist(0.9)._ref_ilca13)
+
+        self.cav13_ica_spine_vec = None
+        if len(self.spines) > 0 and has_mech(self.spines[0], "Cav13"):
+            self.cav13_ica_spine_vec = h.Vector()
+            self.cav13_ica_spine_vec.record(self.spines[0](0.5)._ref_ilca13)
+
+
 def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     h.dt = dt
     h.tstop = tstop
