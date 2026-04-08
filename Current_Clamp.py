@@ -1889,6 +1889,9 @@ if __name__ == "__main__":
     print("WT Cav12 ica max:", float(np.max(np.abs(cav12_ica0_soma))) if cav12_ica0_soma is not None else None)
     print("50% Cav12 ica max:", float(np.max(np.abs(cav12_ica1_soma))) if cav12_ica1_soma is not None else None)
 
+    print("WT Cav13 ica max:", float(np.max(np.abs(cav13_ica0_soma))) if cav13_ica0_soma is not None else None)
+    print("50% Cav13 ica max:", float(np.max(np.abs(cav13_ica1_soma))) if cav13_ica1_soma is not None else None)
+
     plt.figure()
     if bk_acai12_0 is not None:
         plt.plot(t0, bk_acai12_0, color=WT_COLOR, label=WT_LABEL)
