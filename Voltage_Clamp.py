@@ -1034,7 +1034,7 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "vc_Cav21_source_current_WT_vs_Cav12_50.png"), dpi=300)
 plt.show()
 
-# 6-panel voltage clamp Ca current fig
+#6-panel voltage clamp Ca current fig
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharex=True, sharey=False)
 
