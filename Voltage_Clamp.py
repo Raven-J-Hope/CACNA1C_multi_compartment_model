@@ -718,6 +718,36 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
         arr(getattr(cell, "cav12_ica_soma_vec", None)),
         arr(getattr(cell, "cav13_ica_soma_vec", None)),
         arr(getattr(cell, "clamp_i_vec", None)),
+
+        #total Ca by compartment
+        arr(getattr(cell, "ica_ais_vec", None)),
+        arr(getattr(cell, "ica_prox_vec", None)),
+        arr(getattr(cell, "ica_dist_vec", None)),
+        arr(getattr(cell, "ica_spine_vec", None)),
+
+        #Cav1.2 by compartment
+        arr(getattr(cell, "cav12_ica_ais_vec", None)),
+        arr(getattr(cell, "cav12_ica_prox_vec", None)),
+        arr(getattr(cell, "cav12_ica_dist_vec", None)),
+        arr(getattr(cell, "cav12_ica_spine_vec", None)),
+
+        #Cav1.3 by compartment
+        arr(getattr(cell, "cav13_ica_ais_vec", None)),
+        arr(getattr(cell, "cav13_ica_prox_vec", None)),
+        arr(getattr(cell, "cav13_ica_dist_vec", None)),
+        arr(getattr(cell, "cav13_ica_spine_vec", None)),
+
+        #Cav2.1 by compartment
+        arr(getattr(cell, "cav21_ica_ais_vec", None)),
+        arr(getattr(cell, "cav21_ica_prox_vec", None)),
+        arr(getattr(cell, "cav21_ica_dist_vec", None)),
+        arr(getattr(cell, "cav21_ica_spine_vec", None)),
+
+        #Cav2.2 by compartment
+        arr(getattr(cell, "cav22_ica_ais_vec", None)),
+        arr(getattr(cell, "cav22_ica_prox_vec", None)),
+        arr(getattr(cell, "cav22_ica_dist_vec", None)),
+        arr(getattr(cell, "cav22_ica_spine_vec", None)),
     )
 
 
