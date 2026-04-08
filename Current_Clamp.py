@@ -1375,7 +1375,63 @@ def run_sim(cell: DGGranuleLikeCell, tstop=500.0, v_init=-70.0, dt=0.025):
     bk_acai21 = np.array(cell.bk_acai21_soma_vec) if cell.bk_acai21_soma_vec is not None else None
     bk_acai22 = np.array(cell.bk_acai22_soma_vec) if cell.bk_acai22_soma_vec is not None else None
 
-    return t, vs, vais, vp, vd, vsp, cai_soma, cai_prox, cai_dist, cai_spine, cai_ais, ica_soma, ik_soma, bk_Cav22_ik_soma, bk_Cav12_ik_soma, bk_Cav21_ik_soma, sk_ik_soma, ina_soma, na8st_o_soma, na8st_g_soma, na8st_i_total_soma, na8st_o_ais, na8st_g_ais, na8st_i_total_ais, sk_acai_soma, cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, bk_acai12, bk_acai21, bk_acai22
+    #BK_Cav22 currents by compartment
+    bk_Cav22_ik_ais = np.array(cell.bk_Cav22_ik_ais_vec) if getattr(cell, "bk_Cav22_ik_ais_vec", None) is not None else None
+    bk_Cav22_ik_prox = np.array(cell.bk_Cav22_ik_prox_vec) if getattr(cell, "bk_Cav22_ik_prox_vec", None) is not None else None
+    bk_Cav22_ik_dist = np.array(cell.bk_Cav22_ik_dist_vec) if getattr(cell, "bk_Cav22_ik_dist_vec", None) is not None else None
+    bk_Cav22_ik_spine = np.array(cell.bk_Cav22_ik_spine_vec) if getattr(cell, "bk_Cav22_ik_spine_vec", None) is not None else None
+
+    #BK_Cav12 currents by compartment
+    bk_Cav12_ik_ais = np.array(cell.bk_Cav12_ik_ais_vec) if getattr(cell, "bk_Cav12_ik_ais_vec", None) is not None else None
+    bk_Cav12_ik_prox = np.array(cell.bk_Cav12_ik_prox_vec) if getattr(cell, "bk_Cav12_ik_prox_vec", None) is not None else None
+    bk_Cav12_ik_dist = np.array(cell.bk_Cav12_ik_dist_vec) if getattr(cell, "bk_Cav12_ik_dist_vec", None) is not None else None
+    bk_Cav12_ik_spine = np.array(cell.bk_Cav12_ik_spine_vec) if getattr(cell, "bk_Cav12_ik_spine_vec", None) is not None else None
+
+    #BK_Cav21 currents by compartment
+    bk_Cav21_ik_ais = np.array(cell.bk_Cav21_ik_ais_vec) if getattr(cell, "bk_Cav21_ik_ais_vec", None) is not None else None
+    bk_Cav21_ik_prox = np.array(cell.bk_Cav21_ik_prox_vec) if getattr(cell, "bk_Cav21_ik_prox_vec", None) is not None else None
+    bk_Cav21_ik_dist = np.array(cell.bk_Cav21_ik_dist_vec) if getattr(cell, "bk_Cav21_ik_dist_vec", None) is not None else None
+    bk_Cav21_ik_spine = np.array(cell.bk_Cav21_ik_spine_vec) if getattr(cell, "bk_Cav21_ik_spine_vec", None) is not None else None
+
+    #BK_Cav22 acai by compartment
+    bk_acai22_ais = np.array(cell.bk_acai22_ais_vec) if getattr(cell, "bk_acai22_ais_vec", None) is not None else None
+    bk_acai22_prox = np.array(cell.bk_acai22_prox_vec) if getattr(cell, "bk_acai22_prox_vec", None) is not None else None
+    bk_acai22_dist = np.array(cell.bk_acai22_dist_vec) if getattr(cell, "bk_acai22_dist_vec", None) is not None else None
+    bk_acai22_spine = np.array(cell.bk_acai22_spine_vec) if getattr(cell, "bk_acai22_spine_vec", None) is not None else None
+
+    #BK_Cav12 acai by compartment
+    bk_acai12_ais = np.array(cell.bk_acai12_ais_vec) if getattr(cell, "bk_acai12_ais_vec", None) is not None else None
+    bk_acai12_prox = np.array(cell.bk_acai12_prox_vec) if getattr(cell, "bk_acai12_prox_vec", None) is not None else None
+    bk_acai12_dist = np.array(cell.bk_acai12_dist_vec) if getattr(cell, "bk_acai12_dist_vec", None) is not None else None
+    bk_acai12_spine = np.array(cell.bk_acai12_spine_vec) if getattr(cell, "bk_acai12_spine_vec", None) is not None else None
+
+    #BK_Cav21 acai by compartment
+    bk_acai21_ais = np.array(cell.bk_acai21_ais_vec) if getattr(cell, "bk_acai21_ais_vec", None) is not None else None
+    bk_acai21_prox = np.array(cell.bk_acai21_prox_vec) if getattr(cell, "bk_acai21_prox_vec", None) is not None else None
+    bk_acai21_dist = np.array(cell.bk_acai21_dist_vec) if getattr(cell, "bk_acai21_dist_vec", None) is not None else None
+    bk_acai21_spine = np.array(cell.bk_acai21_spine_vec) if getattr(cell, "bk_acai21_spine_vec", None) is not None else None
+
+    return (
+        t, vs, vais, vp, vd, vsp,
+        cai_soma, cai_prox, cai_dist, cai_spine, cai_ais,
+        ica_soma, ik_soma,
+        bk_Cav22_ik_soma, bk_Cav12_ik_soma, bk_Cav21_ik_soma,
+        bk_total_soma, sk_ik_soma, ina_soma,
+        na8st_o_soma, na8st_g_soma, na8st_i_total_soma,
+        na8st_o_ais, na8st_g_ais, na8st_i_total_ais,
+        sk_acai_soma,
+        cav21_ica_soma, cav22_ica_soma, cav12_ica_soma, cav13_ica_soma,
+        cav13_ica_ais, cav13_ica_prox, cav13_ica_dist, cav13_ica_spine,
+        bk_acai12, bk_acai21, bk_acai22,
+
+        bk_Cav22_ik_ais, bk_Cav22_ik_prox, bk_Cav22_ik_dist, bk_Cav22_ik_spine,
+        bk_Cav12_ik_ais, bk_Cav12_ik_prox, bk_Cav12_ik_dist, bk_Cav12_ik_spine,
+        bk_Cav21_ik_ais, bk_Cav21_ik_prox, bk_Cav21_ik_dist, bk_Cav21_ik_spine,
+
+        bk_acai22_ais, bk_acai22_prox, bk_acai22_dist, bk_acai22_spine,
+        bk_acai12_ais, bk_acai12_prox, bk_acai12_dist, bk_acai12_spine,
+        bk_acai21_ais, bk_acai21_prox, bk_acai21_dist, bk_acai21_spine
+    )
 
 def save_run_report(path, meta: dict):
     def _json_safe(x):
