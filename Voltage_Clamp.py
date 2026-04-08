@@ -869,6 +869,8 @@ if __name__ == "__main__":
         print(f"{label}: ina_soma =", peak_abs(ina), "mA/cm2")
         print(f"{label}: Cav2.1 source current =", peak_abs(cav21), "mA/cm2")
         print(f"{label}: Cav22 source current =", peak_abs(cav22), "mA/cm2")
+        print(f"{label}: Cav1.2 source current =", peak_abs(cav12), "mA/cm2")
+        print(f"{label}: Cav1.3 source current =", peak_abs(cav13), "mA/cm2")
 
     step_on = 100.0
     step_off = 400.0
