@@ -1740,7 +1740,18 @@ if __name__ == "__main__":
     print("[Cav12 gbar ratio 50%/WT]:", cell2.soma(0.5).Cav12.gbar / cell.soma(0.5).Cav12.gbar) #check 50% scale corrcet
     cell2.add_current_clamp(delay=100, dur=300, amp=0.3)
     cell2.setup_recording()
-    t1, vs1, vais1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine, cai1_ais, ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, skik1_soma, ina1_soma, na8st1_o_soma, na8st1_g_soma, na8st1_i_total_soma, na8st1_o_ais, na8st1_g_ais, na8st1_i_total_ais, sk_acai1_soma, cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, bk_acai12_1, bk_acai21_1, bk_acai22_1 = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
+    t1, vs1, vais1, vp1, vd1, vsp1, cai1_soma, cai1_prox, cai1_dist, cai1_spine, cai1_ais, \
+    ica1_soma, ik1_soma, bk_Cav22ik1_soma, bk_Cav12ik1_soma, bk_Cav21ik1_soma, bk_total1_soma, skik1_soma, ina1_soma, \
+    na8st1_o_soma, na8st1_g_soma, na8st1_i_total_soma, na8st1_o_ais, na8st1_g_ais, na8st1_i_total_ais, \
+    sk_acai1_soma, cav21_ica1_soma, cav22_ica1_soma, cav12_ica1_soma, cav13_ica1_soma, \
+    cav13_ica1_ais, cav13_ica1_prox, cav13_ica1_dist, cav13_ica1_spine, \
+    bk_acai12_1, bk_acai21_1, bk_acai22_1, \
+    bk_Cav22ik1_ais, bk_Cav22ik1_prox, bk_Cav22ik1_dist, bk_Cav22ik1_spine, \
+    bk_Cav12ik1_ais, bk_Cav12ik1_prox, bk_Cav12ik1_dist, bk_Cav12ik1_spine, \
+    bk_Cav21ik1_ais, bk_Cav21ik1_prox, bk_Cav21ik1_dist, bk_Cav21ik1_spine, \
+    bk_acai22_1_ais, bk_acai22_1_prox, bk_acai22_1_dist, bk_acai22_1_spine, \
+    bk_acai12_1_ais, bk_acai12_1_prox, bk_acai12_1_dist, bk_acai12_1_spine, \
+    bk_acai21_1_ais, bk_acai21_1_prox, bk_acai21_1_dist, bk_acai21_1_spine = run_sim(cell2, tstop=500, v_init=-70, dt=0.025)
     print("lens:", len(t1), len(vs1), len(vp1), len(vd1), len(vsp1))
     print("Peak cai 50% soma/prox/dist/spine:",  #prints ca peak in each compartment
           float(np.max(cai1_soma)),
