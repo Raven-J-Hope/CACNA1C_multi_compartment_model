@@ -1,4 +1,4 @@
-#Masters modelling project
+# CACNA1C Dentate Gyrus Granule Cell-like Model 
 
 This repository contains a multi-compartment dentate gyrus granule cell model built in Python using NEURON.
 
