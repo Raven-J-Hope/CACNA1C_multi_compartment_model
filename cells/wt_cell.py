@@ -399,7 +399,7 @@ class DGGranuleLikeCell:
         self.axon.nseg = 11    #nseg = compartment
 
         for sec in self.all_secs():
-            sec.Ra = 100.0       #Ra = axial resistivity
+            sec.Ra = 300.0       #Ra = axial resistivity
             sec.cm = 1.0         #cm = capacitance
 
     def _set_biophysics(self):
