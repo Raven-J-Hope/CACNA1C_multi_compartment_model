@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from neuron import h
 
-from cells import WTCell, Cav12_50Cell
+from cells import WTCell, Cav12_50Cell, WT_BK_SPLIT, CAV12_50_BK_SPLIT
 
 h.load_file("stdrun.hoc")
 
