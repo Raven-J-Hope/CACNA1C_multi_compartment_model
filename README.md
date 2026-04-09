@@ -27,30 +27,50 @@ It includes:
 Project_Folder/
 `
 ├── cells/
+
 │   ├── __init__.py
+
 │   ├── wt_cell.py
+
 │   └── cav12_50_cell.py
+
 ├── experiments/
+
 │   ├── __init__.py
+
 │   ├── current_clamp.py
+
 │   └── voltage_clamp.py
+
 ├── Mod_Files/
+
 │   ├── *.mod
+
 │   └── x86_64/              #will be created after compilation on Linux/macOS
+
 ├── outputs/
+
 │   ├── ic_figures/
+
 │   ├── vc_figures/
+
 │   └── *.json
+
 ├── run_all.py
+
 └── README.md `
 
 
 ## Step 1: download the repository
 
 **Option A:** download ZIP from GitHub
+
 Open the GitHub repository page
+
 Click Code
+
 Click Download ZIP
+
 Extract the ZIP to a folder on your computer
 
 **Option B:** clone with git
@@ -58,11 +78,13 @@ Extract the ZIP to a folder on your computer
 Open a terminal and run:
 
 git clone https://github.com/USERNAME/REPOSITORY.git
+
 cd REPOSITORY
 
 Replace:
 
 USERNAME with the GitHub username
+
 REPOSITORY with the repository name
 
 ## Step 2: check the folder structure
@@ -70,11 +92,17 @@ REPOSITORY with the repository name
 After downloading or cloning, the extracted folder should contain:
 
 your_project_folder/
+
 ├── cells/
+
 ├── experiments/
+
 ├── Mod_Files/
+
 ├── run_all.py
+
 └── README.md
+
 
 It is important that
 
@@ -99,16 +127,13 @@ A similar recent Python 3 version should usually work, but matching the original
 **Required packages:**
 
 numpy
+
 matplotlib
+
 neuron
 
 Install them with pip.
 
-Linux
-pip install numpy matplotlib neuron
-macOS
-pip3 install numpy matplotlib neuron
-Windows
 pip install numpy matplotlib neuron
 
 If you are using a virtual environment or conda environment, activate it first.
@@ -117,22 +142,11 @@ If you are using a virtual environment or conda environment, activate it first.
 
 If NEURON is not already installed, install it via pip:
 
-Linux
-pip install neuron
-macOS
-pip3 install neuron
-Windows
 pip install neuron
 
 Then test it:
 
-Linux
 python -c "from neuron import h; print(h.nrnversion())"
-macOS
-python3 -c "from neuron import h; print(h.nrnversion())"
-Windows
-python -c "from neuron import h; print(h.nrnversion())"
-
 
 ## Step 6: compile the .mod files
 
@@ -140,13 +154,10 @@ Before running the model, the mechanism files in Mod_Files/ must be compiled.
 
 Run this from the top-level project folder.
 
-**Linux**
-cd Mod_Files
-nrnivmodl
+**Linux/ MacOS**
 
-
-**macOS**
 cd Mod_Files
+
 nrnivmodl
 
 
@@ -159,8 +170,9 @@ mknrndll
 
 After successful compilation:
 
-on Linux/macOS you should see Mod_Files/x86_64/libnrnmech.so
-on Windows NEURON will create the compiled mechanism library in its Windows-compatible form
+on **Linux/macOS** you should see Mod_Files/x86_64/libnrnmech.so
+
+on **Windows** NEURON will create the compiled mechanism library in its Windows-compatible form
 
 
 ## Step 7: make sure you run from the correct folder
@@ -170,29 +182,25 @@ Before running any script, move into the top-level project folder.
 I.e.,
 
 **Linux/macOS**
+
 cd /path/to/your_project_folder
 
 **Windows**
+
 cd C:\path\to\your_project_folder
 
 This matters because the code expects imports like cells and experiments to be found from the top level.
 
-**Step 8:** run the full project
+## Step 8: run the full project
 
 To run everything:
 
-Linux
-python run_all.py
-
-macOS
-python3 run_all.py
-
-Windows
 python run_all.py
 
 This will run:
 
 current clamp
+
 voltage clamp
 
 and write outputs into the outputs/ folder.
