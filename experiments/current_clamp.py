@@ -185,15 +185,12 @@ def run_current_clamp():
 
     #plots
 
-    # ============================================================
-    # EXTRA IC PLOTS
-    # ============================================================
 
-    # helper: convert recorded NEURON vector to numpy array
+    #convert recorded NEURON vector to numpy array
     def vec_to_np(v):
         return np.array(v) if v is not None else None
 
-    # helper: upward crossing spike times
+    #upward crossing spike times
     def spike_times_upcross(t, v, thr=0.0, refractory_ms=2.0, t0=100.0, t1=400.0):
         t = np.asarray(t)
         v = np.asarray(v)
@@ -214,7 +211,7 @@ def run_current_clamp():
                 last = ts
         return np.array(out)
 
-    # helper: AP widths
+    #AP widths
     def ap_widths_per_spike(t, v, frac=0.5, threshold=0.0, refractory_ms=2.0,
                             t_start=100.0, t_end=400.0, pre_ms=3.0, post_ms=15.0):
         t = np.asarray(t)
@@ -274,7 +271,7 @@ def run_current_clamp():
 
         return np.array(spike_times), np.array(widths), np.array(peaks), np.array(troughs)
 
-    # helper: AUC around spikes
+    #AUC around spikes
     def auc_around_spikes(t, y, spike_ts, pre_ms=5.0, post_ms=20.0):
         if y is None:
             return np.array([])
@@ -287,7 +284,7 @@ def run_current_clamp():
                 aucs.append(float(np.trapz(y[w], t[w])))
         return np.array(aucs)
 
-    # helper: first AP window
+    #first AP window
     def first_ap_window(t, v, thr=0.0, t0=100.0, t1=400.0, pre_ms=5.0, post_ms=20.0):
         spk = spike_times_upcross(t, v, thr=thr, refractory_ms=2.0, t0=t0, t1=t1)
         if len(spk) == 0:
@@ -295,7 +292,7 @@ def run_current_clamp():
         ts = spk[0]
         return (t >= ts - pre_ms) & (t <= ts + post_ms)
 
-    # helper: safe max abs
+    #safe max abs
     def safe_max_abs(*arrays):
         vals = []
         for a in arrays:
@@ -303,7 +300,7 @@ def run_current_clamp():
                 vals.append(float(np.max(np.abs(a))))
         return max(vals) if vals else None
 
-    # helper: safe min/max
+    #safe min/max
     def safe_min(*arrays):
         vals = []
         for a in arrays:
@@ -318,9 +315,9 @@ def run_current_clamp():
                 vals.append(float(np.max(a)))
         return max(vals) if vals else None
 
-    # ------------------------------------------------------------
-    # pull extra traces directly from cell objects
-    # ------------------------------------------------------------
+
+    #pull extra traces directly from cell objects
+
     t0 = wt_data["t"]
     t1 = het_data["t"]
 
@@ -339,7 +336,7 @@ def run_current_clamp():
     cai0_soma = wt_data["cai_soma"]
     cai1_soma = het_data["cai_soma"]
 
-    # BK local acai
+    #BK local acai
     bk_acai12_0 = vec_to_np(getattr(wt, "bk_acai12_soma_vec", None))
     bk_acai21_0 = vec_to_np(getattr(wt, "bk_acai21_soma_vec", None))
     bk_acai22_0 = vec_to_np(getattr(wt, "bk_acai22_soma_vec", None))
@@ -348,7 +345,7 @@ def run_current_clamp():
     bk_acai21_1 = vec_to_np(getattr(het, "bk_acai21_soma_vec", None))
     bk_acai22_1 = vec_to_np(getattr(het, "bk_acai22_soma_vec", None))
 
-    # summed BK acai
+    #summed BK acai
     bk_acai_total_0 = None
     if bk_acai12_0 is not None and bk_acai21_0 is not None and bk_acai22_0 is not None:
         bk_acai_total_0 = bk_acai12_0 + bk_acai21_0 + bk_acai22_0
@@ -357,7 +354,7 @@ def run_current_clamp():
     if bk_acai12_1 is not None and bk_acai21_1 is not None and bk_acai22_1 is not None:
         bk_acai_total_1 = bk_acai12_1 + bk_acai21_1 + bk_acai22_1
 
-    # BK currents by type
+    #BK currents by type
     bk12_0 = wt_data["bk_Cav12_ik_soma"]
     bk21_0 = wt_data["bk_Cav21_ik_soma"]
     bk22_0 = wt_data["bk_Cav22_ik_soma"]
@@ -368,7 +365,7 @@ def run_current_clamp():
     bk_total0 = wt_data["bk_total_soma"]
     bk_total1 = het_data["bk_total_soma"]
 
-    # y-limits shared across comparable plots
+    #y-limits shared across comparable plots
     vm_min = safe_min(vs0, vs1, vais0, vais1, vp0, vp1, vd0, vd1, vsp0, vsp1)
     vm_max = safe_max(vs0, vs1, vais0, vais1, vp0, vp1, vd0, vd1, vsp0, vsp1)
 
@@ -395,9 +392,8 @@ def run_current_clamp():
     bk_acai22_min = safe_min(bk_acai22_0, bk_acai22_1)
     bk_acai22_max = safe_max(bk_acai22_0, bk_acai22_1)
 
-    # ------------------------------------------------------------
-    # # AP - soma
-    # ------------------------------------------------------------
+
+    #AP - soma
     plt.figure()
     plt.plot(t0, vs0, color=WT_COLOR)
     plt.xlabel("Time (ms)")
@@ -416,9 +412,8 @@ def run_current_clamp():
     savefig("ic_AP_soma_Cav12_50.png")
     plt.show()
 
-    # ------------------------------------------------------------
-    # # panelled AP plot for AIS / prox dend / dist dend / spine
-    # ------------------------------------------------------------
+
+    #panelled AP plot for AIS / prox dend / dist dend / spine
     fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex=True)
     axes[0, 0].plot(t0, vais0, color=WT_COLOR)
     axes[0, 0].set_ylabel("Vm (mV)")
@@ -461,9 +456,8 @@ def run_current_clamp():
     savefig("ic_AP_panel_AIS_prox_dist_spine_Cav12_50.png")
     plt.show()
 
-    # ------------------------------------------------------------
-    # # AP half widths across train (soma)
-    # ------------------------------------------------------------
+
+    #AP half widths across train (soma)
     spk_t0, widths0, _, _ = ap_widths_per_spike(t0, vs0, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0)
     spk_t1, widths1, _, _ = ap_widths_per_spike(t1, vs1, frac=0.5, threshold=0.0, t_start=100.0, t_end=400.0)
 
@@ -490,9 +484,8 @@ def run_current_clamp():
         savefig("ic_AP_half_widths_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # AP aligned with cai
-    # ------------------------------------------------------------
+
+    #AP aligned with cai
     if cai0_soma is not None:
         fig, ax1 = plt.subplots(figsize=(10, 5))
         ax1.plot(t0, vs0, color=WT_COLOR)
@@ -525,9 +518,8 @@ def run_current_clamp():
         savefig("ic_AP_with_cai_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # AP aligned with cai for 1 AP
-    # ------------------------------------------------------------
+
+    #AP aligned with cai for 1 AP
     w_ap0 = first_ap_window(t0, vs0, thr=0.0, t0=100.0, t1=400.0, pre_ms=5.0, post_ms=20.0)
     w_ap1 = first_ap_window(t1, vs1, thr=0.0, t0=100.0, t1=400.0, pre_ms=5.0, post_ms=20.0)
 
@@ -559,9 +551,8 @@ def run_current_clamp():
         savefig("ic_AP_with_cai_1AP_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # total BK plot
-    # ------------------------------------------------------------
+
+    #total BK plot
     if bk_total0 is not None:
         plt.figure()
         plt.plot(t0, bk_total0, color=WT_COLOR)
@@ -582,9 +573,7 @@ def run_current_clamp():
         savefig("ic_total_BK_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # BkCavXX plot, panelled with BkCaV12, 21 and 22
-    # ------------------------------------------------------------
+    #BkCavXX plots, panelled with BkCaV12, 21 and 22
     fig, axes = plt.subplots(3, 1, figsize=(10, 10), sharex=True)
     axes[0].plot(t0, bk12_0, color=WT_COLOR)
     axes[0].set_ylabel("BK_Cav12")
@@ -621,9 +610,8 @@ def run_current_clamp():
     savefig("ic_BK_CavXX_panel_Cav12_50.png")
     plt.show()
 
-    # ------------------------------------------------------------
-    # # total BK acai plot
-    # ------------------------------------------------------------
+
+    #total BK acai plot
     if bk_acai_total_0 is not None:
         plt.figure()
         plt.plot(t0, bk_acai_total_0, color=WT_COLOR)
@@ -644,9 +632,8 @@ def run_current_clamp():
         savefig("ic_total_BK_acai_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # panelled acai BkCavXX plot, panelled with BkCaV12, 21 and 22
-    # ------------------------------------------------------------
+
+    #panelled acai BkCavXX plot, panelled with BkCaV12, 21 and 22
     fig, axes = plt.subplots(3, 1, figsize=(10, 10), sharex=True)
     axes[0].plot(t0, bk_acai12_0, color=WT_COLOR)
     axes[0].set_ylabel("BK_Cav12 acai")
@@ -683,9 +670,8 @@ def run_current_clamp():
     savefig("ic_BK_acai_CavXX_panel_Cav12_50.png")
     plt.show()
 
-    # ------------------------------------------------------------
-    # # total BK current density aligned with AP
-    # ------------------------------------------------------------
+
+    #total BK current density aligned with AP
     if bk_total0 is not None:
         fig, ax1 = plt.subplots(figsize=(10, 5))
         ax1.plot(t0, vs0, color=WT_COLOR)
@@ -718,9 +704,8 @@ def run_current_clamp():
         savefig("ic_total_BK_with_AP_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # total BK current density aligned with AP for 1 AP
-    # ------------------------------------------------------------
+
+    #total BK current density aligned with AP for 1 AP
     if w_ap0 is not None and bk_total0 is not None:
         fig, ax1 = plt.subplots(figsize=(10, 5))
         ax1.plot(t0[w_ap0], vs0[w_ap0], color=WT_COLOR)
@@ -749,9 +734,7 @@ def run_current_clamp():
         savefig("ic_total_BK_with_AP_1AP_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # panelled BkCavXX current density aligned with AP
-    # ------------------------------------------------------------
+    #panelled BkCavXX current density aligned with AP
     fig, axes = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
     for ax, bk, label in zip(
         axes,
@@ -784,10 +767,7 @@ def run_current_clamp():
     savefig("ic_BK_CavXX_with_AP_panel_Cav12_50.png")
     plt.show()
 
-    # ------------------------------------------------------------
-    # # panelled BkCavXX current density aligned with AP for 1 AP
-    # ------------------------------------------------------------
-    if w_ap0 is not None:
+    #panelled BkCavXX current density aligned with AP for 1 AP
         fig, axes = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
         for ax, bk, label in zip(
             axes,
@@ -821,9 +801,8 @@ def run_current_clamp():
         savefig("ic_BK_CavXX_with_AP_panel_1AP_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # total BK recruitment efficiency
-    # ------------------------------------------------------------
+
+    #total BK recruitment efficiency
     spk0 = spike_times_upcross(t0, vs0, thr=0.0, refractory_ms=2.0, t0=100.0, t1=400.0)
     spk1 = spike_times_upcross(t1, vs1, thr=0.0, refractory_ms=2.0, t0=100.0, t1=400.0)
 
@@ -868,9 +847,9 @@ def run_current_clamp():
         savefig("ic_total_BK_recruitment_efficiency_Cav12_50.png")
         plt.show()
 
-    # ------------------------------------------------------------
-    # # panelled BK recruitment efficiency for BK_Cav12 / 21 / 22
-    # ------------------------------------------------------------
+
+    #panelled BK recruitment efficiency for BK_Cav12 / 21 / 22
+
     auc_bk12_0 = auc_around_spikes(t0, bk12_0, spk0, pre_ms=pre_ms, post_ms=post_ms)
     auc_bk21_0 = auc_around_spikes(t0, bk21_0, spk0, pre_ms=pre_ms, post_ms=post_ms)
     auc_bk22_0 = auc_around_spikes(t0, bk22_0, spk0, pre_ms=pre_ms, post_ms=post_ms)
