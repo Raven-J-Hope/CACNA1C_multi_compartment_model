@@ -768,21 +768,21 @@ def run_current_clamp():
     plt.show()
 
     #panelled BkCavXX current density aligned with AP for 1 AP
-        fig, axes = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
-        for ax, bk, label in zip(
-            axes,
-            [bk12_0, bk21_0, bk22_0],
-            ["BK_Cav12", "BK_Cav21", "BK_Cav22"]
-        ):
-            ax.plot(t0[w_ap0], vs0[w_ap0], color=WT_COLOR)
-            ax2 = ax.twinx()
-            ax2.plot(t0[w_ap0], bk[w_ap0], color="blue")
-            ax.set_ylabel("Vm (mV)")
-            ax2.set_ylabel(label)
-        axes[-1].set_xlabel("Time (ms)")
-        fig.tight_layout()
-        savefig("ic_BK_CavXX_with_AP_panel_1AP_WT.png")
-        plt.show()
+    fig, axes = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
+    for ax, bk, label in zip(
+         axes,
+         [bk12_0, bk21_0, bk22_0],
+         ["BK_Cav12", "BK_Cav21", "BK_Cav22"]
+     ):
+        ax.plot(t0[w_ap0], vs0[w_ap0], color=WT_COLOR)
+        ax2 = ax.twinx()
+        ax2.plot(t0[w_ap0], bk[w_ap0], color="blue")
+        ax.set_ylabel("Vm (mV)")
+        ax2.set_ylabel(label)
+    axes[-1].set_xlabel("Time (ms)")
+    fig.tight_layout()
+    savefig("ic_BK_CavXX_with_AP_panel_1AP_WT.png")
+    plt.show()
 
     if w_ap1 is not None:
         fig, axes = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
