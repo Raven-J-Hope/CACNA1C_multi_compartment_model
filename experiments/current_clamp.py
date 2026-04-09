@@ -142,6 +142,37 @@ def run_current_clamp():
     het.setup_recording()
     het_data = run_sim(het, tstop=500.0, v_init=-70.0, dt=0.025)
 
+    #DEBUG - check WT vs 50% cell actually differ
+    print("\n--- DEBUG CELL PARAMS ---")
+
+    print("WT soma Cav12.gbar:", wt.soma(0.5).Cav12.gbar)
+    print("50% soma Cav12.gbar:", het.soma(0.5).Cav12.gbar)
+    print("ratio soma 50%/WT:", het.soma(0.5).Cav12.gbar / wt.soma(0.5).Cav12.gbar)
+
+    print("WT AIS Cav12.gbar:", wt.ais(0.5).Cav12.gbar)
+    print("50% AIS Cav12.gbar:", het.ais(0.5).Cav12.gbar)
+    print("ratio AIS 50%/WT:", het.ais(0.5).Cav12.gbar / wt.ais(0.5).Cav12.gbar)
+
+    print("WT prox Cav12.gbar:", wt.dend_prox(0.5).Cav12.gbar)
+    print("50% prox Cav12.gbar:", het.dend_prox(0.5).Cav12.gbar)
+    print("ratio prox 50%/WT:", het.dend_prox(0.5).Cav12.gbar / wt.dend_prox(0.5).Cav12.gbar)
+
+    print("WT dist Cav12.gbar:", wt.dend_dist(0.5).Cav12.gbar)
+    print("50% dist Cav12.gbar:", het.dend_dist(0.5).Cav12.gbar)
+    print("ratio dist 50%/WT:", het.dend_dist(0.5).Cav12.gbar / wt.dend_dist(0.5).Cav12.gbar)
+
+    print("WT spine Cav12.gbar:", wt.spines[0](0.5).Cav12.gbar)
+    print("50% spine Cav12.gbar:", het.spines[0](0.5).Cav12.gbar)
+    print("ratio spine 50%/WT:", het.spines[0](0.5).Cav12.gbar / wt.spines[0](0.5).Cav12.gbar)
+
+    print("WT BK_Cav22 gakbar:", wt.soma(0.5).BK_Cav22.gakbar)
+    print("WT BK_Cav12 gakbar:", wt.soma(0.5).BK_Cav12.gakbar)
+    print("WT BK_Cav21 gakbar:", wt.soma(0.5).BK_Cav21.gakbar)
+
+    print("50% BK_Cav22 gakbar:", het.soma(0.5).BK_Cav22.gakbar)
+    print("50% BK_Cav12 gakbar:", het.soma(0.5).BK_Cav12.gakbar)
+    print("50% BK_Cav21 gakbar:", het.soma(0.5).BK_Cav21.gakbar)
+
     #save metadata
     run_meta = {
         "python_version": sys.version,
