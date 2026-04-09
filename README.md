@@ -45,7 +45,7 @@ Project_Folder/
 └── README.md `
 
 
-##Step 1: download the repository
+## Step 1: download the repository
 
 **Option A:** download ZIP from GitHub
 Open the GitHub repository page
