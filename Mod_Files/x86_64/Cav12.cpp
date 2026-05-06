@@ -338,7 +338,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  
     hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 Cav12 /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav12.mod\n");
+ 	ivoc_help("help ?1 Cav12 /home/raven/PycharmProjects/Masters/Mod_Files/Cav12.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -622,7 +622,7 @@ _first = 0;
 
 #if NMODL_TEXT
 static void register_nmodl_text_and_filename(int mech_type) {
-    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/Cav12.mod";
+    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters/Mod_Files/Cav12.mod";
     const char* nmodl_file_text = 
   ": model from Evans et al 2013, transferred from GENESIS to NEURON by Beining et al (2016), \"A novel comprehensive and consistent electrophysiologcal model of dentate granule cells\"\n"
   ": also added Calcium dependent inactivation\n"
@@ -663,11 +663,11 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	h2Tau = 0.5 (ms)\n"
   "	gbar = 0	(S/cm2)\n"
   "		vshift = 0 		(mV)\n"
-  "		\n"
-  "		:parameters for calcium-dep inactivation (CDI) \n"
+  "\n"
+  "		:parameters for calcium-dep inactivation (CDI)\n"
   "			:f= (0.001/(0.001+[Ca]))Poirazi CA1  2003\n"
   "			:f= (0.0005/(0.0005+[Ca])) Rhodes and Llinas 2001 Cort Pyr\n"
-  "	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper	\n"
+  "	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper\n"
   "	VDI = 0.17\n"
   "}\n"
   "\n"
@@ -684,9 +684,9 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	rates()\n"
   "	SOLVE state METHOD cnexp\n"
   "	g = gbar*m*h*h2 : h2 calcium dependent inactivation is taken from santhakumar 05.. tjos assumes instantaneous calcium inactivation\n"
-  "	ica = (g)*(v - eca) : \n"
+  "	ica = (g)*(v - eca) :\n"
   "	ilca = ica\n"
-  "	\n"
+  "\n"
   "}\n"
   "\n"
   "DERIVATIVE state {	: exact when v held constant integrates over dt step\n"
@@ -699,10 +699,10 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "		LOCAL mA,mB\n"
   "		mA = 39800*(v + 8.124)/(exp((v + 8.124)/9.005) - 1)\n"
   "		mB = 990*exp(v/31.4)\n"
-  "		mTau = 1/(mA + mB) \n"
+  "		mTau = 1/(mA + mB)\n"
   "\n"
   "		mInf   = 1/(1 + exp((v + 8.9)/(-6.7)))\n"
-  "		\n"
+  "\n"
   "		hInf   = VDI/(1 + exp((v +55)/8)) + (1-VDI)\n"
   "		h2Inf = kf/(kf+cai)\n"
   "}\n"

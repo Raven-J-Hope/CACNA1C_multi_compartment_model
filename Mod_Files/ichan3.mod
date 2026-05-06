@@ -171,12 +171,12 @@ FUNCTION bk(Vm (mV)) (/ms) {
 
 FUNCTION al(Vm (mV)) (/ms) {
 	UNITSOFF
-	al = 0.00015*exp(-0.066667*(Vm -(-13+vshiftak)))
+	al = 0.00005*exp(-0.066667*(Vm -(-13+vshiftak)))
 	UNITSON
 }
 
 FUNCTION bl(Vm (mV)) (/ms) {
 	UNITSOFF
-	bl = 0.06/(1+exp(-(-0.083333)*((-68+vshiftak)-Vm)))
+	bl = 0.02/(1+exp(-(-0.083333)*((-68+vshiftak)-Vm)))
 	UNITSON
 }

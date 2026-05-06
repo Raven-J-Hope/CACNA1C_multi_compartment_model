@@ -37,11 +37,11 @@ PARAMETER {
 	h2Tau = 0.5 (ms)
 	gbar = 0	(S/cm2)
 		vshift = 0 		(mV)
-		
-		:parameters for calcium-dep inactivation (CDI) 
+
+		:parameters for calcium-dep inactivation (CDI)
 			:f= (0.001/(0.001+[Ca]))Poirazi CA1  2003
 			:f= (0.0005/(0.0005+[Ca])) Rhodes and Llinas 2001 Cort Pyr
-	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper	
+	kf		=			0.0005 (mM)  : factor in inactivation, the higher the less sensitive. others uses 0.0002.. standen and stanfield use 0.001mM in original paper
 	VDI = 0.17
 }
 
@@ -58,9 +58,9 @@ BREAKPOINT {
 	rates()
 	SOLVE state METHOD cnexp
 	g = gbar*m*h*h2 : h2 calcium dependent inactivation is taken from santhakumar 05.. tjos assumes instantaneous calcium inactivation
-	ica = (g)*(v - eca) : 
+	ica = (g)*(v - eca) :
 	ilca = ica
-	
+
 }
 
 DERIVATIVE state {	: exact when v held constant integrates over dt step
@@ -73,10 +73,10 @@ PROCEDURE rates(){
 		LOCAL mA,mB
 		mA = 39800*(v + 8.124)/(exp((v + 8.124)/9.005) - 1)
 		mB = 990*exp(v/31.4)
-		mTau = 1/(mA + mB) 
+		mTau = 1/(mA + mB)
 
 		mInf   = 1/(1 + exp((v + 8.9)/(-6.7)))
-		
+
 		hInf   = VDI/(1 + exp((v +55)/8)) + (1-VDI)
 		h2Inf = kf/(kf+cai)
 }

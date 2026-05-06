@@ -104,10 +104,10 @@ DERIVATIVE states {
     h' = (hinf-h)/tauh
 }
 
-FUNCTION ghk( v (mV), ci (mM), co (mM), z )  (coulombs/cm3) { 
+FUNCTION ghk( v (mV), ci (mM), co (mM), z )  (coulombs/cm3) {
     E = (1e-3) * v
-      zeta = (z*F*E)/(R*T)  
-    
+      zeta = (z*F*E)/(R*T)
+
     if ( fabs(1-exp(-zeta)) < 1e-6 ) {
         ghk = (1e-6) * (z*F) * (ci - co*exp(-zeta)) * (1 + zeta/2)
     } else {

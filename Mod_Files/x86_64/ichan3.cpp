@@ -439,7 +439,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  
     hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 ichan3 /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/ichan3.mod\n");
+ 	ivoc_help("help ?1 ichan3 /home/raven/PycharmProjects/Masters/Mod_Files/ichan3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -924,7 +924,7 @@ _nt = nrn_threads;
  
 double al ( _internalthreadargsprotocomma_ double _lVm ) {
    double _lal;
-  _lal = 0.00015 * exp ( - 0.066667 * ( _lVm - ( - 13.0 + vshiftak ) ) ) ;
+  _lal = 0.00005 * exp ( - 0.066667 * ( _lVm - ( - 13.0 + vshiftak ) ) ) ;
     
 return _lal;
  }
@@ -963,7 +963,7 @@ _nt = nrn_threads;
  
 double bl ( _internalthreadargsprotocomma_ double _lVm ) {
    double _lbl;
-  _lbl = 0.06 / ( 1.0 + exp ( - ( - 0.083333 ) * ( ( - 68.0 + vshiftak ) - _lVm ) ) ) ;
+  _lbl = 0.02 / ( 1.0 + exp ( - ( - 0.083333 ) * ( ( - 68.0 + vshiftak ) - _lVm ) ) ) ;
     
 return _lbl;
  }
@@ -1209,7 +1209,7 @@ _first = 0;
 
 #if NMODL_TEXT
 static void register_nmodl_text_and_filename(int mech_type) {
-    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/ichan3.mod";
+    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters/Mod_Files/ichan3.mod";
     const char* nmodl_file_text = 
   ": Na-channels from Aradi and Holmes 1999 as available in ModelDB (transformed into mod file)\n"
   ": Note: \"The Na and KDR parameters in the paper were chosen relative to a\n"
@@ -1384,13 +1384,13 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "\n"
   "FUNCTION al(Vm (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	al = 0.00015*exp(-0.066667*(Vm -(-13+vshiftak)))\n"
+  "	al = 0.00005*exp(-0.066667*(Vm -(-13+vshiftak)))\n"
   "	UNITSON\n"
   "}\n"
   "\n"
   "FUNCTION bl(Vm (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	bl = 0.06/(1+exp(-(-0.083333)*((-68+vshiftak)-Vm)))\n"
+  "	bl = 0.02/(1+exp(-(-0.083333)*((-68+vshiftak)-Vm)))\n"
   "	UNITSON\n"
   "}\n"
   ;

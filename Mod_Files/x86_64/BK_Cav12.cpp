@@ -189,7 +189,7 @@ static NPyDirectMechFunc npy_direct_func_proc[] = {
 #define ca0 ca0_BK_Cav12
  double ca0 = 7e-05;
 #define tau tau_BK_Cav12
- double tau = 5;
+ double tau = 8;
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
  {0, 0, 0}
@@ -399,8 +399,8 @@ static int _ode_spec1(_internalthreadargsproto_);
      acai = ca0 ;
      }
    rates ( _threadargscomma_ v , acai ) ;
-   Da = ( ainf - a ) / atau ;
-   Dab = ( abinf - ab ) / abtau ;
+   Da = ( ainf - a ) / ( atau * 3.0 ) ;
+   Dab = ( abinf - ab ) / ( abtau * 3.0 ) ;
    }
  return _reset;
 }
@@ -411,8 +411,8 @@ static int _ode_spec1(_internalthreadargsproto_);
    acai = ca0 ;
    }
  rates ( _threadargscomma_ v , acai ) ;
- Da = Da  / (1. - dt*( ( ( ( - 1.0 ) ) ) / atau )) ;
- Dab = Dab  / (1. - dt*( ( ( ( - 1.0 ) ) ) / abtau )) ;
+ Da = Da  / (1. - dt*( ( ( ( - 1.0 ) ) ) / ( atau * 3.0 ) )) ;
+ Dab = Dab  / (1. - dt*( ( ( ( - 1.0 ) ) ) / ( abtau * 3.0 ) )) ;
   return 0;
 }
  /*END CVODE*/
@@ -423,8 +423,8 @@ static int _ode_spec1(_internalthreadargsproto_);
      acai = ca0 ;
      }
    rates ( _threadargscomma_ v , acai ) ;
-    a = a + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / atau)))*(- ( ( ( ainf ) ) / atau ) / ( ( ( ( - 1.0 ) ) ) / atau ) - a) ;
-    ab = ab + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / abtau)))*(- ( ( ( abinf ) ) / abtau ) / ( ( ( ( - 1.0 ) ) ) / abtau ) - ab) ;
+    a = a + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / ( atau * 3.0 ))))*(- ( ( ( ainf ) ) / ( atau * 3.0 ) ) / ( ( ( ( - 1.0 ) ) ) / ( atau * 3.0 ) ) - a) ;
+    ab = ab + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / ( abtau * 3.0 ))))*(- ( ( ( abinf ) ) / ( abtau * 3.0 ) ) / ( ( ( ( - 1.0 ) ) ) / ( abtau * 3.0 ) ) - ab) ;
    }
   return 0;
 }
@@ -630,17 +630,21 @@ _nt = nrn_threads;
 static int  rates ( _internalthreadargsprotocomma_ double _lv , double _lc ) {
    double _lrange , _lvv , _lashift , _lbshift ;
  _lashift = - 32.0 + ( 59.2 * exp ( - .09 * _lc * 1e3 ) ) + ( 96.7 * exp ( - .47 * _lc * 1e3 ) ) ;
+   _lashift = _lashift + 15.0 ;
    ainf = 1.0 / ( 1.0 + exp ( ( _lashift - _lv ) / ( 25.0 / 1.6 ) ) ) ;
    _lvv = _lv + 100.0 - shifta ( _threadargscomma_ _lc ) ;
    atau = taufunc ( _threadargscomma_ _lvv ) ;
    _lrange = peaka ( _threadargscomma_ _lc ) - 1.0 ;
    atau = ( _lrange * ( ( atau - .2 ) / .8 ) ) + 1.0 ;
+   atau = atau * 2.0 ;
    _lbshift = - 56.449 + 104.52 * exp ( - .22964 * _lc * 1e3 ) + 295.68 * exp ( - 2.1571 * _lc * 1e3 ) ;
+   _lbshift = _lbshift + 15.0 ;
    abinf = 1.0 / ( 1.0 + exp ( ( _lbshift - _lv ) / ( 25.0 / 1.6 ) ) ) ;
    _lvv = _lv + 100.0 - shiftab ( _threadargscomma_ _lc ) ;
    abtau = taufunc ( _threadargscomma_ _lvv ) ;
    _lrange = peakab ( _threadargscomma_ _lc ) - base ;
    abtau = ( _lrange * ( ( abtau - .2 ) / .8 ) ) + base ;
+   abtau = abtau * 2.0 ;
     return 0; }
  
 static void _hoc_rates(void) {
@@ -912,7 +916,7 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	base = 4  	(mV)\n"
   "\n"
   "	ca0 = 0.00007 (mM)\n"
-  "	tau = 5 (ms)\n"
+  "	tau = 8 (ms)\n"
   "	B = 0.15 (mM-cm2/mA-ms)\n"
   "}\n"
   "\n"
@@ -950,8 +954,8 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	}\n"
   "\n"
   "	rates(v, acai)\n"
-  "	a' = (ainf-a)/atau\n"
-  "	ab' = (abinf-ab)/abtau\n"
+  "	a' = (ainf-a)/(atau*3)\n"
+  "	ab' = (abinf-ab)/(abtau*3)\n"
   "}\n"
   "\n"
   "INITIAL {\n"
@@ -994,29 +998,33 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "	 }\n"
   "}\n"
   "\n"
-  "PROCEDURE rates(v (mV), c (mM)) { : nc (mM), \n"
+  "PROCEDURE rates(v (mV), c (mM)) { : nc (mM),\n"
   "	  LOCAL range, vv,ashift, bshift\n"
   "\n"
   "	  : alpha model\n"
   "\n"
   "	  ashift =  -32 + (59.2*exp(-.09*c*1e3)) + (96.7*exp(-.47*c*1e3))\n"
+  "      ashift = ashift + 15\n"
   "	  ainf = 1/(1+exp((ashift-v)/(25/1.6)))\n"
   "\n"
   "	  vv = v + 100 - shifta(c)\n"
   "	  atau = taufunc(vv)\n"
   "	  range = peaka(c)-1\n"
   "	  atau = (range*((atau-.2)/.8)) + 1\n"
+  "      atau = atau * 2\n"
   "\n"
   "	  : alpha-beta4 model\n"
   "\n"
   "	  bshift = -56.449 + 104.52*exp(-.22964*c*1e3) + 295.68*exp(-2.1571*c*1e3)\n"
+  "      bshift = bshift + 15\n"
   "\n"
   "	  abinf = 1/(1+exp((bshift-v)/(25/1.6)))\n"
   "\n"
   "	  vv = v + 100 - shiftab(c)\n"
   "	  abtau = taufunc(vv)\n"
   "	  range = peakab(c)-base\n"
-  "	  abtau = (range*((abtau-.2)/.8)) + base		\n"
+  "	  abtau = (range*((abtau-.2)/.8)) + base\n"
+  "      abtau = abtau * 2\n"
   "\n"
   "}\n"
   ;

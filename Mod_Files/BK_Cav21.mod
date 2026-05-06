@@ -36,7 +36,7 @@ PARAMETER {
 	base = 4  	(mV)
 
 	ca0 = 0.00007 (mM)
-	tau = 5 (ms)
+	tau = 8 (ms)
 	B = 0.15 (mM-cm2/mA-ms)
 }
 
@@ -74,8 +74,8 @@ DERIVATIVE state {
 	}
 
 	rates(v, acai)
-	a' = (ainf-a)/atau
-	ab' = (abinf-ab)/abtau
+	a' = (ainf-a)/(atau*3)
+	ab' = (abinf-ab)/(abtau*3)
 }
 
 INITIAL {
@@ -113,18 +113,22 @@ PROCEDURE rates(v (mV), c (mM)) {
 	LOCAL range, vv, ashift, bshift
 
 	ashift = -32 + (59.2*exp(-.09*c*1e3)) + (96.7*exp(-.47*c*1e3))
+    ashift = ashift + 15
 	ainf = 1/(1+exp((ashift-v)/(25/1.6)))
 
 	vv = v + 100 - shifta(c)
 	atau = taufunc(vv)
 	range = peaka(c)-1
 	atau = (range*((atau-.2)/.8)) + 1
+    atau = atau * 2
 
 	bshift = -56.449 + 104.52*exp(-.22964*c*1e3) + 295.68*exp(-2.1571*c*1e3)
+    bshift = bshift + 15
 	abinf = 1/(1+exp((bshift-v)/(25/1.6)))
 
 	vv = v + 100 - shiftab(c)
 	abtau = taufunc(vv)
 	range = peakab(c)-base
 	abtau = (range*((abtau-.2)/.8)) + base
+    abtau = abtau * 2
 }
