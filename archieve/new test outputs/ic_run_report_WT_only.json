@@ -1,0 +1,19 @@
+{
+  "python_version": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:50:58) [GCC 12.3.0]",
+  "neuron_version": "NEURON -- VERSION 9.0.1 HEAD (b12a541+) 2025-11-14",
+  "dt_ms": 0.025,
+  "tstop_ms": 500.0,
+  "v_init_mV": -70.0,
+  "celsius_C": 34.0,
+  "currents_nA": [
+    0.0,
+    0.1,
+    0.2,
+    0.30000000000000004,
+    0.4,
+    0.5,
+    0.6000000000000001,
+    0.7000000000000001
+  ],
+  "notes": "WT only. Mechanism placement follows user-supplied compartment table. Sk mapped to SK2."
+}

@@ -1,0 +1,13 @@
+"metric","condition","value_mA_per_cm2","voltage_mV"
+"bk_total_peak","WT",1.88624305348096e-07,40
+"bk_total_peak","Cav1.2 50% BK_Cav1.2 removed",1.28113612066896e-07,40
+"bk_total_peak","Cav1.2 50% redist",1.51214448141908e-07,40
+"bk12_peak","WT",6.96992567655742e-08,40
+"bk12_peak","Cav1.2 50% BK_Cav1.2 removed",2.0853876025164e-08,40
+"bk12_peak","Cav1.2 50% redist",2.03539466076264e-08,40
+"bk21_peak","WT",1.16527652172509e-07,40
+"bk21_peak","Cav1.2 50% BK_Cav1.2 removed",1.05095803483364e-07,40
+"bk21_peak","Cav1.2 50% redist",1.28220430708808e-07,40
+"bk22_peak","WT",2.4172395260951e-09,40
+"bk22_peak","Cav1.2 50% BK_Cav1.2 removed",2.18856794560584e-09,40
+"bk22_peak","Cav1.2 50% redist",2.67012682958095e-09,40

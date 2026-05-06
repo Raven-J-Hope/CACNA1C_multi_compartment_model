@@ -1,0 +1,42 @@
+{
+  "python_version": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:50:58) [GCC 12.3.0]",
+  "neuron_version": "NEURON -- VERSION 9.0.1 HEAD (b12a541+) 2025-11-14",
+  "celsius_C": 34.0,
+  "current_clamp_currents_nA": [
+    0.0,
+    0.1,
+    0.2,
+    0.30000000000000004,
+    0.4,
+    0.5,
+    0.6000000000000001,
+    0.7000000000000001
+  ],
+  "morphology": {
+    "soma": {
+      "L": 20.0,
+      "diam": 20.0,
+      "nseg": 1
+    },
+    "dend_prox": {
+      "L": 150.0,
+      "diam": 2.0,
+      "nseg": 9
+    },
+    "dend_dist": {
+      "L": 200.0,
+      "diam": 1.2,
+      "nseg": 11
+    },
+    "ais": {
+      "L": 30.0,
+      "diam": 1.0,
+      "nseg": 3
+    },
+    "axon": {
+      "L": 300.0,
+      "diam": 1.0,
+      "nseg": 11
+    }
+  }
+}
