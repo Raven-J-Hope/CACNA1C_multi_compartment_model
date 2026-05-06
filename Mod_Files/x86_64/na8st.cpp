@@ -217,7 +217,7 @@ static NPyDirectMechFunc npy_direct_func_proc[] = {
 #define maxrate maxrate_na8st
  double maxrate = 8000;
 #define slow slow_na8st
- double slow = 0;
+ double slow = 1;
 #define vShift_inact vShift_inact_na8st
  double vShift_inact = 10;
 #define vShift vShift_na8st
@@ -500,7 +500,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  
     hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 na8st /home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/na8st.mod\n");
+ 	ivoc_help("help ?1 na8st /home/raven/PycharmProjects/Masters/Mod_Files/na8st.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -1193,7 +1193,7 @@ _first = 0;
 
 #if NMODL_TEXT
 static void register_nmodl_text_and_filename(int mech_type) {
-    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters_model/Mod_Files_Beining_2017/na8st.mod";
+    const char* nmodl_filename = "/home/raven/PycharmProjects/Masters/Mod_Files/na8st.mod";
     const char* nmodl_file_text = 
   ": Eight state kinetic sodium channel gating scheme\n"
   ": Modified from k3st.mod, chapter 9.9 (example 9.7)\n"
@@ -1228,7 +1228,7 @@ static void register_nmodl_text_and_filename(int mech_type) {
   "\n"
   "PARAMETER {\n"
   "    gbar = 0     (S/cm2)\n"
-  "	slow = 0\n"
+  "	slow = 1\n"
   "    a1_0 =0 (/ms) : 5.142954478051616e+01 (/ms)\n"
   "    a1_1 = 0 (/mV) : 7.674641248142576e-03 (/mV) \n"
   "    \n"

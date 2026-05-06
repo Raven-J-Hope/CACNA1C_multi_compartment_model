@@ -55,13 +55,13 @@ PARAMETER {
 
 }
 
-ASSIGNED{ 
-	v	(mV) 
-	ek	(mV) 
+ASSIGNED{
+	v	(mV)
+	ek	(mV)
 	cai (mM)
 	celsius		(degC)
-	gk	(mho/cm2) 
-	ik	(mA/cm2) 
+	gk	(mho/cm2)
+	ik	(mA/cm2)
 	invc1_t  ( /ms)
 	invc2_t  ( /ms)
 	invc3_t  ( /ms)
@@ -77,13 +77,13 @@ ASSIGNED{
 	dirc2_t_ca  ( /ms)
 	dirc3_t_ca  ( /ms)
 	dirc4_t_ca  ( /ms)
-	
+
 	lcai		(mM)
 	acai     (mM)
 	:ilca		(mA/cm2) : instantaneous calcium current of l-type calcium channel
 	:diam	(um)
 	:VSR (um)
-} 
+}
 
 STATE {
 	c1
@@ -94,35 +94,35 @@ STATE {
 	o2
 }
 
-BREAKPOINT{ 
-	SOLVE kin METHOD sparse 
+BREAKPOINT{
+	SOLVE kin METHOD sparse
 	gk = gkbar*(o1+o2)	:(mho/cm2)
 	ik = gk*(v-ek)		:(mA/cm2)
-} 
+}
 
 INITIAL{
 	rate(celsius)
 	SOLVE kin STEADYSTATE sparse
-	
-} 
 
-KINETIC kin{ 
+}
+
+KINETIC kin{
 	acai =  (lcai)/diff : instantaneous calcium concentration of L-type Ca channels for SK activation divided by diffusion factor (determines proximity between both channels) of SK
 
 	if (acai < cai)
 		{acai = cai}
-	rates(acai) 
-	
-	~c1<->c2 (dirc2_t_ca, invc1_t) 
-	~c2<->c3 (dirc3_t_ca, invc2_t) 
-	~c3<->c4 (dirc4_t_ca, invc3_t) 
-	~c3<->o1 (diro1_t, invo1_t) 
-	~c4<->o2 (diro2_t, invo2_t) 
-	CONSERVE c1+c2+c3+c4+o2+o1=1 
-} 
+	rates(acai)
+
+	~c1<->c2 (dirc2_t_ca, invc1_t)
+	~c2<->c3 (dirc3_t_ca, invc2_t)
+	~c3<->c4 (dirc4_t_ca, invc3_t)
+	~c3<->o1 (diro1_t, invo1_t)
+	~c4<->o2 (diro2_t, invo2_t)
+	CONSERVE c1+c2+c3+c4+o2+o1=1
+}
 
 FUNCTION temper (Q10, celsius (degC)) {
-	temper = Q10^((celsius -23(degC)) / 10(degC)) 
+	temper = Q10^((celsius -23(degC)) / 10(degC))
 }
 
 PROCEDURE rates(c(mM)){

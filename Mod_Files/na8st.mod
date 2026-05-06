@@ -31,7 +31,7 @@ UNITS { (mV) = (millivolt)
 
 PARAMETER {
     gbar = 0     (S/cm2)
-	slow = 0
+	slow = 1
     a1_0 =0 (/ms) : 5.142954478051616e+01 (/ms)
     a1_1 = 0 (/mV) : 7.674641248142576e-03 (/mV) 
     

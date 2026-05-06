@@ -34,7 +34,7 @@ PARAMETER {
 	vshift = 10 		(mV)  : recorrection of Jaffe  1994 compared to Fox 1987, as voltage-dependent activation curve should not depend on ion concentrations or type
 }
 
-STATE {m h} 
+STATE {m h}
 
 BREAKPOINT {
 	rates()
@@ -42,7 +42,7 @@ BREAKPOINT {
 	g = gbar*m*m*h
 	ica = g*(v - eca)
 	inca = ica
-	
+
 }
 
 DERIVATIVE state {	: exact when v held constant; integrates over dt step
@@ -56,7 +56,7 @@ INITIAL {
 }
 
 PROCEDURE rates() { LOCAL alpha,beta
-	alpha = f(1.9,0.1,v,19.88 + vshift) 
+	alpha = f(1.9,0.1,v,19.88 + vshift)
 	beta = exponential(0.046,-0.048239,v, vshift)
 	mTau = 1/(alpha+beta)
 	mInf = alpha*mTau
