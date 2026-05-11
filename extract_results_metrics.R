@@ -2,7 +2,7 @@
 
 # ------------------------------------------------------------
 # extract_results_metrics.R
-# Extracts the current-clamp (IC) and voltage-clamp (VC) values
+# Extracts current-clamp (IC) and voltage-clamp (VC) values
 # used in dissertation Results section.
 #
 # Expected input files:
