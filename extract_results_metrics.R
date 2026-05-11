@@ -5,11 +5,11 @@
 # Extracts current-clamp (IC) and voltage-clamp (VC) values
 # used in dissertation Results section.
 #
-# Expected input files:
+# Expected input files
 #   IC_raw_data.csv
 #   VC_raw_data.csv
 #
-# Usage examples:
+# Usage
 #   Rscript extract_results_metrics.R
 #   Rscript extract_results_metrics.R /path/to/IC_raw_data.csv /path/to/VC_raw_data.csv
 # ------------------------------------------------------------
@@ -101,7 +101,7 @@ ic_wt_fi_summary <- data.frame(
   stringsAsFactors = FALSE
 )
 
-# Include the final two current steps if present, useful for plateau/highest-current wording.
+# Include final two current steps if present, useful for plateau/highest-current wording.
 for (current_value in c(0.80, 0.85, 0.90)) {
   colname <- paste0("rate_at_", gsub("\\.", "p", sprintf("%.2f", current_value)), "_nA")
   row <- subset(wt_sweep, abs(current_nA - current_value) < 1e-9)
@@ -227,7 +227,7 @@ if (!is.null(vc_peak_bk) && nrow(vc_peak_bk) > 0) {
   write.csv(vc_peak_bk, file.path(out_dir, "VC_peak_BK_currents_optional_check.csv"), row.names = FALSE)
 }
 
-# Combined text-friendly summary for quick inspection.
+# Combined summary for quick inspection.
 cat("\n================ IC: max firing rate ================\n")
 print(ic_max_firing_rate)
 
